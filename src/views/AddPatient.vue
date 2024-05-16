@@ -1,14 +1,16 @@
 <template>
   <NavBar />
-  <h1>Add Patient</h1>
+  <SideBar />
 </template>
 
 <script>
 import NavBar from '../components/NavBar.vue'
+import SideBar from '../components/SideBar.vue'
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    SideBar
   }
 }
 </script>

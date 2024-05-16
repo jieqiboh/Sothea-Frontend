@@ -2,20 +2,20 @@
   <div>
     <nav class="bg-[#3F51B5]">
       <div class="px-8 mx-auto max-w-7xl">
-        <div class="flex items-center justify-between h-16">
+        <div class="flex items-center justify-between h-1/6 pt-2">
           <div class="flex items-center">
             <h1>Project Sothea</h1>
             <div class="hidden md:block">
               <div class="flex items-baseline ml-10 space-x-4">
                 <router-link
-                  class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                  class="text-white hover:text-gray-300 px-3 py-2 rounded-t-lg text-sm font-medium"
                   active-class="active"
                   to="/allpatients"
                 >
                   All Patients
                 </router-link>
                 <router-link
-                  class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                  class="text-white hover:text-gray-300 px-3 py-2 rounded-t-lg text-sm font-medium"
                   active-class="active"
                   to="/addpatient"
                 >
@@ -75,5 +75,6 @@ h2 {
   background-color: white;
   color: #3f51b5;
   border: solid white;
+  border-width: 0.25rem;
 }
 </style>
