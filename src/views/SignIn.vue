@@ -137,5 +137,6 @@ h1 {
 h2 {
   font-size: 1rem;
   font-weight: 600;
+  color: black;
 }
 </style>
