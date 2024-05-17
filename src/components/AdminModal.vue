@@ -121,7 +121,7 @@
         <div class="flex flex-row w-1/2 ml-2">
           <div class="flex flex-col w-full">
             <div class="w-full">
-              <label class="mb-1 block text-sm font-medium text-dark"> Attachments </label>
+              <label class="mb-1 block text-sm font-medium text-dark"> Photo ID </label>
 
               <div class="relative">
                 <label

@@ -20,12 +20,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="tubercolosis" class="w-5 h-5" />
+              <input type="radio" name="tubercolosis" class="w-4 h-4" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="tubercolosis" class="w-5 h-5" />
+              <input type="radio" name="tubercolosis" class="w-4 h-4" />
             </label>
           </div>
         </div>
@@ -38,12 +38,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="diabetes" class="w-5 h-5" />
+              <input type="radio" name="diabetes" class="w-4 h-4" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="diabetes" class="w-5 h-5" />
+              <input type="radio" name="diabetes" class="w-4 h-4" />
             </label>
           </div>
         </div>
@@ -56,12 +56,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="hypertension" class="w-5 h-5" />
+              <input type="radio" name="hypertension" class="w-4 h-4" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="hypertension" class="w-5 h-5" />
+              <input type="radio" name="hypertension" class="w-4 h-4" />
             </label>
           </div>
         </div>
@@ -74,12 +74,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="hyperlipidemia" class="w-5 h-5" />
+              <input type="radio" name="hyperlipidemia" class="w-4 h-4" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="hyperlipidemia" class="w-5 h-5" />
+              <input type="radio" name="hyperlipidemia" class="w-4 h-4" />
             </label>
           </div>
         </div>
@@ -92,12 +92,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="chronic-joint-pains" class="w-5 h-5" />
+              <input type="radio" name="chronic-joint-pains" class="w-4 h-4" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="chronic-joint-pains" class="w-5 h-5" />
+              <input type="radio" name="chronic-joint-pains" class="w-4 h-4" />
             </label>
           </div>
         </div>
@@ -110,12 +110,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="chronic-muscle-aches" class="w-5 h-5" />
+              <input type="radio" name="chronic-muscle-aches" class="w-4 h-4" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="chronic-muscle-aches" class="w-5 h-5" />
+              <input type="radio" name="chronic-muscle-aches" class="w-4 h-4" />
             </label>
           </div>
         </div>
@@ -128,12 +128,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="std" class="w-5 h-5" />
+              <input type="radio" name="std" class="w-4 h-4" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="std" class="w-5 h-5" />
+              <input type="radio" name="std" class="w-4 h-4" />
             </label>
           </div>
         </div>
