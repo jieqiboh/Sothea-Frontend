@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center">
-    <div class="flex flex-col rounded-lg w-3/4 max-h-fit border border-gray-300 p-5">
+    <div class="flex flex-col rounded-lg w-3/4 max-h-fit border border-gray-300 p-8">
       <h1>Admin Details</h1>
       <br />
       <div class="flex flex-row w-full">

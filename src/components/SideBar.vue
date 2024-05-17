@@ -9,9 +9,9 @@
         </div>
         <nav class="mt-3 px-6">
           <a
-            class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-2 transition-colors duration-200 text-gray-600"
+            class="hover:text-gray-200 hover:bg-[#3f51b5] flex items-center p-2 my-2 transition-colors duration-200 text-[#3f51b5]"
             :class="{
-              'border-l-2 border-gray-600 bg-gray-100 text-gray-800': activeSection === 'admin',
+              'border-l-4 border-[#3f51b5]/75 bg-[#3f51b5]/50': activeSection === 'admin',
               'text-gray-600': activeSection !== 'admin'
             }"
             @click="setActiveSection('admin')"
@@ -30,14 +30,13 @@
                 d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
               />
             </svg>
-            <span class="mx-4 text-sm font-normal"> Admin </span>
+            <span class="mx-4 text-sm font-medium"> Admin </span>
             <span class="flex-grow text-right"> </span>
           </a>
           <a
-            class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-2 transition-colors duration-200 text-gray-600"
+            class="hover:text-gray-200 hover:bg-[#3f51b5] flex items-center p-2 my-2 transition-colors duration-200 text-[#3f51b5]"
             :class="{
-              'border-l-2 border-gray-600 bg-gray-100 text-gray-800':
-                activeSection === 'past-med-hist',
+              'border-l-4 border-[#3f51b5]/75 bg-[#3f51b5]/50': activeSection === 'past-med-hist',
               'text-gray-600': activeSection !== 'past-med-hist'
             }"
             @click="setActiveSection('past-med-hist')"
@@ -95,14 +94,13 @@
               </defs>
             </svg>
 
-            <span class="mx-4 text-sm font-normal"> Past Medical History </span>
+            <span class="mx-4 text-sm font-medium"> Past Medical History </span>
             <span class="flex-grow text-right"> </span>
           </a>
           <a
-            class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-2 transition-colors duration-200 text-gray-600"
+            class="hover:text-gray-200 hover:bg-[#3f51b5] flex items-center p-2 my-2 transition-colors duration-200 text-[#3f51b5]"
             :class="{
-              'border-l-2 border-gray-600 bg-gray-100 text-gray-800':
-                activeSection === 'social-hist',
+              'border-l-4 border-[#3f51b5]/75 bg-[#3f51b5]/50': activeSection === 'social-hist',
               'text-gray-600': activeSection !== 'social-hist'
             }"
             @click="setActiveSection('social-hist')"
@@ -141,14 +139,13 @@
               />
             </svg>
 
-            <span class="mx-4 text-sm font-normal"> Social History </span>
+            <span class="mx-4 text-sm font-medium"> Social History </span>
             <span class="flex-grow text-right"> </span>
           </a>
           <a
-            class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-2 transition-colors duration-200 text-gray-600"
+            class="hover:text-gray-200 hover:bg-[#3f51b5] flex items-center p-2 my-2 transition-colors duration-200 text-[#3f51b5]"
             :class="{
-              'border-l-2 border-gray-600 bg-gray-100 text-gray-800':
-                activeSection === 'vital-stats',
+              'border-l-4 border-[#3f51b5]/75 bg-[#3f51b5]/50': activeSection === 'vital-stats',
               'text-gray-600': activeSection !== 'vital-stats'
             }"
             @click="setActiveSection('vital-stats')"
@@ -181,15 +178,14 @@
               />
             </svg>
 
-            <span class="mx-4 text-sm font-normal"> Vital Statistics </span>
+            <span class="mx-4 text-sm font-medium"> Vital Statistics </span>
             <span class="flex-grow text-right"> </span>
           </a>
 
           <a
-            class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-2 transition-colors duration-200 text-gray-600"
+            class="hover:text-gray-200 hover:bg-[#3f51b5] flex items-center p-2 my-2 transition-colors duration-200 text-[#3f51b5]"
             :class="{
-              'border-l-2 border-gray-600 bg-gray-100 text-gray-800':
-                activeSection === 'height-weight',
+              'border-l-4 border-[#3f51b5]/75 bg-[#3f51b5]/50': activeSection === 'height-weight',
               'text-gray-600': activeSection !== 'height-weight'
             }"
             @click="setActiveSection('height-weight')"
@@ -229,15 +225,14 @@
               </defs>
             </svg>
 
-            <span class="mx-4 text-sm font-normal"> Height and Weight </span>
+            <span class="mx-4 text-sm font-medium"> Height and Weight </span>
             <span class="flex-grow text-right"> </span>
           </a>
 
           <a
-            class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-2 transition-colors duration-200 text-gray-600"
+            class="hover:text-gray-200 hover:bg-[#3f51b5] flex items-center p-2 my-2 transition-colors duration-200 text-[#3f51b5]"
             :class="{
-              'border-l-2 border-gray-600 bg-gray-100 text-gray-800':
-                activeSection === 'visual-acuity',
+              'border-l-4 border-[#3f51b5]/75 bg-[#3f51b5]/50': activeSection === 'visual-acuity',
               'text-gray-600': activeSection !== 'visual-acuity'
             }"
             @click="setActiveSection('visual-acuity')"
@@ -288,15 +283,14 @@
               />
             </svg>
 
-            <span class="mx-4 text-sm font-normal"> Visual Acuity </span>
+            <span class="mx-4 text-sm font-medium"> Visual Acuity </span>
             <span class="flex-grow text-right"> </span>
           </a>
 
           <a
-            class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-2 transition-colors duration-200 text-gray-600"
+            class="hover:text-gray-200 hover:bg-[#3f51b5] flex items-center p-2 my-2 transition-colors duration-200 text-[#3f51b5]"
             :class="{
-              'border-l-2 border-gray-600 bg-gray-100 text-gray-800':
-                activeSection === 'dr-consult',
+              'border-l-4 border-[#3f51b5]/75 bg-[#3f51b5]/50': activeSection === 'dr-consult',
               'text-gray-600': activeSection !== 'dr-consult'
             }"
             @click="setActiveSection('dr-consult')"
@@ -329,7 +323,7 @@
               />
             </svg>
 
-            <span class="mx-4 text-sm font-normal"> Doctor's Consult </span>
+            <span class="mx-4 text-sm font-medium"> Doctor's Consult </span>
             <span class="flex-grow text-right"> </span>
           </a>
         </nav>
