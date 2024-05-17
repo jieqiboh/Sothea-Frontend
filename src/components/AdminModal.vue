@@ -133,10 +133,7 @@
                     <span class="flex items-center justify-center">
                       <img src="../assets/camera.svg" height="20" width="20" />
                     </span>
-                    <span class="text-sm text-body-color">
-                      Drag &amp; drop or
-                      <span class="text-[#3f51b5] underline"> browse </span>
-                    </span>
+                    <span class="text-sm text-body-color"> Add Photo ID </span>
                   </div>
                 </label>
               </div>
