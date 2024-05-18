@@ -1,14 +1,17 @@
 <template>
   <NavBar />
-  <h1>All Patients</h1>
+  <AllPatientsTableModal  /> 
 </template>
 
 <script>
 import NavBar from '../components/NavBar.vue'
 
+import AllPatientsTableModal from '../components/all patients page/AllPatientsTableModal.vue'
+
 export default {
   components: {
-    NavBar
+    NavBar,
+    AllPatientsTableModal
   }
 }
 </script>
