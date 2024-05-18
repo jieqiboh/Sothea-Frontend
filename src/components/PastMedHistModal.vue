@@ -124,7 +124,7 @@
       <!-- STD -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Sexually Transmitted Disease (STD)</div>
+          <div class="font-normal text-sm w-1/3">Sexually Transmitted Disease</div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
