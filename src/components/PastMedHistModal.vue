@@ -146,7 +146,7 @@
         </label>
         <textarea
           rows="2"
-          placeholder="Remark"
+          placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
         ></textarea>
       </div>
@@ -156,7 +156,7 @@
         <label for="" class="mb-2 block text-sm font-normal text-dark">Others: </label>
         <textarea
           rows="2"
-          placeholder="Remark"
+          placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
         ></textarea>
       </div>

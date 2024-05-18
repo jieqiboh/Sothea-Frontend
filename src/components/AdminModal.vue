@@ -14,7 +14,7 @@
                 <input
                   type="text"
                   placeholder="Name"
-                  class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                 />
                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
                   <img src="../assets/user.svg" width="20" height="20" />
@@ -24,9 +24,7 @@
 
             <!-- Khmer Name Input -->
             <div class="ml-2 w-1/2">
-              <label class="mb-1 block text-sm font-medium text-dark dark:text-white">
-                Khmer Name
-              </label>
+              <label class="mb-1 block text-sm font-medium text-dark"> Khmer Name </label>
               <div class="relative">
                 <input
                   type="text"
