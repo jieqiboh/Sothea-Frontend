@@ -65,6 +65,7 @@ export default {
 h1 {
   color: white;
   font-weight: 500;
+  font-size: medium;
 }
 
 h2 {
