@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center">
-    <div class="flex flex-col rounded-lg w-3/4 max-h-fit border border-gray-300 p-8">
+    <div class="flex flex-col rounded-lg w-3/4 max-h-fit border border-gray-300 p-10">
       <h1>Vital Statistics</h1>
       <br />
       <div class="flex flex-col">
