@@ -1,5 +1,19 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { onMounted, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const authState = reactive({
+  token: null
+})
+
+onMounted(() => {
+  if (!authState.token) {
+    router.push('/signin')
+  }
+})
 </script>
 
 <template>

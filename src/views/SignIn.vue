@@ -61,6 +61,8 @@
   </div>
 </template>
 
+<script></script>
+
 <style scoped>
 .center-div {
   display: flex;
