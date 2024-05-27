@@ -5,7 +5,7 @@
                 {{ id }}
             </p>
         </td>
-        <td class="px-12 py-4 text-sm bg-white border-b border-gray-200">
+        <td class="px-10 py-4 text-sm bg-white border-b border-gray-200">
             <p class="text-gray-900 whitespace-no-wrap">
                 {{ name }}
             </p>
@@ -22,7 +22,7 @@
         </td>
         <td class="px-5 py-4 text-sm bg-white border-b border-gray-200">
             <p class="text-gray-900 whitespace-no-wrap">
-                {{ DOB }}
+                {{ formattedDOB }}
             </p>
         </td>
         <td class="px-5 py-4 text-sm bg-white border-b border-gray-200">
@@ -32,7 +32,7 @@
         </td>
         <td class="px-5 py-4 text-sm bg-white border-b border-gray-200">
             <p class="text-gray-900 whitespace-no-wrap">
-                {{ queuedat }}
+                {{ formattedQueuedAt }}
             </p>
         </td>
     </tr>    
@@ -40,15 +40,25 @@
 
 <script>
 export default {
-    props: [
-        'id',
-        'name',
-        'khmername',
-        'gender',
-        'DOB',
-        'contactnumber',
-        'queuedat'
-    ]
+    props: {
+        id: String,
+        name: String,
+        khmername: String,
+        gender: String,
+        DOB: String,
+        contactnumber: String,
+        queuedat: String
+    },
+    computed: {
+        formattedDOB() {
+            const date = new Date(this.DOB);
+            return date.toLocaleDateString('en-GB', {day: 'numeric', month: 'numeric', year: 'numeric'});
+        },
+        formattedQueuedAt() {
+            const date = new Date(this.queuedat);
+            return date.toLocaleTimeString('en-CA', {timeStyle: 'short'});
+        }
+    }
 }
 </script>
 

@@ -2,7 +2,7 @@
   <div class="bar">Project Sothea</div>
   <div class="center-div">
     <div class="form-container">
-      <form>
+      <form @submit.prevent="getToken">
         <h1>SIGN IN</h1>
         <br />
         <!-- Username Input -->
@@ -25,7 +25,7 @@
               />
             </svg>
           </span>
-          <input type="text" id="sign-in-email" class="input-style" placeholder="Enter username" />
+          <input type="text" v-model="username" id="sign-in-email" class="input-style" placeholder="Enter username" />
         </div>
 
         <!-- Password Input -->
@@ -48,7 +48,7 @@
               />
             </svg>
           </span>
-          <input type="text" id="sign-in-email" class="input-style" placeholder="Enter password" />
+          <input type="text" v-model="password" id="sign-in-email" class="input-style" placeholder="Enter password" />
         </div>
         <br />
 
@@ -60,6 +60,43 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'SignIn',
+  data() {
+    return {
+      username: '',
+      password: '',
+    }
+  },
+  methods: {
+    async getToken(event) {
+        event.preventDefault();
+        console.log('getToken method called');
+
+        try {
+            console.log('hi')
+            const response = await axios.post("http://localhost:9090/login", {
+                username: this.username,
+                password: this.password
+            });
+            this.token = response.data.token;
+            console.log(this.token)  
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+            this.$router.push('/allpatients');
+
+        } catch (error) {
+            console.error("Error fetching token:", error);
+        }
+    },
+  }
+}
+
+</script>
+
 
 <style scoped>
 .center-div {

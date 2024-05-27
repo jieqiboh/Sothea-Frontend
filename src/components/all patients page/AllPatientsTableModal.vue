@@ -16,15 +16,16 @@
                         placeholder="Search"
                     />
                 </div>
-
-                <div class="flex items-center space-x-3">
-                    <Text style="font-size:medium">Add New Patient</Text>
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                          </svg>                          
-                      </span>
-                </div>
+                <router-link active-class="active" to="/addpatient">
+                    <div class="flex items-center space-x-3">
+                        <Text style="font-size:medium">Add New Patient</Text>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                            </svg>                          
+                        </span>
+                    </div>
+                </router-link>
             </div>
 
             <hr class="line"/> 
@@ -37,7 +38,7 @@
                                 <th scope="col" class="px-5 py-5 text-sm font-medium text-left text-gray-800 uppercase border-b border-gray-200" style="background: rgba(63, 81, 181, 0.3);">
                                     Patient ID
                                 </th>
-                                <th scope="col" class="px-12 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200" style="background: rgba(63, 81, 181, 0.3);">
+                                <th scope="col" class="px-10 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200" style="background: rgba(63, 81, 181, 0.3);">
                                     Patient Name
                                 </th>
                                 <th scope="col" class="px-14 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200" style="background: rgba(63, 81, 181, 0.3);">
@@ -58,22 +59,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <TableRow id='1234567' name="Lim Pei En" khmername="Champei" gender="F" DOB="16/04/2003" contactnumber="+885 76 234 5678" queuedat="11:05:33 A.M."/>
-                            <TableRow id='1234568' name="Beverley Teo" khmername="Kaliyanei" gender="F" DOB="14/03/2002" contactnumber="+885 76 234 5678" queuedat="11:08:50 A.M."/>
-                            <TableRow id='1234567' name="Lim Pei En" khmername="Champei" gender="F" DOB="16/04/2003" contactnumber="+885 76 234 5678" queuedat="11:05:33 A.M."/>
-                            <TableRow id='1234568' name="Beverley Teo" khmername="Kaliyanei" gender="F" DOB="14/03/2002" contactnumber="+885 76 234 5678" queuedat="11:08:50 A.M."/>
-                            <TableRow id='1234567' name="Lim Pei En" khmername="Champei" gender="F" DOB="16/04/2003" contactnumber="+885 76 234 5678" queuedat="11:05:33 A.M."/>
-                            <TableRow id='1234568' name="Beverley Teo" khmername="Kaliyanei" gender="F" DOB="14/03/2002" contactnumber="+885 76 234 5678" queuedat="11:08:50 A.M."/>
-                            <TableRow id='1234567' name="Lim Pei En" khmername="Champei" gender="F" DOB="16/04/2003" contactnumber="+885 76 234 5678" queuedat="11:05:33 A.M."/>
-                            <TableRow id='1234568' name="Beverley Teo" khmername="Kaliyanei" gender="F" DOB="14/03/2002" contactnumber="+885 76 234 5678" queuedat="11:08:50 A.M."/>
-                            <TableRow id='1234567' name="Lim Pei En" khmername="Champei" gender="F" DOB="16/04/2003" contactnumber="+885 76 234 5678" queuedat="11:05:33 A.M."/>
-                            <TableRow id='1234568' name="Beverley Teo" khmername="Kaliyanei" gender="F" DOB="14/03/2002" contactnumber="+885 76 234 5678" queuedat="11:08:50 A.M."/>
-                            <TableRow id='1234567' name="Lim Pei En" khmername="Champei" gender="F" DOB="16/04/2003" contactnumber="+885 76 234 5678" queuedat="11:05:33 A.M."/>
-                            <TableRow id='1234568' name="Beverley Teo" khmername="Kaliyanei" gender="F" DOB="14/03/2002" contactnumber="+885 76 234 5678" queuedat="11:08:50 A.M."/>
-                            <TableRow id='1234567' name="Lim Pei En" khmername="Champei" gender="F" DOB="16/04/2003" contactnumber="+885 76 234 5678" queuedat="11:05:33 A.M."/>
-                            <TableRow id='1234568' name="Beverley Teo" khmername="Kaliyanei" gender="F" DOB="14/03/2002" contactnumber="+885 76 234 5678" queuedat="11:08:50 A.M."/>
-                            <TableRow id='1234567' name="Lim Pei En" khmername="Champei" gender="F" DOB="16/04/2003" contactnumber="+885 76 234 5678" queuedat="11:05:33 A.M."/>
-                            <TableRow id='1234568' name="Beverley Teo" khmername="Kaliyanei" gender="F" DOB="14/03/2002" contactnumber="+885 76 234 5678" queuedat="11:08:50 A.M."/>
+                            <TableRow
+                                v-for="patient in patients"
+                                :key="patient.id"
+                                :id="patient.id"
+                                :name="patient.name"
+                                :khmername="patient.khmerName"
+                                :gender="patient.gender"
+                                :DOB="patient.dob"
+                                :contactnumber="patient.contactNo"
+                                :queuedat="getMockQueuedAt()"
+                            />
                         </tbody>
                     </table>
                 </div>
@@ -86,10 +82,39 @@
 
 <script>
 import TableRow from './TableRow.vue';
+import axios from 'axios';
 
 export default {
     components: {
         TableRow
+    },
+    data() {
+        return {
+            patients: [],
+            token: null
+        }
+    },
+    methods: {
+        async getData() {
+            try {
+                const { data } = await axios.get('http://localhost:9090/get-all-admin');
+                this.patients = data;  // Store the fetched data in the patients array
+                console.log(this.patients);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        },
+        getMockQueuedAt() {
+            // Generate a mock queuedat value
+            const date = new Date();
+            const hours = Math.floor(Math.random() * 24);
+            const minutes = Math.floor(Math.random() * 60);
+            date.setHours(hours, minutes);
+            return date.toISOString();  // Return ISO string format of the date
+        }
+    },
+    created() {
+        this.getData();
     }
 }
 

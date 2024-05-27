@@ -22,6 +22,8 @@ import HeightWeightModal from '../components/HeightWeightModal.vue'
 import VisualAcuityModal from '../components/VisualAcuityModal.vue'
 import DrConsultModal from '../components/DrConsultModal.vue'
 
+import axios from 'axios'
+
 export default {
   components: {
     NavBar,
@@ -61,9 +63,16 @@ export default {
       }
     }
   },
+  created() {
+    this.getData();
+  },
   methods: {
     setActiveSection(section) {
       this.activeSection = section
+    },
+    async getData() {
+        const { data } = await axios.get('http://localhost:9090/get-all-admin');
+        console.log(data)
     }
   }
 }
