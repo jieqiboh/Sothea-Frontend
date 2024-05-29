@@ -22,12 +22,24 @@
           <div class="flex w-1/6">
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
-                <input type="radio" name="smoking-hist" class="w-4 h-4" />
+                <input
+                  type="radio"
+                  name="smoking-hist"
+                  class="w-4 h-4"
+                  v-model="pastSmokingHistory"
+                  :value="true"
+                />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
-                <input type="radio" name="smoking-hist" class="w-4 h-4" />
+                <input
+                  type="radio"
+                  name="smoking-hist"
+                  class="w-4 h-4"
+                  v-model="pastSmokingHistory"
+                  :value="false"
+                />
               </label>
             </div>
           </div>
@@ -36,6 +48,8 @@
             <textarea
               rows="1"
               placeholder="If Y, no. of years"
+              type="number"
+              v-model="numberOfYears"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
             ></textarea>
           </div>
@@ -52,12 +66,24 @@
           <div class="flex w-1/6">
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
-                <input type="radio" name="curr-smoking-hist" class="w-4 h-4" />
+                <input
+                  type="radio"
+                  name="curr-smoking-hist"
+                  class="w-4 h-4"
+                  v-model="currentSmokingHistory"
+                  :value="true"
+                />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
-                <input type="radio" name="curr-smoking-hist" class="w-4 h-4" />
+                <input
+                  type="radio"
+                  name="curr-smoking-hist"
+                  class="w-4 h-4"
+                  v-model="currentSmokingHistory"
+                  :value="false"
+                />
               </label>
             </div>
           </div>
@@ -66,6 +92,8 @@
             <textarea
               rows="1"
               placeholder="If Y, how many cigarettes/day?"
+              type="number"
+              v-model="cigarettesPerDay"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
             ></textarea>
           </div>
@@ -80,12 +108,24 @@
           <div class="flex w-1/6">
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
-                <input type="radio" name="alc-hist" class="w-4 h-4" />
+                <input
+                  type="radio"
+                  name="alc-hist"
+                  class="w-4 h-4"
+                  v-model="alcoholHistory"
+                  :value="true"
+                />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
-                <input type="radio" name="alc-hist" class="w-4 h-4" />
+                <input
+                  type="radio"
+                  name="alc-hist"
+                  class="w-4 h-4"
+                  v-model="alcoholHistory"
+                  :value="false"
+                />
               </label>
             </div>
           </div>
@@ -94,6 +134,7 @@
             <textarea
               rows="1"
               placeholder="If Y, how regularly?"
+              v-model="howRegular"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
             ></textarea>
           </div>
@@ -103,6 +144,7 @@
       <!-- Save Button -->
       <div class="flex flex-row-reverse w-full mt-5">
         <button
+          @click="submitData"
           class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
         >
           Save
@@ -111,6 +153,49 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  props: {
+    patientId: {
+      type: Number,
+      required: true
+    }
+  },
+  data() {
+    return {
+      pastSmokingHistory: false,
+      numberOfYears: null,
+      currentSmokingHistory: false,
+      cigarettesPerDay: null,
+      alcoholHistory: false,
+      howRegular: ''
+    }
+  },
+  methods: {
+    async submitData() {
+      try {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          socialHistory: {
+            pastSmokingHistory: this.pastSmokingHistory,
+            numberOfYears: this.numberOfYears,
+            currentSmokingHistory: this.currentSmokingHistory,
+            cigarettesPerDay: this.cigarettesPerDay,
+            alcoholHistory: this.alcoholHistory,
+            howRegular: this.howRegular
+          }
+        })
+        console.log(response.data)
+        console.log('Social history posted successfully!')
+      } catch (error) {
+        console.error('Error posting data:', error)
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
 h1 {
