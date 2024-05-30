@@ -263,11 +263,11 @@
               <img src="../assets/mask.svg" width="25" height="25" />
             </span>
             <select
-              v-model="isInfectious"
+              v-model="sentToId"
               class="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
             >
-              <option value="Y" class="dark:bg-dark-2">Y</option>
-              <option value="N" class="dark:bg-dark-2">N</option>
+              <option :value="true" class="dark:bg-dark-2">Y</option>
+              <option :value="false" class="dark:bg-dark-2">N</option>
             </select>
             <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
               <img src="../assets/chevrondown.svg" height="20" width="20" />
@@ -307,15 +307,34 @@ export default {
       pregnant: null,
       lastMenstrualPeriod: '',
       drugAllergies: '',
-      isInfectious: '',
       selectedPhoto: null,
-      photo: '',
-      sentToId: false
+      photo: '', //base 64 string (for POST)
+      sentToId: null
     }
   },
   methods: {
     async submitData() {
       try {
+        console.log('name', this.name, typeof this.name)
+        console.log('khmerName', this.khmerName, typeof this.khmerName)
+        console.log('dob', this.dob, typeof this.dob)
+        console.log('age', this.age, typeof this.age)
+        console.log('gender', this.gender, typeof this.gender)
+        console.log('contactNo', this.contactNo, typeof this.contactNo)
+        console.log('regDate', this.regDate, typeof this.regDate)
+        console.log('village', this.village, typeof this.village)
+        console.log('familyGroup', this.familyGroup, typeof this.familyGroup)
+        console.log('pregnant', this.pregnant, typeof this.pregnant)
+        console.log(
+          'lastMenstrualPeriod',
+          this.lastMenstrualPeriod,
+          typeof this.lastMenstrualPeriod
+        )
+        console.log('drugAllergies', this.drugAllergies, typeof this.drugAllergies)
+        console.log('photo', this.photo, typeof this.photo)
+        console.log('sentToId', this.sentToId, typeof this.sentToId)
+
+        console.log(this.sentToId, typeof this.sentToId)
         const response = await axios.post('http://localhost:9090/patient', {
           admin: {
             name: this.name,
