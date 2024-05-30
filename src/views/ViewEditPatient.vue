@@ -5,7 +5,7 @@
     <div class="flex">
       <SideBar :activeSection="activeSection" @update:activeSection="setActiveSection" />
       <div class="content flex-grow p-6">
-        <component :is="activeComponent"></component>
+        <component :is="activeComponent" :patient="patient"></component>
       </div>
     </div>
   </template>
@@ -38,7 +38,8 @@
     },
     data() {
       return {
-        activeSection: 'admin'
+        activeSection: 'admin',
+        patient: null 
       }
     },
     computed: {
@@ -64,15 +65,21 @@
       }
     },
     created() {
-      this.getData();
+      const patientId = this.$route.params.id;
+      this.getPatientData(patientId);
     },
     methods: {
       setActiveSection(section) {
         this.activeSection = section
       },
-      async getData() {
-          const { data } = await axios.get('http://localhost:9090/patient/<patient-id>');
-          console.log(data)
+      async getPatientData(id) {
+        try {
+          const { data } = await axios.get(`http://localhost:9090/patient/${id}`);
+          this.patient = data;
+          console.log(this.patient);
+        } catch (error) {
+          console.error("Error fetching patient data:", error);
+        }
       }
     }
   }
