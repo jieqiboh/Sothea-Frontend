@@ -37,6 +37,7 @@
           <div class="w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Height % </label>
             <input
+              v-model="paedsHeight"
               type="number"
               placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
@@ -47,6 +48,7 @@
           <div class="ml-3 w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Weight % </label>
             <input
+              v-model="paedsWeight"
               type="number"
               placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
@@ -88,6 +90,7 @@
         <!-- Save Button -->
         <div class="flex flex-row-reverse w-full mt-5">
           <button
+            @click="submitData"
             class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
           >
             Save
@@ -99,18 +102,28 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
+  props: {
+    patientId: {
+      type: Number,
+      required: true
+    }
+  },
   data() {
     return {
       height: null,
-      weight: null
+      weight: null,
+      paedsHeight: null,
+      paedsWeight: null
     }
   },
   computed: {
     bmi() {
       if (this.height && this.weight) {
         const heightInMeters = this.height / 100
-        return (this.weight / (heightInMeters * heightInMeters)).toFixed(1)
+        return this.weight / (heightInMeters * heightInMeters)
       }
       return null
     },
@@ -128,6 +141,26 @@ export default {
         }
       }
       return null
+    }
+  },
+  methods: {
+    async submitData() {
+      try {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          heightAndWeight: {
+            height: this.height,
+            weight: this.weight,
+            bmi: this.bmi,
+            bmiAnalysis: this.bmianalysis,
+            paedsHeight: this.paedsHeight,
+            paedsWeight: this.paedsWeight
+          }
+        })
+        console.log(response.data)
+        console.log('Height and Weight is posted successfully!')
+      } catch (error) {
+        console.error('Error posting data:', error)
+      }
     }
   }
 }

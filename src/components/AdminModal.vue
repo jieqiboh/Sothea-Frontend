@@ -263,11 +263,11 @@
               <img src="../assets/mask.svg" width="25" height="25" />
             </span>
             <select
-              v-model="isInfectious"
+              v-model="sentToId"
               class="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
             >
-              <option value="Y" class="dark:bg-dark-2">Y</option>
-              <option value="N" class="dark:bg-dark-2">N</option>
+              <option :value="true" class="dark:bg-dark-2">Y</option>
+              <option :value="false" class="dark:bg-dark-2">N</option>
             </select>
             <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
               <img src="../assets/chevrondown.svg" height="20" width="20" />
@@ -307,110 +307,62 @@ export default {
       pregnant: null,
       lastMenstrualPeriod: '',
       drugAllergies: '',
-      isInfectious: '',
       selectedPhoto: null,
-      photo: ''
+      photo: '', //base 64 string (for POST)
+      sentToId: null
     }
   },
   methods: {
-    // async getData() {
-    //   const { data } = await axios.get('http://localhost:9090/get-all-admin')
-    //   console.log(data)
-    // },
-    // async submitData() {
-    //   try {
-    //     const response = await axios.post('http://localhost:9090/patient', {
-    //       name: this.name,
-    //       khmerName: this.khmerName,
-    //       dob: new Date(this.dob).toISOString(),
-    //       age: this.age,
-    //       gender: this.gender,
-    //       contactNo: this.contactNo,
-    //       regDate: new Date(this.regDate).toISOString(),
-    //       village: this.village,
-    //       familyGroup: this.familyGroup,
-    //       pregnant: this.pregnant,
-    //       lastMenstrualPeriod: new Date(this.lastMenstrualPeriod).toISOString(),
-    //       drugAllergies: this.drugAllergies,
-    //       // isInfectious: this.isInfectious,
-    //       photo: this.photo,
-    //       sentToID: false
-    //     })
-    //     console.log(response.data)
-    //   } catch (error) {
-    //     console.error('Error posting data:', error)
-    //   }
-    // },
-
     async submitData() {
       try {
-        const payload = {
-          name: this.name,
-          khmerName: this.khmerName,
-          dob: new Date(this.dob).toISOString(),
-          age: this.age,
-          gender: this.gender,
-          contactNo: this.contactNo,
-          regDate: new Date(this.regDate).toISOString(),
-          village: this.village,
-          familyGroup: this.familyGroup,
-          pregnant: this.pregnant,
-          lastMenstrualPeriod: this.lastMenstrualPeriod
-            ? new Date(this.lastMenstrualPeriod).toISOString()
-            : null,
-          drugAllergies: this.drugAllergies,
-          // isInfectious: this.isInfectious,
-          photo: this.photo,
-          sentToID: false
-        }
+        console.log('name', this.name, typeof this.name)
+        console.log('khmerName', this.khmerName, typeof this.khmerName)
+        console.log('dob', this.dob, typeof this.dob)
+        console.log('age', this.age, typeof this.age)
+        console.log('gender', this.gender, typeof this.gender)
+        console.log('contactNo', this.contactNo, typeof this.contactNo)
+        console.log('regDate', this.regDate, typeof this.regDate)
+        console.log('village', this.village, typeof this.village)
+        console.log('familyGroup', this.familyGroup, typeof this.familyGroup)
+        console.log('pregnant', this.pregnant, typeof this.pregnant)
+        console.log(
+          'lastMenstrualPeriod',
+          this.lastMenstrualPeriod,
+          typeof this.lastMenstrualPeriod
+        )
+        console.log('drugAllergies', this.drugAllergies, typeof this.drugAllergies)
+        console.log('photo', this.photo, typeof this.photo)
+        console.log('sentToId', this.sentToId, typeof this.sentToId)
 
-        const response = await axios.post('http://localhost:9090/patient', payload, {
-          headers: {
-            'Content-Type': 'application/json'
+        console.log(this.sentToId, typeof this.sentToId)
+        const response = await axios.post('http://localhost:9090/patient', {
+          admin: {
+            name: this.name,
+            khmerName: this.khmerName,
+            dob: new Date(this.dob).toISOString(),
+            age: this.age,
+            gender: this.gender,
+            contactNo: this.contactNo,
+            regDate: new Date(this.regDate).toISOString(),
+            village: this.village,
+            familyGroup: this.familyGroup,
+            pregnant: this.pregnant,
+            lastMenstrualPeriod: new Date(this.lastMenstrualPeriod).toISOString(),
+            drugAllergies: this.drugAllergies ? this.drugAllergies : null,
+            photo: this.photo ? this.photo : null,
+            sentToId: this.sentToId
           }
         })
         console.log(response.data)
+        console.log('Data posted successfully!')
+
+        // Emit the ID after the patient has been created
+        const patientId = response.data['Inserted userid']
+        this.$emit('patientCreated', patientId)
       } catch (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
-          console.error('Server responded with an error:', error.response.data)
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.error('No response received:', error.request)
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.error('Error setting up request:', error.message)
-        }
+        console.error('Error posting data:', error)
       }
     },
-
-    // For debugging
-    // submitData() {
-    //   // Convert dob and regDate to RFC3339 format
-    //   const dob = new Date(this.dob).toISOString()
-    //   const regDate = new Date(this.regDate).toISOString()
-    //   const lastMenstrualPeriod = new Date(this.lastMenstrualPeriod).toISOString()
-
-    //   console.log('Name:', this.name, 'Type:', typeof this.name)
-    //   console.log('Khmer Name:', this.khmerName, 'Type:', typeof this.khmerName)
-    //   console.log('DOB:', dob, 'Type:', typeof dob)
-    //   console.log('Age:', this.age, 'Type:', typeof this.age)
-    //   console.log('Gender:', this.gender, 'Type:', typeof this.gender)
-    //   console.log('Contact No:', this.contactNo, 'Type:', typeof this.contactNo)
-    //   console.log('Reg Date:', regDate, 'Type:', typeof regDate)
-    //   console.log('Village:', this.village, 'Type:', typeof this.village)
-    //   console.log('Family Group:', this.familyGroup, 'Type:', typeof this.familyGroup)
-    //   console.log('Pregnant:', this.pregnant, 'Type:', typeof this.pregnant)
-    //   console.log(
-    //     'Last Menstrual Period:',
-    //     lastMenstrualPeriod,
-    //     'Type:',
-    //     typeof lastMenstrualPeriod
-    //   )
-    //   console.log('Drug Allergies:', this.drugAllergies, 'Type:', typeof this.drugAllergies)
-    //   console.log('Is Infectious:', this.isInfectious, 'Type:', typeof this.isInfectious)
-    //   console.log('Selected Photo:', this.photo, 'Type:', typeof this.photo)
-    // },
     handleFileChange(event) {
       const file = event.target.files[0]
       if (file && /\.(jpg|jpeg|png)$/i.test(file.name)) {
@@ -422,6 +374,7 @@ export default {
         }
         reader.readAsDataURL(file)
         console.log(this.selectedPhoto)
+        console.log(this.photo)
       } else {
         // Reset selectedPhoto or show error message
         this.selectedPhoto = null
@@ -429,9 +382,6 @@ export default {
       }
     }
   }
-  // created() {
-  //   this.getData()
-  // }
 }
 </script>
 

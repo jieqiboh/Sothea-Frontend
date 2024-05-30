@@ -10,6 +10,7 @@
           <div class="w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> Temperature </label>
             <input
+              v-model="temperature"
               type="number"
               step="0.01"
               placeholder="Degree Celsius"
@@ -21,6 +22,7 @@
           <div class="ml-3 w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> SpO2 </label>
             <input
+              v-model="spO2"
               type="number"
               step="0.01"
               placeholder="%"
@@ -150,21 +152,22 @@
 
         <!-- Row 5 -->
         <div class="flex flex-row mb-2">
-          <!-- Random Blood Glucose -->
+          <!-- Random Blood Glucose (mmol/L) -->
           <div class="w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
               Random Blood Glucose
             </label>
             <input
+              v-model="randomBloodGlucoseMmolL"
               type="number"
               step="0.01"
-              placeholder="mg/dL or mmol/L"
+              placeholder="mmol/L"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
             />
           </div>
 
-          <!-- SpO2 -->
-          <div class="ml-3 w-1/4">
+          <!-- Units -->
+          <!-- <div class="ml-3 w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark dark:text-white">
               Units
             </label>
@@ -180,12 +183,30 @@
                 <img src="../assets/chevrondown.svg" height="20" width="20" />
               </span>
             </div>
+          </div> -->
+        </div>
+
+        <!-- Row 6 -->
+        <div class="flex flex-row mb-2">
+          <!-- Random Blood Glucose (mg/dL) -->
+          <div class="w-1/4">
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Random Blood Glucose
+            </label>
+            <input
+              v-model="randomBloodGlucoseMmolLp"
+              type="number"
+              step="0.01"
+              placeholder="mg/dL"
+              class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+            />
           </div>
         </div>
 
         <!-- Save Button -->
         <div class="flex flex-row-reverse mt-5">
           <button
+            @click="submitData"
             class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
           >
             Save
@@ -197,23 +218,30 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-const glucoseUnits = ref('')
+import axios from 'axios'
 
 export default {
-  setup() {
-    return {
-      glucoseUnits
+  props: {
+    patientId: {
+      type: Number,
+      required: true
     }
   },
   data() {
     return {
+      temperature: null,
+      spO2: null,
       systolicBP1: null,
       systolicBP2: null,
       diastolicBP1: null,
       diastolicBP2: null,
+      averageSystolicBP: null,
+      averageDiastolicBP: null,
       hr1: null,
-      hr2: null
+      hr2: null,
+      averageHR: null,
+      randomBloodGlucoseMmolL: null,
+      randomBloodGlucoseMmolLp: null
     }
   },
   computed: {
@@ -234,6 +262,33 @@ export default {
         return (Number(this.hr1) + Number(this.hr2)) / 2
       }
       return null
+    }
+  },
+  methods: {
+    async submitData() {
+      try {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          vitalStatistics: {
+            temperature: this.temperature,
+            spO2: this.spO2,
+            systolicBP1: this.systolicBP1,
+            systolicBP2: this.systolicBP2,
+            diastolicBP1: this.diastolicBP1,
+            diastolicBP2: this.diastolicBP2,
+            averageSystolicBP: this.avgSystolicBP,
+            averageDiastolicBP: this.avgDiastolicBP,
+            hr1: this.hr1,
+            hr2: this.hr2,
+            averageHR: this.avgHR,
+            randomBloodGlucoseMmolL: this.randomBloodGlucoseMmolL,
+            randomBloodGlucoseMmolLp: this.randomBloodGlucoseMmolLp
+          }
+        })
+        console.log(response.data)
+        console.log('Vital Statistics posted successfully!')
+      } catch (error) {
+        console.error('Error posting data:', error)
+      }
     }
   }
 }

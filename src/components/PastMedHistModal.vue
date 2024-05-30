@@ -13,19 +13,31 @@
         </div>
       </div>
 
-      <!-- Tubercolosis -->
+      <!-- Tuberculosis -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Tubercolosis</div>
+          <div class="font-normal text-sm w-1/3">Tuberculosis</div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="tubercolosis" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="tuberculosis"
+                class="w-4 h-4"
+                v-model="tuberculosis"
+                :value="true"
+              />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="tubercolosis" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="tuberculosis"
+                class="w-4 h-4"
+                v-model="tuberculosis"
+                :value="false"
+              />
             </label>
           </div>
         </div>
@@ -38,12 +50,24 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="diabetes" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="diabetes"
+                class="w-4 h-4"
+                v-model="diabetes"
+                :value="true"
+              />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="diabetes" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="diabetes"
+                class="w-4 h-4"
+                v-model="diabetes"
+                :value="false"
+              />
             </label>
           </div>
         </div>
@@ -56,12 +80,24 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="hypertension" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="hypertension"
+                class="w-4 h-4"
+                v-model="hypertension"
+                :value="true"
+              />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="hypertension" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="hypertension"
+                class="w-4 h-4"
+                v-model="hypertension"
+                :value="false"
+              />
             </label>
           </div>
         </div>
@@ -74,12 +110,24 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="hyperlipidemia" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="hyperlipidemia"
+                class="w-4 h-4"
+                v-model="hyperlipidemia"
+                :value="true"
+              />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="hyperlipidemia" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="hyperlipidemia"
+                class="w-4 h-4"
+                v-model="hyperlipidemia"
+                :value="false"
+              />
             </label>
           </div>
         </div>
@@ -92,12 +140,24 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="chronic-joint-pains" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="chronic-joint-pains"
+                class="w-4 h-4"
+                v-model="chronicJointPains"
+                :value="true"
+              />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="chronic-joint-pains" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="chronic-joint-pains"
+                class="w-4 h-4"
+                v-model="chronicJointPains"
+                :value="false"
+              />
             </label>
           </div>
         </div>
@@ -110,12 +170,24 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="chronic-muscle-aches" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="chronic-muscle-aches"
+                class="w-4 h-4"
+                v-model="chronicMuscleAches"
+                :value="true"
+              />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="chronic-muscle-aches" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="chronic-muscle-aches"
+                class="w-4 h-4"
+                v-model="chronicMuscleAches"
+                :value="false"
+              />
             </label>
           </div>
         </div>
@@ -128,12 +200,24 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="std" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="std"
+                class="w-4 h-4"
+                v-model="sexuallyTransmittedDisease"
+                :value="true"
+              />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="std" class="w-4 h-4" />
+              <input
+                type="radio"
+                name="std"
+                class="w-4 h-4"
+                v-model="sexuallyTransmittedDisease"
+                :value="false"
+              />
             </label>
           </div>
         </div>
@@ -141,29 +225,36 @@
 
       <!-- Remarks -->
       <div class="mt-4">
-        <label for="" class="mb-2 block text-sm font-normal text-dark"
-          >If Y to STD, specify:
+        <label>
+          <label for="" class="mb-2 block text-sm font-normal text-dark"
+            >If Y to STD, specify:
+          </label>
+          <textarea
+            rows="2"
+            placeholder="Remarks"
+            class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+            v-model="specifiedSTDs"
+          ></textarea>
         </label>
-        <textarea
-          rows="2"
-          placeholder="Remarks"
-          class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-        ></textarea>
       </div>
 
       <!-- Others -->
       <div class="mt-2">
-        <label for="" class="mb-2 block text-sm font-normal text-dark">Others: </label>
-        <textarea
-          rows="2"
-          placeholder="Remarks"
-          class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-        ></textarea>
+        <label>
+          <label for="" class="mb-2 block text-sm font-normal text-dark">Others: </label>
+          <textarea
+            rows="2"
+            placeholder="Remarks"
+            class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+            v-model="others"
+          ></textarea>
+        </label>
       </div>
 
       <!-- Save Button -->
       <div class="flex flex-row-reverse w-full mt-5">
         <button
+          @click="submitData"
           class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
         >
           Save
@@ -172,6 +263,55 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  props: {
+    patientId: {
+      type: String,
+      required: true
+    }
+  },
+  data() {
+    return {
+      tuberculosis: false,
+      diabetes: false,
+      hypertension: false,
+      hyperlipidemia: false,
+      chronicJointPains: false,
+      chronicMuscleAches: false,
+      sexuallyTransmittedDisease: false,
+      specifiedSTDs: '',
+      others: ''
+    }
+  },
+  methods: {
+    async submitData() {
+      try {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          pastMedicalHistory: {
+            tuberculosis: this.tuberculosis,
+            diabetes: this.diabetes,
+            hypertension: this.hypertension,
+            hyperlipidemia: this.hyperlipidemia,
+            chronicJointPains: this.chronicJointPains,
+            chronicMuscleAches: this.chronicMuscleAches,
+            sexuallyTransmittedDisease: this.sexuallyTransmittedDisease,
+            specifiedSTDs: this.specifiedSTDs,
+            others: this.others
+          }
+        })
+        console.log(response.data)
+        console.log('Past medical history posted successfully!')
+      } catch (error) {
+        console.error('Error posting data:', error)
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
 h1 {
