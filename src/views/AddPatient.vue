@@ -5,7 +5,13 @@
   <div class="flex">
     <SideBar :activeSection="activeSection" @update:activeSection="setActiveSection" />
     <div class="content flex-grow p-6">
-      <component :is="activeComponent"></component>
+      <keep-alive>
+        <component
+          :is="activeComponent"
+          :patientId="patientId"
+          @patientCreated="handlePatientCreated"
+        ></component>
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -38,7 +44,8 @@ export default {
   },
   data() {
     return {
-      activeSection: 'admin'
+      activeSection: 'admin',
+      patientId: null
     }
   },
   computed: {
@@ -64,15 +71,19 @@ export default {
     }
   },
   created() {
-    this.getData();
+    this.getData()
   },
   methods: {
     setActiveSection(section) {
       this.activeSection = section
     },
     async getData() {
-        const { data } = await axios.get('http://localhost:9090/get-all-admin');
-        console.log(data)
+      const { data } = await axios.get('http://localhost:9090/get-all-admin')
+      console.log(data)
+    },
+    handlePatientCreated(id) {
+      console.log('Patient created with ID:', id)
+      this.patientId = id
     }
   }
 }
