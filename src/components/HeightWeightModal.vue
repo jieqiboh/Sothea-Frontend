@@ -103,6 +103,8 @@
 
 <script>
 import axios from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
   props: {
@@ -145,7 +147,33 @@ export default {
   },
   methods: {
     async submitData() {
+      const toast = useToast()
       try {
+        if (this.height === null) {
+          toast.error('Please enter height')
+          return
+        }
+        if (this.weight === null) {
+          toast.error('Please enter weight')
+          return
+        } else if (this.weight < 0) {
+          toast.error('Weight cannot be negative')
+          return
+        }
+        if (this.paedsHeight === null) {
+          toast.error('Please enter Paeds: Height %')
+          return
+        } else if (this.paedsHeight < 0) {
+          toast.error('Paeds: Height % cannot be negative')
+          return
+        }
+        if (this.paedsWeight === null) {
+          toast.error('Please enter Paeds: Weight %')
+          return
+        } else if (this.paedsWeight < 0) {
+          toast.error('Paeds: Weight % cannot be negative')
+          return
+        }
         const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           heightAndWeight: {
             height: this.height,
@@ -158,8 +186,10 @@ export default {
         })
         console.log(response.data)
         console.log('Height and Weight is posted successfully!')
+        toast.success('Height and Weight saved successfully!')
       } catch (error) {
         console.error('Error posting data:', error)
+        toast.error('Error saving Height and Weight')
       }
     }
   }

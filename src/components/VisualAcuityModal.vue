@@ -64,6 +64,8 @@
 
 <script>
 import axios from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
   props: {
@@ -81,7 +83,16 @@ export default {
   },
   methods: {
     async submitData() {
+      const toast = useToast()
       try {
+        if (this.lEyeVision === null) {
+          toast.error('Please fill in L eye vision')
+          return
+        }
+        if (this.rEyeVision === null) {
+          toast.error('Please fill in R eye vision')
+          return
+        }
         const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           visualAcuity: {
             lEyeVision: this.lEyeVision,
@@ -91,8 +102,10 @@ export default {
         })
         console.log(response.data)
         console.log('Visual Acuity posted successfully!')
+        toast.success('Visual Acuity posted successfully!')
       } catch (error) {
         console.error('Error posting data:', error)
+        toast.error('Error saving Visual Acuity ')
       }
     }
   }
