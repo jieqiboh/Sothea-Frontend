@@ -10,9 +10,7 @@ const authState = reactive({
 })
 
 onMounted(() => {
-  if (!authState.token) {
-    router.push('/signin')
-  }
+  router.push('/signin')
 })
 </script>
 
