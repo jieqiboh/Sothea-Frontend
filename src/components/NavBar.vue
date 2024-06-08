@@ -1,38 +1,29 @@
 <template>
-  <div>
     <nav class="bg-[#3F51B5]">
-      <div class="px-8 mx-auto max-w-7xl">
-        <div class="flex items-center justify-between h-1/6 pt-2">
+      <div class="pl-6 mx-auto">
+        <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <h1>Project Sothea</h1>
-            <div class="hidden md:block">
-              <div class="flex items-baseline ml-10 space-x-4">
-                <router-link
-                  class="text-white hover:text-gray-300 px-3 py-2 rounded-t-lg text-sm font-medium"
-                  active-class="active"
-                  to="/allpatients"
-                >
-                  All Patients
-                </router-link>
-                <router-link
-                  class="text-white hover:text-gray-300 px-3 py-2 rounded-t-lg text-sm font-medium"
-                  active-class="active"
-                  to="/addpatient"
-                >
-                  Add Patient
-                </router-link>
-              </div>
+            <h1 class="py-4">Project Sothea</h1>
+            <div class="flex items-baseline ml-10">
+              <router-link class="text-white hover:text-gray-300 px-3 py-4 text-base font-medium" active-class="active"
+                to="/allpatients">
+                All Patients
+              </router-link>
+              <router-link class="text-white hover:text-gray-300 px-3 py-4 text-base font-medium" active-class="active"
+                to="/addpatient">
+                Add Patient
+              </router-link>
             </div>
           </div>
 
           <div class="flex items-center ml-4 md:ml-6">
-            <button
+          <button
               type="button"
-              class="relative ml-3 text-left flex items-center justify-center w-full rounded-md px-4 py-2 text-sm font-medium hover:text-gray-300 text-white"
+              class="relative ml-3 text-left flex items-center justify-center w-full rounded-md px-4 py-2 text-base font-medium hover:text-gray-300 text-white"
               id="options-menu"
+              @click="logout"
             >
               <h2>Logout</h2>
-
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -52,12 +43,16 @@
         </div>
       </div>
     </nav>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+  methods: {
+    logout() {
+      this.$router.push('/signin')
+    }
+  }
 }
 </script>
 
@@ -72,10 +67,10 @@ h2 {
   color: white;
   padding: 0.25rem;
 }
+
 .active {
   background-color: white;
   color: #3f51b5;
-  border: solid white;
-  border-width: 0.25rem;
+  border: 0;
 }
 </style>
