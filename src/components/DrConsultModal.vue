@@ -21,13 +21,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="true" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="false" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -41,13 +41,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="true" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="false" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -61,13 +61,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="true" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="false"
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -81,13 +81,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="true" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="false" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -101,13 +101,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="true" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="false" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -121,13 +121,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="true" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="false" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -141,13 +141,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="true" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="false" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -161,14 +161,14 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="true" 
-                disabled="!isEditing && !isAdd"/>
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input 
                 type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="false" 
-                  disabled="!isEditing && !isAdd"/>
+                  :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -418,6 +418,7 @@ export default {
 
         if (!this.isAdd) {
           this.toggleEdit(); // to switch back to read-only mode
+          this.$emit('reload')
         }
       } catch (error) {
         console.error('Error posting data:', error)

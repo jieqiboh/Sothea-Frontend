@@ -478,6 +478,8 @@ export default {
         })
         console.log(response.data)
         console.log('Patient updated successfully!')
+
+        this.$emit('reload')
       } catch (error) {
         console.error('Error updating patient:', error)
       }

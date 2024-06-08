@@ -344,6 +344,7 @@ export default {
 
         if (!this.isAdd) {
           this.toggleEdit(); // to switch back to read-only mode
+          this.$emit('reload')
         }
       } catch (error) {
         console.error('Error posting data:', error)
