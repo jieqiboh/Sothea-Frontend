@@ -266,6 +266,8 @@
 
 <script>
 import axios from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
   props: {
@@ -276,20 +278,33 @@ export default {
   },
   data() {
     return {
-      tuberculosis: false,
-      diabetes: false,
-      hypertension: false,
-      hyperlipidemia: false,
-      chronicJointPains: false,
-      chronicMuscleAches: false,
-      sexuallyTransmittedDisease: false,
+      tuberculosis: null,
+      diabetes: null,
+      hypertension: null,
+      hyperlipidemia: null,
+      chronicJointPains: null,
+      chronicMuscleAches: null,
+      sexuallyTransmittedDisease: null,
       specifiedSTDs: '',
       others: ''
     }
   },
   methods: {
     async submitData() {
+      const toast = useToast()
       try {
+        if (
+          this.tuberculosis === null ||
+          this.diabetes === null ||
+          this.hypertension === null ||
+          this.hyperlipidemia === null ||
+          this.chronicJointPains === null ||
+          this.chronicMuscleAches === null ||
+          this.sexuallyTransmittedDisease === null
+        ) {
+          toast.error('Please select yes/no for all fields')
+          return
+        }
         const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           pastMedicalHistory: {
             tuberculosis: this.tuberculosis,
@@ -305,8 +320,10 @@ export default {
         })
         console.log(response.data)
         console.log('Past medical history posted successfully!')
+        toast.success('Past medical history saved successfully!')
       } catch (error) {
         console.error('Error posting data:', error)
+        toast.error('Error saving past medical history')
       }
     }
   }

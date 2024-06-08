@@ -291,6 +291,8 @@
 
 <script>
 import axios from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
   data() {
@@ -314,27 +316,55 @@ export default {
   },
   methods: {
     async submitData() {
-      try {
-        console.log('name', this.name, typeof this.name)
-        console.log('khmerName', this.khmerName, typeof this.khmerName)
-        console.log('dob', this.dob, typeof this.dob)
-        console.log('age', this.age, typeof this.age)
-        console.log('gender', this.gender, typeof this.gender)
-        console.log('contactNo', this.contactNo, typeof this.contactNo)
-        console.log('regDate', this.regDate, typeof this.regDate)
-        console.log('village', this.village, typeof this.village)
-        console.log('familyGroup', this.familyGroup, typeof this.familyGroup)
-        console.log('pregnant', this.pregnant, typeof this.pregnant)
-        console.log(
-          'lastMenstrualPeriod',
-          this.lastMenstrualPeriod,
-          typeof this.lastMenstrualPeriod
-        )
-        console.log('drugAllergies', this.drugAllergies, typeof this.drugAllergies)
-        console.log('photo', this.photo, typeof this.photo)
-        console.log('sentToId', this.sentToId, typeof this.sentToId)
+      const toast = useToast()
 
-        console.log(this.sentToId, typeof this.sentToId)
+      try {
+        // Perform validation checks
+        if (!this.name) {
+          toast.error('Name is required')
+          return
+        }
+        if (!this.khmerName) {
+          toast.error('Khmer Name is required')
+          return
+        }
+        if (!this.dob) {
+          toast.error('Date of Birth is required')
+          return
+        }
+        if (!this.age) {
+          toast.error('Age is required')
+          return
+        }
+        if (!this.gender) {
+          toast.error('Gender is required')
+          return
+        }
+        if (!this.contactNo) {
+          toast.error('Contact No. is required')
+          return
+        }
+        if (!this.regDate) {
+          toast.error('Date Registered is required')
+          return
+        }
+        if (!this.village) {
+          toast.error('Village is required')
+          return
+        }
+        if (!this.familyGroup) {
+          toast.error('Family Group is required')
+          return
+        }
+        if (this.pregnant === null) {
+          toast.error('Pregnant? is required')
+          return
+        }
+        if (this.sentToId === null) {
+          toast.error('Sent to Infectious Disease? is required')
+          return
+        }
+
         const response = await axios.post('http://localhost:9090/patient', {
           admin: {
             name: this.name,
@@ -355,12 +385,14 @@ export default {
         })
         console.log(response.data)
         console.log('Data posted successfully!')
+        toast.success('Admin Details saved successfully!')
 
         // Emit the ID after the patient has been created
         const patientId = response.data['Inserted userid']
         this.$emit('patientCreated', patientId)
       } catch (error) {
         console.error('Error posting data:', error)
+        toast.error('Error saving admin details')
       }
     },
     handleFileChange(event) {
