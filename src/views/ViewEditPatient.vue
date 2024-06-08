@@ -1,18 +1,35 @@
 <template>
-  <div class="bar">Project Sothea</div>
-  <!-- <SideBar /> -->
+  <div>
+    <div class="bar" style="display: flex; justify-content: space-between;">
+      <p>Project Sothea</p>
+      <div class="flex justify-end" v-on:click="back">
+        <p class="pr-2 text-sm font-light">Back to All Patients</p>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 stroke-2 pt-1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+      </div>  
+      
+    </div>
 
-  <div class="flex">
-    <SideBar :activeSection="activeSection" :id="this.patientId" :name="this.name" :age="this.age" @update:activeSection="setActiveSection" />
-    <div class="content flex-grow p-6">
-      <component :is="activeComponent" :patient="patient" :patientId="this.patientId" :patientData="this.patient" :isAdd="false"></component>
+    <div class="flex">
+      <SideBar :activeSection="activeSection" :id="this.patientId" :name="this.name" :age="this.age" @update:activeSection="setActiveSection" />
+      <div class="content flex-grow p-6">
+        <component 
+          :is="activeComponent" 
+          :patient="patient" 
+          :patientId="this.patientId" 
+          :patientData="this.patient" 
+          :isAdd="false"
+          @reload="this.loadPatientData">
+        </component>
+      </div>
     </div>
   </div>
+  
 </template>
 
 <script>
 import SideBar from '../components/SideBar.vue'
-
 import AdminModal from '../components/AdminModal.vue'
 import PastMedHistModal from '../components/PastMedHistModal.vue'
 import SocialHistModal from '../components/SocialHistModal.vue'
@@ -71,6 +88,7 @@ export default {
   },
   methods: {
     setActiveSection(section) {
+      console.log(section)
       this.activeSection = section
     },
     async getPatientData(id) {
@@ -84,6 +102,7 @@ export default {
     },
     async loadPatientData() {
       try {
+        console.log('Loading patient data...')
         await this.getPatientData(this.patientId);
         console.log(this.patient);
         if (this.patient && this.patient.admin) {
@@ -91,13 +110,16 @@ export default {
           this.name = admin.name;
           const dob = admin.dob;
           this.age = new Date().getFullYear() - new Date(dob).getFullYear();
-          console.log(this.name)
         }
       } catch (error) {
         console.error('Error loading patient data:', error);
       }
+    },
+    back() {
+      this.$router.push('/allpatients');
     }
-  }
+  },
+  
 }
 </script>
 
