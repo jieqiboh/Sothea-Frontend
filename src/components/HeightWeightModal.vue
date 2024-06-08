@@ -15,6 +15,7 @@
               step="1"
               placeholder="cm"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
 
@@ -27,6 +28,7 @@
               step="0.1"
               placeholder="kg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
         </div>
@@ -41,6 +43,7 @@
               type="number"
               placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
 
@@ -52,6 +55,7 @@
               type="number"
               placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
         </div>
@@ -90,12 +94,36 @@
         <!-- Save Button -->
         <div class="flex flex-row-reverse w-full mt-5">
           <button
+            v-if="isAdd"
             @click="submitData"
             class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
           >
             Save
           </button>
         </div>
+
+        <!-- Edit Button -->
+        <div class="flex flex-row-reverse w-full mt-5">
+          <button
+            v-if="!isEditing && !isAdd"
+            @click="toggleEdit"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
+            Edit
+          </button>
+        </div>
+
+        <!-- Save Edits Button -->
+        <div class="flex flex-row-reverse w-full mt-5">
+          <button
+            v-if="isEditing && !isAdd"
+            @click="submitData"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
+            Save Edits
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
@@ -124,18 +152,18 @@ export default {
       height: null,
       weight: null,
       paedsHeight: null,
-      paedsWeight: null
+      paedsWeight: null,
+      isEditing: false,
     }
   },
   created() {
     if (!this.isAdd) {
       const heightAndWeight = this.patientData.heightandweight;
-      if (heightAndWeight) {
-        this.height = heightAndWeight.height
-        this.weight = heightAndWeight.weight
-        this.paedsHeight = heightAndWeight.paedsHeight
-        this.paedsWeight = heightAndWeight.paedsWeight
-      }
+      if (!heightAndWeight) return;
+      this.height = heightAndWeight.height 
+      this.weight = heightAndWeight.weight
+      this.paedsHeight = heightAndWeight.paedsHeight
+      this.paedsWeight = heightAndWeight.paedsWeight
     } 
   },
   computed: {
@@ -177,10 +205,20 @@ export default {
         })
         console.log(response.data)
         console.log('Height and Weight is posted successfully!')
+        if (!this.isAdd) {
+          this.toggleEdit(); // to switch back to read-only mode
+        }
       } catch (error) {
         console.error('Error posting data:', error)
       }
-    }
+    },
+
+    toggleEdit() {
+      console.log('toggleEdit')
+      this.isEditing = !this.isEditing
+      console.log(this.isEditing)
+    },
+
   }
 }
 </script>

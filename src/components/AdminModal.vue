@@ -364,22 +364,23 @@ export default {
   },
   created() {
     if (!this.isAdd) {
-      const admin = this.patientData.admin;
-      this.name = admin.name;
-      this.khmerName = admin.khmerName;
-      this.dob = new Date(admin.dob).toISOString().split('T')[0];
-      this.age = admin.age;
-      this.gender = admin.gender;
-      this.contactNo = admin.contactNo;
-      this.regDate = new Date(admin.regDate).toISOString().split('T')[0];
-      this.village = admin.village; 
-      this.familyGroup = admin.familyGroup;
-      this.pregnant = admin.pregnant;
-      this.lastMenstrualPeriod = new Date(admin.lastMenstrualPeriod).toISOString().split('T')[0];
-      this.drugAllergies = admin.drugAllergies;
-      this.selectedPhoto = admin.photo;
-      this.sentToId = admin.sentToId;
-    } 
+      const admin = this.patientData.admin 
+      if (!admin) return;
+      this.name = admin.name || '';
+      this.khmerName = admin.khmerName || ''
+      this.dob = admin.dob || ''
+      this.age = admin.age || ''
+      this.gender = admin.gender || ''
+      this.contactNo = admin.contactNo || ''
+      this.regDate = admin.regDate || ''
+      this.village = admin.village || ''
+      this.familyGroup = admin.familyGroup || ''
+      this.pregnant = admin.pregnant 
+      this.lastMenstrualPeriod = admin.lastMenstrualPeriod || ''
+      this.drugAllergies = admin.drugAllergies || ''
+      this.photo = admin.photo || ''
+      this.sentToId = admin.sentToId 
+    }
   },
   methods: {
     // POST request to add a new patient

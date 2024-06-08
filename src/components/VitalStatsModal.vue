@@ -15,6 +15,7 @@
               step="0.01"
               placeholder="Degree Celsius"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
 
@@ -27,6 +28,7 @@
               step="0.01"
               placeholder="%"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
         </div>
@@ -42,6 +44,7 @@
               step="0.01"
               placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
           <!-- Systolic BP2 -->
@@ -53,6 +56,7 @@
               step="0.01"
               placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
 
@@ -81,6 +85,7 @@
               step="0.01"
               placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
           <!-- Diastolic BP2 -->
@@ -92,6 +97,7 @@
               step="0.01"
               placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
 
@@ -122,6 +128,7 @@
               step="1"
               placeholder="BPM"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
           <!-- HR2 -->
@@ -133,6 +140,7 @@
               step="1"
               placeholder="BPM"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
 
@@ -155,7 +163,7 @@
           <!-- Random Blood Glucose (mmol/L) -->
           <div class="w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Random Blood Glucose
+              Random Blood Glucose (mmol/L)
             </label>
             <input
               v-model="randomBloodGlucoseMmolL"
@@ -163,9 +171,24 @@
               step="0.01"
               placeholder="mmol/L"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
 
+          <!-- Random Blood Glucose (mg/dL) -->
+          <div class="ml-3 w-1/4">
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Random Blood Glucose (mg/dL)
+            </label>
+            <input
+              v-model="randomBloodGlucoseMmolLp"
+              type="number"
+              step="0.01"
+              placeholder="mg/dL"
+              class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
+            />
+          </div>
           <!-- Units -->
           <!-- <div class="ml-3 w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark dark:text-white">
@@ -186,32 +209,39 @@
           </div> -->
         </div>
 
-        <!-- Row 6 -->
-        <div class="flex flex-row mb-2">
-          <!-- Random Blood Glucose (mg/dL) -->
-          <div class="w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Random Blood Glucose
-            </label>
-            <input
-              v-model="randomBloodGlucoseMmolLp"
-              type="number"
-              step="0.01"
-              placeholder="mg/dL"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-            />
-          </div>
-        </div>
-
         <!-- Save Button -->
         <div class="flex flex-row-reverse mt-5">
           <button
+            v-if="isAdd"
             @click="submitData"
             class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
           >
             Save
           </button>
         </div>
+
+        <!-- Edit Button -->
+        <div class="flex flex-row-reverse w-full mt-5">
+          <button
+            v-if="!isEditing && !isAdd"
+            @click="toggleEdit"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
+            Edit
+          </button>
+        </div>
+
+        <!-- Save Edits Button -->
+        <div class="flex flex-row-reverse w-full mt-5">
+          <button
+            v-if="isEditing && !isAdd"
+            @click="submitData"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
+            Save Edits
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
@@ -249,7 +279,8 @@ export default {
       hr2: null,
       averageHR: null,
       randomBloodGlucoseMmolL: null,
-      randomBloodGlucoseMmolLp: null
+      randomBloodGlucoseMmolLp: null,
+      isEditing: false,
     }
   },
   computed: {
@@ -275,6 +306,7 @@ export default {
   created() {
     if (!this.isAdd) {
       const vitalStatistics = this.patientData.vitalstatistics;
+      if (!vitalStatistics) return;
       this.temperature = vitalStatistics.temperature;
       this.spO2 = vitalStatistics.spO2;
       this.systolicBP1 = vitalStatistics.systolicBP1;
@@ -309,10 +341,20 @@ export default {
         })
         console.log(response.data)
         console.log('Vital Statistics posted successfully!')
+
+        if (!this.isAdd) {
+          this.toggleEdit(); // to switch back to read-only mode
+        }
       } catch (error) {
         console.error('Error posting data:', error)
       }
-    }
+    },
+
+    toggleEdit() {
+      console.log('toggleEdit')
+      this.isEditing = !this.isEditing
+      console.log(this.isEditing)
+    },
   }
 }
 </script>

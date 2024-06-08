@@ -26,6 +26,7 @@
                 class="w-4 h-4"
                 v-model="tuberculosis"
                 :value="true"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -37,6 +38,7 @@
                 class="w-4 h-4"
                 v-model="tuberculosis"
                 :value="false"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -56,6 +58,7 @@
                 class="w-4 h-4"
                 v-model="diabetes"
                 :value="true"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -67,6 +70,7 @@
                 class="w-4 h-4"
                 v-model="diabetes"
                 :value="false"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -86,6 +90,7 @@
                 class="w-4 h-4"
                 v-model="hypertension"
                 :value="true"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -97,6 +102,7 @@
                 class="w-4 h-4"
                 v-model="hypertension"
                 :value="false"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -116,6 +122,7 @@
                 class="w-4 h-4"
                 v-model="hyperlipidemia"
                 :value="true"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -127,6 +134,7 @@
                 class="w-4 h-4"
                 v-model="hyperlipidemia"
                 :value="false"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -146,6 +154,7 @@
                 class="w-4 h-4"
                 v-model="chronicJointPains"
                 :value="true"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -157,6 +166,7 @@
                 class="w-4 h-4"
                 v-model="chronicJointPains"
                 :value="false"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -176,6 +186,7 @@
                 class="w-4 h-4"
                 v-model="chronicMuscleAches"
                 :value="true"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -187,6 +198,7 @@
                 class="w-4 h-4"
                 v-model="chronicMuscleAches"
                 :value="false"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -206,6 +218,7 @@
                 class="w-4 h-4"
                 v-model="sexuallyTransmittedDisease"
                 :value="true"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -217,6 +230,7 @@
                 class="w-4 h-4"
                 v-model="sexuallyTransmittedDisease"
                 :value="false"
+                :disabled="!isEditing && !isAdd"
               />
             </label>
           </div>
@@ -234,6 +248,7 @@
             placeholder="Remarks"
             class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
             v-model="specifiedSTDs"
+            :disabled="!isEditing && !isAdd"
           ></textarea>
         </label>
       </div>
@@ -247,6 +262,7 @@
             placeholder="Remarks"
             class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
             v-model="others"
+            :disabled="!isEditing && !isAdd"
           ></textarea>
         </label>
       </div>
@@ -254,12 +270,36 @@
       <!-- Save Button -->
       <div class="flex flex-row-reverse w-full mt-5">
         <button
+          v-if="isAdd"
           @click="submitData"
           class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
         >
           Save
         </button>
       </div>
+
+      <!-- Edit Button -->
+      <div class="flex flex-row-reverse w-full mt-5">
+        <button
+          v-if="!isEditing && !isAdd"
+          @click="toggleEdit"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
+          Edit
+        </button>
+      </div>
+
+      <!-- Save Edits Button -->
+      <div class="flex flex-row-reverse w-full mt-5">
+        <button
+          v-if="isEditing && !isAdd"
+          @click="submitData"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
+          Save Edits
+        </button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -292,21 +332,23 @@ export default {
       chronicMuscleAches: false,
       sexuallyTransmittedDisease: false,
       specifiedSTDs: '',
-      others: ''
+      others: '', 
+      isEditing: false,
     }
   },
   created() {
     if (!this.isAdd) {
       const pastMedHist = this.patientData.pastmedicalhistory;
-      this.tuberculosis = pastMedHist.tuberculosis;
-      this.diabetes = pastMedHist.diabetes;
-      this.hypertension = pastMedHist.hypertension;
-      this.hyperlipidemia = pastMedHist.hyperlipidemia;
-      this.chronicJointPains = pastMedHist.chronicJointPains;
-      this.chronicMuscleAches = pastMedHist.chronicMuscleAches;
-      this.sexuallyTransmittedDisease = pastMedHist.sexuallyTransmittedDisease;
-      this.specifiedSTDs = pastMedHist.specifiedSTDs;
-      this.others = pastMedHist.others;
+      if (!pastMedHist) return;
+      this.tuberculosis = pastMedHist.tuberculosis || false;
+      this.diabetes = pastMedHist.diabetes || false;
+      this.hypertension = pastMedHist.hypertension || false;
+      this.hyperlipidemia = pastMedHist.hyperlipidemia || false;
+      this.chronicJointPains = pastMedHist.chronicJointPains || false;
+      this.chronicMuscleAches = pastMedHist.chronicMuscleAches || false;
+      this.sexuallyTransmittedDisease = pastMedHist.sexuallyTransmittedDisease || false;
+      this.specifiedSTDs = pastMedHist.specifiedSTDs || '';
+      this.others = pastMedHist.others || '';
     } 
   },
   methods: {
@@ -327,10 +369,21 @@ export default {
         })
         console.log(response.data)
         console.log('Past medical history posted successfully!')
+
+        if (!this.isAdd) {
+          this.toggleEdit(); // to switch back to read-only mode
+        }
       } catch (error) {
         console.error('Error posting data:', error)
       }
-    }
+    },
+
+    toggleEdit() {
+      console.log('toggleEdit')
+      this.isEditing = !this.isEditing
+      console.log(this.isEditing)
+    },
+    
   }
 }
 </script>
