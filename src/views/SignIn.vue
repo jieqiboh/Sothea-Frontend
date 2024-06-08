@@ -160,11 +160,11 @@ export default {
   border-radius: 0 0.5rem 0.5rem 0;
   flex: 1;
 }
-.input-style:focus {
+/* .input-style:focus {
   outline: none;
   border: none;
   box-shadow: 0 0 0 2px #3f51b5;
-}
+} */
 
 h1 {
   font-size: 1.5rem;
