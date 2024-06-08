@@ -109,6 +109,14 @@ export default {
     patientId: {
       type: Number,
       required: true
+    },
+    patientData: {
+      type: Object,
+      default: null
+    },
+    isAdd : {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -118,6 +126,17 @@ export default {
       paedsHeight: null,
       paedsWeight: null
     }
+  },
+  created() {
+    if (!this.isAdd) {
+      const heightAndWeight = this.patientData.heightandweight;
+      if (heightAndWeight) {
+        this.height = heightAndWeight.height
+        this.weight = heightAndWeight.weight
+        this.paedsHeight = heightAndWeight.paedsHeight
+        this.paedsWeight = heightAndWeight.paedsWeight
+      }
+    } 
   },
   computed: {
     bmi() {

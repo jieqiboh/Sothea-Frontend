@@ -162,6 +162,14 @@ export default {
     patientId: {
       type: Number,
       required: true
+    },
+    patientData: {
+      type: Object,
+      default: null
+    },
+    isAdd : {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -173,6 +181,17 @@ export default {
       alcoholHistory: false,
       howRegular: ''
     }
+  },
+  created() {
+    if (!this.isAdd) {
+      const socialHistory = this.patientData.socialhistory;
+      this.pastSmokingHistory = socialHistory.pastSmokingHistory;
+      this.numberOfYears = socialHistory.numberOfYears;
+      this.currentSmokingHistory  = socialHistory.currentSmokingHistory;
+      this.cigarettesPerDay = socialHistory.cigarettesPerDay;
+      this.alcoholHistory = socialHistory.alcoholHistory;
+      this.howRegular = socialHistory.howRegular;
+    } 
   },
   methods: {
     async submitData() {

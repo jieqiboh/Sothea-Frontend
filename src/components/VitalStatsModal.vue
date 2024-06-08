@@ -225,6 +225,14 @@ export default {
     patientId: {
       type: Number,
       required: true
+    },
+    patientData: {
+      type: Object,
+      default: null
+    },
+    isAdd : {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -263,6 +271,21 @@ export default {
       }
       return null
     }
+  },
+  created() {
+    if (!this.isAdd) {
+      const vitalStatistics = this.patientData.vitalstatistics;
+      this.temperature = vitalStatistics.temperature;
+      this.spO2 = vitalStatistics.spO2;
+      this.systolicBP1 = vitalStatistics.systolicBP1;
+      this.systolicBP2 = vitalStatistics.systolicBP2;
+      this.diastolicBP1 = vitalStatistics.diastolicBP1;
+      this.diastolicBP2 = vitalStatistics.diastolicBP2;
+      this.hr1 = vitalStatistics.hr1;
+      this.hr2 = vitalStatistics.hr2;
+      this.randomBloodGlucoseMmolL = vitalStatistics.randomBloodGlucoseMmolL;
+      this.randomBloodGlucoseMmolLp = vitalStatistics.randomBloodGlucoseMmolLp;
+    } 
   },
   methods: {
     async submitData() {

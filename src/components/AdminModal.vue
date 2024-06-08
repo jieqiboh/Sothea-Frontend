@@ -13,6 +13,7 @@
               <div class="relative">
                 <input
                   v-model="name"
+                  :disabled="!isEditing && !isAdd"
                   type="text"
                   placeholder="Name"
                   class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
@@ -29,6 +30,7 @@
               <div class="relative">
                 <input
                   v-model="khmerName"
+                  :disabled="!isEditing && !isAdd"
                   type="text"
                   placeholder="Khmer Name"
                   class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
@@ -47,6 +49,7 @@
               <div class="relative z-20">
                 <input
                   v-model="dob"
+                  :disabled="!isEditing && !isAdd"
                   type="date"
                   class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
                 />
@@ -60,6 +63,7 @@
               </label>
               <input
                 v-model="age"
+                :disabled="!isEditing && !isAdd"
                 type="number"
                 placeholder="Age"
                 class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
@@ -74,6 +78,7 @@
               <div class="relative z-20">
                 <select
                   v-model="gender"
+                  :disabled="!isEditing && !isAdd"
                   class="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-1.5 pl-3 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                 >
                   <option value="M" class="dark:bg-dark-2">M</option>
@@ -94,6 +99,7 @@
               <div class="relative">
                 <input
                   v-model="contactNo"
+                  :disabled="!isEditing && !isAdd"
                   type="tel"
                   placeholder="Contact No."
                   class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
@@ -112,6 +118,7 @@
               <div class="relative z-20">
                 <input
                   v-model="regDate"
+                  :disabled="!isEditing && !isAdd"
                   type="date"
                   class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
                 />
@@ -169,6 +176,7 @@
           <div class="relative">
             <input
               v-model="village"
+              :disabled="!isEditing && !isAdd"
               type="text"
               placeholder="Village"
               class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
@@ -185,6 +193,7 @@
           <div class="relative">
             <input
               v-model="familyGroup"
+              :disabled="!isEditing && !isAdd"
               type="text"
               placeholder="Family Group"
               class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
@@ -209,6 +218,7 @@
             </span>
             <select
               v-model="pregnant"
+              :disabled="!isEditing && !isAdd"
               class="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
             >
               <option :value="true" class="dark:bg-dark-2">Y</option>
@@ -228,6 +238,7 @@
           <div class="relative z-20">
             <input
               v-model="lastMenstrualPeriod"
+              :disabled="!isEditing && !isAdd"
               type="date"
               class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
             />
@@ -243,6 +254,7 @@
           <div class="relative">
             <input
               v-model="drugAllergies"
+              :disabled="!isEditing && !isAdd"
               type="text"
               placeholder="Enter Drug Allergies"
               class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
@@ -264,6 +276,7 @@
             </span>
             <select
               v-model="sentToId"
+              :disabled="!isEditing && !isAdd"
               class="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
             >
               <option :value="true" class="dark:bg-dark-2">Y</option>
@@ -279,20 +292,56 @@
       <!-- Save Button -->
       <div class="flex flex-row-reverse w-full mt-5">
         <button
+          v-if="isAdd"
           @click="submitData"
           class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
         >
           Save
         </button>
       </div>
+      <!-- Edit Button -->
+      <div class="flex flex-row-reverse w-full mt-5">
+        <button
+          v-if="!isEditing && !isAdd"
+          @click="toggleEdit"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
+          Edit
+        </button>
+      </div>
+      <!-- Save Edits Button -->
+      <div class="flex flex-row-reverse w-full mt-5">
+        <button
+          v-if="isEditing && !isAdd"
+          @click="saveChanges"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
+          Save Edits
+        </button>
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import axios from 'axios'
 
 export default {
+  props: {
+    patientId: {
+      type: Number,
+      default: null
+    },
+    patientData: {
+      type: Object,
+      default: null
+    },
+    isAdd : {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
       name: '',
@@ -309,10 +358,31 @@ export default {
       drugAllergies: '',
       selectedPhoto: null,
       photo: '', //base 64 string (for POST)
-      sentToId: null
+      sentToId: null,
+      isEditing: false,
     }
   },
+  created() {
+    if (!this.isAdd) {
+      const admin = this.patientData.admin;
+      this.name = admin.name;
+      this.khmerName = admin.khmerName;
+      this.dob = new Date(admin.dob).toISOString().split('T')[0];
+      this.age = admin.age;
+      this.gender = admin.gender;
+      this.contactNo = admin.contactNo;
+      this.regDate = new Date(admin.regDate).toISOString().split('T')[0];
+      this.village = admin.village; 
+      this.familyGroup = admin.familyGroup;
+      this.pregnant = admin.pregnant;
+      this.lastMenstrualPeriod = new Date(admin.lastMenstrualPeriod).toISOString().split('T')[0];
+      this.drugAllergies = admin.drugAllergies;
+      this.selectedPhoto = admin.photo;
+      this.sentToId = admin.sentToId;
+    } 
+  },
   methods: {
+    // POST request to add a new patient
     async submitData() {
       try {
         console.log('name', this.name, typeof this.name)
@@ -363,6 +433,7 @@ export default {
         console.error('Error posting data:', error)
       }
     },
+
     handleFileChange(event) {
       const file = event.target.files[0]
       if (file && /\.(jpg|jpeg|png)$/i.test(file.name)) {
@@ -380,7 +451,47 @@ export default {
         this.selectedPhoto = null
         alert('Please select a JPEG, JPG, or PNG file.')
       }
-    }
+    },
+
+    // PUT request to update an existing patient
+    async saveEdits() {
+      try {
+        console.log("saving edits....")
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          admin: {
+            name: this.name,
+            khmerName: this.khmerName,
+            dob: new Date(this.dob).toISOString(),
+            age: this.age,
+            gender: this.gender,
+            contactNo: this.contactNo,
+            regDate: new Date(this.regDate).toISOString(),
+            village: this.village,
+            familyGroup: this.familyGroup,
+            pregnant: this.pregnant,
+            lastMenstrualPeriod: new Date(this.lastMenstrualPeriod).toISOString(),
+            drugAllergies: this.drugAllergies ? this.drugAllergies : null,
+            photo: this.photo ? this.photo : null,
+            sentToId: this.sentToId
+          }
+        })
+        console.log(response.data)
+        console.log('Patient updated successfully!')
+      } catch (error) {
+        console.error('Error updating patient:', error)
+      }
+    },
+            
+    toggleEdit() {
+      console.log('toggleEdit')
+      this.isEditing = !this.isEditing
+      console.log(this.isEditing)
+    },
+
+    saveChanges() {
+      this.saveEdits();
+      this.toggleEdit();
+    },
   }
 }
 </script>

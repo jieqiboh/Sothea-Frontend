@@ -272,6 +272,14 @@ export default {
     patientId: {
       type: String,
       required: true
+    },
+    patientData: {
+      type: Object,
+      default: null
+    },
+    isAdd : {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -286,6 +294,20 @@ export default {
       specifiedSTDs: '',
       others: ''
     }
+  },
+  created() {
+    if (!this.isAdd) {
+      const pastMedHist = this.patientData.pastmedicalhistory;
+      this.tuberculosis = pastMedHist.tuberculosis;
+      this.diabetes = pastMedHist.diabetes;
+      this.hypertension = pastMedHist.hypertension;
+      this.hyperlipidemia = pastMedHist.hyperlipidemia;
+      this.chronicJointPains = pastMedHist.chronicJointPains;
+      this.chronicMuscleAches = pastMedHist.chronicMuscleAches;
+      this.sexuallyTransmittedDisease = pastMedHist.sexuallyTransmittedDisease;
+      this.specifiedSTDs = pastMedHist.specifiedSTDs;
+      this.others = pastMedHist.others;
+    } 
   },
   methods: {
     async submitData() {

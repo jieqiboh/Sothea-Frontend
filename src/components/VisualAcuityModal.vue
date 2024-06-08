@@ -70,6 +70,14 @@ export default {
     patientId: {
       type: Number,
       required: true
+    },
+    patientData: {
+      type: Object,
+      default: null
+    },
+    isAdd : {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -78,6 +86,14 @@ export default {
       rEyeVision: null,
       additionalIntervention: ''
     }
+  },
+  created() {
+    if (!this.isAdd) {
+      const visualAcuity = this.patientData.visualacuity;
+      this.lEyeVision = visualAcuity.lEyeVision;
+      this.rEyeVision = visualAcuity.rEyeVision;
+      this.additionalIntervention = visualAcuity.additionalIntervention;
+    } 
   },
   methods: {
     async submitData() {

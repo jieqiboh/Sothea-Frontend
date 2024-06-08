@@ -277,6 +277,14 @@ export default {
     patientId: {
       type: Number,
       required: true
+    },
+    patientData: {
+      type: Object,
+      default: null
+    },
+    isAdd : {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -297,6 +305,26 @@ export default {
       referralLoc: '',
       remarks: 'remarks'
     }
+  },
+  created() {
+    if (!this.isAdd) {
+      const drConsult = this.patientData.doctorsconsultation;
+      this.healthy = drConsult.healthy;
+      this.msk = drConsult.msk;
+      this.cvs = drConsult.cvs;
+      this.respi = drConsult.respi;
+      this.gu = drConsult.gu;
+      this.git = drConsult.git;
+      this.eye = drConsult.eye;
+      this.derm = drConsult.derm;
+      this.others = drConsult.others;
+      this.consultationNotes = drConsult.consultationNotes;
+      this.diagnosis = drConsult.diagnosis;
+      this.treatment = drConsult.treatment;
+      this.referralNeeded = drConsult.referralNeeded;
+      this.referralLoc = drConsult.referralLoc;
+      this.remarks = drConsult.remarks;
+    } 
   },
   methods: {
     async submitData() {
