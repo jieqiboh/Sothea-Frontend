@@ -28,6 +28,7 @@
                   class="w-4 h-4"
                   v-model="pastSmokingHistory"
                   :value="true"
+                  :disabled="!isEditing && !isAdd"
                 />
               </label>
             </div>
@@ -39,6 +40,7 @@
                   class="w-4 h-4"
                   v-model="pastSmokingHistory"
                   :value="false"
+                  :disabled="!isEditing && !isAdd"
                 />
               </label>
             </div>
@@ -51,6 +53,7 @@
               type="number"
               v-model="numberOfYears"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+              :disabled="!isEditing && !isAdd"
             ></textarea>
           </div>
         </div>
@@ -72,6 +75,7 @@
                   class="w-4 h-4"
                   v-model="currentSmokingHistory"
                   :value="true"
+                  :disabled="!isEditing && !isAdd"
                 />
               </label>
             </div>
@@ -83,6 +87,7 @@
                   class="w-4 h-4"
                   v-model="currentSmokingHistory"
                   :value="false"
+                  :disabled="!isEditing && !isAdd"
                 />
               </label>
             </div>
@@ -95,6 +100,7 @@
               type="number"
               v-model="cigarettesPerDay"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+              :disabled="!isEditing && !isAdd"
             ></textarea>
           </div>
         </div>
@@ -114,6 +120,7 @@
                   class="w-4 h-4"
                   v-model="alcoholHistory"
                   :value="true"
+                  :disabled="!isEditing && !isAdd"
                 />
               </label>
             </div>
@@ -125,6 +132,7 @@
                   class="w-4 h-4"
                   v-model="alcoholHistory"
                   :value="false"
+                  :disabled="!isEditing && !isAdd"
                 />
               </label>
             </div>
@@ -136,6 +144,7 @@
               placeholder="If Y, how regularly?"
               v-model="howRegular"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+              :disabled="!isEditing && !isAdd"
             ></textarea>
           </div>
         </div>
@@ -144,12 +153,36 @@
       <!-- Save Button -->
       <div class="flex flex-row-reverse w-full mt-5">
         <button
+          v-if="isAdd"
           @click="submitData"
           class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
         >
           Save
         </button>
       </div>
+
+      <!-- Edit Button -->
+      <div class="flex flex-row-reverse w-full mt-5">
+        <button
+          v-if="!isEditing && !isAdd"
+          @click="toggleEdit"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
+          Edit
+        </button>
+      </div>
+
+      <!-- Save Edits Button -->
+      <div class="flex flex-row-reverse w-full mt-5">
+        <button
+          v-if="isEditing && !isAdd"
+          @click="submitData"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
+          Save Edits
+        </button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -164,6 +197,14 @@ export default {
     patientId: {
       type: Number,
       required: true
+    },
+    patientData: {
+      type: Object,
+      default: null
+    },
+    isAdd : {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -173,8 +214,21 @@ export default {
       currentSmokingHistory: null,
       cigarettesPerDay: null,
       alcoholHistory: null,
-      howRegular: ''
+      howRegular: '',
+      isEditing: false,
     }
+  },
+  created() {
+    if (!this.isAdd) {
+      const socialHistory = this.patientData.socialhistory;
+      if (!socialHistory) return;
+      this.pastSmokingHistory = socialHistory.pastSmokingHistory || false;
+      this.numberOfYears = socialHistory.numberOfYears || null;
+      this.currentSmokingHistory  = socialHistory.currentSmokingHistory || false;
+      this.cigarettesPerDay = socialHistory.cigarettesPerDay || null;
+      this.alcoholHistory = socialHistory.alcoholHistory || null;
+      this.howRegular = socialHistory.howRegular || '';
+    } 
   },
   methods: {
     async submitData() {
@@ -204,13 +258,22 @@ export default {
         })
         console.log(response.data)
         console.log('Social history posted successfully!')
+        if (!this.isAdd) {
+          this.toggleEdit(); // to switch back to read-only mode
+        }
+        this.$emit('reload')
         toast.success('Social history saved successfully!')
       } catch (error) {
         console.error('Error posting data:', error)
         toast.error('Error saving social history')
       }
-    }
-  }
+    },
+    toggleEdit() {
+      console.log('toggleEdit')
+      this.isEditing = !this.isEditing
+      console.log(this.isEditing)
+    },
+  },
 }
 </script>
 

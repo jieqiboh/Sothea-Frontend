@@ -3,9 +3,9 @@
     <div class="flex flex-col">
       <div class="h-screen w-61">
         <div class="flex flex-col items-start justify-start mx-6 mt-5">
-          <h2>Name:</h2>
-          <h2>ID:</h2>
-          <h2>Age:</h2>
+          <h2>Name: {{ this.name }}</h2>
+          <h2>ID: {{ this.id }}</h2>
+          <h2>Age: {{ this.age }}</h2>
         </div>
         <nav class="mt-3 px-6">
           <a
@@ -338,13 +338,25 @@ export default {
     activeSection: {
       type: String,
       required: true
+    },
+    name: {
+      type: String,
+      default: null
+    },
+    id: {
+      type: String,
+      default: null
+    }, 
+    age: {
+      type: String,
+      default: null
     }
   },
   methods: {
     setActiveSection(section) {
       this.$emit('update:activeSection', section)
     }
-  }
+  },
 }
 </script>
 

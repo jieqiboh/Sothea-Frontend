@@ -5,14 +5,8 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const authState = reactive({
-  token: null
-})
-
 onMounted(() => {
-  if (!authState.token) {
-    router.push('/signin')
-  }
+  router.push('/signin')
 })
 </script>
 

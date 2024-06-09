@@ -20,12 +20,14 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="true" />
+              <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="true" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="false" />
+              <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="false" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -38,12 +40,14 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="true" />
+              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="true" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="false" />
+              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="false" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -56,12 +60,14 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="true" />
+              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="true" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="false" />
+              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="false"
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -74,12 +80,14 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="true" />
+              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="true" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="false" />
+              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="false" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -92,12 +100,14 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="true" />
+              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="true" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="false" />
+              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="false" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -110,12 +120,14 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="true" />
+              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="true" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="false" />
+              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="false" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -128,12 +140,14 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="true" />
+              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="true" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="false" />
+              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="false" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -146,12 +160,15 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="true" />
+              <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="true" 
+                :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="false" />
+              <input 
+                type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="false" 
+                  :disabled="!isEditing && !isAdd"/>
             </label>
           </div>
         </div>
@@ -167,6 +184,7 @@
               type="text"
               placeholder="Specify"
               class="w-full bg-transparent rounded-md border border-stroke py-2 px-2 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing && !isAdd"
             />
           </div>
         </div>
@@ -180,6 +198,7 @@
           rows="3"
           placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+          :disabled="!isEditing && !isAdd"
         ></textarea>
       </div>
 
@@ -191,6 +210,7 @@
           rows="3"
           placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+          :disabled="!isEditing && !isAdd"
         ></textarea>
       </div>
 
@@ -202,6 +222,7 @@
           rows="3"
           placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+          :disabled="!isEditing && !isAdd"
         ></textarea>
       </div>
 
@@ -229,6 +250,7 @@
                   class="w-4 h-4"
                   v-model="referralNeeded"
                   :value="true"
+                  :disabled="!isEditing && !isAdd"
                 />
               </label>
             </div>
@@ -240,6 +262,7 @@
                   class="w-4 h-4"
                   v-model="referralNeeded"
                   :value="false"
+                  :disabled="!isEditing && !isAdd"
                 />
               </label>
             </div>
@@ -251,6 +274,7 @@
               rows="1"
               placeholder="Enter Location"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+              :disabled="!isEditing && !isAdd"
             ></textarea>
           </div>
         </div>
@@ -259,12 +283,36 @@
       <!-- Save Button -->
       <div class="flex flex-row-reverse w-full mt-5">
         <button
+          v-if="isAdd"
           @click="submitData"
           class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
         >
           Save
         </button>
       </div>
+
+      <!-- Edit Button -->
+      <div class="flex flex-row-reverse w-full mt-5">
+        <button
+          v-if="!isEditing && !isAdd"
+          @click="toggleEdit"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
+          Edit
+        </button>
+      </div>
+
+      <!-- Save Edits Button -->
+      <div class="flex flex-row-reverse w-full mt-5">
+        <button
+          v-if="isEditing && !isAdd"
+          @click="submitData"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
+          Save Edits
+        </button>
+      </div>
+      
     </div>
   </div>
 </template>
@@ -279,6 +327,14 @@ export default {
     patientId: {
       type: Number,
       required: true
+    },
+    patientData: {
+      type: Object,
+      default: null
+    },
+    isAdd : {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -297,8 +353,30 @@ export default {
       treatment: '',
       referralNeeded: null,
       referralLoc: '',
-      remarks: 'remarks'
+      remarks: 'remarks',
+      isEditing: false,
     }
+  },
+  created() {
+    if (!this.isAdd) {
+      const drConsult = this.patientData.doctorsconsultation;
+      if (!drConsult) return;
+      this.healthy = drConsult.healthy;
+      this.msk = drConsult.msk;
+      this.cvs = drConsult.cvs;
+      this.respi = drConsult.respi;
+      this.gu = drConsult.gu;
+      this.git = drConsult.git;
+      this.eye = drConsult.eye;
+      this.derm = drConsult.derm;
+      this.others = drConsult.others || "";
+      this.consultationNotes = drConsult.consultationNotes || "";
+      this.diagnosis = drConsult.diagnosis || "";
+      this.treatment = drConsult.treatment || "";
+      this.referralNeeded = drConsult.referralNeeded;
+      this.referralLoc = drConsult.referralLoc || "";
+      this.remarks = drConsult.remarks || "";
+    } 
   },
   methods: {
     async submitData() {
@@ -365,12 +443,23 @@ export default {
         })
         console.log(response.data)
         console.log('Doctors Consultation posted successfully!')
+        if (!this.isAdd) {
+          this.toggleEdit(); // to switch back to read-only mode
+          this.$emit('reload')
+        }
         toast.success('Doctors Consultation saved successfully!')
       } catch (error) {
         console.error('Error posting data:', error)
         toast.error('Error saving Doctors Consultation')
       }
-    }
+    },
+
+    toggleEdit() {
+      console.log('toggleEdit')
+      this.isEditing = !this.isEditing
+      console.log(this.isEditing)
+    },
+
   }
 }
 </script>

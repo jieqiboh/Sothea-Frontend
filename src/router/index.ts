@@ -3,6 +3,7 @@ import AllPatients from '../views/AllPatients.vue'
 import SignIn from '../views/SignIn.vue'
 import AddPatient from '../views/AddPatient.vue'
 import SideBar from '../components/SideBar.vue'
+import ViewEditPatient from '../views/ViewEditPatient.vue'
 
 import AdminModal from '../components/AdminModal.vue'
 import PastMedHistModal from '../components/PastMedHistModal.vue'
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/sidebar',
       name: 'sidebar',
       component: SideBar
+    },
+    {
+      path: '/patient/:id',
+      name: 'patient',
+      component: ViewEditPatient
     }
     // {
     //   path: '/admin',

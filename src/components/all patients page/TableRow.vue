@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr @click="handleClick">
         <td class="px-5 py-4 text-sm bg-white border-b border-gray-200">
             <p class="text-gray-900 whitespace-no-wrap">
                 {{ id }}
@@ -57,6 +57,11 @@ export default {
         formattedQueuedAt() {
             const date = new Date(this.queuedat);
             return date.toLocaleTimeString('en-CA', {timeStyle: 'short'});
+        }
+    },
+    methods: {
+        handleClick() {
+            this.$router.push({ name: 'patient', params: { id: this.id } });
         }
     }
 }
