@@ -319,6 +319,8 @@
 
 <script>
 import axios from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
   props: {
@@ -378,22 +380,48 @@ export default {
   },
   methods: {
     async submitData() {
+      const toast = useToast()
       try {
-        console.log('healthy', this.healthy, typeof this.healthy)
-        console.log('msk', this.msk, typeof this.msk)
-        console.log('cvs', this.cvs, typeof this.cvs)
-        console.log('respi', this.respi, typeof this.respi)
-        console.log('gu', this.gu, typeof this.gu)
-        console.log('git', this.git, typeof this.git)
-        console.log('eye', this.eye, typeof this.eye)
-        console.log('derm', this.derm, typeof this.derm)
-        console.log('others', this.others, typeof this.others)
-        console.log('consultationNotes', this.consultationNotes, typeof this.consultationNotes)
-        console.log('diagnosis', this.diagnosis, typeof this.diagnosis)
-        console.log('treatment', this.treatment, typeof this.treatment)
-        console.log('referralNeeded', this.referralNeeded, typeof this.referralNeeded)
-        console.log('referralLoc', this.referralLoc, typeof this.referralLoc)
-        console.log('remarks', this.remarks, typeof this.remarks)
+        if (this.healthy === null) {
+          toast.error('Please indicate if patient is healthy')
+          return
+        }
+        if (this.msk === null) {
+          toast.error('Please indicate if patient has MSK')
+          return
+        }
+        if (this.cvs === null) {
+          toast.error('Please indicate if patient has CVS')
+          return
+        }
+        if (this.respi === null) {
+          toast.error('Please indicate if patient has Respi')
+          return
+        }
+        if (this.gu === null) {
+          toast.error('Please indicate if patient has GU')
+          return
+        }
+        if (this.git === null) {
+          toast.error('Please indicate if patient has GIT')
+          return
+        }
+        if (this.eye === null) {
+          toast.error('Please indicate if patient has Eye')
+          return
+        }
+        if (this.derm === null) {
+          toast.error('Please indicate if patient has Derm')
+          return
+        }
+        if (this.others === '') {
+          toast.error('Please indicate if patient has Others')
+          return
+        }
+        if (this.referralNeeded === null) {
+          toast.error('Please indicate if patient needs referral')
+          return
+        }
         const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           doctorsConsultation: {
             healthy: this.healthy,
@@ -415,13 +443,14 @@ export default {
         })
         console.log(response.data)
         console.log('Doctors Consultation posted successfully!')
-
         if (!this.isAdd) {
           this.toggleEdit(); // to switch back to read-only mode
           this.$emit('reload')
         }
+        toast.success('Doctors Consultation saved successfully!')
       } catch (error) {
         console.error('Error posting data:', error)
+        toast.error('Error saving Doctors Consultation')
       }
     },
 

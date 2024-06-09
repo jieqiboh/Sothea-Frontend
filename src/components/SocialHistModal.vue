@@ -189,6 +189,8 @@
 
 <script>
 import axios from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
   props: {
@@ -207,11 +209,11 @@ export default {
   },
   data() {
     return {
-      pastSmokingHistory: false,
+      pastSmokingHistory: null,
       numberOfYears: null,
-      currentSmokingHistory: false,
+      currentSmokingHistory: null,
       cigarettesPerDay: null,
-      alcoholHistory: false,
+      alcoholHistory: null,
       howRegular: '',
       isEditing: false,
     }
@@ -224,13 +226,26 @@ export default {
       this.numberOfYears = socialHistory.numberOfYears || null;
       this.currentSmokingHistory  = socialHistory.currentSmokingHistory || false;
       this.cigarettesPerDay = socialHistory.cigarettesPerDay || null;
-      this.alcoholHistory = socialHistory.alcoholHistory || false;
+      this.alcoholHistory = socialHistory.alcoholHistory || null;
       this.howRegular = socialHistory.howRegular || '';
     } 
   },
   methods: {
     async submitData() {
+      const toast = useToast()
       try {
+        if (this.pastSmokingHistory === null) {
+          toast.error('Please indicate past smoking history')
+          return
+        }
+        if (this.currentSmokingHistory === null) {
+          toast.error('Please indicate current smoking history')
+          return
+        }
+        if (this.alcoholHistory === null) {
+          toast.error('Please indicate alcohol history')
+          return
+        }
         const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           socialHistory: {
             pastSmokingHistory: this.pastSmokingHistory,
@@ -243,13 +258,14 @@ export default {
         })
         console.log(response.data)
         console.log('Social history posted successfully!')
-
         if (!this.isAdd) {
           this.toggleEdit(); // to switch back to read-only mode
         }
         this.$emit('reload')
+        toast.success('Social history saved successfully!')
       } catch (error) {
         console.error('Error posting data:', error)
+        toast.error('Error saving social history')
       }
     },
     toggleEdit() {

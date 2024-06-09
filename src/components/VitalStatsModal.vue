@@ -249,6 +249,8 @@
 
 <script>
 import axios from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
   props: {
@@ -321,7 +323,48 @@ export default {
   },
   methods: {
     async submitData() {
+      const toast = useToast()
       try {
+        if (this.temperature === null) {
+          toast.error('Please enter temperature')
+          return
+        }
+        if (this.spO2 === null) {
+          toast.error('Please enter SpO2')
+          return
+        }
+        if (this.systolicBP1 === null) {
+          toast.error('Please enter Systolic BP1')
+          return
+        }
+        if (this.systolicBP2 === null) {
+          toast.error('Please enter Systolic BP2')
+          return
+        }
+        if (this.diastolicBP1 === null) {
+          toast.error('Please enter Diastolic BP1')
+          return
+        }
+        if (this.diastolicBP2 === null) {
+          toast.error('Please enter Diastolic BP2')
+          return
+        }
+        if (this.hr1 === null) {
+          toast.error('Please enter HR1')
+          return
+        }
+        if (this.hr2 === null) {
+          toast.error('Please enter HR2')
+          return
+        }
+        if (this.randomBloodGlucoseMmolL === null) {
+          toast.error('Please enter Random Blood Glucose (mmol/L)')
+          return
+        }
+        if (this.randomBloodGlucoseMmolLp === null) {
+          toast.error('Please enter Random Blood Glucose (mg/dL)')
+          return
+        }
         const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           vitalStatistics: {
             temperature: this.temperature,
@@ -341,13 +384,14 @@ export default {
         })
         console.log(response.data)
         console.log('Vital Statistics posted successfully!')
-
         if (!this.isAdd) {
           this.toggleEdit(); // to switch back to read-only mode
           this.$emit('reload')
         }
+        toast.success('Vital Statistics saved successfully!')
       } catch (error) {
         console.error('Error posting data:', error)
+        toast.error('Error saving vital statistics')
       }
     },
 
