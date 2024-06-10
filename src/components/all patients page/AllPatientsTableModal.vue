@@ -11,9 +11,10 @@
                 <div class="relative flex-grow">
                     <input 
                         type="text" 
-                        id="&quot;form-subscribe-Filter" 
+                        id="search-input" 
                         class="rounded-lg border-transparent appearance-none bg-gray-300 border border-gray-300 py-3 px-4 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
                         placeholder="Search"
+                        @input="searchPatient"
                     />
                 </div>
                 <router-link active-class="active" to="/addpatient">
@@ -91,6 +92,7 @@ export default {
     data() {
         return {
             patients: [],
+            patientsFixed: [], // for searching patients 
             token: null
         }
     },
@@ -99,6 +101,7 @@ export default {
             try {
                 const { data } = await axios.get('http://localhost:9090/get-all-admin');
                 this.patients = data;  // Store the fetched data in the patients array
+                this.patientsFixed = data;
                 console.log(this.patients);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -111,6 +114,15 @@ export default {
             const minutes = Math.floor(Math.random() * 60);
             date.setHours(hours, minutes);
             return date.toISOString();  // Return ISO string format of the date
+        },
+        searchPatient() {
+            console.log('searching')
+            // get value of the search input
+            const searchValue = document.getElementById('search-input').value;
+            // filter patients array based on the search value
+            this.patients = this.patientsFixed.filter(patient => {
+                return patient.name.toLowerCase().includes(searchValue.toLowerCase());
+            });
         }
     },
     created() {
