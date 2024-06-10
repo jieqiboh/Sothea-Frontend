@@ -14,14 +14,17 @@
     <div class="flex">
       <SideBar :activeSection="activeSection" :id="this.patientId" :name="this.name" :age="this.age" @update:activeSection="setActiveSection" />
       <div class="content flex-grow p-6">
-        <component 
-          :is="activeComponent" 
-          :patient="patient" 
-          :patientId="this.patientId" 
-          :patientData="this.patient" 
-          :isAdd="false"
-          @reload="this.loadPatientData">
-        </component>
+        <keep-alive>
+          <component 
+            :is="activeComponent" 
+            :patient="patient" 
+            :patientId="this.patientId" 
+            :patientData="this.patient" 
+            :isAdd="false"
+            @reload="this.loadPatientData">
+          </component>
+        </keep-alive>
+        
       </div>
     </div>
   </div>

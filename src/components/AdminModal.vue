@@ -460,7 +460,7 @@ export default {
 
         // Emit the ID after the patient has been created
         const patientId = response.data['Inserted userid']
-        this.$emit('patientCreated', patientId)
+        // this.$emit('patientCreated', patientId)
       } catch (error) {
         console.error('Error posting data:', error)
         toast.error('Error saving admin details')
@@ -488,8 +488,54 @@ export default {
 
     // PUT request to update an existing patient
     async saveEdits() {
+      const toast = useToast();
       try {
         console.log("saving edits....")
+        // Perform validation checks
+        if (!this.name) {
+          toast.error('Name is required')
+          return
+        }
+        if (!this.khmerName) {
+          toast.error('Khmer Name is required')
+          return
+        }
+        if (!this.dob) {
+          toast.error('Date of Birth is required')
+          return
+        }
+        if (!this.age) {
+          toast.error('Age is required')
+          return
+        }
+        if (!this.gender) {
+          toast.error('Gender is required')
+          return
+        }
+        if (!this.contactNo) {
+          toast.error('Contact No. is required')
+          return
+        }
+        if (!this.regDate) {
+          toast.error('Date Registered is required')
+          return
+        }
+        if (!this.village) {
+          toast.error('Village is required')
+          return
+        }
+        if (!this.familyGroup) {
+          toast.error('Family Group is required')
+          return
+        }
+        if (this.pregnant === null) {
+          toast.error('Pregnant? is required')
+          return
+        }
+        if (this.sentToId === null) {
+          toast.error('Sent to Infectious Disease? is required')
+          return
+        }
         const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           admin: {
             name: this.name,
@@ -510,10 +556,11 @@ export default {
         })
         console.log(response.data)
         console.log('Patient updated successfully!')
-
         this.$emit('reload')
+        toast.success('Admin Details saved successfully!')
       } catch (error) {
         console.error('Error updating patient:', error)
+        toast.error('Error saving admin details')
       }
     },
             
@@ -524,6 +571,7 @@ export default {
     },
 
     saveChanges() {
+      console.log('saving changes....')
       this.saveEdits();
       this.toggleEdit();
     },
