@@ -3,7 +3,13 @@
   <!-- <SideBar /> -->
 
   <div class="flex">
-    <SideBar :activeSection="activeSection" @update:activeSection="setActiveSection" />
+    <SideBar
+      :activeSection="activeSection"
+      @update:activeSection="setActiveSection"
+      :id="this.patientId"
+      :name="this.name"
+      :age="this.age"
+    />
     <div class="content flex-grow p-6">
       <keep-alive>
         <component
@@ -45,7 +51,10 @@ export default {
   data() {
     return {
       activeSection: 'admin',
-      patientId: null
+      // patient: null,
+      patientId: ''
+      // name: '',
+      // age: ''
     }
   },
   computed: {
@@ -80,9 +89,34 @@ export default {
     async getIsValidToken() {
       await axios.get('http://localhost:9090/login/is-valid-token')
     },
+    // async getPatientData(id) {
+    //   axios
+    //     .get(`http://localhost:9090/patient/${id}`)
+    //     .then((response) => {
+    //       const { data } = response
+    //       this.patient = data
+    //     })
+    //     .catch((error) => {
+    //       this.patient = {}
+    //     })
+    // },
+    // async loadPatientData() {
+    //   try {
+    //     await this.getPatientData(this.patientId)
+    //     if (this.patient && this.patient.admin) {
+    //       const admin = this.patient.admin
+    //       this.name = admin.name
+    //       const dob = admin.dob
+    //       this.age = new Date().getFullYear() - new Date(dob).getFullYear()
+    //     }
+    //   } catch (error) {
+    //     console.log('Error loading patient data:', error)
+    //   }
+    // },
     handlePatientCreated(id) {
       console.log('Patient created with ID:', id)
       this.patientId = id
+      // this.loadPatientData()
     }
   }
 }
