@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bar" style="display: flex; justify-content: space-between;">
+    <!-- <div class="bar" style="display: flex; justify-content: space-between;">
       <p>Project Sothea</p>
       <div class="flex justify-end" v-on:click="back">
         <p class="pr-2 text-sm font-light">Back to All Patients</p>
@@ -10,7 +10,8 @@
         </svg>
       </div>
 
-    </div>
+    </div> -->
+    <NavBar/>
 
     <div class="flex">
       <SideBar :activeSection="activeSection" :id="this.patientId" :name="this.name" :age="this.age"
@@ -30,6 +31,8 @@
 
 <script>
 import SideBar from '../components/SideBar.vue'
+import NavBar from '../components/NavBar.vue'
+
 import AdminModal from '../components/AdminModal.vue'
 import PastMedHistModal from '../components/PastMedHistModal.vue'
 import SocialHistModal from '../components/SocialHistModal.vue'
@@ -43,6 +46,7 @@ import axios from 'axios'
 export default {
   components: {
     SideBar,
+    NavBar,
     AdminModal,
     PastMedHistModal,
     SocialHistModal,
