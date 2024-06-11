@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative bg-gray-800">
     <div class="flex flex-col">
       <div class="h-screen">
         <div class="flex flex-col items-start justify-start mx-6 mt-5">
