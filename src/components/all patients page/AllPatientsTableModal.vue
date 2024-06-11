@@ -2,16 +2,20 @@
     <div class="container max-w-3xl px-4 mx-auto sm:px-8 table">
         <div class="py-8">
             <div class="flex flex-row justify-between w-full mb-1 sm:mb-0">
-                <h2 class="text-4xl leading-tight" style="color:black">
+                <h2 class="text-3xl leading-tight" style="color:black">
                     All Patients
                 </h2>
             </div>
 
-            <div class="flex justify-between items-center" style="padding-top: 20px; padding-bottom: 20px">
-                <div class="relative flex-grow">
-                    <input type="text" id="&quot;form-subscribe-Filter"
-                        class="rounded-lg border-transparent appearance-none bg-gray-300 border border-gray-300 py-3 px-4 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
-                        placeholder="Search" />
+            <div class="flex justify-between items-center" style="padding: 20px 0px;">
+                <div class="relative flex-grow w-20">
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        class="rounded-lg border-transparent appearance-none bg-gray-300 border border-gray-300 py-3 px-10 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                        placeholder="Search ID/Name/Contact"
+                        @input="searchPatient"
+                    />
                 </div>
                 <router-link active-class="active" to="/addpatient">
                     <div class="flex items-center space-x-3">
@@ -99,6 +103,7 @@ export default {
     data() {
         return {
             patients: [],
+            patientsFixed: [], // for searching patients 
             token: null
         }
     },
@@ -108,6 +113,7 @@ export default {
             try {
                 const { data } = await axios.get('http://localhost:9090/get-all-admin');
                 this.patients = data;  // Store the fetched data in the patients array
+                this.patientsFixed = data;
                 console.log(this.patients);
             } catch (error) {
                 if (error.response) {
@@ -124,6 +130,17 @@ export default {
             const minutes = Math.floor(Math.random() * 60);
             date.setHours(hours, minutes);
             return date.toISOString();  // Return ISO string format of the date
+        },
+        searchPatient() {
+            console.log('searching')
+            // get value of the search input
+            const searchValue = document.getElementById('search-input').value;
+            // filter patients array based on the search value
+            this.patients = this.patientsFixed.filter(patient => {
+                return patient.name.toLowerCase().includes(searchValue) ||
+                    patient.id.toString().includes(searchValue) ||
+                    patient.contactNo.toLowerCase().includes(searchValue);
+            });
         }
     },
     created() {
