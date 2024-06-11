@@ -4,31 +4,28 @@
       <p>Project Sothea</p>
       <div class="flex justify-end" v-on:click="back">
         <p class="pr-2 text-sm font-light">Back to All Patients</p>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 stroke-2 pt-1">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="size-4 stroke-2 pt-1">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
         </svg>
-      </div>  
-      
+      </div>
+
     </div>
 
     <div class="flex">
-      <SideBar :activeSection="activeSection" :id="this.patientId" :name="this.name" :age="this.age" @update:activeSection="setActiveSection" />
+      <SideBar :activeSection="activeSection" :id="this.patientId" :name="this.name" :age="this.age"
+        @update:activeSection="setActiveSection" />
       <div class="content flex-grow p-6">
         <keep-alive>
-          <component 
-            :is="activeComponent" 
-            :patient="patient" 
-            :patientId="this.patientId" 
-            :patientData="this.patient" 
-            :isAdd="false"
-            @reload="this.loadPatientData">
+          <component :is="activeComponent" :patient="patient" :patientId="this.patientId" :patientData="this.patient"
+            :isAdd="false" @reload="this.loadPatientData">
           </component>
         </keep-alive>
-        
+
       </div>
     </div>
   </div>
-  
+
 </template>
 
 <script>
@@ -58,7 +55,6 @@ export default {
     return {
       activeSection: 'admin',
       patient: null,
-      patientId: null,
       name: null,
       age: null
     }
@@ -85,29 +81,23 @@ export default {
       }
     }
   },
-  created() {
-    this.patientId = this.$route.params.id;
-    this.loadPatientData();
-  },
   methods: {
     setActiveSection(section) {
       console.log(section)
       this.activeSection = section
     },
     async getPatientData(id) {
-      try {
-        const { data } = await axios.get(`http://localhost:9090/patient/${id}`);
-        this.patient = data;
-        console.log(this.patient);
-      } catch (error) {
-        console.error("Error fetching patient data:", error);
-      }
+      axios.get(`http://localhost:9090/patient/${id}`)
+        .then((response) => {
+          const { data } = response
+          this.patient = data;
+        }).catch((error) => {
+          this.patient = {}
+        })
     },
     async loadPatientData() {
       try {
-        console.log('Loading patient data...')
         await this.getPatientData(this.patientId);
-        console.log(this.patient);
         if (this.patient && this.patient.admin) {
           const admin = this.patient.admin;
           this.name = admin.name;
@@ -115,24 +105,27 @@ export default {
           this.age = new Date().getFullYear() - new Date(dob).getFullYear();
         }
       } catch (error) {
-        console.error('Error loading patient data:', error);
+        console.log('Error loading patient data:', error);
       }
     },
     back() {
       this.$router.push('/allpatients');
     }
   },
-  
+  created() {
+    this.patientId = this.$route.params.id;
+    this.loadPatientData();
+  }
 }
 </script>
 
 <style scoped>
-  .bar {
-    background-color: #3f51b5;
-    padding: 1rem;
-    width: 100%;
-    color: white;
-    font-weight: 500;
-    padding-left: 1.5rem;
-  }
+.bar {
+  background-color: #3f51b5;
+  padding: 1rem;
+  width: 100%;
+  color: white;
+  font-weight: 500;
+  padding-left: 1.5rem;
+}
 </style>

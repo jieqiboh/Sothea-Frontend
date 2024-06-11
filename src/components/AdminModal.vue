@@ -212,8 +212,8 @@
             </span>
             <select v-model="sentToId" :disabled="!isEditing && !isAdd"
               class="relative z-20 w-full appearance-none rounded-md border border-stroke  bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2">
-              <option :value="true" class="dark:bg-dark-2">Y</option>
-              <option :value="false" class="dark:bg-dark-2">N</option>
+              <option :value="true">Y</option>
+              <option :value="false">N</option>
             </select>
             <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
               <img src="../assets/chevrondown.svg" height="20" width="20" />
@@ -386,8 +386,11 @@ export default {
         const patientId = response.data['Inserted userid']
         // this.$emit('patientCreated', patientId)
       } catch (error) {
-        console.error('Error posting data:', error)
-        toast.error('Error saving admin details')
+        if (error.response) {
+          toast.error(error.response.data.error)
+        } else { // No response received at all
+          toast.error("An internal server error occurred.")
+        }
       }
     },
 
@@ -485,6 +488,11 @@ export default {
       } catch (error) {
         console.error('Error updating patient:', error)
         toast.error('Error saving admin details')
+        if (error.response) {
+          toast.error(error.response.data.error)
+        } else { // No response received at all
+          toast.error("An internal server error occurred.")
+        }
       }
     },
 
