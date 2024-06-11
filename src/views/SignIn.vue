@@ -10,19 +10,10 @@
         <div class="flex relative">
           <!-- Profile Icon -->
           <span class="icon-container">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="#9ca3af"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9ca3af"
+              class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
             </svg>
           </span>
           <input type="text" v-model="username" id="sign-in-email" class="input-style" placeholder="Enter username" />
@@ -33,19 +24,10 @@
         <div class="flex relative">
           <!-- Lock Icon -->
           <span class="icon-container">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="#9ca3af"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-              />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9ca3af"
+              class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
             </svg>
           </span>
           <input type="text" v-model="password" id="sign-in-email" class="input-style" placeholder="Enter password" />
@@ -63,6 +45,8 @@
 
 <script>
 import axios from 'axios';
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
   name: 'SignIn',
@@ -74,23 +58,26 @@ export default {
   },
   methods: {
     async getToken(event) {
-        event.preventDefault();
-        console.log('getToken method called');
+      const toast = useToast()
+      event.preventDefault();
+      console.log('getToken method called');
 
-        try {
-            console.log('hi')
-            const response = await axios.post("http://localhost:9090/login", {
-                username: this.username,
-                password: this.password
-            });
-            this.token = response.data.token;
-            console.log(this.token)  
-            axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
-            this.$router.push('/allpatients');
-
-        } catch (error) {
-            console.error("Error fetching token:", error);
+      try {
+        const response = await axios.post("http://localhost:9090/login", {
+          username: this.username,
+          password: this.password
+        });
+        this.token = response.data.token;
+        console.log(this.token)
+        axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+        this.$router.push('/allpatients');
+      } catch (error) {
+        if (error.response) {
+          toast.error(error.response.data.error)
+        } else { // No response received at all
+          toast.error("An internal server error occurred.")
         }
+      }
     },
   }
 }
@@ -149,6 +136,7 @@ export default {
   align-items: center;
   background-color: #e5e7eb;
 }
+
 .input-style {
   border-top: 1px solid #d1d5db;
   border-right: 1px solid #d1d5db;
@@ -160,11 +148,6 @@ export default {
   border-radius: 0 0.5rem 0.5rem 0;
   flex: 1;
 }
-/* .input-style:focus {
-  outline: none;
-  border: none;
-  box-shadow: 0 0 0 2px #3f51b5;
-} */
 
 h1 {
   font-size: 1.5rem;
