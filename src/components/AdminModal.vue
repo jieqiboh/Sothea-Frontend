@@ -464,9 +464,8 @@ export default {
         console.log('Data posted successfully!')
         toast.success('Admin Details saved successfully!')
 
-        // Emit the ID after the patient has been created
-        const patientId = response.data['Inserted userid']
-        // this.$emit('patientCreated', patientId)
+        // Emit patient details to be rendered in sidebar
+        this.$emit('patientCreated', { id: patientId, name: this.name, age: this.age })
       } catch (error) {
         if (error.response) {
           toast.error(error.response.data.error)
@@ -568,6 +567,8 @@ export default {
         console.log('Patient updated successfully!')
         this.$emit('reload')
         toast.success('Admin Details saved successfully!')
+        // Emit updated patient details to be rendered in sidebar
+        this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.age })
       } catch (error) {
         console.error('Error updating patient:', error)
         toast.error('Error saving admin details')

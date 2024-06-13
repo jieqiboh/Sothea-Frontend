@@ -16,6 +16,7 @@
           :is="activeComponent"
           :patientId="patientId"
           @patientCreated="handlePatientCreated"
+          @patientUpdated="handlePatientCreated"
         ></component>
       </keep-alive>
     </div>
@@ -51,10 +52,9 @@ export default {
   data() {
     return {
       activeSection: 'admin',
-      // patient: null,
-      patientId: ''
-      // name: '',
-      // age: ''
+      patientId: '',
+      name: '',
+      age: ''
     }
   },
   computed: {
@@ -89,34 +89,33 @@ export default {
     async getIsValidToken() {
       await axios.get('http://localhost:9090/login/is-valid-token')
     },
-    // async getPatientData(id) {
-    //   axios
-    //     .get(`http://localhost:9090/patient/${id}`)
-    //     .then((response) => {
-    //       const { data } = response
-    //       this.patient = data
-    //     })
-    //     .catch((error) => {
-    //       this.patient = {}
-    //     })
-    // },
-    // async loadPatientData() {
-    //   try {
-    //     await this.getPatientData(this.patientId)
-    //     if (this.patient && this.patient.admin) {
-    //       const admin = this.patient.admin
-    //       this.name = admin.name
-    //       const dob = admin.dob
-    //       this.age = new Date().getFullYear() - new Date(dob).getFullYear()
-    //     }
-    //   } catch (error) {
-    //     console.log('Error loading patient data:', error)
-    //   }
-    // },
-    handlePatientCreated(id) {
-      console.log('Patient created with ID:', id)
+    async loadPatientData() {
+      try {
+        console.log('Loading patient data')
+        console.log(this.patientId)
+
+        const response = await axios.get(`http://localhost:9090/patient/${this.patientId}`)
+        const { data } = response
+        this.patient = data
+
+        if (this.patient && this.patient.admin) {
+          const admin = this.patient.admin
+          this.name = admin.name
+          const dob = admin.dob
+          this.age = new Date().getFullYear() - new Date(dob).getFullYear()
+        }
+      } catch (error) {
+        console.log('Error loading patient data:', error)
+      }
+    },
+    handlePatientCreated(event) {
+      console.log('Patient Event:', event)
+      const { id, name, age } = event
+      console.log(`Patient ID: ${id}, Name: ${name}, Age: ${age}`)
+
       this.patientId = id
-      // this.loadPatientData()
+      this.name = name
+      this.age = age
     }
   }
 }
