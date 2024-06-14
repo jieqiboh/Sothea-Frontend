@@ -187,7 +187,7 @@ export default {
           toast.error('Please indicate alcohol history')
           return
         }
-        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+        const response = await axios.patch(`/patient/${this.patientId}`, {
           socialHistory: {
             pastSmokingHistory: this.pastSmokingHistory,
             numberOfYears: this.numberOfYears,

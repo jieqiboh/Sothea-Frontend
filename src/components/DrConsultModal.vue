@@ -380,7 +380,7 @@ export default {
           toast.error('Please indicate if patient needs referral')
           return
         }
-        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+        const response = await axios.patch(`/patient/${this.patientId}`, {
           doctorsConsultation: {
             healthy: this.healthy,
             msk: this.msk,

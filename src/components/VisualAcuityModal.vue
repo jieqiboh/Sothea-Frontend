@@ -114,7 +114,7 @@ export default {
           toast.error('Please fill in R eye vision')
           return
         }
-        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+        const response = await axios.patch(`/patient/${this.patientId}`, {
           visualAcuity: {
             lEyeVision: this.lEyeVision,
             rEyeVision: this.rEyeVision,

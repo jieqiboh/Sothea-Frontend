@@ -91,7 +91,7 @@ export default {
       this.activeSection = section
     },
     async getPatientData(id) {
-      axios.get(`http://localhost:9090/patient/${id}`)
+      axios.get(`/patient/${id}`)
         .then((response) => {
           const { data } = response
           this.patient = data;

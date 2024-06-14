@@ -111,7 +111,7 @@ export default {
         async getData() {
             const toast = useToast()
             try {
-                const { data } = await axios.get('http://localhost:9090/get-all-admin');
+                const { data } = await axios.get('/get-all-admin');
                 this.patients = data;  // Store the fetched data in the patients array
                 this.patientsFixed = data;
                 console.log(this.patients);
