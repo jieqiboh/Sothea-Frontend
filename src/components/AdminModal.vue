@@ -442,7 +442,7 @@ export default {
           return
         }
 
-        const response = await axios.post('http://localhost:9090/patient', {
+        const response = await axios.post('/patient', {
           admin: {
             name: this.name,
             khmerName: this.khmerName,
@@ -545,7 +545,7 @@ export default {
           toast.error('Sent to Infectious Disease? is required')
           return
         }
-        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+        const response = await axios.patch(`/patient/${this.patientId}`, {
           admin: {
             name: this.name,
             khmerName: this.khmerName,

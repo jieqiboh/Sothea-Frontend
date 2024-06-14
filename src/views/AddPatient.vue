@@ -87,7 +87,7 @@ export default {
       this.activeSection = section
     },
     async getIsValidToken() {
-      await axios.get('http://localhost:9090/login/is-valid-token')
+      await axios.get('/login/is-valid-token')
     },
     async loadPatientData() {
       try {
