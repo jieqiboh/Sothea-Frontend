@@ -363,15 +363,15 @@ export default {
       if (!admin) return
       this.name = admin.name || ''
       this.khmerName = admin.khmerName || ''
-      this.dob = admin.dob || ''
+      this.dob = this.formatDateForInput(admin.dob) || ''
       this.age = admin.age || ''
       this.gender = admin.gender || ''
       this.contactNo = admin.contactNo || ''
-      this.regDate = admin.regDate || ''
+      this.regDate = this.formatDateForInput(admin.regDate) || ''
       this.village = admin.village || ''
       this.familyGroup = admin.familyGroup || ''
       this.pregnant = admin.pregnant
-      this.lastMenstrualPeriod = admin.lastMenstrualPeriod || ''
+      this.lastMenstrualPeriod = this.formatDateForInput(admin.lastMenstrualPeriod) || ''
       this.drugAllergies = admin.drugAllergies || ''
       this.photo = admin.photo || ''
       this.sentToId = admin.sentToId
@@ -493,6 +493,16 @@ export default {
         this.selectedPhoto = null
         alert('Please select a JPEG, JPG, or PNG file.')
       }
+    },
+
+    formatDateForInput(dateString) {
+      const date = new Date(dateString);
+      // Get the year, month, and day components
+      const year = date.getUTCFullYear();
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+      const day = String(date.getUTCDate()).padStart(2, '0');
+      // Return the formatted date string
+      return `${year}-${month}-${day}`;
     },
 
     // PUT request to update an existing patient
