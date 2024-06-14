@@ -9,17 +9,31 @@
           <!-- Height -->
           <div class="w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> Height (cm) </label>
-            <input v-model="height" type="number" step="1" placeholder="cm"
+            <input
+              v-model="height"
+              type="number"
+              step="1"
+              placeholder="cm"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd" />
+              :disabled="!isEditing && !isAdd"
+              @keydown="preventNegative"
+              min="0"
+            />
           </div>
 
           <!-- Weight -->
           <div class="ml-3 w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> Weight (kg) </label>
-            <input v-model="weight" type="number" step="0.1" placeholder="kg"
+            <input
+              v-model="weight"
+              type="number"
+              step="0.1"
+              placeholder="kg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd" />
+              :disabled="!isEditing && !isAdd"
+              @keydown="preventNegative"
+              min="0"
+            />
           </div>
         </div>
 
@@ -28,17 +42,29 @@
           <!-- Paeds: Height % -->
           <div class="w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Height % </label>
-            <input v-model="paedsHeight" type="number" placeholder=""
+            <input
+              v-model="paedsHeight"
+              type="number"
+              placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd" />
+              :disabled="!isEditing && !isAdd"
+              @keydown="preventNegative"
+              min="0"
+            />
           </div>
 
           <!-- Paeds: Weight % -->
           <div class="ml-3 w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Weight % </label>
-            <input v-model="paedsWeight" type="number" placeholder=""
+            <input
+              v-model="paedsWeight"
+              type="number"
+              placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd" />
+              :disabled="!isEditing && !isAdd"
+              @keydown="preventNegative"
+              min="0"
+            />
           </div>
         </div>
 
@@ -47,8 +73,14 @@
           <!-- BMI -->
           <div class="w-1/3">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> BMI </label>
-            <input :value="bmi" disabled type="number" step="0.1" placeholder=""
-              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
+            <input
+              :value="bmi"
+              disabled
+              type="number"
+              step="0.1"
+              placeholder=""
+              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+            />
           </div>
         </div>
 
@@ -57,35 +89,48 @@
           <!-- BMI Analysis-->
           <div class="w-1/3">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> BMI Analysis </label>
-            <input :value="bmianalysis" disabled type="text" placeholder=""
-              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
+            <input
+              :value="bmianalysis"
+              disabled
+              type="text"
+              placeholder=""
+              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+            />
           </div>
         </div>
 
         <!-- Save Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button v-if="isAdd" @click="submitData"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+          <button
+            v-if="isAdd"
+            @click="submitData"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
             Save
           </button>
         </div>
 
         <!-- Edit Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button v-if="!isEditing && !isAdd" @click="toggleEdit"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+          <button
+            v-if="!isEditing && !isAdd"
+            @click="toggleEdit"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
             Edit
           </button>
         </div>
 
         <!-- Save Edits Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button v-if="isEditing && !isAdd" @click="submitData"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+          <button
+            v-if="isEditing && !isAdd"
+            @click="submitData"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
             Save Edits
           </button>
         </div>
-
       </div>
     </div>
   </div>
@@ -117,13 +162,13 @@ export default {
       weight: null,
       paedsHeight: null,
       paedsWeight: null,
-      isEditing: false,
+      isEditing: false
     }
   },
   created() {
     if (!this.isAdd) {
-      const heightAndWeight = this.patientData.heightandweight;
-      if (!heightAndWeight) return;
+      const heightAndWeight = this.patientData.heightandweight
+      if (!heightAndWeight) return
       this.height = heightAndWeight.height
       this.weight = heightAndWeight.weight
       this.paedsHeight = heightAndWeight.paedsHeight
@@ -196,7 +241,7 @@ export default {
         console.log(response.data)
         console.log('Height and Weight is posted successfully!')
         if (!this.isAdd) {
-          this.toggleEdit(); // to switch back to read-only mode
+          this.toggleEdit() // to switch back to read-only mode
           this.$emit('reload')
         }
         toast.success('Height and Weight saved successfully!')
@@ -205,8 +250,9 @@ export default {
         toast.error('Error saving Height and Weight')
         if (error.response) {
           toast.error(error.response.data.error)
-        } else { // No response received at all
-          toast.error("An internal server error occurred.")
+        } else {
+          // No response received at all
+          toast.error('An internal server error occurred.')
         }
       }
     },
@@ -216,7 +262,11 @@ export default {
       this.isEditing = !this.isEditing
       console.log(this.isEditing)
     },
-
+    preventNegative(event) {
+      if (event.key === '-' || event.key === 'e') {
+        event.preventDefault()
+      }
+    }
   }
 }
 </script>
