@@ -1,12 +1,24 @@
 <template>
   <div>
+
     <!-- <div class="bar" style="display: flex; justify-content: space-between;">
+
       <p>Project Sothea</p>
       <div class="flex justify-end" v-on:click="back">
         <p class="pr-2 text-sm font-light">Back to All Patients</p>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="size-4 stroke-2 pt-1">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-4 stroke-2 pt-1"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+          />
         </svg>
       </div>
 
@@ -14,19 +26,28 @@
     <NavBar/>
 
     <div class="flex">
-      <SideBar :activeSection="activeSection" :id="this.patientId" :name="this.name" :age="this.age"
-        @update:activeSection="setActiveSection" />
+      <SideBar
+        :activeSection="activeSection"
+        :id="this.patientId"
+        :name="this.name"
+        :age="this.age"
+        @update:activeSection="setActiveSection"
+      />
       <div class="content flex-grow p-6">
         <keep-alive>
-          <component :is="activeComponent" :patient="patient" :patientId="this.patientId" :patientData="this.patient"
-            :isAdd="false" @reload="this.loadPatientData">
+          <component
+            :is="activeComponent"
+            :patient="patient"
+            :patientId="this.patientId"
+            :patientData="this.patient"
+            :isAdd="false"
+            @reload="this.loadPatientData"
+          >
           </component>
         </keep-alive>
-
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -90,6 +111,7 @@ export default {
       console.log(section)
       this.activeSection = section
     },
+
     async loadPatientData() {
       try {
         console.log("Loading patient data")
@@ -98,24 +120,26 @@ export default {
         const response = await axios.get(`http://localhost:9090/patient/${this.patientId}`);
         const { data } = response;
         this.patient = data;
-
+        
         if (this.patient && this.patient.admin) {
-          const admin = this.patient.admin;
-          this.name = admin.name;
-          const dob = admin.dob;
-          this.age = new Date().getFullYear() - new Date(dob).getFullYear();
+          const admin = this.patient.admin
+          this.name = admin.name
+          const dob = admin.dob
+          this.age = new Date().getFullYear() - new Date(dob).getFullYear()
+          console.log(this.name)
+          console.log(this.age)
         }
       } catch (error) {
-        console.log('Error loading patient data:', error);
+        console.log('Error loading patient data:', error)
       }
     },
     back() {
-      this.$router.push('/allpatients');
+      this.$router.push('/allpatients')
     }
   },
   created() {
-    this.patientId = this.$route.params.id;
-    this.loadPatientData();
+    this.patientId = this.$route.params.id
+    this.loadPatientData()
   }
 }
 </script>
