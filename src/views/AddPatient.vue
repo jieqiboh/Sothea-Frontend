@@ -78,7 +78,7 @@ export default {
       this.activeSection = section
     },
     async getIsValidToken() {
-      await axios.get('http://localhost:9090/login/is-valid-token')
+      await axios.get('/login/is-valid-token')
     },
     handlePatientCreated(id) {
       console.log('Patient created with ID:', id)
