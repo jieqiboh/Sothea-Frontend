@@ -202,12 +202,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import axios from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 
-export default {
+export default defineComponent({
   props: {
     patientId: {
       type: String,
@@ -304,7 +306,7 @@ export default {
     },
 
   }
-}
+})
 </script>
 
 <style scoped>

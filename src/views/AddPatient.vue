@@ -23,7 +23,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import NavBar from '../components/NavBar.vue'
 import SideBar from '../components/SideBar.vue'
 
@@ -37,7 +39,7 @@ import DrConsultModal from '../components/DrConsultModal.vue'
 
 import axios from 'axios'
 
-export default {
+export default defineComponent({
   components: {
     NavBar,
     SideBar,
@@ -118,5 +120,5 @@ export default {
       this.age = age
     }
   }
-}
+})
 </script>
