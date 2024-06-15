@@ -366,7 +366,7 @@ export default {
           toast.error('Please enter Random Blood Glucose (mg/dL)')
           return
         }
-        const response = await axios.patch(`/patient/${this.patientId}`, {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           vitalStatistics: {
             temperature: this.temperature,
             spO2: this.spO2,
