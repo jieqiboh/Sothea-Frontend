@@ -228,7 +228,7 @@ export default {
           toast.error('Paeds: Weight % cannot be negative')
           return
         }
-        const response = await axios.patch(`/patient/${this.patientId}`, {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           heightAndWeight: {
             height: this.height,
             weight: this.weight,

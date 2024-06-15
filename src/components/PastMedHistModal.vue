@@ -267,7 +267,7 @@ export default {
           toast.error('Please select yes/no for all fields')
           return
         }
-        const response = await axios.patch(`/patient/${this.patientId}`, {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           pastMedicalHistory: {
             tuberculosis: this.tuberculosis,
             diabetes: this.diabetes,
