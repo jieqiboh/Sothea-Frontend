@@ -7,14 +7,15 @@
                 </h2>
             </div>
 
-            <div class="flex justify-between items-center" style="padding: 20px 0px;">
-                <div class="relative flex-grow w-20">
+            <div class="flex justify-between items-center py-5" >
+                <div class="relative flex-grow">
                     <input 
                         type="text" 
                         id="search-input" 
-                        class="rounded-lg border-transparent appearance-none bg-gray-300 border border-gray-300 py-3 px-10 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
-                        placeholder="Search ID/Name/Contact"
+                        class="rounded-lg border-transparent appearance-none w-64 bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                        placeholder="Search by Name/Khmer Name/ID"
                         @input="searchPatient"
+                        @keyup.enter="searchPatient"
                     />
                 </div>
                 <router-link active-class="active" to="/addpatient">
@@ -111,7 +112,7 @@ export default {
         async getData() {
             const toast = useToast()
             try {
-                const { data } = await axios.get('http://localhost:9090/get-all-admin');
+                const { data } = await axios.get('/get-all-admin');
                 this.patients = data;  // Store the fetched data in the patients array
                 this.patientsFixed = data;
                 console.log(this.patients);
@@ -135,11 +136,16 @@ export default {
             console.log('searching')
             // get value of the search input
             const searchValue = document.getElementById('search-input').value;
+            // refresh the table of patients
+            if (searchValue == "") {
+                this.getData()
+            }
             // filter patients array based on the search value
             this.patients = this.patientsFixed.filter(patient => {
                 return patient.name.toLowerCase().includes(searchValue) ||
+                    patient.name.includes(searchValue) ||
                     patient.id.toString().includes(searchValue) ||
-                    patient.contactNo.toLowerCase().includes(searchValue);
+                    patient.khmerName.toLowerCase().includes(searchValue);
             });
         }
     },

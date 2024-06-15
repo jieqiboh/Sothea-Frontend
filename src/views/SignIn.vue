@@ -63,7 +63,7 @@ export default {
       console.log('getToken method called');
 
       try {
-        const response = await axios.post("http://localhost:9090/login", {
+        const response = await axios.post("/login", {
           username: this.username,
           password: this.password
         });
