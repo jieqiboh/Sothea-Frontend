@@ -45,15 +45,17 @@
     </nav>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'NavBar',
   methods: {
     logout() {
       this.$router.push('/signin')
     }
   }
-}
+})
 </script>
 
 <style scoped>

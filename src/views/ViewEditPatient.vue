@@ -50,7 +50,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/NavBar.vue'
 
@@ -64,7 +66,7 @@ import DrConsultModal from '../components/DrConsultModal.vue'
 
 import axios from 'axios'
 
-export default {
+export default defineComponent({
   components: {
     SideBar,
     NavBar,
@@ -141,7 +143,7 @@ export default {
     this.patientId = this.$route.params.id
     this.loadPatientData()
   }
-}
+})
 </script>
 
 <style scoped>
