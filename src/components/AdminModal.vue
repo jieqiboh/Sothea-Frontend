@@ -375,6 +375,8 @@ export default {
       this.drugAllergies = admin.drugAllergies || ''
       this.photo = admin.photo || ''
       this.sentToId = admin.sentToId
+
+      this.selectedPhoto = `data:image/png;base64,${atob(this.photo)}`
     }
   },
   methods: {
@@ -497,9 +499,8 @@ export default {
 
     formatDateForInput(dateString) {
       const date = new Date(dateString);
-      // Get the year, month, and day components
       const year = date.getUTCFullYear();
-      const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0'); 
       const day = String(date.getUTCDate()).padStart(2, '0');
       // Return the formatted date string
       return `${year}-${month}-${day}`;
