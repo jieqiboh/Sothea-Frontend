@@ -19,6 +19,7 @@
               @keydown="preventNegative"
               min="0"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing"
             />
           </div>
 
@@ -35,6 +36,7 @@
               @keydown="preventNegative"
               min="0"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              :disabled="!isEditing"
             />
           </div>
         </div>
@@ -49,16 +51,29 @@
             rows="3"
             placeholder="Remarks"
             class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+            :disabled="!isEditing"
           ></textarea>
         </div>
 
-        <!-- Save Button -->
+        <!-- Edit Button -->
         <div class="flex flex-row-reverse w-full mt-5">
           <button
+            v-if="!isEditing && !isAdd"
+            @click="toggleEdit"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
+            Edit
+          </button>
+        </div>
+
+        <!-- Save Edits Button -->
+        <div class="flex flex-row-reverse w-full mt-5">
+          <button
+            v-if="isEditing && !isAdd"
             @click="submitData"
             class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
           >
-            Save
+            Save Edits
           </button>
         </div>
       </div>
@@ -67,17 +82,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, type PropType } from 'vue'
 
 import axios from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import type Patient from '@/types/Patient'
 
 export default defineComponent({
   props: {
     patientId: {
-      type: Number,
-      required: true
+      type: String,
+      default: null
+    },
+    patientData: {
+      type: Object as PropType<Patient>,
+      default: null
+    },
+    isAdd: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

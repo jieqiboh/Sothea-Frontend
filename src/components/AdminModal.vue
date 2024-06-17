@@ -322,7 +322,7 @@ import { defineComponent, type PropType } from 'vue'
 
 import type Admin from '@/types/Admin';
 
-import axios, { AxiosError, type AxiosResponse } from 'axios'
+import axios, { Axios, AxiosError, type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import type Patient from '@/types/Patient'
@@ -490,8 +490,11 @@ export default defineComponent({
           this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.ageComputed })
         }
       } catch (error : unknown) {
-        if (error.response) {
-          toast.error(error.response.data.error)
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
+          }
         } else {
           // No response received at all
           console.log(error)
@@ -529,92 +532,6 @@ export default defineComponent({
       // Return the formatted date string
       return `${year}-${month}-${day}`;
     },
-
-    // PUT request to update an existing patient
-    // async saveEdits() {
-    //   const toast = useToast()
-    //   try {
-    //     console.log('saving edits....')
-    //     // Perform validation checks
-    //     if (!this.name) {
-    //       toast.error('Name is required')
-    //       return
-    //     }
-    //     if (!this.khmerName) {
-    //       toast.error('Khmer Name is required')
-    //       return
-    //     }
-    //     if (!this.dob) {
-    //       toast.error('Date of Birth is required')
-    //       return
-    //     }
-    //     if (!this.age) {
-    //       toast.error('Age is required')
-    //       return
-    //     }
-    //     if (!this.gender) {
-    //       toast.error('Gender is required')
-    //       return
-    //     }
-    //     if (!this.contactNo) {
-    //       toast.error('Contact No. is required')
-    //       return
-    //     }
-    //     if (!this.regDate) {
-    //       toast.error('Date Registered is required')
-    //       return
-    //     }
-    //     if (!this.village) {
-    //       toast.error('Village is required')
-    //       return
-    //     }
-    //     if (!this.familyGroup) {
-    //       toast.error('Family Group is required')
-    //       return
-    //     }
-    //     if (this.pregnant === null) {
-    //       toast.error('Pregnant? is required')
-    //       return
-    //     }
-    //     if (this.sentToId === null) {
-    //       toast.error('Sent to Infectious Disease? is required')
-    //       return
-    //     }
-    //     const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
-    //       admin: {
-    //         name: this.name,
-    //         khmerName: this.khmerName,
-    //         dob: new Date(this.dob).toISOString(),
-    //         age: this.age,
-    //         gender: this.gender,
-    //         contactNo: this.contactNo,
-    //         regDate: new Date(this.regDate).toISOString(),
-    //         village: this.village,
-    //         familyGroup: this.familyGroup,
-    //         pregnant: this.pregnant,
-    //         lastMenstrualPeriod: new Date(this.lastMenstrualPeriod).toISOString(),
-    //         drugAllergies: this.drugAllergies ? this.drugAllergies : null,
-    //         photo: this.photo ? this.photo : null,
-    //         sentToId: this.sentToId
-    //       } as Admin
-    //     })
-    //     console.log(response.data)
-    //     console.log('Patient updated successfully!')
-    //     this.$emit('reload')
-    //     toast.success('Admin Details saved successfully!')
-    //     // Emit updated patient details to be rendered in sidebar
-    //     this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.ageComputed })
-    //   } catch (error) {
-    //     console.error('Error updating patient:', error)
-    //     toast.error('Error saving admin details')
-    //     if (error.response) {
-    //       toast.error(error.response.data.error)
-    //     } else {
-    //       // No response received at all
-    //       toast.error('An internal server error occurred.')
-    //     }
-    //   }
-    // },
 
     toggleEdit() {
       console.log('toggleEdit')

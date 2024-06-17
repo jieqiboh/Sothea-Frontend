@@ -23,13 +23,13 @@
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
                 <input type="radio" name="smoking-hist" class="w-4 h-4" v-model="pastSmokingHistory" :value="true"
-                  :disabled="!isEditing && !isAdd" />
+                  :disabled="!isEditing" />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
                 <input type="radio" name="smoking-hist" class="w-4 h-4" v-model="pastSmokingHistory" :value="false"
-                  :disabled="!isEditing && !isAdd" />
+                  :disabled="!isEditing" />
               </label>
             </div>
           </div>
@@ -37,7 +37,7 @@
           <div class="flex w-1/3 grow">
             <textarea rows="1" placeholder="If Y, no. of years" type="number" v-model="numberOfYears"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-              :disabled="!isEditing && !isAdd"></textarea>
+              :disabled="!isEditing"></textarea>
           </div>
         </div>
       </div>
@@ -53,13 +53,13 @@
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
                 <input type="radio" name="curr-smoking-hist" class="w-4 h-4" v-model="currentSmokingHistory"
-                  :value="true" :disabled="!isEditing && !isAdd" />
+                  :value="true" :disabled="!isEditing" />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
                 <input type="radio" name="curr-smoking-hist" class="w-4 h-4" v-model="currentSmokingHistory"
-                  :value="false" :disabled="!isEditing && !isAdd" />
+                  :value="false" :disabled="!isEditing" />
               </label>
             </div>
           </div>
@@ -67,7 +67,7 @@
           <div class="flex w-1/3 grow">
             <textarea rows="1" placeholder="If Y, how many cigarettes/day?" type="number" v-model="cigarettesPerDay"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-              :disabled="!isEditing && !isAdd"></textarea>
+              :disabled="!isEditing"></textarea>
           </div>
         </div>
       </div>
@@ -81,13 +81,13 @@
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
                 <input type="radio" name="alc-hist" class="w-4 h-4" v-model="alcoholHistory" :value="true"
-                  :disabled="!isEditing && !isAdd" />
+                  :disabled="!isEditing" />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
                 <input type="radio" name="alc-hist" class="w-4 h-4" v-model="alcoholHistory" :value="false"
-                  :disabled="!isEditing && !isAdd" />
+                  :disabled="!isEditing" />
               </label>
             </div>
           </div>
@@ -95,17 +95,9 @@
           <div class="flex w-1/3 grow">
             <textarea rows="1" placeholder="If Y, how regularly?" v-model="howRegular"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-              :disabled="!isEditing && !isAdd"></textarea>
+              :disabled="!isEditing"></textarea>
           </div>
         </div>
-      </div>
-
-      <!-- Save Button -->
-      <div class="flex flex-row-reverse w-full mt-5">
-        <button v-if="isAdd" @click="submitData"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
-          Save
-        </button>
       </div>
 
       <!-- Edit Button -->
