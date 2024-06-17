@@ -63,7 +63,7 @@
                 :value="ageComputed"
                 disabled
                 type="number"
-                placeholder="Age"
+                placeholder=""
                 min="0"
                 step="1"
                 @input="validateAge"
@@ -421,10 +421,6 @@ export default defineComponent({
           toast.error('Date of Birth is required')
           return
         }
-        if (!this.age) {
-          toast.error('Age is required')
-          return
-        }
         if (!this.gender) {
           toast.error('Gender is required')
           return
@@ -459,7 +455,7 @@ export default defineComponent({
             name: this.name,
             khmerName: this.khmerName,
             dob: new Date(this.dob).toISOString(),
-            age: this.age,
+            age: this.ageComputed,
             gender: this.gender,
             contactNo: this.contactNo,
             regDate: new Date(this.regDate).toISOString(),
@@ -472,12 +468,12 @@ export default defineComponent({
             sentToId: this.sentToId
           }
         })
-        console.log(response.data)
+        console.log(response.data["Inserted userid"])
         console.log('Data posted successfully!')
         toast.success('Admin Details saved successfully!')
 
         // Emit patient details to be rendered in sidebar
-        this.$emit('patientCreated', { id: patientId, name: this.name, age: this.age })
+        this.$emit('patientCreated', { id: response.data["Inserted userid"], name: this.name, age: this.ageComputed })
       } catch (error) {
         if (error.response) {
           toast.error(error.response.data.error)
@@ -589,7 +585,7 @@ export default defineComponent({
         this.$emit('reload')
         toast.success('Admin Details saved successfully!')
         // Emit updated patient details to be rendered in sidebar
-        this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.age })
+        this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.ageComputed })
       } catch (error) {
         console.error('Error updating patient:', error)
         toast.error('Error saving admin details')
