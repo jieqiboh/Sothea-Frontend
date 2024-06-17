@@ -60,15 +60,15 @@
             <div class="ml-2 w-1/4">
               <label for="" class="mb-1 block text-sm font-medium text-dark"> Age </label>
               <input
-                v-model="age"
-                :disabled="!isEditing && !isAdd"
+                :value="ageComputed"
+                disabled
                 type="number"
-                placeholder="Age"
+                placeholder=""
                 min="0"
                 step="1"
                 @input="validateAge"
                 @keydown="preventNegative"
-                class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+                class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
               />
             </div>
 
@@ -359,6 +359,14 @@ export default defineComponent({
       isEditing: false
     }
   },
+  computed: {
+    ageComputed() {
+      if (this.dob) {
+        return new Date().getFullYear() - new Date(this.dob).getFullYear();
+      }
+      return null
+    }
+  },
   created() {
     if (!this.isAdd) {
       const admin = this.patientData.admin
@@ -413,10 +421,6 @@ export default defineComponent({
           toast.error('Date of Birth is required')
           return
         }
-        if (!this.age) {
-          toast.error('Age is required')
-          return
-        }
         if (!this.gender) {
           toast.error('Gender is required')
           return
@@ -451,7 +455,7 @@ export default defineComponent({
             name: this.name,
             khmerName: this.khmerName,
             dob: new Date(this.dob).toISOString(),
-            age: this.age,
+            age: this.ageComputed,
             gender: this.gender,
             contactNo: this.contactNo,
             regDate: new Date(this.regDate).toISOString(),
@@ -464,12 +468,12 @@ export default defineComponent({
             sentToId: this.sentToId
           }
         })
-        console.log(response.data)
+        console.log(response.data["Inserted userid"])
         console.log('Data posted successfully!')
         toast.success('Admin Details saved successfully!')
 
         // Emit patient details to be rendered in sidebar
-        this.$emit('patientCreated', { id: patientId, name: this.name, age: this.age })
+        this.$emit('patientCreated', { id: response.data["Inserted userid"], name: this.name, age: this.ageComputed })
       } catch (error) {
         if (error.response) {
           toast.error(error.response.data.error)
@@ -581,7 +585,7 @@ export default defineComponent({
         this.$emit('reload')
         toast.success('Admin Details saved successfully!')
         // Emit updated patient details to be rendered in sidebar
-        this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.age })
+        this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.ageComputed })
       } catch (error) {
         console.error('Error updating patient:', error)
         toast.error('Error saving admin details')
