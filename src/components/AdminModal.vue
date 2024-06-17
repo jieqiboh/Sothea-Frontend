@@ -60,15 +60,15 @@
             <div class="ml-2 w-1/4">
               <label for="" class="mb-1 block text-sm font-medium text-dark"> Age </label>
               <input
-                v-model="age"
-                :disabled="!isEditing && !isAdd"
+                :value="ageComputed"
+                disabled
                 type="number"
                 placeholder="Age"
                 min="0"
                 step="1"
                 @input="validateAge"
                 @keydown="preventNegative"
-                class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+                class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
               />
             </div>
 
@@ -355,6 +355,14 @@ export default {
       photo: '', //base 64 string (for POST)
       sentToId: null,
       isEditing: false
+    }
+  },
+  computed: {
+    ageComputed() {
+      if (this.dob) {
+        return new Date().getFullYear() - new Date(this.dob).getFullYear();
+      }
+      return null
     }
   },
   created() {
