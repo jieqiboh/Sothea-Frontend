@@ -1,47 +1,23 @@
 <template>
   <div>
-
-    <!-- <div class="bar" style="display: flex; justify-content: space-between;">
-
-      <p>Project Sothea</p>
-      <div class="flex justify-end" v-on:click="back">
-        <p class="pr-2 text-sm font-light">Back to All Patients</p>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="size-4 stroke-2 pt-1"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-          />
-        </svg>
-      </div>
-
-    </div> -->
     <NavBar/>
 
     <div class="flex">
       <SideBar
         :activeSection="activeSection"
-        :id="this.patientId"
-        :name="this.name"
-        :age="this.age"
+        :id="id"
+        :name="name"
+        :age="age"
         @update:activeSection="setActiveSection"
       />
       <div class="content flex-grow p-6">
         <keep-alive>
           <component
             :is="activeComponent"
-            :patient="patient"
-            :patientId="this.patientId"
-            :patientData="this.patient"
+            :patientId="id"
+            :patientData="patient"
             :isAdd="false"
-            @reload="this.loadPatientData"
+            @reload="loadPatientData"
           >
           </component>
         </keep-alive>
@@ -52,6 +28,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import {useRoute} from "vue-router";
 
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/NavBar.vue'
@@ -64,7 +41,10 @@ import HeightWeightModal from '../components/HeightWeightModal.vue'
 import VisualAcuityModal from '../components/VisualAcuityModal.vue'
 import DrConsultModal from '../components/DrConsultModal.vue'
 
-import axios from 'axios'
+import type Patient from '@/types/Patient'
+
+import axios, { type AxiosResponse } from 'axios'
+import type Admin from '@/types/Admin'
 
 export default defineComponent({
   components: {
@@ -78,12 +58,18 @@ export default defineComponent({
     VisualAcuityModal,
     DrConsultModal
   },
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       activeSection: 'admin',
-      patient: null,
-      name: null,
-      age: null
+      patient: {} as Patient,
+      name: '',
+      age: 0,
     }
   },
   computed: {
@@ -109,30 +95,34 @@ export default defineComponent({
     }
   },
   methods: {
-    setActiveSection(section) {
+    setActiveSection(section : string) {
       console.log(section)
       this.activeSection = section
     },
 
+    async getPatientData(id : string) {
+      axios.get(`http://localhost:9090/patient/${id}`)
+        .then((response : AxiosResponse) => {
+          console.log(response)
+          const { data } = response
+          this.patient = JSON.parse(JSON.stringify(data)) as Patient
+          this.age = new Date().getFullYear() - new Date(this.patient.admin.dob).getFullYear()
+          this.name = this.patient.admin.name
+        }).catch((error) => {
+          console.log(error)
+        })
+    },
     async loadPatientData() {
       try {
-        console.log("Loading patient data")
-        console.log(this.patientId)
-
-        const response = await axios.get(`http://localhost:9090/patient/${this.patientId}`);
-        const { data } = response;
-        this.patient = data;
-        
+        await this.getPatientData(this.id);
         if (this.patient && this.patient.admin) {
-          const admin = this.patient.admin
-          this.name = admin.name
-          const dob = admin.dob
-          this.age = new Date().getFullYear() - new Date(dob).getFullYear()
-          console.log(this.name)
-          console.log(this.age)
+          const admin = this.patient.admin;
+          this.name = admin.name;
+          const dob = admin.dob;
+          this.age = new Date().getFullYear() - new Date(dob).getFullYear();
         }
       } catch (error) {
-        console.log('Error loading patient data:', error)
+        console.log('Error loading patient data:', error);
       }
     },
     back() {
@@ -140,7 +130,7 @@ export default defineComponent({
     }
   },
   created() {
-    this.patientId = this.$route.params.id
+    console.log("vieweditpatient created called")
     this.loadPatientData()
   }
 })

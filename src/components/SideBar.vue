@@ -3,9 +3,9 @@
     <div class="flex flex-col">
       <div class="h-screen">
         <div class="flex flex-col items-start justify-start mx-6 mt-5">
-          <h2 class="text-sm font-medium text-[#6675c9]">Name: {{ this.name }}</h2>
-          <h2 class="text-sm font-medium text-[#6675c9]">ID: {{ this.id }}</h2>
-          <h2 class="text-sm font-medium text-[#6675c9]">Age: {{ this.age }}</h2>
+          <h2 class="text-sm font-medium text-[#6675c9]">Name: {{ name }}</h2>
+          <h2 class="text-sm font-medium text-[#6675c9]">ID: {{ id }}</h2>
+          <h2 class="text-sm font-medium text-[#6675c9]">Age: {{ age }}</h2>
         </div>
         <nav class="mt-3 px-6">
           <a
@@ -344,16 +344,16 @@ export default defineComponent({
       default: null
     },
     id: {
-      type: String,
+      type: Number,
       default: null
     },
     age: {
-      type: String,
+      type: Number,
       default: null
     }
   },
   methods: {
-    setActiveSection(section) {
+    setActiveSection(section : string) {
       this.$emit('update:activeSection', section)
     }
   }

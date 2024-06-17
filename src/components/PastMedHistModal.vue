@@ -240,6 +240,7 @@ export default defineComponent({
   },
   created() {
     if (!this.isAdd) {
+      console.log("past medical history is: " + this.patientData.pastmedicalhistory)
       const pastMedHist = this.patientData.pastmedicalhistory;
       if (!pastMedHist) return;
       this.tuberculosis = pastMedHist.tuberculosis || false;

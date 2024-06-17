@@ -39,7 +39,8 @@ const router = createRouter({
     {
       path: '/patient/:id',
       name: 'patient',
-      component: ViewEditPatient
+      component: ViewEditPatient,
+      props: true,
     }
     // {
     //   path: '/admin',
