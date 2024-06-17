@@ -275,12 +275,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import axios from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 
-export default {
+export default defineComponent({
   props: {
     patientId: {
       type: Number,
@@ -380,7 +382,7 @@ export default {
           toast.error('Please indicate if patient needs referral')
           return
         }
-        const response = await axios.patch(`/patient/${this.patientId}`, {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           doctorsConsultation: {
             healthy: this.healthy,
             msk: this.msk,
@@ -424,7 +426,7 @@ export default {
     },
 
   }
-}
+})
 </script>
 
 <style scoped>

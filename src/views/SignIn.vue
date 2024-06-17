@@ -43,12 +43,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from 'axios';
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'SignIn',
   data() {
     return {
@@ -63,7 +64,7 @@ export default {
       console.log('getToken method called');
 
       try {
-        const response = await axios.post("/login", {
+        const response = await axios.post("http://localhost:9090/login", {
           username: this.username,
           password: this.password
         });
@@ -80,7 +81,7 @@ export default {
       }
     },
   }
-}
+})
 
 </script>
 

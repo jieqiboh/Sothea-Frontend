@@ -317,12 +317,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import axios from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 
-export default {
+export default defineComponent({
   props: {
     patientId: {
       type: Number,
@@ -371,18 +373,20 @@ export default {
       if (!admin) return
       this.name = admin.name || ''
       this.khmerName = admin.khmerName || ''
-      this.dob = admin.dob || ''
+      this.dob = this.formatDateForInput(admin.dob) || ''
       this.age = admin.age || ''
       this.gender = admin.gender || ''
       this.contactNo = admin.contactNo || ''
-      this.regDate = admin.regDate || ''
+      this.regDate = this.formatDateForInput(admin.regDate) || ''
       this.village = admin.village || ''
       this.familyGroup = admin.familyGroup || ''
       this.pregnant = admin.pregnant
-      this.lastMenstrualPeriod = admin.lastMenstrualPeriod || ''
+      this.lastMenstrualPeriod = this.formatDateForInput(admin.lastMenstrualPeriod) || ''
       this.drugAllergies = admin.drugAllergies || ''
       this.photo = admin.photo || ''
       this.sentToId = admin.sentToId
+
+      this.selectedPhoto = `data:image/png;base64,${atob(this.photo)}`
     }
   },
   methods: {
@@ -450,7 +454,7 @@ export default {
           return
         }
 
-        const response = await axios.post('/patient', {
+        const response = await axios.post('http://localhost:9090/patient', {
           admin: {
             name: this.name,
             khmerName: this.khmerName,
@@ -503,6 +507,15 @@ export default {
       }
     },
 
+    formatDateForInput(dateString) {
+      const date = new Date(dateString);
+      const year = date.getUTCFullYear();
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0'); 
+      const day = String(date.getUTCDate()).padStart(2, '0');
+      // Return the formatted date string
+      return `${year}-${month}-${day}`;
+    },
+
     // PUT request to update an existing patient
     async saveEdits() {
       const toast = useToast()
@@ -553,7 +566,7 @@ export default {
           toast.error('Sent to Infectious Disease? is required')
           return
         }
-        const response = await axios.patch(`/patient/${this.patientId}`, {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           admin: {
             name: this.name,
             khmerName: this.khmerName,
@@ -601,7 +614,7 @@ export default {
       this.toggleEdit()
     }
   }
-}
+})
 </script>
 
 <style scoped>

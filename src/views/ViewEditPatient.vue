@@ -50,7 +50,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/NavBar.vue'
 
@@ -64,7 +66,7 @@ import DrConsultModal from '../components/DrConsultModal.vue'
 
 import axios from 'axios'
 
-export default {
+export default defineComponent({
   components: {
     SideBar,
     NavBar,
@@ -111,19 +113,16 @@ export default {
       console.log(section)
       this.activeSection = section
     },
-    async getPatientData(id) {
-      axios.get(`/patient/${id}`)
-        .then((response) => {
-          const { data } = response
-          this.patient = data
-        })
-        .catch((error) => {
-          this.patient = {}
-        })
-    },
+
     async loadPatientData() {
       try {
-        await this.getPatientData(this.patientId)
+        console.log("Loading patient data")
+        console.log(this.patientId)
+
+        const response = await axios.get(`http://localhost:9090/patient/${this.patientId}`);
+        const { data } = response;
+        this.patient = data;
+        
         if (this.patient && this.patient.admin) {
           const admin = this.patient.admin
           this.name = admin.name
@@ -144,7 +143,7 @@ export default {
     this.patientId = this.$route.params.id
     this.loadPatientData()
   }
-}
+})
 </script>
 
 <style scoped>

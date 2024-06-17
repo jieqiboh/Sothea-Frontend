@@ -202,12 +202,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import axios from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 
-export default {
+export default defineComponent({
   props: {
     patientId: {
       type: String,
@@ -267,7 +269,7 @@ export default {
           toast.error('Please select yes/no for all fields')
           return
         }
-        const response = await axios.patch(`/patient/${this.patientId}`, {
+        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
           pastMedicalHistory: {
             tuberculosis: this.tuberculosis,
             diabetes: this.diabetes,
@@ -304,7 +306,7 @@ export default {
     },
 
   }
-}
+})
 </script>
 
 <style scoped>
