@@ -359,15 +359,15 @@ export default defineComponent({
           toast.error('Please enter Random Blood Glucose (mg/dL)')
           return
         }
-        if (this.averageSystolicBP == null) {
+        if (this.avgSystolicBP === null) {
           toast.error('Average Systolic BP cannot be empty')
           return
         }
-        if (this.averageDiastolicBP == null) {
+        if (this.avgDiastolicBP === null) {
           toast.error('Average Diastolic BP cannot be empty')
           return
         }
-        if (this.averageHR == null) {
+        if (this.avgHR === null) {
           toast.error('Average HR cannot be empty')
           return
         }
@@ -378,11 +378,11 @@ export default defineComponent({
           systolicBP2: this.systolicBP2,
           diastolicBP1: this.diastolicBP1,
           diastolicBP2: this.diastolicBP2,
-          averageSystolicBP: this.averageSystolicBP,
-          averageDiastolicBP: this.averageDiastolicBP,
+          averageSystolicBP: this.avgSystolicBP, // pre-computed value
+          averageDiastolicBP: this.avgDiastolicBP, // pre-computed value
           hr1: this.hr1,
           hr2: this.hr2,
-          averageHR: this.averageHR,
+          averageHR: this.avgHR, // pre-computed value
           randomBloodGlucoseMmolL: this.randomBloodGlucoseMmolL,
           randomBloodGlucoseMmolLp: this.randomBloodGlucoseMmolLp
         }
