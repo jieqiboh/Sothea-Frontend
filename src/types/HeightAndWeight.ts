@@ -1,5 +1,5 @@
 export default interface HeightAndWeight {
-  id?: number | null
+  id?: number
   height: number
   weight: number
   bmi: number

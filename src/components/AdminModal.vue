@@ -366,13 +366,13 @@ export default defineComponent({
       }
     }
   },
-  data() { // Default values in the AddPatient page, types mirror Admin type
+  data() { // Default values in the AddPatient page, types mirror Admin type except for booleans, which always take on boolean | null
     return {
       name: '' as string,
       khmerName: '' as string,
       dob: '' as string,
       age: 0 as number,
-      gender: '' as string,
+      gender: '' as 'M' | 'F' | '',
       contactNo: '' as string,
       regDate: '' as string,
       village: '' as string,
@@ -443,7 +443,7 @@ export default defineComponent({
           toast.error('Village is required')
           return
         }
-        if (!this.familyGroup) {
+        if (this.familyGroup == null) {
           toast.error('Family Group is required')
           return
         }
@@ -451,12 +451,16 @@ export default defineComponent({
           toast.error('Pregnant? is required')
           return
         }
-        if (!this.sentToId == null) {
+        if (this.sentToId == null) {
           toast.error('Sent to Infectious Disease? is required')
           return
         }
+        if (this.ageComputed == null) {
+          toast.error('Please enter a valid Date of Birth')
+          return
+        }
 
-        const admin = {
+        const admin: Admin = { // need to define outside to catch missing fields
           name: this.name,
           khmerName: this.khmerName,
           dob: new Date(this.dob).toISOString(),
@@ -471,23 +475,24 @@ export default defineComponent({
           drugAllergies: this.drugAllergies ? this.drugAllergies : null,
           photo: this.photo ? this.photo : null,
           sentToId: this.sentToId
-        } as Admin
+        }
 
-        let response : AxiosResponse;
-        if (this.isAdd && !this.isEditing) {
-          response = await axios.post('http://localhost:9090/patient', {
+        if (this.isAdd && !this.isEditing) { // Add new patient
+          await axios.post('http://localhost:9090/patient', {
             admin: admin
+          }).then(response => {
+            toast.success('Admin Details created successfully!')
+            // Emit patient details to be rendered in sidebar
+            this.$emit('patientCreated', { id: response.data["Inserted userid"], name: this.name, age: this.ageComputed })
           })
-          toast.success('Admin Details created successfully!')
-          // Emit patient details to be rendered in sidebar
-          this.$emit('patientCreated', { id: response.data["Inserted userid"], name: this.name, age: this.ageComputed })
-        } else if (!this.isAdd && this.isEditing) {
-          response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+        } else if (!this.isAdd && this.isEditing) { // Editing an existing patient
+          await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
             admin: admin
+          }).then(() => {
+            toast.success('Admin Details updated successfully!')
+            // Emit updated patient details to be rendered in sidebar
+            this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.ageComputed })
           })
-          toast.success('Admin Details updated successfully!')
-          // Emit updated patient details to be rendered in sidebar
-          this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.ageComputed })
         }
       } catch (error : unknown) {
         if (axios.isAxiosError(error)) {

@@ -218,22 +218,20 @@ export default defineComponent({
       default: true
     }
   },
-  watch: {
-    patientData: function(newVal : Patient, oldVal : Patient) { // watch it
-      if (!this.isAdd) {
-        console.log("past medical history is: " + this.patientData.pastmedicalhistory)
-        const pastMedHist = this.patientData.pastmedicalhistory;
-        if (!pastMedHist) return;
-        this.tuberculosis = pastMedHist.tuberculosis;
-        this.diabetes = pastMedHist.diabetes;
-        this.hypertension = pastMedHist.hypertension;
-        this.hyperlipidemia = pastMedHist.hyperlipidemia;
-        this.chronicJointPains = pastMedHist.chronicJointPains;
-        this.chronicMuscleAches = pastMedHist.chronicMuscleAches;
-        this.sexuallyTransmittedDisease = pastMedHist.sexuallyTransmittedDisease;
-        this.specifiedSTDs = pastMedHist.specifiedSTDs
-        this.others = pastMedHist.others;
-      }
+  created() {
+    if (!this.isAdd) {
+      console.log('past medical history is: ' + this.patientData.pastmedicalhistory)
+      const pastMedHist = this.patientData.pastmedicalhistory
+      if (!pastMedHist) return
+      this.tuberculosis = pastMedHist.tuberculosis
+      this.diabetes = pastMedHist.diabetes
+      this.hypertension = pastMedHist.hypertension
+      this.hyperlipidemia = pastMedHist.hyperlipidemia
+      this.chronicJointPains = pastMedHist.chronicJointPains
+      this.chronicMuscleAches = pastMedHist.chronicMuscleAches
+      this.sexuallyTransmittedDisease = pastMedHist.sexuallyTransmittedDisease
+      this.specifiedSTDs = pastMedHist.specifiedSTDs
+      this.others = pastMedHist.others
     }
   },
   data() {
@@ -247,7 +245,7 @@ export default defineComponent({
       sexuallyTransmittedDisease: null as boolean | null,
       specifiedSTDs: '' as string | null,
       others: '' as string | null,
-      isEditing: false,
+      isEditing: false
     }
   },
   methods: {
@@ -266,8 +264,7 @@ export default defineComponent({
           toast.error('Please select yes/no for all fields')
           return
         }
-
-        const pastmedicalhistory = {
+        const pastMedicalHistory: PastMedicalHistory = { // need to define outside to catch missing fields
           tuberculosis: this.tuberculosis,
           diabetes: this.diabetes,
           hypertension: this.hypertension,
@@ -277,22 +274,18 @@ export default defineComponent({
           sexuallyTransmittedDisease: this.sexuallyTransmittedDisease,
           specifiedSTDs: this.specifiedSTDs,
           others: this.others
-        } as PastMedicalHistory
-
-        let response : AxiosResponse;
-        if (!this.isAdd && this.isEditing) {
-          response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
-            pastMedicalHistory: pastmedicalhistory
-          })
-          console.log(response.data)
+        }
+        await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          pastMedicalHistory: pastMedicalHistory
+        }).then(response => {
+          console.log(response)
           console.log('Past medical history posted successfully!')
-          if (!this.isAdd) {
-            this.toggleEdit(); // to switch back to read-only mode
+          if (!this.isEditing) {
+            this.toggleEdit() // to switch back to read-only mode
           }
           toast.success('Past medical history saved successfully!')
-        }
-
-      } catch (error : unknown) {
+        })
+      } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
           console.log(error.response)
           if (error.response) {
@@ -310,7 +303,7 @@ export default defineComponent({
       console.log('toggleEdit')
       this.isEditing = !this.isEditing
       console.log(this.isEditing)
-    },
+    }
 
   }
 })

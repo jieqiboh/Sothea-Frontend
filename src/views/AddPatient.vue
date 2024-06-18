@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       activeSection: 'admin',
-      patientId: '',
+      patientId: '', // Empty value passed to the Sidebar since it is not needed
       name: '',
       age: '',
     }
@@ -93,10 +93,6 @@ export default {
       console.log('Patient Event:', event)
       const { id, name, age } = event
       console.log(`Patient ID: ${id}, Name: ${name}, Age: ${age}`)
-
-      this.patientId = id
-      this.name = name
-      this.age = age
     }
   }
 }

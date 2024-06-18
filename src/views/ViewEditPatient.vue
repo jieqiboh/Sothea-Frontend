@@ -28,7 +28,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import {useRoute} from "vue-router";
 
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/NavBar.vue'
@@ -44,7 +43,6 @@ import DrConsultModal from '../components/DrConsultModal.vue'
 import type Patient from '@/types/Patient'
 
 import axios, { type AxiosResponse } from 'axios'
-import type Admin from '@/types/Admin'
 
 export default defineComponent({
   components: {
@@ -67,9 +65,9 @@ export default defineComponent({
   data() {
     return {
       activeSection: 'admin',
-      patient: {} as Patient,
-      name: '',
-      age: 0,
+      patient: null as Patient | null,
+      name: null as string | null,
+      age: null as number | null
     }
   },
   computed: {
@@ -115,22 +113,12 @@ export default defineComponent({
     async loadPatientData() {
       try {
         await this.getPatientData(this.id);
-        if (this.patient && this.patient.admin) {
-          const admin = this.patient.admin;
-          this.name = admin.name;
-          const dob = admin.dob;
-          this.age = new Date().getFullYear() - new Date(dob).getFullYear();
-        }
       } catch (error) {
         console.log('Error loading patient data:', error);
       }
     },
-    back() {
-      this.$router.push('/allpatients')
-    }
   },
   created() {
-    console.log("vieweditpatient created called")
     this.loadPatientData()
   }
 })

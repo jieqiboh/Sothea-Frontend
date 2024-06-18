@@ -6,6 +6,7 @@ import type SocialHistory from "./SocialHistory"
 import type HeightAndWeight from "./HeightAndWeight"
 import type VitalStatistics from "./VitalStatistics"
 
+// The Patient type is a composite type that contains all the other types.
 export default interface Patient {
   admin: Admin
   pastmedicalhistory: PastMedicalHistory | null
@@ -15,10 +16,3 @@ export default interface Patient {
   visualacuity: VisualAcuity | null
   doctorsconsultation: DoctorsConsultation | null
 }
-
-
-
-
-
-
-
