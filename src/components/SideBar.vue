@@ -344,7 +344,7 @@ export default defineComponent({
       default: null
     },
     id: {
-      type: Number,
+      type: String,
       default: null
     },
     age: {

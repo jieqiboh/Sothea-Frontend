@@ -5,14 +5,6 @@ import AddPatient from '../views/AddPatient.vue'
 import SideBar from '../components/SideBar.vue'
 import ViewEditPatient from '../views/ViewEditPatient.vue'
 
-import AdminModal from '../components/AdminModal.vue'
-import PastMedHistModal from '../components/PastMedHistModal.vue'
-import SocialHistModal from '../components/SocialHistModal.vue'
-import VitalStatsModal from '../components/VitalStatsModal.vue'
-import HeightWeightModal from '../components/HeightWeightModal.vue'
-import VisualAcuityModal from '../components/VisualAcuityModal.vue'
-import DrConsultModal from '../components/DrConsultModal.vue'
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

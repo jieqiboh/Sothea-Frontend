@@ -6,9 +6,9 @@
     <SideBar
       :activeSection="activeSection"
       @update:activeSection="setActiveSection"
-      :id="patientId"
-      :name="name"
-      :age="age"
+      :id="undefined"
+      :name="undefined"
+      :age="undefined"
     />
     <div class="content flex-grow p-6">
       <keep-alive>
@@ -16,7 +16,6 @@
           :is="activeComponent"
           :patientId="patientId"
           @patientCreated="handlePatientCreated"
-          @patientUpdated="handlePatientCreated"
         ></component>
       </keep-alive>
     </div>
@@ -53,8 +52,8 @@ export default {
     return {
       activeSection: 'admin',
       patientId: '', // Empty value passed to the Sidebar since it is not needed
-      name: '',
-      age: '',
+      name: '' as string, // Empty value passed to the Sidebar since it is not needed
+      age: null, // Empty value passed to the Sidebar since it is not needed
     }
   },
   computed: {
@@ -90,9 +89,9 @@ export default {
       await axios.get('/login/is-valid-token')
     },
     handlePatientCreated(event : any) {
-      console.log('Patient Event:', event)
       const { id, name, age } = event
-      console.log(`Patient ID: ${id}, Name: ${name}, Age: ${age}`)
+      console.log(`Patient Created Wth ID: ${id}, Name: ${name}, Age: ${age}`)
+      this.$router.push("/patient/" + id)
     }
   }
 }

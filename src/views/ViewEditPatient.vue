@@ -1,24 +1,14 @@
 <template>
   <div>
-    <NavBar/>
+    <NavBar />
 
     <div class="flex">
-      <SideBar
-        :activeSection="activeSection"
-        :id="id"
-        :name="name"
-        :age="age"
-        @update:activeSection="setActiveSection"
-      />
+      <SideBar :activeSection="activeSection" :id="id" :name="name" :age="age"
+        @update:activeSection="setActiveSection" />
       <div class="content flex-grow p-6">
         <keep-alive>
-          <component
-            :is="activeComponent"
-            :patientId="id"
-            :patientData="patient"
-            :isAdd="false"
-            @reload="loadPatientData"
-          >
+          <component :is="activeComponent" :patientId="id" :patientData="patient" :isAdd="false"
+            @reload="loadPatientData" @patientUpdated="handlePatientUpdated">
           </component>
         </keep-alive>
       </div>
@@ -43,6 +33,8 @@ import DrConsultModal from '../components/DrConsultModal.vue'
 import type Patient from '@/types/Patient'
 
 import axios, { type AxiosResponse } from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default defineComponent({
   components: {
@@ -66,8 +58,8 @@ export default defineComponent({
     return {
       activeSection: 'admin',
       patient: null as Patient | null,
-      name: null as string | null,
-      age: null as number | null
+      name: '' as string,
+      age: 0 as number,
     }
   },
   computed: {
@@ -93,34 +85,48 @@ export default defineComponent({
     }
   },
   methods: {
-    setActiveSection(section : string) {
+    setActiveSection(section: string) {
       console.log(section)
       this.activeSection = section
     },
 
-    async getPatientData(id : string) {
+    async getPatientData(id: string) {
       axios.get(`http://localhost:9090/patient/${id}`)
-        .then((response : AxiosResponse) => {
+        .then((response: AxiosResponse) => {
           console.log(response)
           const { data } = response
           this.patient = JSON.parse(JSON.stringify(data)) as Patient
           this.age = new Date().getFullYear() - new Date(this.patient.admin.dob).getFullYear()
           this.name = this.patient.admin.name
-        }).catch((error) => {
-          console.log(error)
         })
     },
     async loadPatientData() {
+      const toast = useToast()
       try {
         await this.getPatientData(this.id);
-      } catch (error) {
-        console.log('Error loading patient data:', error);
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
+          }
+        } else {
+          // No response received at all
+          console.log(error)
+          toast.error('An internal server error occurred.')
+        }
       }
     },
+    handlePatientUpdated(event: any) {
+      const { id, name, age } = event
+      console.log(`Patient Updated With ID: ${id}, Name: ${name}, Age: ${age}`)
+      this.name = name
+      this.age = age
+    }
   },
   created() {
     this.loadPatientData()
-  }
+  },
 })
 </script>
 
