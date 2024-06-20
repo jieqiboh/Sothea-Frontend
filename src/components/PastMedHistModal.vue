@@ -21,13 +21,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="tuberculosis" class="w-4 h-4" v-model="tuberculosis" :value="true"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="tuberculosis" class="w-4 h-4" v-model="tuberculosis" :value="false"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -41,13 +41,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="diabetes" class="w-4 h-4" v-model="diabetes" :value="true"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="diabetes" class="w-4 h-4" v-model="diabetes" :value="false"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -61,13 +61,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="hypertension" class="w-4 h-4" v-model="hypertension" :value="true"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="hypertension" class="w-4 h-4" v-model="hypertension" :value="false"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -81,13 +81,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="hyperlipidemia" class="w-4 h-4" v-model="hyperlipidemia" :value="true"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="hyperlipidemia" class="w-4 h-4" v-model="hyperlipidemia" :value="false"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -101,13 +101,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="chronic-joint-pains" class="w-4 h-4" v-model="chronicJointPains" :value="true"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="chronic-joint-pains" class="w-4 h-4" v-model="chronicJointPains" :value="false"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -121,13 +121,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="chronic-muscle-aches" class="w-4 h-4" v-model="chronicMuscleAches" :value="true"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="chronic-muscle-aches" class="w-4 h-4" v-model="chronicMuscleAches"
-                :value="false" :disabled="!isEditing && !isAdd" />
+                :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -141,13 +141,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="std" class="w-4 h-4" v-model="sexuallyTransmittedDisease" :value="true"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="std" class="w-4 h-4" v-model="sexuallyTransmittedDisease" :value="false"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -160,7 +160,7 @@
           </label>
           <textarea rows="2" placeholder="Remarks"
             class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-            v-model="specifiedSTDs" :disabled="!isEditing && !isAdd"></textarea>
+            v-model="specifiedSTDs" :disabled="!isEditing"></textarea>
         </label>
       </div>
 
@@ -170,16 +170,8 @@
           <label for="" class="mb-2 block text-sm font-normal text-dark">Others: </label>
           <textarea rows="2" placeholder="Remarks"
             class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-            v-model="others" :disabled="!isEditing && !isAdd"></textarea>
+            v-model="others" :disabled="!isEditing"></textarea>
         </label>
-      </div>
-
-      <!-- Save Button -->
-      <div class="flex flex-row-reverse w-full mt-5">
-        <button v-if="isAdd" @click="submitData"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
-          Save
-        </button>
       </div>
 
       <!-- Edit Button -->
@@ -203,20 +195,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, type PropType } from 'vue'
 
-import axios from 'axios'
+import axios, { type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import type Patient from '@/types/Patient'
+import type PastMedicalHistory from '@/types/PastMedicalHistory'
 
 export default defineComponent({
   props: {
     patientId: {
       type: String,
-      required: true
+      default: null
     },
     patientData: {
-      type: Object,
+      type: Object as PropType<Patient>,
       default: null
     },
     isAdd: {
@@ -224,33 +218,34 @@ export default defineComponent({
       default: true
     }
   },
-  data() {
-    return {
-      tuberculosis: null,
-      diabetes: null,
-      hypertension: null,
-      hyperlipidemia: null,
-      chronicJointPains: null,
-      chronicMuscleAches: null,
-      sexuallyTransmittedDisease: null,
-      specifiedSTDs: '',
-      others: '',
-      isEditing: false,
-    }
-  },
   created() {
     if (!this.isAdd) {
-      const pastMedHist = this.patientData.pastmedicalhistory;
-      if (!pastMedHist) return;
-      this.tuberculosis = pastMedHist.tuberculosis || false;
-      this.diabetes = pastMedHist.diabetes || false;
-      this.hypertension = pastMedHist.hypertension || false;
-      this.hyperlipidemia = pastMedHist.hyperlipidemia || false;
-      this.chronicJointPains = pastMedHist.chronicJointPains || false;
-      this.chronicMuscleAches = pastMedHist.chronicMuscleAches || false;
-      this.sexuallyTransmittedDisease = pastMedHist.sexuallyTransmittedDisease || false;
-      this.specifiedSTDs = pastMedHist.specifiedSTDs || '';
-      this.others = pastMedHist.others || '';
+      console.log('past medical history is: ' + this.patientData.pastmedicalhistory)
+      const pastMedHist = this.patientData.pastmedicalhistory
+      if (!pastMedHist) return
+      this.tuberculosis = pastMedHist.tuberculosis
+      this.diabetes = pastMedHist.diabetes
+      this.hypertension = pastMedHist.hypertension
+      this.hyperlipidemia = pastMedHist.hyperlipidemia
+      this.chronicJointPains = pastMedHist.chronicJointPains
+      this.chronicMuscleAches = pastMedHist.chronicMuscleAches
+      this.sexuallyTransmittedDisease = pastMedHist.sexuallyTransmittedDisease
+      this.specifiedSTDs = pastMedHist.specifiedSTDs
+      this.others = pastMedHist.others
+    }
+  },
+  data() {
+    return {
+      tuberculosis: null as boolean | null,
+      diabetes: null as boolean | null,
+      hypertension: null as boolean | null,
+      hyperlipidemia: null as boolean | null,
+      chronicJointPains: null as boolean | null,
+      chronicMuscleAches: null as boolean | null,
+      sexuallyTransmittedDisease: null as boolean | null,
+      specifiedSTDs: '' as string | null,
+      others: '' as string | null,
+      isEditing: false
     }
   },
   methods: {
@@ -269,32 +264,37 @@ export default defineComponent({
           toast.error('Please select yes/no for all fields')
           return
         }
-        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
-          pastMedicalHistory: {
-            tuberculosis: this.tuberculosis,
-            diabetes: this.diabetes,
-            hypertension: this.hypertension,
-            hyperlipidemia: this.hyperlipidemia,
-            chronicJointPains: this.chronicJointPains,
-            chronicMuscleAches: this.chronicMuscleAches,
-            sexuallyTransmittedDisease: this.sexuallyTransmittedDisease,
-            specifiedSTDs: this.specifiedSTDs,
-            others: this.others
-          }
-        })
-        console.log(response.data)
-        console.log('Past medical history posted successfully!')
-        if (!this.isAdd) {
-          this.toggleEdit(); // to switch back to read-only mode
+        const pastMedicalHistory: PastMedicalHistory = { // need to define outside to catch missing fields
+          tuberculosis: this.tuberculosis,
+          diabetes: this.diabetes,
+          hypertension: this.hypertension,
+          hyperlipidemia: this.hyperlipidemia,
+          chronicJointPains: this.chronicJointPains,
+          chronicMuscleAches: this.chronicMuscleAches,
+          sexuallyTransmittedDisease: this.sexuallyTransmittedDisease,
+          specifiedSTDs: this.specifiedSTDs,
+          others: this.others
         }
-        toast.success('Past medical history saved successfully!')
-      } catch (error) {
-        console.error('Error posting data:', error)
-        toast.error('Error saving past medical history')
-        if (error.response) {
-          toast.error(error.response.data.error)
-        } else { // No response received at all
-          toast.error("An internal server error occurred.")
+        await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          pastMedicalHistory: pastMedicalHistory
+        }).then(response => {
+          console.log(response)
+          console.log('Past medical history posted successfully!')
+          if (!this.isEditing) {
+            this.toggleEdit() // to switch back to read-only mode
+          }
+          toast.success('Past medical history saved successfully!')
+        })
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
+          }
+        } else {
+          // No response received at all
+          console.log(error)
+          toast.error('An internal server error occurred.')
         }
       }
     },
@@ -303,7 +303,7 @@ export default defineComponent({
       console.log('toggleEdit')
       this.isEditing = !this.isEditing
       console.log(this.isEditing)
-    },
+    }
 
   }
 })

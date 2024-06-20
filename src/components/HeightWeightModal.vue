@@ -15,7 +15,7 @@
               step="1"
               placeholder="cm"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -30,7 +30,7 @@
               step="0.1"
               placeholder="kg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -47,7 +47,7 @@
               type="number"
               placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -61,7 +61,7 @@
               type="number"
               placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -99,17 +99,6 @@
           </div>
         </div>
 
-        <!-- Save Button -->
-        <div class="flex flex-row-reverse w-full mt-5">
-          <button
-            v-if="isAdd"
-            @click="submitData"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
-          >
-            Save
-          </button>
-        </div>
-
         <!-- Edit Button -->
         <div class="flex flex-row-reverse w-full mt-5">
           <button
@@ -137,20 +126,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, type PropType } from 'vue'
 
 import axios from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import type Patient from '@/types/Patient'
+import type HeightAndWeight from '@/types/HeightAndWeight'
 
 export default defineComponent({
   props: {
     patientId: {
-      type: Number,
-      required: true
+      type: String,
+      default: null
     },
     patientData: {
-      type: Object,
+      type: Object as PropType<Patient>,
       default: null
     },
     isAdd: {
@@ -160,10 +151,10 @@ export default defineComponent({
   },
   data() {
     return {
-      height: null,
-      weight: null,
-      paedsHeight: null,
-      paedsWeight: null,
+      height: null as number | null,
+      weight: null as number | null,
+      paedsHeight: null as number | null,
+      paedsWeight: null as number | null,
       isEditing: false
     }
   },
@@ -187,7 +178,7 @@ export default defineComponent({
     },
     bmianalysis() {
       if (this.bmi) {
-        const bmiValue = parseFloat(this.bmi)
+        const bmiValue = this.bmi
         if (bmiValue < 18.5) {
           return 'Underweight'
         } else if (bmiValue < 25) {
@@ -230,30 +221,41 @@ export default defineComponent({
           toast.error('Paeds: Weight % cannot be negative')
           return
         }
-        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
-          heightAndWeight: {
-            height: this.height,
-            weight: this.weight,
-            bmi: this.bmi,
-            bmiAnalysis: this.bmianalysis,
-            paedsHeight: this.paedsHeight,
-            paedsWeight: this.paedsWeight
-          }
-        })
-        console.log(response.data)
-        console.log('Height and Weight is posted successfully!')
-        if (!this.isAdd) {
-          this.toggleEdit() // to switch back to read-only mode
-          this.$emit('reload')
+        if (this.bmi === null) {
+          toast.error('Please enter height and weight to calculate BMI')
+          return
         }
-        toast.success('Height and Weight saved successfully!')
-      } catch (error) {
-        console.error('Error posting data:', error)
-        toast.error('Error saving Height and Weight')
-        if (error.response) {
-          toast.error(error.response.data.error)
+        if (this.bmianalysis === null) {
+          toast.error('Please enter height and weight to calculate BMI Analysis')
+          return
+        }
+        const heightAndWeight: HeightAndWeight = { // need to define outside to catch missing fields
+          height: this.height,
+          weight: this.weight,
+          bmi: this.bmi,
+          bmiAnalysis: this.bmianalysis,
+          paedsHeight: this.paedsHeight,
+          paedsWeight: this.paedsWeight
+        }
+        await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          heightAndWeight: heightAndWeight 
+        }).then(response => {
+          console.log(response.data)
+          console.log('Height and Weight is posted successfully!')
+          if (this.isEditing) {
+            this.toggleEdit() // to switch back to read-only mode
+          }
+          toast.success('Height and Weight saved successfully!')
+        })
+      } catch (error : unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
+          }
         } else {
           // No response received at all
+          console.log(error)
           toast.error('An internal server error occurred.')
         }
       }

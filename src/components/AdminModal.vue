@@ -318,20 +318,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, type PropType } from 'vue'
 
-import axios from 'axios'
+import type Admin from '@/types/Admin';
+
+import axios, { Axios, AxiosError, type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import type Patient from '@/types/Patient'
 
 export default defineComponent({
   props: {
     patientId: {
-      type: Number,
+      type: String,
       default: null
     },
     patientData: {
-      type: Object,
+      type: Object as PropType<Patient>,
       default: null
     },
     isAdd: {
@@ -339,23 +342,47 @@ export default defineComponent({
       default: true
     }
   },
-  data() {
+  watch: {
+    patientData: function(newVal : Patient, oldVal : Patient) { // watch it
+      if (!this.isAdd) { // In View / Edit Page
+        const admin = this.patientData.admin
+        if (!admin) return
+        this.name = admin.name
+        this.khmerName = admin.khmerName
+        this.dob = this.formatDateForInput(admin.dob)
+        this.age = admin.age
+        this.gender = admin.gender
+        this.contactNo = admin.contactNo
+        this.regDate = this.formatDateForInput(admin.regDate)
+        this.village = admin.village
+        this.familyGroup = admin.familyGroup
+        this.pregnant = admin.pregnant
+        this.lastMenstrualPeriod = (admin.lastMenstrualPeriod != null) ? this.formatDateForInput(admin.lastMenstrualPeriod) : null
+        this.drugAllergies = admin.drugAllergies
+        this.photo = admin.photo
+        this.sentToId = admin.sentToId
+
+        this.selectedPhoto = (this.photo) ? `data:image/png;base64,${atob(this.photo)}` : ''
+      }
+    }
+  },
+  data() { // Default values in the AddPatient page, types mirror Admin type except for booleans, which always take on boolean | null
     return {
-      name: '',
-      khmerName: '',
-      dob: '',
-      age: '',
-      gender: '',
-      contactNo: '',
-      regDate: '',
-      village: '',
-      familyGroup: '',
-      pregnant: null,
-      lastMenstrualPeriod: '',
-      drugAllergies: '',
-      selectedPhoto: null,
-      photo: '', //base 64 string (for POST)
-      sentToId: null,
+      name: '' as string,
+      khmerName: '' as string,
+      dob: '' as string,
+      age: 0 as number,
+      gender: '' as 'M' | 'F' | '',
+      contactNo: '' as string,
+      regDate: '' as string,
+      village: '' as string,
+      familyGroup: '' as string,
+      pregnant: null as boolean | null,
+      lastMenstrualPeriod: null as string | null,
+      drugAllergies: '' as string | null,
+      selectedPhoto: '' as string,
+      photo: '' as string | null, //base 64 string (for POST)
+      sentToId: null as boolean | null,
       isEditing: false
     }
   },
@@ -367,28 +394,6 @@ export default defineComponent({
       return null
     }
   },
-  created() {
-    if (!this.isAdd) {
-      const admin = this.patientData.admin
-      if (!admin) return
-      this.name = admin.name || ''
-      this.khmerName = admin.khmerName || ''
-      this.dob = this.formatDateForInput(admin.dob) || ''
-      this.age = admin.age || ''
-      this.gender = admin.gender || ''
-      this.contactNo = admin.contactNo || ''
-      this.regDate = this.formatDateForInput(admin.regDate) || ''
-      this.village = admin.village || ''
-      this.familyGroup = admin.familyGroup || ''
-      this.pregnant = admin.pregnant
-      this.lastMenstrualPeriod = this.formatDateForInput(admin.lastMenstrualPeriod) || ''
-      this.drugAllergies = admin.drugAllergies || ''
-      this.photo = admin.photo || ''
-      this.sentToId = admin.sentToId
-
-      this.selectedPhoto = `data:image/png;base64,${atob(this.photo)}`
-    }
-  },
   methods: {
     validateAge() {
       if (this.age < 0) {
@@ -398,12 +403,13 @@ export default defineComponent({
         this.age = Math.floor(this.age)
       }
     },
-    preventNegative(event) {
+    preventNegative(event : any) {
       if (event.key === '-' || event.key === 'e' || event.key === '+') {
         event.preventDefault()
       }
     },
-    // POST request to add a new patient
+    // POST request to add a new patient / PUT request to update an existing patient
+    // If isAdd is true, do insert patient, otherwise do update patient
     async submitData() {
       const toast = useToast()
 
@@ -437,165 +443,99 @@ export default defineComponent({
           toast.error('Village is required')
           return
         }
-        if (!this.familyGroup) {
+        if (this.familyGroup == null) {
           toast.error('Family Group is required')
           return
         }
-        if (this.pregnant === null) {
+        if (this.pregnant == null) {
           toast.error('Pregnant? is required')
           return
         }
-        if (this.sentToId === null) {
+        if (this.sentToId == null) {
           toast.error('Sent to Infectious Disease? is required')
           return
         }
+        if (this.ageComputed == null) {
+          toast.error('Please enter a valid Date of Birth')
+          return
+        }
 
-        const response = await axios.post('http://localhost:9090/patient', {
-          admin: {
-            name: this.name,
-            khmerName: this.khmerName,
-            dob: new Date(this.dob).toISOString(),
-            age: this.ageComputed,
-            gender: this.gender,
-            contactNo: this.contactNo,
-            regDate: new Date(this.regDate).toISOString(),
-            village: this.village,
-            familyGroup: this.familyGroup,
-            pregnant: this.pregnant,
-            lastMenstrualPeriod: new Date(this.lastMenstrualPeriod).toISOString(),
-            drugAllergies: this.drugAllergies ? this.drugAllergies : null,
-            photo: this.photo ? this.photo : null,
-            sentToId: this.sentToId
+        const admin: Admin = { // need to define outside to catch missing fields
+          name: this.name,
+          khmerName: this.khmerName,
+          dob: new Date(this.dob).toISOString(),
+          age: this.ageComputed,
+          gender: this.gender,
+          contactNo: this.contactNo,
+          regDate: new Date(this.regDate).toISOString(),
+          village: this.village,
+          familyGroup: this.familyGroup,
+          pregnant: this.pregnant,
+          lastMenstrualPeriod: (this.lastMenstrualPeriod) ? new Date(this.lastMenstrualPeriod).toISOString() : null,
+          drugAllergies: this.drugAllergies ? this.drugAllergies : null,
+          photo: this.photo ? this.photo : null,
+          sentToId: this.sentToId
+        }
+
+        if (this.isAdd && !this.isEditing) { // Add new patient
+          await axios.post('http://localhost:9090/patient', {
+            admin: admin
+          }).then(response => {
+            toast.success('Admin Details created successfully!')
+            // Emit patient details to be rendered in sidebar
+            this.$emit('patientCreated', { id: response.data["Inserted userid"], name: this.name, age: this.ageComputed })
+          })
+        } else if (!this.isAdd && this.isEditing) { // Editing an existing patient
+          await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+            admin: admin
+          }).then(() => {
+            toast.success('Admin Details updated successfully!')
+            // Emit updated patient details to be rendered in sidebar
+            this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.ageComputed })
+          })
+        }
+      } catch (error : unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
           }
-        })
-        console.log(response.data["Inserted userid"])
-        console.log('Data posted successfully!')
-        toast.success('Admin Details saved successfully!')
-
-        // Emit patient details to be rendered in sidebar
-        this.$emit('patientCreated', { id: response.data["Inserted userid"], name: this.name, age: this.ageComputed })
-      } catch (error) {
-        if (error.response) {
-          toast.error(error.response.data.error)
         } else {
           // No response received at all
+          console.log(error)
           toast.error('An internal server error occurred.')
         }
       }
     },
 
-    handleFileChange(event) {
+    handleFileChange(event: any) {
       const file = event.target.files[0]
       if (file && /\.(jpg|jpeg|png)$/i.test(file.name)) {
         const reader = new FileReader()
         reader.onload = (e) => {
           // Remove the data URL prefix to get just the base64 string
-          this.selectedPhoto = e.target.result
-          this.photo = e.target.result.split(',')[1]
+          if (e.target != null && typeof e.target.result == 'string') {
+            this.selectedPhoto = e.target.result
+            this.photo = e.target.result.split(',')[1]
+          }
         }
         reader.readAsDataURL(file)
         console.log(this.selectedPhoto)
         console.log(this.photo)
       } else {
         // Reset selectedPhoto or show error message
-        this.selectedPhoto = null
+        this.selectedPhoto = ''
         alert('Please select a JPEG, JPG, or PNG file.')
       }
     },
 
-    formatDateForInput(dateString) {
+    formatDateForInput(dateString : string) {
       const date = new Date(dateString);
       const year = date.getUTCFullYear();
       const month = String(date.getUTCMonth() + 1).padStart(2, '0'); 
       const day = String(date.getUTCDate()).padStart(2, '0');
       // Return the formatted date string
       return `${year}-${month}-${day}`;
-    },
-
-    // PUT request to update an existing patient
-    async saveEdits() {
-      const toast = useToast()
-      try {
-        console.log('saving edits....')
-        // Perform validation checks
-        if (!this.name) {
-          toast.error('Name is required')
-          return
-        }
-        if (!this.khmerName) {
-          toast.error('Khmer Name is required')
-          return
-        }
-        if (!this.dob) {
-          toast.error('Date of Birth is required')
-          return
-        }
-        if (!this.age) {
-          toast.error('Age is required')
-          return
-        }
-        if (!this.gender) {
-          toast.error('Gender is required')
-          return
-        }
-        if (!this.contactNo) {
-          toast.error('Contact No. is required')
-          return
-        }
-        if (!this.regDate) {
-          toast.error('Date Registered is required')
-          return
-        }
-        if (!this.village) {
-          toast.error('Village is required')
-          return
-        }
-        if (!this.familyGroup) {
-          toast.error('Family Group is required')
-          return
-        }
-        if (this.pregnant === null) {
-          toast.error('Pregnant? is required')
-          return
-        }
-        if (this.sentToId === null) {
-          toast.error('Sent to Infectious Disease? is required')
-          return
-        }
-        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
-          admin: {
-            name: this.name,
-            khmerName: this.khmerName,
-            dob: new Date(this.dob).toISOString(),
-            age: this.age,
-            gender: this.gender,
-            contactNo: this.contactNo,
-            regDate: new Date(this.regDate).toISOString(),
-            village: this.village,
-            familyGroup: this.familyGroup,
-            pregnant: this.pregnant,
-            lastMenstrualPeriod: new Date(this.lastMenstrualPeriod).toISOString(),
-            drugAllergies: this.drugAllergies ? this.drugAllergies : null,
-            photo: this.photo ? this.photo : null,
-            sentToId: this.sentToId
-          }
-        })
-        console.log(response.data)
-        console.log('Patient updated successfully!')
-        this.$emit('reload')
-        toast.success('Admin Details saved successfully!')
-        // Emit updated patient details to be rendered in sidebar
-        this.$emit('patientUpdated', { id: this.patientId, name: this.name, age: this.ageComputed })
-      } catch (error) {
-        console.error('Error updating patient:', error)
-        toast.error('Error saving admin details')
-        if (error.response) {
-          toast.error(error.response.data.error)
-        } else {
-          // No response received at all
-          toast.error('An internal server error occurred.')
-        }
-      }
     },
 
     toggleEdit() {
@@ -606,7 +546,7 @@ export default defineComponent({
 
     saveChanges() {
       console.log('saving changes....')
-      this.saveEdits()
+      this.submitData()
       this.toggleEdit()
     }
   }

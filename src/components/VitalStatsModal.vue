@@ -15,7 +15,7 @@
               step="0.01"
               placeholder="Degree Celsius"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -30,7 +30,7 @@
               step="0.01"
               placeholder="%"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -48,7 +48,7 @@
               step="0.01"
               placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -62,7 +62,7 @@
               step="0.01"
               placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -93,7 +93,7 @@
               step="0.01"
               placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -107,7 +107,7 @@
               step="0.01"
               placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -140,7 +140,7 @@
               step="1"
               placeholder="BPM"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -154,7 +154,7 @@
               step="1"
               placeholder="BPM"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -187,7 +187,7 @@
               step="0.01"
               placeholder="mmol/L"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
@@ -204,22 +204,11 @@
               step="0.01"
               placeholder="mg/dL"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd"
+              :disabled="!isEditing"
               @keydown="preventNegative"
               min="0"
             />
           </div>
-        </div>
-
-        <!-- Save Button -->
-        <div class="flex flex-row-reverse mt-5">
-          <button
-            v-if="isAdd"
-            @click="submitData"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
-          >
-            Save
-          </button>
         </div>
 
         <!-- Edit Button -->
@@ -249,20 +238,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, type PropType } from 'vue';
 
 import axios from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import type VitalStatistics from '@/types/VitalStatistics';
+import type Patient from '@/types/Patient';
 
 export default defineComponent({
   props: {
     patientId: {
-      type: Number,
-      required: true
+      type: String,
+      default: null
     },
     patientData: {
-      type: Object,
+      type: Object as PropType<Patient>,
       default: null
     },
     isAdd: {
@@ -272,19 +263,19 @@ export default defineComponent({
   },
   data() {
     return {
-      temperature: null,
-      spO2: null,
-      systolicBP1: null,
-      systolicBP2: null,
-      diastolicBP1: null,
-      diastolicBP2: null,
-      averageSystolicBP: null,
-      averageDiastolicBP: null,
-      hr1: null,
-      hr2: null,
-      averageHR: null,
-      randomBloodGlucoseMmolL: null,
-      randomBloodGlucoseMmolLp: null,
+      temperature: null as number | null,
+      spO2: null as number | null,
+      systolicBP1: null as number | null,
+      systolicBP2: null as number | null,
+      diastolicBP1: null as number | null,
+      diastolicBP2: null as number | null,
+      averageSystolicBP: null as number | null,
+      averageDiastolicBP: null as number | null,
+      hr1: null as number | null,
+      hr2: null as number | null,
+      averageHR: null as number | null,
+      randomBloodGlucoseMmolL: null as number | null,
+      randomBloodGlucoseMmolLp: null as number | null,
       isEditing: false
     }
   },
@@ -368,37 +359,52 @@ export default defineComponent({
           toast.error('Please enter Random Blood Glucose (mg/dL)')
           return
         }
-        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
-          vitalStatistics: {
-            temperature: this.temperature,
-            spO2: this.spO2,
-            systolicBP1: this.systolicBP1,
-            systolicBP2: this.systolicBP2,
-            diastolicBP1: this.diastolicBP1,
-            diastolicBP2: this.diastolicBP2,
-            averageSystolicBP: this.avgSystolicBP,
-            averageDiastolicBP: this.avgDiastolicBP,
-            hr1: this.hr1,
-            hr2: this.hr2,
-            averageHR: this.avgHR,
-            randomBloodGlucoseMmolL: this.randomBloodGlucoseMmolL,
-            randomBloodGlucoseMmolLp: this.randomBloodGlucoseMmolLp
-          }
-        })
-        console.log(response.data)
-        console.log('Vital Statistics posted successfully!')
-        if (!this.isAdd) {
-          this.toggleEdit() // to switch back to read-only mode
-          this.$emit('reload')
+        if (this.avgSystolicBP === null) {
+          toast.error('Average Systolic BP cannot be empty')
+          return
         }
-        toast.success('Vital Statistics saved successfully!')
-      } catch (error) {
-        console.error('Error posting data:', error)
-        toast.error('Error saving vital statistics')
-        if (error.response) {
-          toast.error(error.response.data.error)
+        if (this.avgDiastolicBP === null) {
+          toast.error('Average Diastolic BP cannot be empty')
+          return
+        }
+        if (this.avgHR === null) {
+          toast.error('Average HR cannot be empty')
+          return
+        }
+        const vitalStatistics: VitalStatistics = { // need to define outside to catch missing fields
+          temperature: this.temperature,
+          spO2: this.spO2,
+          systolicBP1: this.systolicBP1,
+          systolicBP2: this.systolicBP2,
+          diastolicBP1: this.diastolicBP1,
+          diastolicBP2: this.diastolicBP2,
+          averageSystolicBP: this.avgSystolicBP, // pre-computed value
+          averageDiastolicBP: this.avgDiastolicBP, // pre-computed value
+          hr1: this.hr1,
+          hr2: this.hr2,
+          averageHR: this.avgHR, // pre-computed value
+          randomBloodGlucoseMmolL: this.randomBloodGlucoseMmolL,
+          randomBloodGlucoseMmolLp: this.randomBloodGlucoseMmolLp
+        }
+        await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          vitalStatistics: vitalStatistics
+        }).then(response => {
+          console.log(response.data)
+          console.log('Vital Statistics posted successfully!')
+          if (this.isEditing) {
+            this.toggleEdit() // to switch back to read-only mode
+          }
+          toast.success('Vital Statistics saved successfully!')
+        })
+      } catch (error : unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
+          }
         } else {
           // No response received at all
+          console.log(error)
           toast.error('An internal server error occurred.')
         }
       }

@@ -6,9 +6,9 @@
     <SideBar
       :activeSection="activeSection"
       @update:activeSection="setActiveSection"
-      :id="this.patientId"
-      :name="this.name"
-      :age="this.age"
+      :id="undefined"
+      :name="undefined"
+      :age="undefined"
     />
     <div class="content flex-grow p-6">
       <keep-alive>
@@ -16,7 +16,6 @@
           :is="activeComponent"
           :patientId="patientId"
           @patientCreated="handlePatientCreated"
-          @patientUpdated="handlePatientCreated"
         ></component>
       </keep-alive>
     </div>
@@ -24,8 +23,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-
 import NavBar from '../components/NavBar.vue'
 import SideBar from '../components/SideBar.vue'
 
@@ -39,7 +36,7 @@ import DrConsultModal from '../components/DrConsultModal.vue'
 
 import axios from 'axios'
 
-export default defineComponent({
+export default {
   components: {
     NavBar,
     SideBar,
@@ -54,9 +51,9 @@ export default defineComponent({
   data() {
     return {
       activeSection: 'admin',
-      patientId: '',
-      name: '',
-      age: ''
+      patientId: '', // Empty value passed to the Sidebar since it is not needed
+      name: '' as string, // Empty value passed to the Sidebar since it is not needed
+      age: null, // Empty value passed to the Sidebar since it is not needed
     }
   },
   computed: {
@@ -85,40 +82,17 @@ export default defineComponent({
     this.getIsValidToken()
   },
   methods: {
-    setActiveSection(section) {
+    setActiveSection(section : string) {
       this.activeSection = section
     },
     async getIsValidToken() {
       await axios.get('/login/is-valid-token')
     },
-    async loadPatientData() {
-      try {
-        console.log('Loading patient data')
-        console.log(this.patientId)
-
-        const response = await axios.get(`http://localhost:9090/patient/${this.patientId}`)
-        const { data } = response
-        this.patient = data
-
-        if (this.patient && this.patient.admin) {
-          const admin = this.patient.admin
-          this.name = admin.name
-          const dob = admin.dob
-          this.age = new Date().getFullYear() - new Date(dob).getFullYear()
-        }
-      } catch (error) {
-        console.log('Error loading patient data:', error)
-      }
-    },
-    handlePatientCreated(event) {
-      console.log('Patient Event:', event)
+    handlePatientCreated(event : any) {
       const { id, name, age } = event
-      console.log(`Patient ID: ${id}, Name: ${name}, Age: ${age}`)
-
-      this.patientId = id
-      this.name = name
-      this.age = age
+      console.log(`Patient Created Wth ID: ${id}, Name: ${name}, Age: ${age}`)
+      this.$router.push("/patient/" + id)
     }
   }
-})
+}
 </script>

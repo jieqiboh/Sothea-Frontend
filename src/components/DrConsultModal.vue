@@ -21,13 +21,13 @@
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="true"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
               <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="false"
-                :disabled="!isEditing && !isAdd" />
+                :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -40,14 +40,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="true"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="false"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -60,14 +58,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="true"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="false"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -80,14 +76,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="true"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="false"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -100,14 +94,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="true"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="false"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -120,14 +112,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="true"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="false"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -140,14 +130,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="true"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="false"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -160,14 +148,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="true"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="false"
-                :disabled="!isEditing && !isAdd" />
+              <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -180,7 +166,7 @@
           <div class="flex w-1/3">
             <input v-model="others" type="text" placeholder="Specify"
               class="w-full bg-transparent rounded-md border border-stroke py-2 px-2 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-              :disabled="!isEditing && !isAdd" />
+              :disabled="!isEditing" />
           </div>
         </div>
       </div>
@@ -190,7 +176,7 @@
         <label for="" class="mb-2 block text-sm font-medium text-dark">Consultation Notes</label>
         <textarea v-model="consultationNotes" rows="3" placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-          :disabled="!isEditing && !isAdd"></textarea>
+          :disabled="!isEditing"></textarea>
       </div>
 
       <!-- Diagnosis -->
@@ -198,7 +184,7 @@
         <label for="" class="mb-2 block text-sm font-medium text-dark">Diagnosis</label>
         <textarea v-model="diagnosis" rows="3" placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-          :disabled="!isEditing && !isAdd"></textarea>
+          :disabled="!isEditing"></textarea>
       </div>
 
       <!-- Treatment -->
@@ -206,7 +192,7 @@
         <label for="" class="mb-2 block text-sm font-medium text-dark">Treatment</label>
         <textarea v-model="treatment" rows="3" placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-          :disabled="!isEditing && !isAdd"></textarea>
+          :disabled="!isEditing"></textarea>
       </div>
 
       <div class="flex flex-col mt-2">
@@ -228,13 +214,13 @@
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
                 <input type="radio" name="ref-needed" class="w-4 h-4" v-model="referralNeeded" :value="true"
-                  :disabled="!isEditing && !isAdd" />
+                  :disabled="!isEditing" />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
                 <input type="radio" name="ref-needed" class="w-4 h-4" v-model="referralNeeded" :value="false"
-                  :disabled="!isEditing && !isAdd" />
+                  :disabled="!isEditing" />
               </label>
             </div>
           </div>
@@ -242,17 +228,9 @@
           <div class="flex w-1/3 grow">
             <textarea v-model="referralLoc" rows="1" placeholder="Enter Location"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-              :disabled="!isEditing && !isAdd"></textarea>
+              :disabled="!isEditing"></textarea>
           </div>
         </div>
-      </div>
-
-      <!-- Save Button -->
-      <div class="flex flex-row-reverse w-full mt-5">
-        <button v-if="isAdd" @click="submitData"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
-          Save
-        </button>
       </div>
 
       <!-- Edit Button -->
@@ -276,20 +254,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, type PropType } from 'vue'
 
-import axios from 'axios'
+import axios, { type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import type Patient from '@/types/Patient'
+import type DoctorsConsultation from '@/types/DoctorsConsultation'
 
 export default defineComponent({
   props: {
     patientId: {
-      type: Number,
-      required: true
+      type: String,
+      default: null
     },
     patientData: {
-      type: Object,
+      type: Object as PropType<Patient>,
       default: null
     },
     isAdd: {
@@ -299,21 +279,21 @@ export default defineComponent({
   },
   data() {
     return {
-      healthy: null,
-      msk: null,
-      cvs: null,
-      respi: null,
-      gu: null,
-      git: null,
-      eye: null,
-      derm: null,
-      others: '',
-      consultationNotes: '',
-      diagnosis: '',
-      treatment: '',
-      referralNeeded: null,
-      referralLoc: '',
-      remarks: 'remarks',
+      healthy: null as boolean | null,
+      msk: null as boolean | null,
+      cvs: null as boolean | null,
+      respi: null as boolean | null,
+      gu: null as boolean | null,
+      git: null as boolean | null,
+      eye: null as boolean | null,
+      derm: null as boolean | null,
+      others: '' as string,
+      consultationNotes: '' as string | null,
+      diagnosis: '' as string | null,
+      treatment: '' as string | null,
+      referralNeeded: null as boolean | null,
+      referralLoc: '' as string | null,
+      remarks: 'remarks' as string | null,
       isEditing: false,
     }
   },
@@ -329,13 +309,13 @@ export default defineComponent({
       this.git = drConsult.git;
       this.eye = drConsult.eye;
       this.derm = drConsult.derm;
-      this.others = drConsult.others || "";
-      this.consultationNotes = drConsult.consultationNotes || "";
-      this.diagnosis = drConsult.diagnosis || "";
-      this.treatment = drConsult.treatment || "";
+      this.others = drConsult.others;
+      this.consultationNotes = drConsult.consultationNotes;
+      this.diagnosis = drConsult.diagnosis;
+      this.treatment = drConsult.treatment;
       this.referralNeeded = drConsult.referralNeeded;
-      this.referralLoc = drConsult.referralLoc || "";
-      this.remarks = drConsult.remarks || "";
+      this.referralLoc = drConsult.referralLoc;
+      this.remarks = drConsult.remarks;
     }
   },
   methods: {
@@ -382,39 +362,43 @@ export default defineComponent({
           toast.error('Please indicate if patient needs referral')
           return
         }
-        const response = await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
-          doctorsConsultation: {
-            healthy: this.healthy,
-            msk: this.msk,
-            cvs: this.cvs,
-            respi: this.respi,
-            gu: this.gu,
-            git: this.git,
-            eye: this.eye,
-            derm: this.derm,
-            others: this.others,
-            consultationNotes: this.consultationNotes,
-            diagnosis: this.diagnosis,
-            treatment: this.treatment,
-            referralNeeded: this.referralNeeded,
-            referralLoc: this.referralLoc,
-            remarks: this.remarks
-          }
-        })
-        console.log(response.data)
-        console.log('Doctors Consultation posted successfully!')
-        if (!this.isAdd) {
-          this.toggleEdit(); // to switch back to read-only mode
-          this.$emit('reload')
+        const doctorsConsultation: DoctorsConsultation = { // need to define outside to catch missing fields
+          healthy: this.healthy,
+          msk: this.msk,
+          cvs: this.cvs,
+          respi: this.respi,
+          gu: this.gu,
+          git: this.git,
+          eye: this.eye,
+          derm: this.derm,
+          others: this.others,
+          consultationNotes: this.consultationNotes,
+          diagnosis: this.diagnosis,
+          treatment: this.treatment,
+          referralNeeded: this.referralNeeded,
+          referralLoc: this.referralLoc,
+          remarks: this.remarks
         }
-        toast.success('Doctors Consultation saved successfully!')
-      } catch (error) {
-        console.error('Error posting data:', error)
-        toast.error('Error saving Doctors Consultation')
-        if (error.response) {
-          toast.error(error.response.data.error)
-        } else { // No response received at all
-          toast.error("An internal server error occurred.")
+        await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          doctorsConsultation: doctorsConsultation
+        }).then(response => {
+          console.log(response.data)
+          console.log('Doctors Consultation posted successfully!')
+          if (this.isEditing) {
+            this.toggleEdit(); // to switch back to read-only mode
+          }
+          toast.success('Doctors Consultation saved successfully!')
+        })
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
+          }
+        } else {
+          // No response received at all
+          console.log(error)
+          toast.error('An internal server error occurred.')
         }
       }
     },

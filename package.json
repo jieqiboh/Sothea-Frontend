@@ -12,8 +12,7 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "serve": "vite",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "vite"
   },
   "dependencies": {
     "autoprefixer": "^10.4.19",
@@ -27,8 +26,11 @@
     "vue-toast-notification": "^3.1.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.5.0",
+    "@playwright/test": "^1.44.1",
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
+    "@types/eslint__js": "^8.42.3",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
@@ -43,6 +45,7 @@
     "npm-run-all2": "^6.1.2",
     "prettier": "^3.2.5",
     "typescript": "~5.4.0",
+    "typescript-eslint": "^7.13.1",
     "vite": "^5.2.11",
     "vitest": "^1.4.0",
     "vue-tsc": "^2.0.11"

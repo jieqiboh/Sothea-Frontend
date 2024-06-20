@@ -1,48 +1,14 @@
 <template>
   <div>
-
-    <!-- <div class="bar" style="display: flex; justify-content: space-between;">
-
-      <p>Project Sothea</p>
-      <div class="flex justify-end" v-on:click="back">
-        <p class="pr-2 text-sm font-light">Back to All Patients</p>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="size-4 stroke-2 pt-1"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-          />
-        </svg>
-      </div>
-
-    </div> -->
-    <NavBar/>
+    <NavBar />
 
     <div class="flex">
-      <SideBar
-        :activeSection="activeSection"
-        :id="this.patientId"
-        :name="this.name"
-        :age="this.age"
-        @update:activeSection="setActiveSection"
-      />
+      <SideBar :activeSection="activeSection" :id="id" :name="name" :age="age"
+        @update:activeSection="setActiveSection" />
       <div class="content flex-grow p-6">
         <keep-alive>
-          <component
-            :is="activeComponent"
-            :patient="patient"
-            :patientId="this.patientId"
-            :patientData="this.patient"
-            :isAdd="false"
-            @reload="this.loadPatientData"
-          >
+          <component :is="activeComponent" :patientId="id" :patientData="patient" :isAdd="false"
+            @reload="loadPatientData" @patientUpdated="handlePatientUpdated">
           </component>
         </keep-alive>
       </div>
@@ -64,7 +30,11 @@ import HeightWeightModal from '../components/HeightWeightModal.vue'
 import VisualAcuityModal from '../components/VisualAcuityModal.vue'
 import DrConsultModal from '../components/DrConsultModal.vue'
 
-import axios from 'axios'
+import type Patient from '@/types/Patient'
+
+import axios, { type AxiosResponse } from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default defineComponent({
   components: {
@@ -78,12 +48,18 @@ export default defineComponent({
     VisualAcuityModal,
     DrConsultModal
   },
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       activeSection: 'admin',
-      patient: null,
-      name: null,
-      age: null
+      patient: null as Patient | null,
+      name: '' as string,
+      age: 0 as number,
     }
   },
   computed: {
@@ -109,40 +85,48 @@ export default defineComponent({
     }
   },
   methods: {
-    setActiveSection(section) {
+    setActiveSection(section: string) {
       console.log(section)
       this.activeSection = section
     },
 
+    async getPatientData(id: string) {
+      axios.get(`http://localhost:9090/patient/${id}`)
+        .then((response: AxiosResponse) => {
+          console.log(response)
+          const { data } = response
+          this.patient = JSON.parse(JSON.stringify(data)) as Patient
+          this.age = new Date().getFullYear() - new Date(this.patient.admin.dob).getFullYear()
+          this.name = this.patient.admin.name
+        })
+    },
     async loadPatientData() {
+      const toast = useToast()
       try {
-        console.log("Loading patient data")
-        console.log(this.patientId)
-
-        const response = await axios.get(`http://localhost:9090/patient/${this.patientId}`);
-        const { data } = response;
-        this.patient = data;
-        
-        if (this.patient && this.patient.admin) {
-          const admin = this.patient.admin
-          this.name = admin.name
-          const dob = admin.dob
-          this.age = new Date().getFullYear() - new Date(dob).getFullYear()
-          console.log(this.name)
-          console.log(this.age)
+        await this.getPatientData(this.id);
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
+          }
+        } else {
+          // No response received at all
+          console.log(error)
+          toast.error('An internal server error occurred.')
         }
-      } catch (error) {
-        console.log('Error loading patient data:', error)
       }
     },
-    back() {
-      this.$router.push('/allpatients')
+    handlePatientUpdated(event: any) {
+      const { id, name, age } = event
+      console.log(`Patient Updated With ID: ${id}, Name: ${name}, Age: ${age}`)
+      this.name = name
+      this.age = age
     }
   },
   created() {
-    this.patientId = this.$route.params.id
     this.loadPatientData()
-  }
+  },
 })
 </script>
 
