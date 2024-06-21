@@ -202,6 +202,7 @@ import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import type Patient from '@/types/Patient'
 import type PastMedicalHistory from '@/types/PastMedicalHistory'
+import { BaseURL } from '@/main'
 
 export default defineComponent({
   props: {
@@ -275,7 +276,7 @@ export default defineComponent({
           specifiedSTDs: this.specifiedSTDs,
           others: this.others
         }
-        await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+        await axios.patch(`${BaseURL}/patient/${this.patientId}`, {
           pastMedicalHistory: pastMedicalHistory
         }).then(response => {
           console.log(response)

@@ -48,6 +48,7 @@ import axios from 'axios';
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import { defineComponent } from 'vue'
+import { BaseURL } from '@/main';
 
 export default defineComponent({
   name: 'SignIn',
@@ -55,28 +56,35 @@ export default defineComponent({
     return {
       username: '',
       password: '',
+      token: '' as string,
     }
   },
   methods: {
-    async getToken(event) {
+    async getToken(event : Event) {
       const toast = useToast()
       event.preventDefault();
       console.log('getToken method called');
 
       try {
-        const response = await axios.post("http://localhost:9090/login", {
+        await axios.post(BaseURL + `/login`, {
           username: this.username,
           password: this.password
+        }).then((response) => {
+          this.token = response.data.token;
+          console.log(this.token)
+          axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+          this.$router.push('/allpatients');
         });
-        this.token = response.data.token;
-        console.log(this.token)
-        axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
-        this.$router.push('/allpatients');
-      } catch (error) {
-        if (error.response) {
-          toast.error(error.response.data.error)
-        } else { // No response received at all
-          toast.error("An internal server error occurred.")
+      } catch (error : unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
+          }
+        } else {
+          // No response received at all
+          console.log(error)
+          toast.error('An internal server error occurred.')
         }
       }
     },

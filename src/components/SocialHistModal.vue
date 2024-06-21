@@ -128,6 +128,7 @@ import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import type Patient from '@/types/Patient'
 import type SocialHistory from '@/types/SocialHistory'
+import { BaseURL } from '@/main'
 
 export default defineComponent({
   props: {
@@ -191,7 +192,7 @@ export default defineComponent({
           alcoholHistory: this.alcoholHistory,
           howRegular: this.howRegular
         }
-        await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+        await axios.patch(`${BaseURL}/patient/${this.patientId}`, {
           socialHistory: socialHistory
         }).then(response => {
           console.log(response)

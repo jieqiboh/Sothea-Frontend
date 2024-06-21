@@ -96,6 +96,7 @@ import TableRow from './TableRow.vue';
 import axios from 'axios';
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import { BaseURL } from '@/main';
 
 export default {
     components: {
@@ -112,7 +113,7 @@ export default {
         async getData() {
             const toast = useToast()
             try {
-                const { data } = await axios.get('http://localhost:9090/get-all-admin');
+                const { data } = await axios.get(`${BaseURL}/get-all-admin`);
                 this.patients = data;  // Store the fetched data in the patients array
                 this.patientsFixed = data;
                 console.log(this.patients);

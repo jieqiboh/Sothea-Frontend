@@ -245,6 +245,7 @@ import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import type VitalStatistics from '@/types/VitalStatistics';
 import type Patient from '@/types/Patient';
+import { BaseURL } from '@/main';
 
 export default defineComponent({
   props: {
@@ -386,7 +387,7 @@ export default defineComponent({
           randomBloodGlucoseMmolL: this.randomBloodGlucoseMmolL,
           randomBloodGlucoseMmolLp: this.randomBloodGlucoseMmolLp
         }
-        await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+        await axios.patch(`${BaseURL}/patient/${this.patientId}`, {
           vitalStatistics: vitalStatistics
         }).then(response => {
           console.log(response.data)
@@ -415,7 +416,7 @@ export default defineComponent({
       this.isEditing = !this.isEditing
       console.log(this.isEditing)
     },
-    preventNegative(event) {
+    preventNegative(event : any) {
       if (event.key === '-' || event.key === 'e') {
         event.preventDefault()
       }
