@@ -13,4 +13,6 @@ app.use(router)
 
 app.mount('#app')
 
-axios.defaults.baseURL = 'http://localhost:9090'
+// axios.defaults.baseURL = '192.168.100:9090'
+// export const BaseURL = 'http://192.168.0.100:9090' // Use in Prod!
+export const BaseURL = 'http://localhost:9090' // Use in development!

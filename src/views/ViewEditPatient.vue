@@ -35,6 +35,7 @@ import type Patient from '@/types/Patient'
 import axios, { type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import { BaseURL } from '@/main';
 
 export default defineComponent({
   components: {
@@ -91,7 +92,7 @@ export default defineComponent({
     },
 
     async getPatientData(id: string) {
-      axios.get(`http://localhost:9090/patient/${id}`)
+      axios.get(`${BaseURL}/patient/${id}`)
         .then((response: AxiosResponse) => {
           console.log(response)
           const { data } = response

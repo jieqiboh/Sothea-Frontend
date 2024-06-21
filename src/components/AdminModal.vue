@@ -326,6 +326,7 @@ import axios, { Axios, AxiosError, type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import type Patient from '@/types/Patient'
+import { BaseURL } from '@/main';
 
 export default defineComponent({
   props: {
@@ -478,7 +479,7 @@ export default defineComponent({
         }
 
         if (this.isAdd && !this.isEditing) { // Add new patient
-          await axios.post('http://localhost:9090/patient', {
+          await axios.post(`${BaseURL}/patient`, {
             admin: admin
           }).then(response => {
             toast.success('Admin Details created successfully!')
@@ -486,7 +487,7 @@ export default defineComponent({
             this.$emit('patientCreated', { id: response.data["Inserted userid"], name: this.name, age: this.ageComputed })
           })
         } else if (!this.isAdd && this.isEditing) { // Editing an existing patient
-          await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+          await axios.patch(`${BaseURL}/patient/${this.patientId}`, {
             admin: admin
           }).then(() => {
             toast.success('Admin Details updated successfully!')

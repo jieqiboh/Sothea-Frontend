@@ -64,6 +64,7 @@ import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import type Patient from '@/types/Patient'
 import type VisualAcuity from '@/types/VisualAcuity'
+import { BaseURL } from '@/main'
 
 export default defineComponent({
   props: {
@@ -105,7 +106,7 @@ export default defineComponent({
           rEyeVision: this.rEyeVision,
           additionalIntervention: this.additionalIntervention
         }
-        await axios.patch(`http://localhost:9090/patient/${this.patientId}`, {
+        await axios.patch(`${BaseURL}/patient/${this.patientId}`, {
           visualAcuity: visualAcuity 
         }).then((response) => {
           console.log(response.data)
@@ -128,7 +129,7 @@ export default defineComponent({
         }
       }
     },
-    preventNegative(event) {
+    preventNegative(event : any) {
       if (event.key === '-' || event.key === 'e') {
         event.preventDefault()
       }
