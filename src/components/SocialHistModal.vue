@@ -22,22 +22,39 @@
           <div class="flex w-1/6">
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
-                <input type="radio" name="smoking-hist" class="w-4 h-4" v-model="pastSmokingHistory" :value="true"
-                  :disabled="!isEditing" />
+                <input
+                  type="radio"
+                  name="smoking-hist"
+                  class="w-4 h-4"
+                  v-model="pastSmokingHistory"
+                  :value="true"
+                  :disabled="!isEditing"
+                />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
-                <input type="radio" name="smoking-hist" class="w-4 h-4" v-model="pastSmokingHistory" :value="false"
-                  :disabled="!isEditing" />
+                <input
+                  type="radio"
+                  name="smoking-hist"
+                  class="w-4 h-4"
+                  v-model="pastSmokingHistory"
+                  :value="false"
+                  :disabled="!isEditing"
+                />
               </label>
             </div>
           </div>
 
           <div class="flex w-1/3 grow">
-            <textarea rows="1" placeholder="If Y, no. of years" type="number" v-model="numberOfYears"
-              class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-              :disabled="!isEditing"></textarea>
+            <textarea
+              rows="1"
+              placeholder="If Y, no. of years"
+              type="number"
+              v-model="numberOfYears"
+              class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+              :disabled="!isEditing"
+            ></textarea>
           </div>
         </div>
       </div>
@@ -52,22 +69,39 @@
           <div class="flex w-1/6">
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
-                <input type="radio" name="curr-smoking-hist" class="w-4 h-4" v-model="currentSmokingHistory"
-                  :value="true" :disabled="!isEditing" />
+                <input
+                  type="radio"
+                  name="curr-smoking-hist"
+                  class="w-4 h-4"
+                  v-model="currentSmokingHistory"
+                  :value="true"
+                  :disabled="!isEditing"
+                />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
-                <input type="radio" name="curr-smoking-hist" class="w-4 h-4" v-model="currentSmokingHistory"
-                  :value="false" :disabled="!isEditing" />
+                <input
+                  type="radio"
+                  name="curr-smoking-hist"
+                  class="w-4 h-4"
+                  v-model="currentSmokingHistory"
+                  :value="false"
+                  :disabled="!isEditing"
+                />
               </label>
             </div>
           </div>
 
           <div class="flex w-1/3 grow">
-            <textarea rows="1" placeholder="If Y, how many cigarettes/day?" type="number" v-model="cigarettesPerDay"
-              class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-              :disabled="!isEditing"></textarea>
+            <textarea
+              rows="1"
+              placeholder="If Y, how many cigarettes/day?"
+              type="number"
+              v-model="cigarettesPerDay"
+              class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+              :disabled="!isEditing"
+            ></textarea>
           </div>
         </div>
       </div>
@@ -80,42 +114,63 @@
           <div class="flex w-1/6">
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
-                <input type="radio" name="alc-hist" class="w-4 h-4" v-model="alcoholHistory" :value="true"
-                  :disabled="!isEditing" />
+                <input
+                  type="radio"
+                  name="alc-hist"
+                  class="w-4 h-4"
+                  v-model="alcoholHistory"
+                  :value="true"
+                  :disabled="!isEditing"
+                />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
-                <input type="radio" name="alc-hist" class="w-4 h-4" v-model="alcoholHistory" :value="false"
-                  :disabled="!isEditing" />
+                <input
+                  type="radio"
+                  name="alc-hist"
+                  class="w-4 h-4"
+                  v-model="alcoholHistory"
+                  :value="false"
+                  :disabled="!isEditing"
+                />
               </label>
             </div>
           </div>
 
           <div class="flex w-1/3 grow">
-            <textarea rows="1" placeholder="If Y, how regularly?" v-model="howRegular"
-              class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-              :disabled="!isEditing"></textarea>
+            <textarea
+              rows="1"
+              placeholder="If Y, how regularly?"
+              v-model="howRegular"
+              class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+              :disabled="!isEditing"
+            ></textarea>
           </div>
         </div>
       </div>
 
       <!-- Edit Button -->
       <div class="flex flex-row-reverse w-full mt-5">
-        <button v-if="!isEditing && !isAdd" @click="toggleEdit"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+        <button
+          v-if="!isEditing && !isAdd"
+          @click="toggleEdit"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
           Edit
         </button>
       </div>
 
       <!-- Save Edits Button -->
       <div class="flex flex-row-reverse w-full mt-5">
-        <button v-if="isEditing && !isAdd" @click="submitData"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+        <button
+          v-if="isEditing && !isAdd"
+          @click="submitData"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
           Save Edits
         </button>
       </div>
-
     </div>
   </div>
 </template>
@@ -153,19 +208,19 @@ export default defineComponent({
       cigarettesPerDay: null as number | null,
       alcoholHistory: null as boolean | null,
       howRegular: '' as string | null,
-      isEditing: false,
+      isEditing: false
     }
   },
   created() {
     if (!this.isAdd) {
-      const socialHistory = this.patientData.socialhistory;
-      if (!socialHistory) return;
-      this.pastSmokingHistory = socialHistory.pastSmokingHistory;
-      this.numberOfYears = socialHistory.numberOfYears;
-      this.currentSmokingHistory = socialHistory.currentSmokingHistory;
-      this.cigarettesPerDay = socialHistory.cigarettesPerDay;
-      this.alcoholHistory = socialHistory.alcoholHistory;
-      this.howRegular = socialHistory.howRegular;
+      const socialHistory = this.patientData.socialhistory
+      if (!socialHistory) return
+      this.pastSmokingHistory = socialHistory.pastSmokingHistory
+      this.numberOfYears = socialHistory.numberOfYears
+      this.currentSmokingHistory = socialHistory.currentSmokingHistory
+      this.cigarettesPerDay = socialHistory.cigarettesPerDay
+      this.alcoholHistory = socialHistory.alcoholHistory
+      this.howRegular = socialHistory.howRegular
     }
   },
   methods: {
@@ -184,7 +239,8 @@ export default defineComponent({
           toast.error('Please indicate alcohol history')
           return
         }
-        const socialHistory: SocialHistory = { // need to define outside to catch missing fields
+        const socialHistory: SocialHistory = {
+          // need to define outside to catch missing fields
           pastSmokingHistory: this.pastSmokingHistory,
           numberOfYears: this.numberOfYears,
           currentSmokingHistory: this.currentSmokingHistory,
@@ -192,17 +248,19 @@ export default defineComponent({
           alcoholHistory: this.alcoholHistory,
           howRegular: this.howRegular
         }
-        await axios.patch(`${BaseURL}/patient/${this.patientId}`, {
-          socialHistory: socialHistory
-        }).then(response => {
-          console.log(response)
-          console.log('Social history posted successfully!')
-          if (this.isEditing) {
-            this.toggleEdit(); // to switch back to read-only mode
-          }
-          toast.success('Social history saved successfully!')
-        })
-      } catch (error : unknown) {
+        await axios
+          .patch(`${BaseURL}/patient/${this.patientId}`, {
+            socialHistory: socialHistory
+          })
+          .then((response) => {
+            console.log(response)
+            console.log('Social history posted successfully!')
+            if (this.isEditing) {
+              this.toggleEdit() // to switch back to read-only mode
+            }
+            toast.success('Social history saved successfully!')
+          })
+      } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
           console.log(error.response)
           if (error.response) {
@@ -219,8 +277,8 @@ export default defineComponent({
       console.log('toggleEdit')
       this.isEditing = !this.isEditing
       console.log(this.isEditing)
-    },
-  },
+    }
+  }
 })
 </script>
 
