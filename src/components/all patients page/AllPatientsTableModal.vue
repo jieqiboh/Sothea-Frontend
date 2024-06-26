@@ -41,8 +41,9 @@
                             <tr>
                                 <th scope="col"
                                     class="px-5 py-5 text-sm font-medium text-left text-gray-800 uppercase border-b border-gray-200"
-                                    style="background: rgba(63, 81, 181, 0.3);">
-                                    Patient ID
+                                    style="background: rgba(63, 81, 181, 0.3);"
+                                    @click="sortById">
+                                    Patient ID &udarr;
                                 </th>
                                 <th scope="col"
                                     class="px-10 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
@@ -77,10 +78,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <TableRow class="hover:cursor-pointer" v-for="patient in patients" :key="patient.id"
+                            <TableRow class="hover:cursor-pointer" v-for="(patient, index) in patients" :key="patient.id"
                                 :id="patient.id" :name="patient.name" :khmername="patient.khmerName"
                                 :gender="patient.gender" :DOB="patient.dob" :contactnumber="patient.contactNo"
-                                :queuedat="getMockQueuedAt()" />
+                                :queuedat="getMockQueuedAt()" 
+                                :class="{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }"/>
                         </tbody>
                     </table>
                 </div>
@@ -106,7 +108,8 @@ export default {
         return {
             patients: [],
             patientsFixed: [], // for searching patients 
-            token: null
+            token: null,
+            sortAscId: true,
         }
     },
     methods: {
@@ -124,6 +127,7 @@ export default {
                     toast.error("An internal server error occurred.")
                 }
             }
+            this.sortById();
         },
         getMockQueuedAt() {
             // Generate a mock queuedat value
@@ -148,6 +152,16 @@ export default {
                     patient.id.toString().includes(searchValue) ||
                     patient.khmerName.toLowerCase().includes(searchValue);
             });
+        },
+        sortById() {
+            this.patients.sort((a, b) => {
+                if (this.sortAscId) {
+                    return a.id - b.id;
+                } else {
+                    return b.id - a.id;
+                }
+            });
+            this.sortAscId = !this.sortAscId;
         }
     },
     created() {
@@ -159,7 +173,7 @@ export default {
 
 <style>
 .table {
-    width: 1200px;
+    width: 1240px;
 }
 
 .table-heading {
@@ -169,5 +183,13 @@ export default {
 .line {
     height: 1px;
     background: rgba(0, 0, 0, 0.17);
+}
+
+.even-row {
+    background-color: #ffffff;
+}
+
+.odd-row {
+    background-color: #f2f2f2;
 }
 </style>
