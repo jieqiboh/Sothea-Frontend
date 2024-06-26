@@ -47,9 +47,8 @@
                                 </th>
                                 <th scope="col"
                                     class="px-10 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
-                                    style="background: rgba(63, 81, 181, 0.3);"
-                                    @click="sortByName">
-                                    Patient Name &udarr;
+                                    style="background: rgba(63, 81, 181, 0.3);">
+                                    Patient Name
                                 </th>
                                 <th scope="col"
                                     class="px-14 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
@@ -111,7 +110,6 @@ export default {
             patientsFixed: [], // for searching patients 
             token: null,
             sortAscId: true,
-            sortAscName: true
         }
     },
     methods: {
@@ -129,6 +127,7 @@ export default {
                     toast.error("An internal server error occurred.")
                 }
             }
+            this.sortById();
         },
         getMockQueuedAt() {
             // Generate a mock queuedat value
@@ -163,16 +162,6 @@ export default {
                 }
             });
             this.sortAscId = !this.sortAscId;
-        },
-        sortByName() {
-            this.patients.sort((a, b) => {
-                if (this.sortAscName) {
-                    return a.name.localeCompare(b.name);
-                } else {
-                    return b.name.localeCompare(a.name);
-                }
-            });
-            this.sortAscName = !this.sortAscName;
         }
     },
     created() {
