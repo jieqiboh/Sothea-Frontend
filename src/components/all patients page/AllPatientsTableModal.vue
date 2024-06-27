@@ -18,16 +18,10 @@
                         @keyup.enter="searchPatient"
                     />
                 </div>
-                <router-link active-class="active" to="/addpatient">
+                <router-link active-class="active">
                     <div class="flex items-center space-x-3">
-                        <Text style="font-size:medium" class="hover:text-gray-500">Add New Patient</Text>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                            </svg>
-                        </span>
+                        <Text style="font-size:medium" class="hover:text-gray-500"
+                        @click="getData()">Refresh List &#x21bb;</Text>
                     </div>
                 </router-link>
             </div>
@@ -40,7 +34,7 @@
                         <thead>
                             <tr>
                                 <th scope="col"
-                                    class="px-5 py-5 text-sm font-medium text-left text-gray-800 uppercase border-b border-gray-200"
+                                    class="px-5 py-5 text-sm font-medium text-left text-gray-800 uppercase border-b border-gray-200 hover:cursor-pointer"
                                     style="background: rgba(63, 81, 181, 0.3);"
                                     @click="sortById">
                                     Patient ID &udarr;
@@ -127,7 +121,6 @@ export default {
                     toast.error("An internal server error occurred.")
                 }
             }
-            this.sortById();
         },
         getMockQueuedAt() {
             // Generate a mock queuedat value
