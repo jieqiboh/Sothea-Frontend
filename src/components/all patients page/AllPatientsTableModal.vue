@@ -7,23 +7,21 @@
                 </h2>
             </div>
 
-            <div class="flex justify-between items-center py-5" >
+            <div class="flex justify-between items-center py-5">
                 <div class="relative flex-grow">
-                    <input 
-                        type="text" 
-                        id="search-input" 
+                    <input type="text" id="search-input"
                         class="rounded-lg border-transparent appearance-none w-64 bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
-                        placeholder="Search by Name/Khmer Name/ID"
-                        @input="searchPatient"
-                        @keyup.enter="searchPatient"
-                    />
+                        placeholder="Search by Name/Khmer Name/ID" @input="searchPatient"
+                        @keyup.enter="searchPatient" />
                 </div>
-                <router-link active-class="active">
-                    <div class="flex items-center space-x-3">
-                        <Text style="font-size:medium" class="hover:text-gray-500"
-                        @click="getData()">Refresh List &#x21bb;</Text>
-                    </div>
-                </router-link>
+                <div class="flex items-center space-x-3 mx-5 hover:cursor-pointer">
+                    <Text style="font-size:medium" class="hover:text-gray-500" @click="exportPatientData()">Export
+                        Patient Data &#x2913;</Text>
+                </div>
+                <div class="flex items-center space-x-3 hover:cursor-pointer">
+                    <Text style="font-size:medium" class="hover:text-gray-500" @click="getData()">Refresh List
+                        &#x21bb;</Text>
+                </div>
             </div>
 
             <hr class="line" />
@@ -35,8 +33,7 @@
                             <tr>
                                 <th scope="col"
                                     class="px-5 py-5 text-sm font-medium text-left text-gray-800 uppercase border-b border-gray-200 hover:cursor-pointer"
-                                    style="background: rgba(63, 81, 181, 0.3);"
-                                    @click="sortById">
+                                    style="background: rgba(63, 81, 181, 0.3);" @click="sortById">
                                     Patient ID &udarr;
                                 </th>
                                 <th scope="col"
@@ -72,11 +69,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <TableRow class="hover:cursor-pointer" v-for="(patient, index) in patients" :key="patient.id"
-                                :id="patient.id" :name="patient.name" :khmername="patient.khmerName"
+                            <TableRow class="hover:cursor-pointer" v-for="(patient, index) in patients"
+                                :key="patient.id" :id="patient.id" :name="patient.name" :khmername="patient.khmerName"
                                 :gender="patient.gender" :DOB="patient.dob" :contactnumber="patient.contactNo"
-                                :queuedat="getMockQueuedAt()" 
-                                :class="{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }"/>
+                                :queuedat="getMockQueuedAt()"
+                                :class="{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }" />
                         </tbody>
                     </table>
                 </div>
@@ -114,6 +111,33 @@ export default {
                 this.patients = data;  // Store the fetched data in the patients array
                 this.patientsFixed = data;
                 console.log(this.patients);
+            } catch (error) {
+                if (error.response) {
+                    toast.error(error.response.data.error)
+                } else { // No response received at all
+                    toast.error("An internal server error occurred.")
+                }
+            }
+        },
+        async exportPatientData() {
+            const toast = useToast()
+
+            try {
+                axios({
+                    url: `${BaseURL}/export-db`,
+                    method: 'GET',
+                    responseType: 'blob', // important
+                }).then((response) => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'patientdata.csv');
+                    document.body.appendChild(link);
+                    link.click();
+                    // Cleanup
+                    link.parentNode.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                });
             } catch (error) {
                 if (error.response) {
                     toast.error(error.response.data.error)
