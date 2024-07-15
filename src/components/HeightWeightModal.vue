@@ -41,11 +41,11 @@
         <div class="flex flex-row mb-2">
           <!-- Paeds: Height % -->
           <div class="w-1/2">
-            <div class="flex flex-row">
-              <button @click="showHeightModal = true" class="mr-1.5 mb-1" title="Paeds Height Charts">
-                <img src="../assets/info.svg" alt="chart" class="w-4 h-4" />
+            <div class="flex flex-row content-center">
+              <button @click="showHeightModal = true" class="mr-1.5 mb-1.5" title="Paeds Height Charts">
+                <img src="../assets/info.svg" alt="chart" class="w-6 h-6" />
               </button>
-              <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Height % </label>
+              <label for="" class="mb-1 pt-0.5 block text-sm font-medium text-dark"> Paeds: Height % </label>
             </div>
             <input
               v-model="paedsHeight"
@@ -61,10 +61,10 @@
           <!-- Paeds: Weight % -->
           <div class="ml-3 w-1/2">
             <div class="flex flex-row">
-              <button @click="showWeightModal = true" class="mr-1.5 mb-1" title="Paeds Weight Charts">
-                <img src="../assets/info.svg" alt="chart" class="w-4 h-4" />
+              <button @click="showWeightModal = true" class="mr-1.5 mb-1.5" title="Paeds Weight Charts">
+                <img src="../assets/info.svg" alt="chart" class="w-6 h-6" />
               </button>
-              <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Weight % </label>
+              <label for="" class="mb-1 pt-0.5 block text-sm font-medium text-dark"> Paeds: Weight % </label>
             </div>
             <input
               v-model="paedsWeight"
