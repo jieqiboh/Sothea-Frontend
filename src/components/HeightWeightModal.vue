@@ -41,7 +41,12 @@
         <div class="flex flex-row mb-2">
           <!-- Paeds: Height % -->
           <div class="w-1/2">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Height % </label>
+            <div class="flex flex-row">
+              <button @click="showHeightModal = true" class="mr-1.5 mb-1" title="Paeds Height Charts">
+                <img src="../assets/info.svg" alt="chart" class="w-4 h-4" />
+              </button>
+              <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Height % </label>
+            </div>
             <input
               v-model="paedsHeight"
               type="number"
@@ -55,7 +60,12 @@
 
           <!-- Paeds: Weight % -->
           <div class="ml-3 w-1/2">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Weight % </label>
+            <div class="flex flex-row">
+              <button @click="showWeightModal = true" class="mr-1.5 mb-1" title="Paeds Weight Charts">
+                <img src="../assets/info.svg" alt="chart" class="w-4 h-4" />
+              </button>
+              <label for="" class="mb-1 block text-sm font-medium text-dark"> Paeds: Weight % </label>
+            </div>
             <input
               v-model="paedsWeight"
               type="number"
@@ -121,6 +131,29 @@
           </button>
         </div>
       </div>
+
+    </div>
+  </div>
+
+  <!-- Height Percentile Modal -->
+  <div v-if="showHeightModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
+    <div class="bg-white rounded-lg p-5 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
+      <div class="flex justify-end">
+        <button @click="showHeightModal = false" class="text-gray-700 hover:text-gray-900">Close</button>
+      </div>
+      <img src="../assets/height-percentile-boys.jpg" alt="height percentile boys" class="w-full mb-4" />
+      <img src="../assets/height-percentile-girls.jpg" alt="height percentile girls" class="w-full" />
+    </div>
+  </div>
+
+  <!-- Weight Percentile Modal -->
+  <div v-if="showWeightModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
+    <div class="bg-white rounded-lg p-5 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
+      <div class="flex justify-end">
+        <button @click="showWeightModal = false" class="text-gray-700 hover:text-gray-900">Close</button>
+      </div>
+      <img src="../assets/weight-percentile-boys.jpg" alt="weight percentile boys" class="w-full mb-4" />
+      <img src="../assets/weight-percentile-girls.jpg" alt="weight percentile girls" class="w-full" />
     </div>
   </div>
 </template>
@@ -156,7 +189,9 @@ export default defineComponent({
       weight: null as number | null,
       paedsHeight: null as number | null,
       paedsWeight: null as number | null,
-      isEditing: false
+      isEditing: false,
+      showHeightModal: false,
+      showWeightModal: false
     }
   },
   created() {
@@ -167,6 +202,8 @@ export default defineComponent({
       this.weight = heightAndWeight.weight
       this.paedsHeight = heightAndWeight.paedsHeight
       this.paedsWeight = heightAndWeight.paedsWeight
+      this.showHeightModal = false
+      this.showWeightModal = false
     }
   },
   computed: {
