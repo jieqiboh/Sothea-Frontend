@@ -1,6 +1,7 @@
 export default interface Admin {
   id?: number
   familyGroup: string
+  queueNo: string
   regDate: string // ISO date string
   name: string
   khmerName: string
