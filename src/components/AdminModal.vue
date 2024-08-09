@@ -174,8 +174,24 @@
 
       <!-- Row 4 -->
       <div class="flex flex-row w-full mb-2">
+        <!-- Queue No Input -->
+        <div class="mr-2 w-1/3">
+          <label class="mb-1 block text-sm font-medium text-dark"> Queue Number </label>
+          <div class="relative">
+            <input
+              v-model="queueNo"
+              :disabled="!isEditing && !isAdd"
+              type="text"
+              placeholder="Queue Number"
+              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+            />
+            <span class="absolute top-1/2 left-4 -translate-y-1/2">
+              <img src="../assets/queueno.svg" width="20" height="20" />
+            </span>
+          </div>
+        </div>
         <!-- Village Input -->
-        <div class="w-1/2">
+        <div class="w-1/3">
           <label class="mb-1 block text-sm font-medium text-dark"> Village </label>
           <div class="relative">
             <input
@@ -192,7 +208,7 @@
         </div>
 
         <!-- Family Group Input -->
-        <div class="ml-2 w-1/2">
+        <div class="ml-2 w-1/3">
           <label class="mb-1 block text-sm font-medium text-dark"> Family Group </label>
           <div class="relative">
             <input
@@ -364,6 +380,7 @@ export default defineComponent({
         this.gender = admin.gender
         this.contactNo = admin.contactNo
         this.regDate = this.formatDateForInput(admin.regDate)
+        this.queueNo = admin.queueNo
         this.village = admin.village
         this.familyGroup = admin.familyGroup
         this.pregnant = admin.pregnant
@@ -393,6 +410,7 @@ export default defineComponent({
       gender: '' as 'M' | 'F' | '',
       contactNo: '' as string,
       regDate: '' as string,
+      queueNo: '' as string,
       village: '' as string,
       familyGroup: '' as string,
       pregnant: null as boolean | null,
@@ -403,6 +421,7 @@ export default defineComponent({
       sentToId: null as boolean | null,
       isEditing: false,
       maxDate: new Date().toISOString().split('T')[0], // Set maxDate to today's date in YYYY-MM-DD format
+      // Vars used for disabling / enabling fields
       isMale: false
     }
   },
@@ -446,6 +465,10 @@ export default defineComponent({
           toast.error('Date Registered is required')
           return
         }
+        if (!this.queueNo) {
+          toast.error('Queue Number is required')
+          return
+        }
         if (!this.village) {
           toast.error('Village is required')
           return
@@ -476,6 +499,7 @@ export default defineComponent({
           gender: this.gender,
           contactNo: this.contactNo,
           regDate: new Date(this.regDate).toISOString(),
+          queueNo: this.queueNo,
           village: this.village,
           familyGroup: this.familyGroup,
           pregnant: this.pregnant,
