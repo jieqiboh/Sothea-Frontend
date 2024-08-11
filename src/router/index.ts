@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import PatientQueue from '../views/PatientQueue.vue'
 import AllPatients from '../views/AllPatients.vue'
 import SignIn from '../views/SignIn.vue'
 import AddPatient from '../views/AddPatient.vue'
@@ -12,6 +13,11 @@ const router = createRouter({
       path: '/signin',
       name: 'signin',
       component: SignIn
+    },
+    {
+      path: '/patientqueue',
+      name: 'patientqueue',
+      component: PatientQueue
     },
     {
       path: '/allpatients',
