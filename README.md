@@ -34,5 +34,7 @@ depending on whether you are in dev or prod!
 The project is structured as a basic Vue.js application. You can make changes to the code inside the `src` directory.
 
 ## Project Screenshots
-!(Home Screenshot)[./public/screenshot_home.png]
-!(Add Patient Screenshot)[./public/screenshot_addpatient.png]
+<div style="display: flex; justify-content: space-around;">
+  <img src="https://github.com/Project-Sothea/Sothea-Frontend/blob/main/public/screenshot_home.png?raw=true" alt="Home Screenshot" width="45%" />
+  <img src="https://github.com/Project-Sothea/Sothea-Frontend/blob/main/public/screenshot_addpatient.png?raw=true" alt="Add Patient Screenshot" width="45%" />
+</div>
