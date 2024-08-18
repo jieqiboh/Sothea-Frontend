@@ -490,33 +490,30 @@ export default defineComponent({
           return
         }
 
-        const admin: Admin = {
-          // need to define outside to catch missing fields
+        const admin = {
+          familyGroup: this.familyGroup,
+          regDate: new Date(this.regDate).toISOString(),
+          queueNo: this.queueNo || null,
           name: this.name,
           khmerName: this.khmerName,
           dob: new Date(this.dob).toISOString(),
           age: this.ageComputed,
           gender: this.gender,
-          contactNo: this.contactNo,
-          regDate: new Date(this.regDate).toISOString(),
-          queueNo: this.queueNo,
           village: this.village,
-          familyGroup: this.familyGroup,
+          contactNo: this.contactNo,
           pregnant: this.pregnant,
           lastMenstrualPeriod: this.lastMenstrualPeriod
             ? new Date(this.lastMenstrualPeriod).toISOString()
             : null,
-          drugAllergies: this.drugAllergies ? this.drugAllergies : null,
-          photo: this.photo ? this.photo : null,
-          sentToId: this.sentToId
+          drugAllergies: this.drugAllergies || null,
+          sentToId: this.sentToId,
+          photo: this.photo || null
         }
 
         if (this.isAdd && !this.isEditing) {
           // Add new patient
           await axios
-            .post(`${BaseURL}/patient`, {
-              admin: admin
-            })
+            .post(`${BaseURL}/patient`, admin)
             .then((response) => {
               toast.success('Admin Details created successfully!')
               // Emit patient details to be rendered in sidebar
