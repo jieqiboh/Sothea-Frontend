@@ -1,21 +1,21 @@
 <template>
     <tr @click="handleClick">
-        <td class="px-6 py-4 text-sm border-b border-gray-200">
+        <td class="px-4 py-4 text-sm border-b border-gray-200">
             <p class="text-gray-900 whitespace-no-wrap">
-                {{ formattedQueuedAt }} <!-- dummy for queue no --> 
+                {{ queueNo }}
             </p>
         </td>
-        <td class="px-5 py-4 text-sm border-b border-gray-200">
+        <td class="px-4 py-4 text-sm border-b border-gray-200">
             <p class="text-gray-900 whitespace-no-wrap">
                 {{ id }}
             </p>
         </td>
-        <td class="px-13 py-4 text-sm border-b border-gray-200">
+        <td class="px-10 py-4 text-sm border-b border-gray-200">
             <p class="text-gray-900 whitespace-no-wrap">
                 {{ name }}
             </p>
         </td>
-        <td class="px-14 py-4 text-sm border-b border-gray-200">
+        <td class="px-10 py-4 text-sm border-b border-gray-200">
             <p class="text-gray-900 whitespace-no-wrap">
                 {{ khmername }}
             </p>
@@ -27,13 +27,16 @@
             </p>
         </td>
         <td class="px-5 py-3 text-sm border-b border-gray-200">
-            <div class="text-gray-900 whitespace-no-wrap allergies nil">
-                NIL <!-- dummy for allergies --> 
+            <div v-if="allergies" class="text-gray-900 whitespace-no-wrap allergies yes">
+                {{ allergies }}
+            </div>
+            <div v-else class="text-gray-900 whitespace-no-wrap allergies nil">
+                Nil
             </div>
         </td>
-        <td class="px-5 py-4 text-sm border-b border-gray-200">
+        <td class="px-7 py-4 text-sm border-b border-gray-200">
             <p class="text-gray-900 whitespace-no-wrap">
-                {{ contactnumber }} <!-- dummy for referral --> 
+                {{ contactnumber }} <!-- TO BE REPLACED with referral --> 
             </p>
         </td>
     </tr>    
@@ -42,13 +45,13 @@
 <script>
 export default {
     props: {
+        queueNo: String,
         id: String,
         name: String,
         khmername: String,
         gender: String,
-        DOB: String,
+        allergies: String,
         contactnumber: String,
-        queuedat: String
     },
     computed: {
         formattedDOB() {
@@ -71,9 +74,11 @@ export default {
 
 <style>
 .allergies {
-    padding: 5px;
+    padding: 5px 20px;
     text-align: center;
     border-radius: 14px;
+    width: fit-content;
+    max-width: 90%;
 }
 .allergies.nil {
     background-color: rgb(172, 249, 172);

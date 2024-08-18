@@ -32,22 +32,22 @@
                         <thead>
                             <tr>
                                 <th scope="col"
-                                    class="px-6 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
+                                    class="px-4 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
                                     style="background: rgba(63, 81, 181, 0.3);">
                                     Queue No.
                                 </th>
                                 <th scope="col"
-                                    class="px-5 py-5 text-sm font-medium text-left text-gray-800 uppercase border-b border-gray-200 hover:cursor-pointer"
+                                    class="px-4 py-5 text-sm font-medium text-left text-gray-800 uppercase border-b border-gray-200 hover:cursor-pointer"
                                     style="background: rgba(63, 81, 181, 0.3);" @click="sortById">
                                     Patient ID &udarr;
                                 </th>
                                 <th scope="col"
-                                    class="px-13 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
+                                    class="px-10 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
                                     style="background: rgba(63, 81, 181, 0.3);">
-                                    Name
+                                    Patient Name
                                 </th>
                                 <th scope="col"
-                                    class="px-14 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
+                                    class="px-10 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
                                     style="background: rgba(63, 81, 181, 0.3);">
                                     Khmer Name
                                 </th>
@@ -62,16 +62,16 @@
                                     Allergies
                                 </th>
                                 <th scope="col"
-                                    class="px-5 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
+                                    class="px-7 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
                                     style="background: rgba(63, 81, 181, 0.3);">
                                     Referral
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <TableRow class="hover:cursor-pointer" v-for="(patient, index) in patients"
-                                :key="patient.id" :id="patient.id" :name="patient.name" :khmername="patient.khmerName"
-                                :gender="patient.gender" :DOB="patient.dob" :contactnumber="patient.contactNo"
+                            <TableRow class="hover:cursor-pointer" v-for="(patient, index) in patientVisits"
+                                :key="patient.id" :queueNo="patient.queueNo" :id="patient.id" :name="patient.name" :khmername="patient.khmerName"
+                                :gender="patient.gender" :allergies="patient.drugAllergies" :contactnumber="patient.contactNo"
                                 :queuedat="getMockQueuedAt()"
                                 :class="{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }" />
                         </tbody>
@@ -97,8 +97,8 @@ export default {
     },
     data() {
         return {
-            patients: [],
-            patientsFixed: [], // for searching patients 
+            patientVisits: [],
+            patientVisitsFixed: [], // for searching patients 
             token: null,
             sortAscId: true,
         }
@@ -106,12 +106,11 @@ export default {
     methods: {
         async getData() {
             const toast = useToast()
-            // TO REPLACE with patient queue API endpoint
             try {
-                const { data } = await axios.get(`${BaseURL}/get-all-admin`);
-                this.patients = data;  // Store the fetched data in the patients array
-                this.patientsFixed = data;
-                console.log(this.patients);
+                const todayDate = new Date().toISOString().split('T')[0];
+                const { data } = await axios.get(`${BaseURL}/all-patient-visit-meta/${todayDate}`);
+                this.patientVisits = data;  // Store the fetched data in the patients array
+                this.patientVisitsFixed = data;
             } catch (error) {
                 if (error.response) {
                     toast.error(error.response.data.error)
@@ -147,16 +146,7 @@ export default {
                 }
             }
         },
-        getMockQueuedAt() {
-            // Generate a mock queuedat value
-            const date = new Date();
-            const hours = Math.floor(Math.random() * 24);
-            const minutes = Math.floor(Math.random() * 60);
-            date.setHours(hours, minutes);
-            return date.toISOString();  // Return ISO string format of the date
-        },
         searchPatient() {
-            console.log('searching')
             // get value of the search input
             const searchValue = document.getElementById('search-input').value;
             // refresh the table of patients
@@ -164,24 +154,15 @@ export default {
                 this.getData()
             }
             // filter patients array based on the search value
-            this.patients = this.patientsFixed.filter(patient => {
+            this.patientVisits = this.patientVisitsFixed.filter(patient => {
                 return patient.name.toLowerCase().includes(searchValue) ||
                     patient.name.includes(searchValue) ||
                     patient.id.toString().includes(searchValue) ||
-                    patient.khmerName.toLowerCase().includes(searchValue) ||
-                    patient.contactNo.includes(searchValue) ||
-                    this.searchByDob(patient.dob, searchValue);
-            });
-        },
-        searchByDob(dob, searchValue) {            
-            const dobString = dob.split('T')[0]; // Get YYYY-MM-DD part of the ISO string
-            const [year, month, day] = dobString.split('-');
-
-            const dobFormatted = `${day}/${month}/${year}`; 
-            return dobFormatted.includes(searchValue);
+                    patient.khmerName.toLowerCase().includes(searchValue);            
+                });
         },
         sortById() {
-            this.patients.sort((a, b) => {
+            this.patientVisits.sort((a, b) => {
                 if (this.sortAscId) {
                     return a.id - b.id;
                 } else {
