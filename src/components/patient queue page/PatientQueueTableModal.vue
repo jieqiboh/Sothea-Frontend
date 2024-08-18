@@ -63,8 +63,8 @@
                                 </th>
                                 <th scope="col"
                                     class="px-7 py-5 text-sm font-medium text-left text-gray-800 uppercase bg-indigo-200 border-b border-gray-200"
-                                    style="background: rgba(63, 81, 181, 0.3);">
-                                    Referral
+                                    style="background: rgba(63, 81, 181, 0.3);" @click="sortByReferral">
+                                    Referral &udarr;
                                 </th>
                             </tr>
                         </thead>
@@ -72,7 +72,6 @@
                             <TableRow class="hover:cursor-pointer" v-for="(patient, index) in patientVisits"
                                 :key="patient.id" :queueNo="patient.queueNo" :id="patient.id" :name="patient.name" :khmername="patient.khmerName"
                                 :gender="patient.gender" :allergies="patient.drugAllergies" :contactnumber="patient.contactNo"
-                                :queuedat="getMockQueuedAt()"
                                 :class="{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }" />
                         </tbody>
                     </table>
@@ -101,6 +100,7 @@ export default {
             patientVisitsFixed: [], // for searching patients 
             token: null,
             sortAscId: true,
+            sortAscReferral: true
         }
     },
     methods: {
@@ -170,7 +170,18 @@ export default {
                 }
             });
             this.sortAscId = !this.sortAscId;
-        }
+        },
+        // TO BE fixed once referral info is available
+        sortByReferral() {
+            this.patientVisits.sort((a, b) => {
+                if (this.sortAscReferral) {
+                    return a.referral - b.referral;
+                } else {
+                    return b.referral - a.referral;
+                }
+            });
+            this.sortAscReferral = !this.sortAscReferral;
+        },
     },
     created() {
         this.getData();
