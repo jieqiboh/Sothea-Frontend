@@ -14,8 +14,8 @@
       <keep-alive>
         <component
           :is="activeComponent"
-          :patientId="patientId"
-          :patientVid="patientVid"
+          :patientId="String(patientId)"
+          :patientVid="String(patientVid)"
           @patientCreated="handlePatientCreated"
         ></component>
       </keep-alive>
