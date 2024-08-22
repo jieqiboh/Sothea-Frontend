@@ -15,12 +15,12 @@
                         @keyup.enter="searchPatient" />
                 </div>
                 <div class="flex items-center space-x-3 mx-5 hover:cursor-pointer">
-                    <Text style="font-size:medium" class="hover:text-gray-500" @click="exportPatientData()">Export
-                        Patient Data &#x2913;</Text>
+                    <p style="font-size:medium" class="hover:text-gray-500" @click="exportPatientData()">Export
+                        Patient Data &#x2913;</p>
                 </div>
                 <div class="flex items-center space-x-3 hover:cursor-pointer">
-                    <Text style="font-size:medium" class="hover:text-gray-500" @click="getData()">Refresh List
-                        &#x21bb;</Text>
+                    <p style="font-size:medium" class="hover:text-gray-500" @click="getData()">Refresh List
+                        &#x21bb;</p>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                         </thead>
                         <tbody>
                             <TableRow class="hover:cursor-pointer" v-for="(patientVisit, index) in patientVisits"
-                                :key="patientVisit.id" :id="patientVisit.id" :vid="patientVisit.vid"
+                                :key="patientVisit.id" :id="String(patientVisit.id)" :vid="String(patientVisit.vid)"
                                 :regDate="patientVisit.regDate" 
                                 :name="patientVisit.name" :khmerName="patientVisit.khmerName"
                                 :gender="patientVisit.gender" :familyGroup="patientVisit.familyGroup"

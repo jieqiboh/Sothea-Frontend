@@ -379,7 +379,7 @@ export default defineComponent({
         if (!admin) return
         this.name = admin.name
         this.khmerName = admin.khmerName
-        this.dob = this.formatDateForInput(admin.dob)
+        this.dob = (admin.dob != null) ? this.formatDateForInput(admin.dob) : null
         this.age = admin.age
         this.gender = admin.gender
         this.contactNo = admin.contactNo
@@ -409,8 +409,8 @@ export default defineComponent({
     return {
       name: '' as string,
       khmerName: '' as string,
-      dob: '' as string,
-      age: 0 as number,
+      dob: '' as string | null,
+      age: 0 as number | null,
       gender: '' as 'M' | 'F' | '',
       contactNo: '' as string,
       regDate: '' as string,

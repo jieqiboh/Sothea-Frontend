@@ -3,11 +3,11 @@
     <NavBar />
 
     <div class="flex">
-      <SideBar :activeSection="activeSection" :id="id" :name="name" :age="age"
+      <SideBar :activeSection="activeSection" :id="id" :name="name" :age="age ? age : undefined"
         @update:activeSection="setActiveSection" />
       <div class="content flex-grow p-6">
         <keep-alive>
-          <component :is="activeComponent" :patientId="id" :patientData="patient" :isAdd="false"
+          <component :is="activeComponent" :patientId="String(id)" :patientVid="String(vid)" :patientData="patient" :isAdd="false"
             @reload="loadPatientData" @patientUpdated="handlePatientUpdated">
           </component>
         </keep-alive>
@@ -53,6 +53,10 @@ export default defineComponent({
     id: {
       type: String,
       required: true
+    },
+    vid: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -60,7 +64,7 @@ export default defineComponent({
       activeSection: 'admin',
       patient: null as Patient | null,
       name: '' as string,
-      age: 0 as number,
+      age: 0 as number | null,
     }
   },
   computed: {
@@ -91,20 +95,22 @@ export default defineComponent({
       this.activeSection = section
     },
 
-    async getPatientData(id: string) {
-      axios.get(`${BaseURL}/patient/${id}`)
+    async getPatientData(id: string, vid: string) {
+      axios.get(`${BaseURL}/patient/${id}/${vid}`)
         .then((response: AxiosResponse) => {
           console.log(response)
           const { data } = response
           this.patient = JSON.parse(JSON.stringify(data)) as Patient
-          this.age = new Date().getFullYear() - new Date(this.patient.admin.dob).getFullYear()
+          this.age = this.patient.admin.dob
+          ? new Date().getFullYear() - new Date(this.patient.admin.dob).getFullYear()
+          : null
           this.name = this.patient.admin.name
         })
     },
     async loadPatientData() {
       const toast = useToast()
       try {
-        await this.getPatientData(this.id);
+        await this.getPatientData(this.id, this.vid)
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
           console.log(error.response)
