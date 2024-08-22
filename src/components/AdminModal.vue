@@ -364,6 +364,10 @@ export default defineComponent({
     isAdd: {
       type: Boolean,
       default: true
+    },
+    patientVid: {
+      type: String,
+      default: null
     }
   },
   watch: {
@@ -473,7 +477,7 @@ export default defineComponent({
           toast.error('Village is required')
           return
         }
-        if (this.familyGroup == null) {
+        if (this.familyGroup == '') {
           toast.error('Family Group is required')
           return
         }
@@ -514,16 +518,15 @@ export default defineComponent({
         if (this.isAdd && !this.isEditing) {
           // Add new patient
           await axios
-            .post(`${BaseURL}/patient`, {
-              admin: admin
-            })
+            .post(`${BaseURL}/patient`, admin)
             .then((response) => {
-              toast.success('Admin Details created successfully!')
+              toast.success('New Patient created successfully!')
               // Emit patient details to be rendered in sidebar
               this.$emit('patientCreated', {
-                id: response.data['Inserted userid'],
+                id: response.data['id'],
                 name: this.name,
-                age: this.ageComputed
+                age: this.ageComputed,
+                vid: 1 // newly created patient will always have a visit id of 1
               })
             })
         } else if (!this.isAdd && this.isEditing) {
