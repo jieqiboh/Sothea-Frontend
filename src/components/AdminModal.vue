@@ -532,7 +532,7 @@ export default defineComponent({
         } else if (!this.isAdd && this.isEditing) {
           // Editing an existing patient
           await axios
-            .patch(`${BaseURL}/patient/${this.patientId}`, {
+            .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
               admin: admin
             })
             .then(() => {
@@ -541,7 +541,8 @@ export default defineComponent({
               this.$emit('patientUpdated', {
                 id: this.patientId,
                 name: this.name,
-                age: this.ageComputed
+                age: this.ageComputed,
+                vid: this.patientVid
               })
             })
         }

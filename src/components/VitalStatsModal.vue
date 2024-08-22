@@ -260,6 +260,10 @@ export default defineComponent({
     isAdd: {
       type: Boolean,
       default: true
+    },
+    patientVid: {
+      type: String,
+      default: null
     }
   },
   data() {
@@ -389,7 +393,7 @@ export default defineComponent({
           randomBloodGlucoseMmolLp: this.randomBloodGlucoseMmolLp
         }
         await axios
-          .patch(`${BaseURL}/patient/${this.patientId}`, {
+          .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
             vitalStatistics: vitalStatistics
           })
           .then((response) => {

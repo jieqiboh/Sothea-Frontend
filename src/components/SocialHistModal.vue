@@ -198,6 +198,10 @@ export default defineComponent({
     isAdd: {
       type: Boolean,
       default: true
+    },
+    patientVid: {
+      type: String,
+      default: null
     }
   },
   data() {
@@ -249,7 +253,7 @@ export default defineComponent({
           howRegular: this.howRegular
         }
         await axios
-          .patch(`${BaseURL}/patient/${this.patientId}`, {
+          .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
             socialHistory: socialHistory
           })
           .then((response) => {
