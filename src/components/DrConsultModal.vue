@@ -423,6 +423,10 @@ export default defineComponent({
     isAdd: {
       type: Boolean,
       default: true
+    },
+    patientVid: {
+      type: String,
+      default: null
     }
   },
   data() {
@@ -529,7 +533,7 @@ export default defineComponent({
           remarks: this.remarks
         }
         await axios
-          .patch(`${BaseURL}/patient/${this.patientId}`, {
+          .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
             doctorsConsultation: doctorsConsultation
           })
           .then((response) => {

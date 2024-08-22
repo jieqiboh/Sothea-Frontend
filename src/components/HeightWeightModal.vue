@@ -181,6 +181,10 @@ export default defineComponent({
     isAdd: {
       type: Boolean,
       default: true
+    },
+    patientVid: {
+      type: String,
+      default: null
     }
   },
   data() {
@@ -277,7 +281,7 @@ export default defineComponent({
           paedsWeight: this.paedsWeight
         }
         await axios
-          .patch(`${BaseURL}/patient/${this.patientId}`, {
+          .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
             heightAndWeight: heightAndWeight
           })
           .then((response) => {
