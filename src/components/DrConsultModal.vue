@@ -20,26 +20,14 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="healthy"
-                class="w-4 h-4"
-                v-model="healthy"
-                :value="true"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="true"
+                :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="healthy"
-                class="w-4 h-4"
-                v-model="healthy"
-                :value="false"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="healthy" class="w-4 h-4" v-model="healthy" :value="false"
+                :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -52,26 +40,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="msk"
-                class="w-4 h-4"
-                v-model="msk"
-                :value="true"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="msk"
-                class="w-4 h-4"
-                v-model="msk"
-                :value="false"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="msk" class="w-4 h-4" v-model="msk" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -84,26 +58,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="cvs"
-                class="w-4 h-4"
-                v-model="cvs"
-                :value="true"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="cvs"
-                class="w-4 h-4"
-                v-model="cvs"
-                :value="false"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="cvs" class="w-4 h-4" v-model="cvs" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -116,26 +76,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="respi"
-                class="w-4 h-4"
-                v-model="respi"
-                :value="true"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="respi"
-                class="w-4 h-4"
-                v-model="respi"
-                :value="false"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="respi" class="w-4 h-4" v-model="respi" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -148,26 +94,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="gu"
-                class="w-4 h-4"
-                v-model="gu"
-                :value="true"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="gu"
-                class="w-4 h-4"
-                v-model="gu"
-                :value="false"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="gu" class="w-4 h-4" v-model="gu" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -180,26 +112,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="git"
-                class="w-4 h-4"
-                v-model="git"
-                :value="true"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="git"
-                class="w-4 h-4"
-                v-model="git"
-                :value="false"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="git" class="w-4 h-4" v-model="git" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -212,26 +130,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="eye"
-                class="w-4 h-4"
-                v-model="eye"
-                :value="true"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="eye"
-                class="w-4 h-4"
-                v-model="eye"
-                :value="false"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="eye" class="w-4 h-4" v-model="eye" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -244,26 +148,12 @@
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="derm"
-                class="w-4 h-4"
-                v-model="derm"
-                :value="true"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="true" :disabled="!isEditing" />
             </label>
           </div>
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="derm"
-                class="w-4 h-4"
-                v-model="derm"
-                :value="false"
-                :disabled="!isEditing"
-              />
+              <input type="radio" name="derm" class="w-4 h-4" v-model="derm" :value="false" :disabled="!isEditing" />
             </label>
           </div>
         </div>
@@ -274,13 +164,9 @@
           <div class="font-normal text-sm w-1/3">Others:</div>
 
           <div class="flex w-1/3">
-            <input
-              v-model="others"
-              type="text"
-              placeholder="Specify"
+            <input v-model="others" type="text" placeholder="Specify"
               class="w-full bg-transparent rounded-md border border-stroke py-2 px-2 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing"
-            />
+              :disabled="!isEditing" />
           </div>
         </div>
       </div>
@@ -288,37 +174,25 @@
       <!-- Consultation Notes -->
       <div class="mt-4">
         <label for="" class="mb-2 block text-sm font-medium text-dark">Consultation Notes</label>
-        <textarea
-          v-model="consultationNotes"
-          rows="3"
-          placeholder="Remarks"
+        <textarea v-model="consultationNotes" rows="3" placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
-          :disabled="!isEditing"
-        ></textarea>
+          :disabled="!isEditing"></textarea>
       </div>
 
       <!-- Diagnosis -->
       <div class="mt-4">
         <label for="" class="mb-2 block text-sm font-medium text-dark">Diagnosis</label>
-        <textarea
-          v-model="diagnosis"
-          rows="3"
-          placeholder="Remarks"
+        <textarea v-model="diagnosis" rows="3" placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
-          :disabled="!isEditing"
-        ></textarea>
+          :disabled="!isEditing"></textarea>
       </div>
 
       <!-- Treatment -->
       <div class="mt-4">
         <label for="" class="mb-2 block text-sm font-medium text-dark">Treatment</label>
-        <textarea
-          v-model="treatment"
-          rows="3"
-          placeholder="Remarks"
+        <textarea v-model="treatment" rows="3" placeholder="Remarks"
           class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
-          :disabled="!isEditing"
-        ></textarea>
+          :disabled="!isEditing"></textarea>
       </div>
 
       <div class="flex flex-col mt-2">
@@ -339,60 +213,38 @@
           <div class="flex w-1/6">
             <div class="flex items-center pr-7">
               <label class="inline-flex items-center">
-                <input
-                  type="radio"
-                  name="ref-needed"
-                  class="w-4 h-4"
-                  v-model="referralNeeded"
-                  :value="true"
-                  :disabled="!isEditing"
-                />
+                <input type="radio" name="ref-needed" class="w-4 h-4" v-model="referralNeeded" :value="true"
+                  :disabled="!isEditing" />
               </label>
             </div>
             <div class="flex items-center">
               <label class="inline-flex items-center">
-                <input
-                  type="radio"
-                  name="ref-needed"
-                  class="w-4 h-4"
-                  v-model="referralNeeded"
-                  :value="false"
-                  :disabled="!isEditing"
-                />
+                <input type="radio" name="ref-needed" class="w-4 h-4" v-model="referralNeeded" :value="false"
+                  :disabled="!isEditing" />
               </label>
             </div>
           </div>
 
           <div class="flex w-1/3 grow">
-            <textarea
-              v-model="referralLoc"
-              rows="1"
-              placeholder="Enter Location"
+            <textarea v-model="referralLoc" rows="1" placeholder="Enter Location"
               class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
-              :disabled="!isEditing"
-            ></textarea>
+              :disabled="!isEditing"></textarea>
           </div>
         </div>
       </div>
 
       <!-- Edit Button -->
       <div class="flex flex-row-reverse w-full mt-5">
-        <button
-          v-if="!isEditing && !isAdd"
-          @click="toggleEdit"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
-        >
+        <button v-if="!isEditing && !isAdd" @click="toggleEdit"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
           Edit
         </button>
       </div>
 
       <!-- Save Edits Button -->
       <div class="flex flex-row-reverse w-full mt-5">
-        <button
-          v-if="isEditing && !isAdd"
-          @click="submitData"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
-        >
+        <button v-if="isEditing && !isAdd" @click="submitData"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
           Save Edits
         </button>
       </div>
@@ -448,6 +300,48 @@ export default defineComponent({
       remarks: 'remarks' as string | null,
       isEditing: false
     }
+  },
+  watch: {
+    patientData: function (newVal: Patient, oldVal: Patient) {
+      // watch it
+      if (!this.isAdd) {
+        // In View / Edit Page
+        const drConsult = this.patientData.doctorsconsultation
+        if (!drConsult) {
+          this.healthy = null
+          this.msk = null
+          this.cvs = null
+          this.respi = null
+          this.gu = null
+          this.git = null
+          this.eye = null
+          this.derm = null
+          this.others = ''
+          this.consultationNotes = ''
+          this.diagnosis = ''
+          this.treatment = ''
+          this.referralNeeded = null
+          this.referralLoc = ''
+          this.remarks = ''
+        } else {
+          this.healthy = drConsult.healthy
+          this.msk = drConsult.msk
+          this.cvs = drConsult.cvs
+          this.respi = drConsult.respi
+          this.gu = drConsult.gu
+          this.git = drConsult.git
+          this.eye = drConsult.eye
+          this.derm = drConsult.derm
+          this.others = drConsult.others
+          this.consultationNotes = drConsult.consultationNotes
+          this.diagnosis = drConsult.diagnosis
+          this.treatment = drConsult.treatment
+          this.referralNeeded = drConsult.referralNeeded
+          this.referralLoc = drConsult.referralLoc
+          this.remarks = drConsult.remarks
+        }
+      }
+    },
   },
   created() {
     if (!this.isAdd) {
