@@ -5,14 +5,18 @@
     <div class="flex">
       <SideBar :activeSection="activeSection" :id="id" :name="name" :age="age ? age : undefined"
         @update:activeSection="setActiveSection" />
-      <div class="content flex-grow p-6">
+      <div class="flex-grow">
+        <SubNavBar :id="id" :regDate="patient?.admin.regDate" :queueNo="patient?.admin.queueNo" @openModal="openRecords"/>
         <keep-alive>
           <component :is="activeComponent" :patientId="String(id)" :patientVid="String(vid)" :patientData="patient" :isAdd="false"
             @reload="loadPatientData" @patientUpdated="handlePatientUpdated">
           </component>
         </keep-alive>
+
       </div>
     </div>
+    <!-- Records Modal -->
+    <RecordsModal :id="id" :isOpen="showRecords" @close="closeRecords"> </RecordsModal>
   </div>
 </template>
 
@@ -21,6 +25,8 @@ import { defineComponent } from 'vue';
 
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/NavBar.vue'
+import SubNavBar from '../components/SubNavBar.vue'
+import RecordsModal from '../components/RecordsModal.vue'
 
 import AdminModal from '../components/AdminModal.vue'
 import PastMedHistModal from '../components/PastMedHistModal.vue'
@@ -41,6 +47,8 @@ export default defineComponent({
   components: {
     SideBar,
     NavBar,
+    SubNavBar,
+    RecordsModal,
     AdminModal,
     PastMedHistModal,
     SocialHistModal,
@@ -65,6 +73,7 @@ export default defineComponent({
       patient: null as Patient | null,
       name: '' as string,
       age: 0 as number | null,
+      showRecords: false
     }
   },
   computed: {
@@ -129,10 +138,22 @@ export default defineComponent({
       console.log(`Patient Updated With ID: ${id}, Name: ${name}, Age: ${age}`)
       this.name = name
       this.age = age
-    }
+    },
+    openRecords() {
+      this.showRecords = true
+    },
+    closeRecords() {
+      this.showRecords = false
+    },
   },
   created() {
     this.loadPatientData()
+    this.$watch(
+      () => this.$route.params.vid,
+      (newId, oldId) => {
+        this.loadPatientData()
+      }
+    )
   },
 })
 </script>
