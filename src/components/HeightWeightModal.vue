@@ -9,31 +9,17 @@
           <!-- Height -->
           <div class="w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> Height (cm) </label>
-            <input
-              v-model="height"
-              type="number"
-              step="1"
-              placeholder="cm"
+            <input v-model="height" type="number" step="1" placeholder="cm"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing"
-              @keydown="preventNegative"
-              min="0"
-            />
+              :disabled="!isEditing" @keydown="preventNegative" min="0" />
           </div>
 
           <!-- Weight -->
           <div class="ml-3 w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> Weight (kg) </label>
-            <input
-              v-model="weight"
-              type="number"
-              step="0.1"
-              placeholder="kg"
+            <input v-model="weight" type="number" step="0.1" placeholder="kg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing"
-              @keydown="preventNegative"
-              min="0"
-            />
+              :disabled="!isEditing" @keydown="preventNegative" min="0" />
           </div>
         </div>
 
@@ -47,15 +33,9 @@
               </button>
               <label for="" class="mb-1 pt-0.5 block text-sm font-medium text-dark"> Paeds: Height % </label>
             </div>
-            <input
-              v-model="paedsHeight"
-              type="number"
-              placeholder=""
+            <input v-model="paedsHeight" type="number" placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing"
-              @keydown="preventNegative"
-              min="0"
-            />
+              :disabled="!isEditing" @keydown="preventNegative" min="0" />
           </div>
 
           <!-- Paeds: Weight % -->
@@ -66,15 +46,9 @@
               </button>
               <label for="" class="mb-1 pt-0.5 block text-sm font-medium text-dark"> Paeds: Weight % </label>
             </div>
-            <input
-              v-model="paedsWeight"
-              type="number"
-              placeholder=""
+            <input v-model="paedsWeight" type="number" placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing"
-              @keydown="preventNegative"
-              min="0"
-            />
+              :disabled="!isEditing" @keydown="preventNegative" min="0" />
           </div>
         </div>
 
@@ -83,14 +57,8 @@
           <!-- BMI -->
           <div class="w-1/3">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> BMI </label>
-            <input
-              :value="bmi"
-              disabled
-              type="number"
-              step="0.1"
-              placeholder=""
-              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-            />
+            <input :value="bmi" disabled type="number" step="0.1" placeholder=""
+              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
           </div>
         </div>
 
@@ -99,34 +67,23 @@
           <!-- BMI Analysis-->
           <div class="w-1/3">
             <label for="" class="mb-1 block text-sm font-medium text-dark"> BMI Analysis </label>
-            <input
-              :value="bmianalysis"
-              disabled
-              type="text"
-              placeholder=""
-              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-            />
+            <input :value="bmianalysis" disabled type="text" placeholder=""
+              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
           </div>
         </div>
 
         <!-- Edit Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button
-            v-if="!isEditing && !isAdd"
-            @click="toggleEdit"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
-          >
+          <button v-if="!isEditing && !isAdd" @click="toggleEdit"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
             Edit
           </button>
         </div>
 
         <!-- Save Edits Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button
-            v-if="isEditing && !isAdd"
-            @click="submitData"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
-          >
+          <button v-if="isEditing && !isAdd" @click="submitData"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
             Save Edits
           </button>
         </div>
@@ -136,7 +93,8 @@
   </div>
 
   <!-- Height Percentile Modal -->
-  <div v-if="showHeightModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
+  <div v-if="showHeightModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
     <div class="bg-white rounded-lg p-5 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
       <div class="flex justify-end">
         <button @click="showHeightModal = false" class="text-gray-700 hover:text-gray-900">Close</button>
@@ -147,7 +105,8 @@
   </div>
 
   <!-- Weight Percentile Modal -->
-  <div v-if="showWeightModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
+  <div v-if="showWeightModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
     <div class="bg-white rounded-lg p-5 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
       <div class="flex justify-end">
         <button @click="showWeightModal = false" class="text-gray-700 hover:text-gray-900">Close</button>
@@ -181,7 +140,30 @@ export default defineComponent({
     isAdd: {
       type: Boolean,
       default: true
+    },
+    patientVid: {
+      type: String,
+      default: null
     }
+  },
+  watch: {
+    patientData: function (newVal: Patient, oldVal: Patient) {
+      // watch it
+      if (!this.isAdd) {
+        const heightAndWeight = this.patientData.heightandweight
+        if (!heightAndWeight) {
+          this.height = null
+          this.weight = null
+          this.paedsHeight = null
+          this.paedsWeight = null
+        } else {
+          this.height = heightAndWeight.height
+          this.weight = heightAndWeight.weight
+          this.paedsHeight = heightAndWeight.paedsHeight
+          this.paedsWeight = heightAndWeight.paedsWeight
+        }
+      }
+    },
   },
   data() {
     return {
@@ -277,7 +259,7 @@ export default defineComponent({
           paedsWeight: this.paedsWeight
         }
         await axios
-          .patch(`${BaseURL}/patient/${this.patientId}`, {
+          .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
             heightAndWeight: heightAndWeight
           })
           .then((response) => {

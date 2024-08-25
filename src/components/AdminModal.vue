@@ -364,6 +364,10 @@ export default defineComponent({
     isAdd: {
       type: Boolean,
       default: true
+    },
+    patientVid: {
+      type: String,
+      default: null
     }
   },
   watch: {
@@ -375,7 +379,7 @@ export default defineComponent({
         if (!admin) return
         this.name = admin.name
         this.khmerName = admin.khmerName
-        this.dob = this.formatDateForInput(admin.dob)
+        this.dob = (admin.dob != null) ? this.formatDateForInput(admin.dob) : null
         this.age = admin.age
         this.gender = admin.gender
         this.contactNo = admin.contactNo
@@ -405,8 +409,8 @@ export default defineComponent({
     return {
       name: '' as string,
       khmerName: '' as string,
-      dob: '' as string,
-      age: 0 as number,
+      dob: '' as string | null,
+      age: 0 as number | null,
       gender: '' as 'M' | 'F' | '',
       contactNo: '' as string,
       regDate: '' as string,
@@ -473,7 +477,7 @@ export default defineComponent({
           toast.error('Village is required')
           return
         }
-        if (this.familyGroup == null) {
+        if (this.familyGroup == '') {
           toast.error('Family Group is required')
           return
         }
@@ -515,18 +519,19 @@ export default defineComponent({
           await axios
             .post(`${BaseURL}/patient`, admin)
             .then((response) => {
-              toast.success('Admin Details created successfully!')
+              toast.success('New Patient created successfully!')
               // Emit patient details to be rendered in sidebar
               this.$emit('patientCreated', {
-                id: response.data['Inserted userid'],
+                id: response.data['id'],
                 name: this.name,
-                age: this.ageComputed
+                age: this.ageComputed,
+                vid: 1 // newly created patient will always have a visit id of 1
               })
             })
         } else if (!this.isAdd && this.isEditing) {
           // Editing an existing patient
           await axios
-            .patch(`${BaseURL}/patient/${this.patientId}`, {
+            .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
               admin: admin
             })
             .then(() => {
@@ -535,7 +540,8 @@ export default defineComponent({
               this.$emit('patientUpdated', {
                 id: this.patientId,
                 name: this.name,
-                age: this.ageComputed
+                age: this.ageComputed,
+                vid: this.patientVid
               })
             })
         }

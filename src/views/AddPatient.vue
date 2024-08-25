@@ -14,7 +14,8 @@
       <keep-alive>
         <component
           :is="activeComponent"
-          :patientId="patientId"
+          :patientId="String(patientId)"
+          :patientVid="String(patientVid)"
           @patientCreated="handlePatientCreated"
         ></component>
       </keep-alive>
@@ -52,6 +53,7 @@ export default {
     return {
       activeSection: 'admin',
       patientId: '', // Empty value passed to the Sidebar since it is not needed
+      patientVid: '', // Empty value since it is not need
       name: '' as string, // Empty value passed to the Sidebar since it is not needed
       age: null, // Empty value passed to the Sidebar since it is not needed
     }
@@ -89,9 +91,9 @@ export default {
       await axios.get('/login/is-valid-token')
     },
     handlePatientCreated(event : any) {
-      const { id, name, age } = event
-      console.log(`Patient Created Wth ID: ${id}, Name: ${name}, Age: ${age}`)
-      this.$router.push("/patient/" + id)
+      const { id, name, age, vid } = event
+      console.log(`Patient Created Wth ID: ${id}, Name: ${name}, Age: ${age}, VID: ${vid}`)
+      this.$router.push('/patient/' + id + '/' + vid)
     }
   }
 }
