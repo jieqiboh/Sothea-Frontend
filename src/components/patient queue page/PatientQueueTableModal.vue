@@ -11,7 +11,7 @@
                 <div class="relative flex-grow">
                     <input type="text" id="search-input"
                         class="rounded-lg border-transparent appearance-none w-96 bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
-                        placeholder="Search by ID/Name/Khmer Name/DOB/Contact No." @input="searchPatient"
+                        placeholder="Search by ID/Name/Khmer Name/Drug Allergies" @input="searchPatient"
                         @keyup.enter="searchPatient" />
                 </div>
                 <div class="flex items-center space-x-3 mx-5 hover:cursor-pointer">
@@ -71,7 +71,7 @@
                         <tbody>
                             <TableRow class="hover:cursor-pointer" v-for="(patient, index) in patientVisits"
                                 :key="patient.id" :queueNo="patient.queueNo" :id="patient.id" :name="patient.name" :khmername="patient.khmerName"
-                                :gender="patient.gender" :allergies="patient.drugAllergies" :contactnumber="patient.contactNo"
+                                :gender="patient.gender" :allergies="patient.drugAllergies" :referralneeded="patient.referralNeeded"
                                 :class="{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }" />
                         </tbody>
                     </table>
@@ -158,7 +158,8 @@ export default {
                 return patient.name.toLowerCase().includes(searchValue) ||
                     patient.name.includes(searchValue) ||
                     patient.id.toString().includes(searchValue) ||
-                    patient.khmerName.toLowerCase().includes(searchValue);            
+                    patient.khmerName.toLowerCase().includes(searchValue) ||
+                    (patient.drugAllergies !== undefined && patient.drugAllergies !== null) ? patient.drugAllergies.toLowerCase().includes(searchValue) : false;                
                 });
         },
         sortById() {
@@ -171,17 +172,21 @@ export default {
             });
             this.sortAscId = !this.sortAscId;
         },
-        // TO BE fixed once referral info is available
         sortByReferral() {
             this.patientVisits.sort((a, b) => {
+                const referralA = (a.referralNeeded !== undefined && a.referralNeeded !== null) ? a.referralNeeded : null;
+                const referralB = (b.referralNeeded !== undefined && b.referralNeeded !== null) ? b.referralNeeded : null;
+
+                if (referralA === referralB) return 0;
+                
                 if (this.sortAscReferral) {
-                    return a.referral - b.referral;
+                    return referralA === null ? 1 : referralB === null ? -1 : referralA < referralB ? -1 : 1;
                 } else {
-                    return b.referral - a.referral;
+                    return referralA === null ? 1 : referralB === null ? -1 : referralA > referralB ? -1 : 1;
                 }
             });
             this.sortAscReferral = !this.sortAscReferral;
-        },
+        }
     },
     created() {
         this.getData();

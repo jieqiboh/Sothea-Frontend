@@ -35,8 +35,11 @@
             </div>
         </td>
         <td class="px-7 py-4 text-sm border-b border-gray-200">
-            <p class="text-gray-900 whitespace-no-wrap">
-                {{ contactnumber }} <!-- TO BE REPLACED with referral --> 
+            <p class="text-gray-900 whitespace-no-wrap" v-if="referralneeded == true">
+                Yes 
+            </p>
+            <p class="text-gray-900 whitespace-no-wrap" v-else-if="referralneeded == false">
+                No
             </p>
         </td>
     </tr>    
@@ -52,6 +55,7 @@ export default {
         gender: String,
         allergies: String,
         contactnumber: String,
+        referralneeded: Boolean
     },
     computed: {
         formattedDOB() {
