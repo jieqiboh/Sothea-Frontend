@@ -69,9 +69,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <TableRow class="hover:cursor-pointer" v-for="(patient, index) in patientVisits"
-                                :key="patient.id" :queueNo="patient.queueNo" :id="patient.id" :name="patient.name" :khmername="patient.khmerName"
-                                :gender="patient.gender" :allergies="patient.drugAllergies" :referralneeded="patient.referralNeeded"
+                            <TableRow class="hover:cursor-pointer" v-for="(patientVisit, index) in patientVisits"
+                                :key="patientVisit.id" :queueNo="patientVisit.queueNo" 
+                                :id="String(patientVisit.id)" :vid="String(patientVisit.vid)" :name="patientVisit.name" :khmername="patientVisit.khmerName"
+                                :gender="patientVisit.gender" :allergies="patientVisit.drugAllergies" :referralneeded="patientVisit.referralNeeded"
                                 :class="{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }" />
                         </tbody>
                     </table>

@@ -50,6 +50,7 @@ export default {
     props: {
         queueNo: String,
         id: String,
+        vid: String,
         name: String,
         khmername: String,
         gender: String,
@@ -69,7 +70,7 @@ export default {
     },
     methods: {
         handleClick() {
-            this.$router.push({ name: 'patient', params: { id: this.id } });
+            this.$router.push({ name: 'patient', params: { id: this.id, vid: this.vid } });
         }
     }
 }
