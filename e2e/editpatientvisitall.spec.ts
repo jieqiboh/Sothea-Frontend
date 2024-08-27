@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-// Add a patient, Edit all Admin Modal fields, then assert all fields are correct
+// Add a new patient, Edit all Admin Modal fields for this visit, then assert all fields are correct
 test('test', async ({ page }) => {
   await page.goto('http://localhost:5173/')
   await page.goto('http://localhost:5173/signin')
