@@ -4,12 +4,12 @@
 
     <div class="flex">
       <SideBar :activeSection="activeSection" :id="id" :name="name" :age="age ? age : undefined"
-        @update:activeSection="setActiveSection" />
+        @update:activeSection="setActiveSection" :isAdd="false"/>
       <div class="flex-grow">
         <SubNavBar :id="id" :regDate="patient?.admin.regDate" :queueNo="patient?.admin.queueNo" @openModal="openRecords"/>
         <keep-alive>
           <component :is="activeComponent" :patientId="String(id)" :patientVid="String(vid)" :patientData="patient" :isAdd="false"
-            @reload="loadPatientData" @patientUpdated="handlePatientUpdated">
+            @reload="loadPatientData" @patientUpdated="handlePatientUpdated" @patientVisitCreated="handlePatientVisitCreated">
           </component>
         </keep-alive>
 
@@ -42,6 +42,7 @@ import axios, { type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import { BaseURL } from '@/main';
+import AddNewVisitModal from '@/components/AddNewVisitModal.vue';
 
 export default defineComponent({
   components: {
@@ -55,7 +56,8 @@ export default defineComponent({
     VitalStatsModal,
     HeightWeightModal,
     VisualAcuityModal,
-    DrConsultModal
+    DrConsultModal,
+    AddNewVisitModal
   },
   props: {
     id: {
@@ -93,6 +95,8 @@ export default defineComponent({
           return 'VisualAcuityModal'
         case 'dr-consult':
           return 'DrConsultModal'
+        case 'add-new-visit':
+          return 'AddNewVisitModal'
         default:
           return 'AdminModal'
       }
@@ -138,6 +142,12 @@ export default defineComponent({
       console.log(`Patient Updated With ID: ${id}, Name: ${name}, Age: ${age}`)
       this.name = name
       this.age = age
+    },
+    handlePatientVisitCreated(event: any) {
+      const { id, name, age, vid, } = event
+      console.log(`Patient Created Wth ID: ${id}, Name: ${name}, Age: ${age}, VID: ${vid}`)
+      this.$router.push('/patient/' + id + '/' + vid)
+      this.setActiveSection('admin') // go back to admin modal
     },
     openRecords() {
       this.showRecords = true

@@ -9,6 +9,7 @@
       :id="undefined"
       :name="undefined"
       :age="undefined"
+      :isAdd="true"
     />
     <div class="content flex-grow p-6">
       <keep-alive>

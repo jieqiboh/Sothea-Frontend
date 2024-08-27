@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// Add a patient, go to home page and search for patient, assert all fields are correct
+// Add a new patient, go to home page and search for patient by name, assert all fields are correct
 test('test', async ({ page }) => {
   await page.goto('http://localhost:5173/');
   await page.goto('http://localhost:5173/signin');
@@ -48,7 +48,7 @@ test('test', async ({ page }) => {
   expect(await page.locator('input[type="date"]').nth(1).inputValue()).toBe('2024-06-14');
   expect(await page.getByPlaceholder('Village').inputValue()).toBe('SR');
   expect(await page.getByPlaceholder('Family Group').inputValue()).toBe('S01');
-  expect(await page.getByPlaceholder('Queue Number').inputValue()).toBe('S01A');
+  expect(await page.getByPlaceholder('Queue Number').inputValue()).toBe('2B');
   expect(await page.getByRole('combobox').nth(1).inputValue()).toBe('true');
   expect(await page.locator('input[type="date"]').nth(2).inputValue()).toBe('2024-06-14');
   expect(await page.getByPlaceholder('Enter Drug Allergies').inputValue()).toBe('nil');
