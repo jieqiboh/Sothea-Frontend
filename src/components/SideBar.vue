@@ -165,8 +165,8 @@
           </a>
 
           <a class="border-l-4 border-l-transparent flex items-center p-2 my-2 transition-colors duration-200" :class="{
-            'border-l-white bg-[#3f51b5] text-white': activeSection === 'dr-consult',
-            'text-gray-500 hover:bg-[#3f51b5] hover:text-white': activeSection !== 'dr-consult'
+            'border-l-white bg-[#3f51b5] text-white': activeSection === 'add-new-visit',
+            'text-gray-500 hover:bg-[#3f51b5] hover:text-white': activeSection !== 'add-new-visit'
           }" @click="setActiveSection('add-new-visit')" href="#" v-if="!isAdd">
 
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
