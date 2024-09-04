@@ -20,28 +20,28 @@
     <!-- Records Modal -->
     <RecordsModal :id="id" :isOpen="showRecords" @close="closeRecords"> </RecordsModal>
 
-<!-- Delete Visit Confirmation Modal -->
-<div v-if="tryDeleteVisit"
-  class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
-  <div class="bg-white rounded-lg p-10 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
-    <!-- Confirmation Message -->
-    <div class="text-center text-lg text-gray-800 mb-6 mt-10">
-      Are you sure you want to delete this patient visit?
-    </div>
+    <!-- Delete Visit Confirmation Modal -->
+    <div v-if="tryDeleteVisit"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
+      <div class="bg-white rounded-lg p-10 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
+        <!-- Confirmation Message -->
+        <div class="text-center text-lg text-gray-800 mb-6 mt-10">
+          Are you sure you want to delete this patient visit?
+        </div>
 
-    <!-- Action Buttons -->
-    <div class="flex justify-center space-x-10 my-10">
-      <button @click="handleDeleteVisit" 
-        class="bg-[#3f51b5] hover:bg-[#5c6cc4] text-white font-bold py-2 px-6 rounded-md transition-colors duration-200">
-        Yes
-      </button>
-      <button @click="tryDeleteVisit = false" 
-        class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-6 rounded-md transition-colors duration-200">
-        No
-      </button>
+        <!-- Action Buttons -->
+        <div class="flex justify-center space-x-10 my-10">
+          <button @click="handleDeleteVisit"
+            class="bg-[#3f51b5] hover:bg-[#5c6cc4] text-white font-bold py-2 px-6 rounded-md transition-colors duration-200">
+            Yes
+          </button>
+          <button @click="tryDeleteVisit = false"
+            class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-6 rounded-md transition-colors duration-200">
+            No
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   </div>
 </template>
 
@@ -182,11 +182,26 @@ export default defineComponent({
       this.showRecords = false
     },
     handleDeleteVisit() {
-      axios.delete(`${BaseURL}/patient/${this.id}/${this.vid}`)
-        .then((response: AxiosResponse) => {
-          console.log(response)
-          this.$router.push('/allpatients')
-        })
+      const toast = useToast()
+      try {
+        axios.delete(`${BaseURL}/patient/${this.id}/${this.vid}`)
+          .then((response: AxiosResponse) => {
+            console.log(response)
+            this.$router.push('/allpatients')
+            toast.success('Patient Visit deleted successfully.')
+          })
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response)
+          if (error.response) {
+            toast.error(error.response.data.error)
+          }
+        } else {
+          // No response received at all
+          console.log(error)
+          toast.error('An internal server error occurred.')
+        }
+      }
     }
   },
   created() {
