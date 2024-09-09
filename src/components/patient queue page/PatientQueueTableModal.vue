@@ -8,11 +8,18 @@
             </div>
 
             <div class="flex justify-between items-center py-5">
-                <div class="relative flex-grow">
-                    <input type="text" id="search-input"
-                        class="rounded-lg border-transparent appearance-none w-96 bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
-                        placeholder="Search by ID/Name/Khmer Name/Drug Allergies" @input="searchPatient"
-                        @keyup.enter="searchPatient" />
+                <div class="relative flex-grow flex flex-row">
+                    <div class="mr-2">
+                        <input type="text" id="search-input"
+                            class="rounded-lg border-transparent appearance-none w-[22rem] bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                            placeholder="Search by ID/Name/Khmer Name/Drug Allergies" @input="searchPatient"
+                            @keyup.enter="searchPatient" />
+                    </div>
+                    <div>
+                        <input type="date" id="date-input"
+                            class="rounded-lg border-transparent appearance-none w-48 bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                            @input="filterPatientsByDate(this)"/>
+                    </div>
                 </div>
                 <div class="flex items-center space-x-3 mx-5 hover:cursor-pointer">
                     <Text style="font-size:medium" class="hover:text-gray-500" @click="exportPatientData()">Export
@@ -71,7 +78,7 @@
                         <tbody>
                             <TableRow class="hover:cursor-pointer" v-for="(patientVisit, index) in patientVisits"
                                 :key="patientVisit.id" :queueNo="patientVisit.queueNo" 
-                                :id="String(patientVisit.id)" :vid="String(patientVisit.vid)" :name="patientVisit.name" :khmername="patientVisit.khmerName"
+                                :id="String(patientVisit.id)"  :vid="String(patientVisit.vid)" :name="patientVisit.name" :khmername="patientVisit.khmerName"
                                 :gender="patientVisit.gender" :allergies="patientVisit.drugAllergies" :referralneeded="patientVisit.referralNeeded"
                                 :class="{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }" />
                         </tbody>
@@ -162,6 +169,21 @@ export default {
                     patient.khmerName.toLowerCase().includes(searchValue) ||
                     (patient.drugAllergies !== undefined && patient.drugAllergies !== null) ? patient.drugAllergies.toLowerCase().includes(searchValue) : false;                
                 });
+        },
+        async filterPatientsByDate() {
+            const toast = useToast()
+            try {
+                const date = document.getElementById('date-input').value;
+                const { data } = await axios.get(`${BaseURL}/all-patient-visit-meta/${date}`);
+                this.patientVisits = data; 
+                this.patientVisitsFixed = data;
+            } catch (error) {
+                if (error.response) {
+                    toast.error(error.response.data.error)
+                } else { // No response received at all
+                    toast.error("An internal server error occurred.")
+                }
+            }
         },
         sortById() {
             this.patientVisits.sort((a, b) => {
