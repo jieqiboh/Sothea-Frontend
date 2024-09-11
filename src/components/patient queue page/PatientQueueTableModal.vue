@@ -18,6 +18,7 @@
                     <div>
                         <input type="date" id="date-input"
                             class="rounded-lg border-transparent appearance-none w-48 bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                            v-model="dateInput"
                             @input="filterPatientsByDate(this)"/>
                     </div>
                 </div>
@@ -108,14 +109,21 @@ export default {
             patientVisitsFixed: [], // for searching patients 
             token: null,
             sortAscId: true,
-            sortAscReferral: true
+            sortAscReferral: true,
+            dateInput: ''
         }
+    },
+    mounted() {
+        // Retrieve the date from localStorage and set it as the input value
+        const storedDate = localStorage.getItem('date-input');
+        this.dateInput = storedDate || new Date().toISOString().split('T')[0]; // Default to today if no stored date
     },
     methods: {
         async getData() {
             const toast = useToast()
             try {
-                const todayDate = new Date().toISOString().split('T')[0];
+                const storedDate = localStorage.getItem('date-input');
+                const todayDate = storedDate ? storedDate : new Date().toISOString().split('T')[0];
                 const { data } = await axios.get(`${BaseURL}/all-patient-visit-meta/${todayDate}`);
                 this.patientVisits = data;  // Store the fetched data in the patients array
                 this.patientVisitsFixed = data;
@@ -174,6 +182,7 @@ export default {
             const toast = useToast()
             try {
                 const date = document.getElementById('date-input').value;
+                localStorage.setItem('date-input', date);
                 const { data } = await axios.get(`${BaseURL}/all-patient-visit-meta/${date}`);
                 this.patientVisits = data; 
                 this.patientVisitsFixed = data;
