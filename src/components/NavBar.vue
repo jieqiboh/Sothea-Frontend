@@ -6,6 +6,10 @@
             <h1 class="py-4">Project Sothea</h1>
             <div class="flex items-baseline ml-10">
               <router-link class="text-white hover:text-gray-300 px-3 py-4 text-base font-medium" active-class="active"
+                to="/patientqueue">
+                Patient Queue
+              </router-link>
+              <router-link class="text-white hover:text-gray-300 px-3 py-4 text-base font-medium" active-class="active"
                 to="/allpatients">
                 All Patients
               </router-link>
