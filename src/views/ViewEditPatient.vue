@@ -130,14 +130,14 @@ export default defineComponent({
   },
   methods: {
     setActiveSection(section: string) {
-      console.log(section)
+      // console.log(section)
       this.activeSection = section
     },
 
     async getPatientData(id: string, vid: string) {
       axios.get(`${BaseURL}/patient/${id}/${vid}`)
         .then((response: AxiosResponse) => {
-          console.log(response)
+          // console.log(response)
           const { data } = response
           this.patient = JSON.parse(JSON.stringify(data)) as Patient
           this.age = this.patient.admin.dob
@@ -152,7 +152,7 @@ export default defineComponent({
         await this.getPatientData(this.id, this.vid)
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
-          console.log(error.response)
+          // console.log(error.response)
           if (error.response) {
             toast.error(error.response.data.error)
           }
@@ -186,7 +186,7 @@ export default defineComponent({
       try {
         axios.delete(`${BaseURL}/patient/${this.id}/${this.vid}`)
           .then((response: AxiosResponse) => {
-            console.log(response)
+            // console.log(response)
             this.$router.push('/allpatients')
             toast.success('Patient Visit deleted successfully.')
           })
