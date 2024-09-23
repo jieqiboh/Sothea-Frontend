@@ -9,12 +9,12 @@
       <button @click="$emit('close')" class="close-btn">×</button>
       <div class="pt-2 pl-2">
         <RecordSection
-          v-for="(regDate, visitId) in patientMeta.visits"
-          :key="visitId"
+          v-for="visit in sortedVisits"
+          :key="visit.visitId"
           :id="id"
-          :vid="visitId.toString()"
-          :currVisit="visitId.toString() === vid"
-          :date="regDate"
+          :vid="visit.visitId"
+          :currVisit="visit.visitId === vid"
+          :date="visit.regDate"
           @close="$emit('close')"
         />
       </div>
@@ -61,6 +61,20 @@ export default defineComponent({
       }
     }
   },
+  computed: {
+    sortedVisits() {
+      if (this.patientMeta && this.patientMeta.visits) {
+        return Object.entries(this.patientMeta.visits)
+          .sort(([ , regDateA], [ , regDateB]) => {
+            const dateA = new Date(regDateA as string);
+            const dateB = new Date(regDateB as string);
+            return dateB.getTime() - dateA.getTime();
+          })
+          .map(([visitId, regDate]) => ({ regDate: regDate as string, visitId: visitId.toString() }));
+      }
+      return [];
+    }
+  },
   methods: {
     async getPatientMeta() {
       const toast = useToast()
@@ -72,7 +86,7 @@ export default defineComponent({
             // Assuming the response data matches the structure of PatientMeta
             this.patientMeta = response.data as PatientMeta;
 
-            console.log(this.patientMeta); // You can log this to verify the structure
+            console.log(12312, this.patientMeta); // You can log this to verify the structure
           })
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
