@@ -13,7 +13,9 @@
           :key="visitId"
           :id="id"
           :vid="visitId.toString()"
+          :currVisit="visitId.toString() === vid"
           :date="regDate"
+          @close="$emit('close')"
         />
       </div>
     </div>
@@ -35,6 +37,10 @@ export default defineComponent({
   },
   props: {
     id: {
+      type: String,
+      default: null
+    },
+    vid: {
       type: String,
       default: null
     },
