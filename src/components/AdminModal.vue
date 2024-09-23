@@ -525,7 +525,9 @@ export default defineComponent({
                 id: response.data['id'],
                 name: this.name,
                 age: this.ageComputed,
-                vid: 1 // newly created patient will always have a visit id of 1
+                vid: 1, // newly created patient will always have a visit id of 1
+                regDate: this.regDate,
+                queueNo: this.queueNo
               })
             })
         } else if (!this.isAdd && this.isEditing) {
@@ -541,8 +543,11 @@ export default defineComponent({
                 id: this.patientId,
                 name: this.name,
                 age: this.ageComputed,
-                vid: this.patientVid
+                vid: this.patientVid,
+                regDate: this.regDate,
+                queueNo: this.queueNo
               })
+              // TODO: update visit date and queue number
             })
         }
       } catch (error: unknown) {
@@ -590,13 +595,13 @@ export default defineComponent({
     },
 
     toggleEdit() {
-      console.log('toggleEdit')
+      // console.log('toggleEdit')
       this.isEditing = !this.isEditing
-      console.log(this.isEditing)
+      // console.log(this.isEditing)
     },
 
     saveChanges() {
-      console.log('saving changes....')
+      // console.log('saving changes....')
       this.submitData()
       this.toggleEdit()
     }
