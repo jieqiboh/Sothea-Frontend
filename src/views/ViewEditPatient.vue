@@ -18,7 +18,7 @@
       </div>
     </div>
     <!-- Records Modal -->
-    <RecordsModal :id="id" :isOpen="showRecords" @close="closeRecords"> </RecordsModal>
+    <RecordsModal :id="id" :vid="vid" :isOpen="showRecords" @close="closeRecords"> </RecordsModal>
 
     <!-- Delete Visit Confirmation Modal -->
     <div v-if="tryDeleteVisit"
