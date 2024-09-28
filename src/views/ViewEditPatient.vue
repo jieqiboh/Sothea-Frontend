@@ -144,6 +144,8 @@ export default defineComponent({
         ? new Date().getFullYear() - new Date(this.patient.admin.dob).getFullYear()
         : null;
       this.name = this.patient.admin.name;
+      this.regDate = this.patient.admin.regDate
+      this.queueNo = this.patient.admin.queueNo
     },
     async loadPatientData() {
       const toast = useToast()
