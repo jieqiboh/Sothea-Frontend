@@ -6,7 +6,7 @@
       <SideBar :activeSection="activeSection" :id="id" :name="name" :age="age ? age : undefined"
         @update:activeSection="setActiveSection" @openTryDeleteVisitModal="tryDeleteVisit = true" :isAdd="false" />
       <div class="flex-grow">
-        <SubNavBar :id="id" :regDate="patient?.admin.regDate" :queueNo="patient?.admin.queueNo"
+        <SubNavBar :id="id" :regDate="regDate" :queueNo="queueNo"
           @openModal="openRecords" />
         <keep-alive>
           <component :is="activeComponent" :patientId="String(id)" :patientVid="String(vid)" :patientData="patient"
@@ -100,6 +100,8 @@ export default defineComponent({
       patient: null as Patient | null,
       name: '' as string,
       age: 0 as number | null,
+      regDate: '' as string,
+      queueNo: '' as string,
       showRecords: false,
       tryDeleteVisit: false
     }
@@ -144,6 +146,8 @@ export default defineComponent({
             ? new Date().getFullYear() - new Date(this.patient.admin.dob).getFullYear()
             : null
           this.name = this.patient.admin.name
+          this.regDate = this.patient.admin.regDate
+          this.queueNo = this.patient.admin.queueNo
         })
     },
     async loadPatientData() {
@@ -164,10 +168,12 @@ export default defineComponent({
       }
     },
     handlePatientUpdated(event: any) {
-      const { id, name, age } = event
-      console.log(`Patient Updated With ID: ${id}, Name: ${name}, Age: ${age}`)
+      const { id, name, age, vid, regDate, queueNo } = event
+      console.log(`Patient Updated With ID: ${id}, Name: ${name}, Age: ${age}, VID: ${vid}, Reg Date: ${regDate}, Queue No: ${queueNo}`)
       this.name = name
       this.age = age
+      this.regDate = regDate
+      this.queueNo = queueNo
     },
     handlePatientVisitCreated(event: any) {
       const { id, name, age, vid, } = event
