@@ -86,10 +86,21 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
 import TableRow from './TableRow.vue';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import { BaseURL } from '@/main';
+
+interface PatientVisit {
+    id: number;
+    vid: string;
+    regDate: string;
+    name: string;
+    khmerName: string;
+    gender: string;
+    familyGroup: string;
+    contactNo: string;
+}
 
 export default defineComponent({
     components: {
@@ -97,8 +108,8 @@ export default defineComponent({
     },
     data() {
         return {
-            patientVisits: [],
-            patientVisitsFixed: [], // for searching patientVisits 
+            patientVisits: [] as PatientVisit[], // Define an empty patientVisits array
+            patientVisitsFixed: [] as PatientVisit[], // for searching patientVisits 
             token: null,
             sortAscId: true,
         }
@@ -152,36 +163,41 @@ export default defineComponent({
                     document.body.appendChild(link);
                     link.click();
                     // Cleanup
-                    link.parentNode.removeChild(link);
-                    window.URL.revokeObjectURL(url);
+                    if (link && link.parentNode) {
+                        link.parentNode.removeChild(link);
+                        window.URL.revokeObjectURL(url);
+                    }
                 });
             } catch (error) {
-                if (error.response) {
-                    toast.error(error.response.data.error)
-                } else { // No response received at all
-                    toast.error("An internal server error occurred.")
-                }
+                console.log(error)
+                toast.error("An internal server error occurred.")
             }
         },
         searchPatient() {
-            console.log('searching')
             // get value of the search input
-            const searchValue = document.getElementById('search-input').value;
+            const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
             // refresh the table of patientVisits
-            if (searchValue == "") {
-                this.getData()
+            if (searchInput) {
+                const searchValue = searchInput.value;
+                // refresh the table of patientVisits
+                if (searchValue === "") {
+                    this.getData();
+                }
+                // filter patientVisits array based on the search value
+                this.patientVisits = this.patientVisitsFixed.filter(patientVisit => {
+                    return patientVisit.name.toLowerCase().includes(searchValue) ||
+                        patientVisit.name.includes(searchValue) ||
+                        patientVisit.id.toString().includes(searchValue) ||
+                        patientVisit.khmerName.toLowerCase().includes(searchValue) ||
+                        patientVisit.contactNo.includes(searchValue) ||
+                        this.searchByRegDate(patientVisit.regDate, searchValue);
+                });
+            } else {
+                console.error('Search input element not found');
             }
-            // filter patientVisits array based on the search value
-            this.patientVisits = this.patientVisitsFixed.filter(patientVisit => {
-                return patientVisit.name.toLowerCase().includes(searchValue) ||
-                    patientVisit.name.includes(searchValue) ||
-                    patientVisit.id.toString().includes(searchValue) ||
-                    patientVisit.khmerName.toLowerCase().includes(searchValue) ||
-                    patientVisit.contactNo.includes(searchValue) ||
-                    this.searchByRegDate(patientVisit.regDate, searchValue);
-            });
+
         },
-        searchByRegDate(regDate, searchValue) {
+        searchByRegDate(regDate: string, searchValue: string) {
             const regDateString = regDate.split('T')[0]; // Get YYYY-MM-DD part of the ISO string
             const [year, month, day] = regDateString.split('-');
 
