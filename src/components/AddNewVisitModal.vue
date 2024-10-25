@@ -248,6 +248,7 @@ import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import type Patient from '@/types/Patient'
 import { BaseURL } from '@/main'
+import { toast } from 'react-toastify';
 
 export default defineComponent({
   props: {
@@ -438,9 +439,11 @@ export default defineComponent({
     //   }
     // },
     async handleImageUpload(event: any) {
+      const toast = useToast()
       const imageFile = event.target.files[0];
       console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
       console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+      toast.default('Loading Image...')
 
       const options = {
         maxSizeMB: 1,
@@ -460,7 +463,6 @@ export default defineComponent({
             fileToProcess = convertedBlob as Blob;
           } catch (heicError) {
             console.error('HEIC conversion failed', heicError);
-            const toast = useToast()
             toast.error('Image upload failed, Please re-upload a JPEG, JPG, PNG or HEIC file.')
             return;
           }
@@ -500,7 +502,7 @@ export default defineComponent({
       this.lastMenstrualPeriod = null;
       this.drugAllergies = '';
       this.selectedPhoto = '';
-      this.photo = null;
+      this.photo = ''; 
       this.sentToId = null;
       this.isEditing = false;
       this.isMale = false;
