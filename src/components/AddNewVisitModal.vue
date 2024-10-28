@@ -248,7 +248,6 @@ import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import type Patient from '@/types/Patient'
 import { BaseURL } from '@/main'
-import { toast } from 'react-toastify';
 
 export default defineComponent({
   props: {
@@ -259,12 +258,41 @@ export default defineComponent({
     patientVid: {
       type: String,
       default: null
+    },
+    patientData: {
+      type: Object as PropType<Patient>,
+      default: null
     }
   },
   watch: {
     gender(newValue) {
       // Set isMale based on the gender value
       this.isMale = newValue === 'M'
+    }
+  },
+  mounted() {
+    if (this.patientData) {
+      const admin = this.patientData.admin
+      if (!admin) return
+      this.name = admin.name
+      this.khmerName = admin.khmerName
+      this.dob = admin.dob != null ? this.formatDateForInput(admin.dob) : null
+      this.age = admin.age
+      this.gender = admin.gender
+      this.contactNo = admin.contactNo
+      this.regDate = this.formatDateForInput(new Date().toISOString())
+      this.queueNo = admin.queueNo
+      this.village = admin.village
+      this.familyGroup = admin.familyGroup
+      // this.pregnant = admin.pregnant
+      // this.lastMenstrualPeriod =
+      //   admin.lastMenstrualPeriod != null
+      //     ? this.formatDateForInput(admin.lastMenstrualPeriod)
+      //     : null
+      this.drugAllergies = admin.drugAllergies
+      this.photo = admin.photo
+      // this.sentToId = admin.sentToId
+      this.selectedPhoto = this.photo ? `data:image/png;base64,${atob(this.photo)}` : ''
     }
   },
   emits: ['patientVisitCreated'],
@@ -391,8 +419,6 @@ export default defineComponent({
               age: this.ageComputed,
               vid: response.data['vid'],
             });
-            // Reset all the fields
-            this.resetFields();
           })
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
@@ -487,31 +513,15 @@ export default defineComponent({
       }
     },
 
-    resetFields() {
-      this.name = '';
-      this.khmerName = '';
-      this.dob = null;
-      this.age = null;
-      this.gender = '';
-      this.contactNo = '';
-      this.regDate = '';
-      this.queueNo = '';
-      this.village = '';
-      this.familyGroup = '';
-      this.pregnant = null;
-      this.lastMenstrualPeriod = null;
-      this.drugAllergies = '';
-      this.selectedPhoto = '';
-      this.photo = ''; 
-      this.sentToId = null;
-      this.isEditing = false;
-      this.isMale = false;
-    },
-    formatDateForInput(date: Date) {
-      const year = date.getFullYear()
-      const month = (date.getMonth() + 1).toString().padStart(2, '0')
-      const day = date.getDate().toString().padStart(2, '0')
+    formatDateForInput(dateString: string) {
+      const date = new Date(dateString)
 
+      // Get the date components (year, month, day) of date in local timezone
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+
+      // Return the formatted date string
       return `${year}-${month}-${day}`
     },
   }
