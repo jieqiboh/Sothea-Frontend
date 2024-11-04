@@ -69,6 +69,7 @@ import axios, { AxiosError, type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import { BaseURL } from '@/main';
+import DentalModal from '@/components/DentalModal.vue';
 
 export default defineComponent({
   components: {
@@ -83,6 +84,7 @@ export default defineComponent({
     HeightWeightModal,
     VisualAcuityModal,
     FallRiskModal,
+    DentalModal,
     DrConsultModal,
     AddNewVisitModal
   },
@@ -125,6 +127,8 @@ export default defineComponent({
           return 'VisualAcuityModal'
         case 'fall-risk':
           return 'FallRiskModal'
+        case 'dental':
+          return 'DentalModal'
         case 'dr-consult':
           return 'DrConsultModal'
         case 'add-new-visit':
