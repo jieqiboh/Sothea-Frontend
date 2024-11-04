@@ -1,0 +1,395 @@
+<template>
+    <div class="flex items-center justify-center">
+        <div class="flex flex-col rounded-lg w-3/4 max-h-fit border border-gray-300 p-10">
+            <h1>Fall Risk (For patients above 60)</h1>
+            <br />
+
+            <!-- History of fall within past 12 months -->
+            <div class="flex flex-col mt-4">
+                <div class="flex flex-row">
+                    <div class="font-medium text-sm">History of fall within the past 12 months:</div>
+                </div>
+
+                <!-- Options (displayed vertically) -->
+                <div class="flex flex-col items-start mt-2 space-y-2">
+                    <label>
+                        <input type="radio" name="fallHistory" v-model="fallHistory" :value="'a'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">No fall (Score 0)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="fallHistory" v-model="fallHistory" :value="'b'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">1 fall prior to admission (Score 1)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="fallHistory" v-model="fallHistory" :value="'c'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">2 or more falls prior to admission (Score 5)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="fallHistory" v-model="fallHistory" :value="'d'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">1 or more falls during current admission (Score 5)</span>
+                    </label>
+                </div>
+            </div>
+
+
+            <!-- Cognitive status -->
+            <div class="flex flex-col mt-4">
+                <div class="flex flex-row">
+                    <div class="font-medium text-sm">Cognitive status:</div>
+                </div>
+
+                <!-- Options (displayed vertically) -->
+                <div class="flex flex-col items-start mt-2 space-y-2">
+                    <label>
+                        <input type="radio" name="cognitiveStatus" v-model="cognitiveStatus" :value="'a'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Intact (Score 0)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="cognitiveStatus" v-model="cognitiveStatus" :value="'b'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Minimally impaired (Score 1)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="cognitiveStatus" v-model="cognitiveStatus" :value="'c'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Moderately impaired (Score 2)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="cognitiveStatus" v-model="cognitiveStatus" :value="'d'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Severely impaired (Score 3)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Continence problems -->
+            <div class="flex flex-col mt-4">
+                <div class="flex flex-row">
+                    <div class="font-medium text-sm">Continence problems:</div>
+                </div>
+
+                <!-- Options (displayed vertically) -->
+                <div class="flex flex-col items-start mt-2 space-y-2">
+                    <label>
+                        <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'a'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">No continence problems or IDC in-situ (Score 0)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'b'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Incontinence of urine and/or faeces (Score 1)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'c'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Frequency (empties bladder > 6 times daily)/ Diarrhoea (Score
+                            1)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'d'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Urgency (Score 1)</span>
+                    </label>
+
+
+                    <label>
+                        <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'e'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Needing nocturnal toileting more than 2 times daily (Score 1)</span>
+                    </label>
+                </div>
+            </div>
+
+
+            <!-- Safety Awareness -->
+            <div class="flex flex-col mt-4">
+                <div class="flex flex-row">
+                    <div class="font-medium text-sm">Safety Awareness:</div>
+                </div>
+
+                <!-- Options (displayed vertically) -->
+                <div class="flex flex-col items-start mt-2 space-y-2">
+                    <label>
+                        <input type="radio" name="safetyAwareness" v-model="safetyAwareness" :value="'a'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Good awareness and requests appropriate assistance (Score 0)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="safetyAwareness" v-model="safetyAwareness" :value="'b'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Occasional risk-taking behaviours (Score 1)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="safetyAwareness" v-model="safetyAwareness" :value="'c'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Inappropriate fear for activities (Score 2)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="safetyAwareness" v-model="safetyAwareness" :value="'d'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Frequent risk-taking behaviours (Score 3)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Unsteadiness when standing, transferring and/or walking -->
+            <div class="flex flex-col mt-4">
+                <div class="flex flex-row">
+                    <div class="font-medium text-sm">Unsteadiness when standing, transferring and/or walking:
+                    </div>
+                </div>
+
+                <!-- Options (displayed vertically) -->
+                <div class="flex flex-col items-start mt-2 space-y-2">
+                    <label>
+                        <input type="radio" name="unsteadiness" v-model="unsteadiness" :value="'a'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Steady gait or complete dependent or on traction (Score 0)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="unsteadiness" v-model="unsteadiness" :value="'b'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Minimally unsteadiness which needs supervision (Score 1)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="unsteadiness" v-model="unsteadiness" :value="'c'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Moderately unsteadiness which require hands-on assist at times (Score
+                            4)</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="unsteadiness" v-model="unsteadiness" :value="'d'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">Severely unsteadiness and need constant hands-on assist (Score
+                            5)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Current Score Display -->
+            <div class="font-medium text-lg mt-4" :class="{ 'text-red-500': currentScore >= 8 }">Current Score: {{ currentScore }}</div>
+
+            <!-- Edit Button -->
+            <div class="flex flex-row-reverse w-full mt-5">
+                <button v-if="!isEditing && !isAdd" @click="toggleEdit"
+                    class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+                    Edit
+                </button>
+            </div>
+
+            <!-- Save Edits Button -->
+            <div class="flex flex-row-reverse w-full mt-5">
+                <button v-if="isEditing && !isAdd" @click="submitData"
+                    class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+                    Save Edits
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, type PropType } from 'vue'
+import axios, { AxiosError, type AxiosResponse } from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
+import type Patient from '@/types/Patient'
+import { BaseURL } from '@/main'
+import type FallRisk from '@/types/FallRisk'
+export default defineComponent({
+    props: {
+        patientId: {
+            type: String,
+            default: null
+        },
+        patientData: {
+            type: Object as PropType<Patient>,
+            default: null
+        },
+        isAdd: {
+            type: Boolean,
+            default: true
+        },
+        patientVid: {
+            type: String,
+            default: null
+        }
+    },
+    computed: {
+        currentScore() {
+            const scoresMap = {
+                'fallHistory': {
+                    'a': 0,
+                    'b': 1,
+                    'c': 5,
+                    'd': 5
+                },
+                'cognitiveStatus': {
+                    'a': 0,
+                    'b': 1,
+                    'c': 2,
+                    'd': 3
+                },
+                'continenceProblems': {
+                    'a': 0,
+                    'b': 1,
+                    'c': 1,
+                    'd': 1,
+                    'e': 1
+                },
+                'safetyAwareness': {
+                    'a': 0,
+                    'b': 1,
+                    'c': 2,
+                    'd': 3
+                },
+                'unsteadiness': {
+                    'a': 0,
+                    'b': 1,
+                    'c': 4,
+                    'd': 5
+                }
+            };
+
+            let totalScore = 0;
+            totalScore += scoresMap['fallHistory'][this.fallHistory] || 0;
+            totalScore += scoresMap['cognitiveStatus'][this.cognitiveStatus] || 0;
+            totalScore += scoresMap['continenceProblems'][this.continenceProblems] || 0;
+            totalScore += scoresMap['safetyAwareness'][this.safetyAwareness] || 0;
+            totalScore += scoresMap['unsteadiness'][this.unsteadiness] || 0;
+            console.log(totalScore);
+            return totalScore;
+        }
+    },
+    watch: {
+        patientData: function (newVal: Patient, oldVal: Patient) {
+            // watch it
+            if (!this.isAdd) {
+                const fallRisk = this.patientData.fallrisk
+                if (!fallRisk) {
+                    this.fallHistory = ''
+                    this.cognitiveStatus = ''
+                    this.continenceProblems = ''
+                    this.safetyAwareness = ''
+                } else {
+                    this.fallHistory = fallRisk.fallHistory
+                    this.cognitiveStatus = fallRisk.cognitiveStatus
+                    this.continenceProblems = fallRisk.continenceProblems
+                    this.safetyAwareness = fallRisk.safetyAwareness
+                    this.unsteadiness = fallRisk.unsteadiness
+                }
+            }
+        },
+    },
+    created() {
+        if (!this.isAdd) {
+            const fallRisk = this.patientData.fallrisk
+            if (!fallRisk) return
+            this.fallHistory = fallRisk.fallHistory
+            this.cognitiveStatus = fallRisk.cognitiveStatus
+            this.continenceProblems = fallRisk.continenceProblems
+            this.safetyAwareness = fallRisk.safetyAwareness
+            this.unsteadiness = fallRisk.unsteadiness
+        }
+    },
+    data() {
+        return {
+            fallHistory: '' as 'a' | 'b' | 'c' | 'd',              // restrict to valid keys
+            cognitiveStatus: '' as 'a' | 'b' | 'c' | 'd',          // restrict to valid keys
+            continenceProblems: '' as 'a' | 'b' | 'c' | 'd' | 'e', // restrict to valid keys
+            safetyAwareness: '' as 'a' | 'b' | 'c' | 'd',          // restrict to valid keys
+            unsteadiness: '' as 'a' | 'b' | 'c' | 'd',             // restrict to valid keys
+            isEditing: false,
+        }
+    },
+    methods: {
+        async submitData() {
+            const toast = useToast()
+            try {
+                if (
+                    this.fallHistory === '' ||
+                    this.cognitiveStatus === '' ||
+                    this.continenceProblems === '' ||
+                    this.safetyAwareness === '' ||
+                    this.unsteadiness === ''
+                ) {
+                    toast.error('Please select options for all fields')
+                    return
+                }
+                const fallRisk: FallRisk = {
+                    // need to define outside to catch missing fields
+                    fallHistory: this.fallHistory,
+                    cognitiveStatus: this.cognitiveStatus,
+                    continenceProblems: this.continenceProblems,
+                    safetyAwareness: this.safetyAwareness,
+                    unsteadiness: this.unsteadiness
+                }
+                await axios
+                    .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
+                        fallRisk: fallRisk
+                    })
+                    .then((response) => {
+                        console.log(response)
+                        console.log('Fall Risk posted successfully!')
+                        this.toggleEdit() // to switch back to read-only mode
+                        toast.success('Fall Risk saved successfully!')
+                    })
+            } catch (error: unknown) {
+                if (axios.isAxiosError(error)) {
+                    const axiosError = error as AxiosError; // Safe casting
+                    if (axiosError.response) {
+                        // The request was made and server responded with a status code out of range 2xx
+                        console.log(axiosError.response.data)
+                        toast.error(axiosError.message)
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        console.log(error.request)
+                        toast.error('No server response received, check your connection.')
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log('Error', axiosError.message);
+                        toast.error('An internal server error occurred.')
+                    }
+                } else {
+                    // No response received at all
+                    console.log(error)
+                    toast.error('An internal server error occurred.')
+                }
+            }
+        },
+        toggleEdit() {
+            console.log('toggleEdit')
+            this.isEditing = !this.isEditing
+            console.log(this.isEditing)
+        }
+    }
+})
+</script>
+
+<style scoped>
+h1 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+</style>
