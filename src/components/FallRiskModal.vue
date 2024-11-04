@@ -273,11 +273,11 @@ export default defineComponent({
             };
 
             let totalScore = 0;
-            totalScore += scoresMap['fallHistory'][this.fallHistory];
-            totalScore += scoresMap['cognitiveStatus'][this.cognitiveStatus];
-            totalScore += scoresMap['continenceProblems'][this.continenceProblems];
-            totalScore += scoresMap['safetyAwareness'][this.safetyAwareness];
-            totalScore += scoresMap['unsteadiness'][this.unsteadiness];
+            totalScore += scoresMap['fallHistory'][this.fallHistory] || 0;
+            totalScore += scoresMap['cognitiveStatus'][this.cognitiveStatus] || 0;
+            totalScore += scoresMap['continenceProblems'][this.continenceProblems] || 0;
+            totalScore += scoresMap['safetyAwareness'][this.safetyAwareness] || 0;
+            totalScore += scoresMap['unsteadiness'][this.unsteadiness] || 0;
             console.log(totalScore);
             return totalScore;
         }
