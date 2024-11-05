@@ -16,7 +16,7 @@
       <!-- Tuberculosis -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Tuberculosis</div>
+          <div class="font-normal text-sm w-1/3">Tuberculosis <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -36,7 +36,7 @@
       <!-- Diabetes -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Diabetes</div>
+          <div class="font-normal text-sm w-1/3">Diabetes <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -56,7 +56,7 @@
       <!-- Hypertension -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Hypertension</div>
+          <div class="font-normal text-sm w-1/3">Hypertension <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -76,7 +76,7 @@
       <!-- Hyperlipidemia -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Hyperlipidemia</div>
+          <div class="font-normal text-sm w-1/3">Hyperlipidemia <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -96,7 +96,7 @@
       <!-- Chronic Joint Pains -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Chronic Joint Pains</div>
+          <div class="font-normal text-sm w-1/3">Chronic Joint Pains <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -116,7 +116,7 @@
       <!-- Chronic Muscle Aches -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Chronic Muscle Aches</div>
+          <div class="font-normal text-sm w-1/3">Chronic Muscle Aches <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -136,7 +136,7 @@
       <!-- STD -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Sexually Transmitted Disease</div>
+          <div class="font-normal text-sm w-1/3">Sexually Transmitted Disease <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -355,5 +355,8 @@ export default defineComponent({
 h1 {
   font-size: 1.25rem;
   font-weight: 500;
+}
+.req {
+        color: red;
 }
 </style>

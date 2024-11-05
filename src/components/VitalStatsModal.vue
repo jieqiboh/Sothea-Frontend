@@ -8,7 +8,7 @@
         <div class="flex flex-row mb-2">
           <!-- Temperature -->
           <div class="w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Temperature </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> Temperature <span class="req">*</span></label>
             <input v-model="temperature" type="number" step="0.01" placeholder="Degree Celsius"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
               :disabled="!isEditing" @keydown="preventNegative" min="0" />
@@ -16,7 +16,7 @@
 
           <!-- SpO2 -->
           <div class="ml-3 w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> SpO2 </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> SpO2 <span class="req">*</span></label>
             <input v-model="spO2" type="number" step="0.01" placeholder="%"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
               :disabled="!isEditing" @keydown="preventNegative" min="0" />
@@ -27,14 +27,14 @@
         <div class="flex flex-row mb-2">
           <!-- Systolic BP1 -->
           <div class="w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Systolic BP1 </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> Systolic BP1 <span class="req">*</span></label>
             <input v-model="systolicBP1" type="number" step="0.01" placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
               :disabled="!isEditing" @keydown="preventNegative" min="0" />
           </div>
           <!-- Systolic BP2 -->
           <div class="ml-3 w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Systolic BP2 </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> Systolic BP2 <span class="req">*</span></label>
             <input v-model="systolicBP2" type="number" step="0.01" placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
               :disabled="!isEditing" @keydown="preventNegative" min="0" />
@@ -42,7 +42,7 @@
 
           <!-- Avg Systolic BP -->
           <div class="ml-3 w-1/3">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Avg Systolic BP </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> Avg Systolic BP <span class="req">*</span></label>
             <input :value="avgSystolicBP" disabled type="number" step="0.01" placeholder=""
               class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
           </div>
@@ -52,14 +52,14 @@
         <div class="flex flex-row mb-2">
           <!-- Diastolic BP1 -->
           <div class="w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Diastolic BP1 </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> Diastolic BP1 <span class="req">*</span></label>
             <input v-model="diastolicBP1" type="number" step="0.01" placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
               :disabled="!isEditing" @keydown="preventNegative" min="0" />
           </div>
           <!-- Diastolic BP2 -->
           <div class="ml-3 w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Diastolic BP2 </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> Diastolic BP2 <span class="req">*</span></label>
             <input v-model="diastolicBP2" type="number" step="0.01" placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
               :disabled="!isEditing" @keydown="preventNegative" min="0" />
@@ -68,7 +68,7 @@
           <!-- Avg Diastolic BP -->
           <div class="ml-3 w-1/3">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Avg Diastolic BP
+              Avg Diastolic BP <span class="req">*</span>
             </label>
             <input :value="avgDiastolicBP" disabled type="number" step="0.01" placeholder=""
               class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
@@ -79,14 +79,14 @@
         <div class="flex flex-row mb-2">
           <!-- HR1 -->
           <div class="w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> HR1 </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> HR1 <span class="req">*</span></label>
             <input v-model="hr1" type="number" step="1" placeholder="BPM"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
               :disabled="!isEditing" @keydown="preventNegative" min="0" />
           </div>
           <!-- HR2 -->
           <div class="ml-3 w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> HR2 </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> HR2 <span class="req">*</span></label>
             <input v-model="hr2" type="number" step="1" placeholder="BPM"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
               :disabled="!isEditing" @keydown="preventNegative" min="0" />
@@ -94,7 +94,7 @@
 
           <!-- Avg HR -->
           <div class="ml-3 w-1/3">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Avg HR </label>
+            <label for="" class="mb-1 block text-sm font-medium text-dark"> Avg HR <span class="req">*</span></label>
             <input :value="avgHR" disabled type="number" step="1" placeholder=""
               class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
           </div>
@@ -105,7 +105,7 @@
           <!-- Random Blood Glucose (mmol/L) -->
           <div class="w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Random Blood Glucose (mmol/L)
+              Random Blood Glucose (mmol/L) <span class="req">*</span>
             </label>
             <input v-model="randomBloodGlucoseMmolL" type="number" step="0.01" placeholder="mmol/L"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
@@ -115,7 +115,7 @@
           <!-- Random Blood Glucose (mg/dL) -->
           <div class="ml-3 w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Random Blood Glucose (mg/dL)
+              Random Blood Glucose (mg/dL) <span class="req">*</span>
             </label>
             <input v-model="randomBloodGlucoseMmolLp" type="number" step="0.01" placeholder="mg/dL"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
@@ -382,5 +382,8 @@ export default defineComponent({
 h1 {
   font-size: 1.25rem;
   font-weight: 500;
+}
+.req {
+        color: red;
 }
 </style>

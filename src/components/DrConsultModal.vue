@@ -16,7 +16,7 @@
       <!-- Healthy -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Healthy</div>
+          <div class="font-normal text-sm w-1/3">Healthy <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -36,7 +36,7 @@
       <!-- MSK -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">MSK</div>
+          <div class="font-normal text-sm w-1/3">MSK <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -54,7 +54,7 @@
       <!-- CVS -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">CVS</div>
+          <div class="font-normal text-sm w-1/3">CVS <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -72,7 +72,7 @@
       <!-- Respi -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">Respi</div>
+          <div class="font-normal text-sm w-1/3">Respi <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -90,7 +90,7 @@
       <!-- GU -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">GU</div>
+          <div class="font-normal text-sm w-1/3">GU <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -108,7 +108,7 @@
       <!-- GIT -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">GIT</div>
+          <div class="font-normal text-sm w-1/3">GIT <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -126,7 +126,7 @@
       <!-- EYE -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">EYE</div>
+          <div class="font-normal text-sm w-1/3">EYE <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -144,7 +144,7 @@
       <!-- DERM -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal text-sm w-1/3">DERM</div>
+          <div class="font-normal text-sm w-1/3">DERM <span class="req">*</span></div>
 
           <div class="flex items-center w-1/6">
             <label class="inline-flex items-center">
@@ -161,7 +161,7 @@
       <!-- Others -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row items-center">
-          <div class="font-normal text-sm w-1/3">Others:</div>
+          <div class="font-normal text-sm w-1/3">Others: <span class="req">*</span></div>
 
           <div class="flex w-1/3">
             <input v-model="others" type="text" placeholder="Specify"
@@ -208,7 +208,7 @@
       <!-- Referral Needed? -->
       <div class="flex flex-col mt-2">
         <div class="flex flex-row">
-          <div class="font-normal items-center inline-flex text-sm w-1/3">Referral Needed?</div>
+          <div class="font-normal items-center inline-flex text-sm w-1/3">Referral Needed? <span class="req">*</span></div>
 
           <div class="flex">
             <div class="flex items-center pr-7">
@@ -489,5 +489,8 @@ export default defineComponent({
 h1 {
   font-size: 1.25rem;
   font-weight: 500;
+}
+.req {
+        color: red;
 }
 </style>

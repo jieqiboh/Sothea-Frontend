@@ -17,7 +17,7 @@
       <!-- Past Smoking History -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal items-center inline-flex text-sm w-1/3">Past Smoking History</div>
+          <div class="font-normal items-center inline-flex text-sm w-1/3">Past Smoking History <span class="req">*</span></div>
 
           <div class="flex w-1/6">
             <div class="flex items-center pr-7">
@@ -46,7 +46,7 @@
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
           <div class="font-normal items-center inline-flex text-sm w-1/3">
-            Current Smoking History
+            Current Smoking History <span class="req">*</span>
           </div>
 
           <div class="flex w-1/6">
@@ -75,7 +75,7 @@
       <!-- Alcohol History -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
-          <div class="font-normal items-center inline-flex text-sm w-1/3">Alcohol History</div>
+          <div class="font-normal items-center inline-flex text-sm w-1/3">Alcohol History <span class="req">*</span></div>
 
           <div class="flex w-1/6">
             <div class="flex items-center pr-7">
@@ -267,5 +267,8 @@ export default defineComponent({
 h1 {
   font-size: 1.25rem;
   font-weight: 500;
+}
+.req {
+        color: red;
 }
 </style>
