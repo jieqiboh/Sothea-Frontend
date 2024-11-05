@@ -8,7 +8,7 @@
             <div class="flex flex-col mt-4">
                     <div class="font-medium text-sm">Bacterial Exposure Question: Has anyone in the immediate
                         family (including a caregiver) had tooth decay or lost a tooth from tooth decay in the past
-                        year?</div>
+                        year? <span class="req">*</span></div>
                 <div class="flex flex-col items-start mt-2 space-y-2">
                     <label>
                         <input type="radio" name="pastYearDecay" v-model="pastYearDecay" :value="true"
@@ -27,7 +27,7 @@
             <!-- brushTeethPain -->
             <div class="flex flex-col mt-4">
                 <div class="font-medium text-sm">Oral Symptoms Question: Does your child complain of tooth pain or
-                    bleeding gums when they brush their teeth?</div>
+                    bleeding gums when they brush their teeth? <span class="req">*</span></div>
                 <div class="flex flex-col items-start mt-2 space-y-2">
                     <label>
                         <input type="radio" name="brushTeethPain" v-model="brushTeethPain" :value="true"
@@ -45,7 +45,7 @@
             <!-- drinkOtherWater -->
             <div class="flex flex-col mt-5">
                 <div class="font-medium text-sm">Oral Hygiene Question: Does your child wake up to drink anything
-                    other than water throughout the night?</div>
+                    other than water throughout the night? <span class="req">*</span></div>
                 <div class="flex flex-col items-start mt-5 space-y-2">
                     <label>
                         <input type="radio" name="drinkOtherWater" v-model="drinkOtherWater" :value="true"
@@ -66,7 +66,7 @@
                 <div>
                     <label for="cleanTeethFreq" class="mb-1 block text-sm font-medium text-dark">
                         How many days per week do you clean your child's teeth or supervise / monitor them brush with
-                        fluoride toothpaste twice a day?
+                        fluoride toothpaste twice a day? <span class="req">*</span>
                     </label>
                     <div class="relative z-20 w-1/5">
                         <select v-model="cleanTeethFreq" :disabled="!isEditing"
@@ -92,7 +92,7 @@
                 <div>
                     <label for="sugarConsumeFreq" class="mb-1 block text-sm font-medium text-dark">
                         Diet Question: On average, how many times daily does your child consume starch or sugar (food or
-                        drinks) between meals?
+                        drinks) between meals? <span class="req">*</span>
                     </label>
                     <div class="relative z-20 w-1/5">
                         <select v-model="sugarConsumeFreq" :disabled="!isEditing"
@@ -138,7 +138,7 @@
             <!-- Referral Needed? -->
             <div class="flex flex-col mt-2">
                 <div class="flex flex-row">
-                    <div class="font-normal items-center inline-flex text-sm w-1/3">Referral Needed?</div>
+                    <div class="font-normal items-center inline-flex text-sm w-1/3">Referral Needed? <span class="req">*</span></div>
 
                     <div class="flex">
                         <div class="flex items-center pr-7">
@@ -912,5 +912,8 @@ export default defineComponent({
 h1 {
     font-size: 1.25rem;
     font-weight: 500;
+}
+.req {
+        color: red;
 }
 </style>

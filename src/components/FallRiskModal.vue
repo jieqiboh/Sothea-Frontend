@@ -7,7 +7,7 @@
             <!-- History of fall within past 12 months -->
             <div class="flex flex-col mt-4">
                 <div class="flex flex-row">
-                    <div class="font-medium text-sm">History of fall within the past 12 months:</div>
+                    <div class="font-medium text-sm">History of fall within the past 12 months: <span class="req">*</span></div>
                 </div>
 
                 <!-- Options (displayed vertically) -->
@@ -42,7 +42,7 @@
             <!-- Cognitive status -->
             <div class="flex flex-col mt-4">
                 <div class="flex flex-row">
-                    <div class="font-medium text-sm">Cognitive status:</div>
+                    <div class="font-medium text-sm">Cognitive status: <span class="req">*</span></div>
                 </div>
 
                 <!-- Options (displayed vertically) -->
@@ -76,7 +76,7 @@
             <!-- Continence problems -->
             <div class="flex flex-col mt-4">
                 <div class="flex flex-row">
-                    <div class="font-medium text-sm">Continence problems:</div>
+                    <div class="font-medium text-sm">Continence problems: <span class="req">*</span></div>
                 </div>
 
                 <!-- Options (displayed vertically) -->
@@ -119,7 +119,7 @@
             <!-- Safety Awareness -->
             <div class="flex flex-col mt-4">
                 <div class="flex flex-row">
-                    <div class="font-medium text-sm">Safety Awareness:</div>
+                    <div class="font-medium text-sm">Safety Awareness: <span class="req">*</span></div>
                 </div>
 
                 <!-- Options (displayed vertically) -->
@@ -153,7 +153,7 @@
             <!-- Unsteadiness when standing, transferring and/or walking -->
             <div class="flex flex-col mt-4">
                 <div class="flex flex-row">
-                    <div class="font-medium text-sm">Unsteadiness when standing, transferring and/or walking:
+                    <div class="font-medium text-sm">Unsteadiness when standing, transferring and/or walking: <span class="req">*</span>
                     </div>
                 </div>
 
@@ -391,5 +391,8 @@ export default defineComponent({
 h1 {
     font-size: 1.25rem;
     font-weight: 500;
+}
+.req {
+        color: red;
 }
 </style>

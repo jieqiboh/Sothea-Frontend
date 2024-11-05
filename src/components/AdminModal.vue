@@ -9,7 +9,7 @@
           <div class="flex flex-row mb-2">
             <!-- Name Input -->
             <div class="w-1/2">
-              <label class="mb-1 block text-sm font-medium text-dark"> Name </label>
+              <label class="mb-1 block text-sm font-medium text-dark"> Name <span class="req">*</span></label>
               <div class="relative">
                 <input v-model="name" :disabled="!isEditing && !isAdd" type="text" placeholder="Name"
                   class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
@@ -21,7 +21,7 @@
 
             <!-- Khmer Name Input -->
             <div class="ml-2 w-1/2">
-              <label class="mb-1 block text-sm font-medium text-dark"> Khmer Name </label>
+              <label class="mb-1 block text-sm font-medium text-dark"> Khmer Name <span class="req">*</span></label>
               <div class="relative">
                 <input v-model="khmerName" :disabled="!isEditing && !isAdd" type="text" placeholder="Khmer Name"
                   class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
@@ -51,7 +51,7 @@
 
             <!-- Gender Input -->
             <div class="ml-2 w-1/4">
-              <label for="" class="mb-1 block text-sm font-medium text-dark"> Gender </label>
+              <label for="" class="mb-1 block text-sm font-medium text-dark"> Gender <span class="req">*</span></label>
               <div class="relative z-20">
                 <select v-model="gender" :disabled="!isEditing && !isAdd"
                   class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-3 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200">
@@ -69,7 +69,7 @@
           <div class="flex flex-row w-full mb-2">
             <!-- Contact No. Input -->
             <div class="w-1/2">
-              <label class="mb-1 block text-sm font-medium text-dark"> Contact No. </label>
+              <label class="mb-1 block text-sm font-medium text-dark"> Contact No. <span class="req">*</span></label>
               <div class="relative">
                 <input v-model="contactNo" :disabled="!isEditing && !isAdd" type="tel" placeholder="Contact No."
                   class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
@@ -81,7 +81,7 @@
 
             <!-- Date Registered Input -->
             <div class="ml-2 w-1/2">
-              <label class="mb-1 block text-sm font-medium text-dark"> Date Registered </label>
+              <label class="mb-1 block text-sm font-medium text-dark"> Date Registered <span class="req">*</span></label>
               <div class="relative z-20">
                 <input v-model="regDate" :disabled="!isEditing && !isAdd" type="date" :max="maxDate"
                   class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2" />
@@ -126,7 +126,7 @@
       <div class="flex flex-row w-full mb-2">
         <!-- Queue No Input -->
         <div class="mr-2 w-1/3">
-          <label class="mb-1 block text-sm font-medium text-dark"> Queue Number </label>
+          <label class="mb-1 block text-sm font-medium text-dark"> Queue Number <span class="req">*</span></label>
           <div class="relative">
             <input v-model="queueNo" :disabled="!isEditing && !isAdd" type="text" placeholder="Queue Number"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
@@ -137,7 +137,7 @@
         </div>
         <!-- Village Input -->
         <div class="w-1/3">
-          <label class="mb-1 block text-sm font-medium text-dark"> Village </label>
+          <label class="mb-1 block text-sm font-medium text-dark"> Village <span class="req">*</span></label>
           <div class="relative">
             <input v-model="village" :disabled="!isEditing && !isAdd" type="text" placeholder="Village"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
@@ -149,7 +149,7 @@
 
         <!-- Family Group Input -->
         <div class="ml-2 w-1/3">
-          <label class="mb-1 block text-sm font-medium text-dark"> Family Group </label>
+          <label class="mb-1 block text-sm font-medium text-dark"> Family Group <span class="req">*</span></label>
           <div class="relative">
             <input v-model="familyGroup" :disabled="!isEditing && !isAdd" type="text" placeholder="Family Group"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
@@ -164,7 +164,7 @@
       <div class="flex flex-row w-full mb-2">
         <!-- Pregnant Input -->
         <div class="w-1/2">
-          <label for="" class="mb-1 block text-sm font-medium text-dark"> Pregnant? </label>
+          <label for="" class="mb-1 block text-sm font-medium text-dark"> Pregnant? <span class="req">*</span></label>
           <div class="relative z-20">
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
               <img src="../assets/pregnantwoman.svg" width="25" height="25" />
@@ -208,7 +208,7 @@
         <!-- Infectious Disease Input -->
         <div class="w-1/2 ml-2">
           <label for="" class="mb-1 block text-sm font-medium text-dark">
-            Sent to Infectious Disease?
+            Sent to Infectious Disease? <span class="req">*</span>
           </label>
           <div class="relative z-20">
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
@@ -584,6 +584,9 @@ export default defineComponent({
 h1 {
   font-size: 1.25rem;
   font-weight: 500;
+}
+.req {
+        color: red;
 }
 </style>
 

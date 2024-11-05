@@ -9,7 +9,7 @@
           <!-- L eye vision -->
           <div class="w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              L eye vision (6/)
+              L eye vision (6/) <span class="req">*</span>
             </label>
             <input v-model="lEyeVision" type="number" step="1" placeholder="" @keydown="preventNegative" min="0"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
@@ -19,7 +19,7 @@
           <!-- R eye vision -->
           <div class="ml-3 w-1/2">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              R eye vision (6/)
+              R eye vision (6/) <span class="req">*</span>
             </label>
             <input v-model="rEyeVision" type="number" step="1" placeholder="" @keydown="preventNegative" min="0"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
@@ -190,5 +190,8 @@ export default defineComponent({
 h1 {
   font-size: 1.25rem;
   font-weight: 500;
+}
+.req {
+        color: red;
 }
 </style>
