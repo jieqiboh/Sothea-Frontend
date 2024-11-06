@@ -21,10 +21,6 @@
                             v-model="dateInput" @input="filterPatientsByDate(this)" :max="maxDate"/>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3 mx-5 hover:cursor-pointer">
-                    <p style="font-size:medium" class="hover:text-gray-500" @click="exportPatientData()">Export
-                        Patient Data &#x2913;</p>
-                </div>
                 <div class="flex items-center space-x-3 hover:cursor-pointer">
                     <p style="font-size:medium" class="hover:text-gray-500" @click="getData()">Refresh List
                         &#x21bb;</p>
