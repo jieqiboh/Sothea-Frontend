@@ -34,8 +34,7 @@ test('test', async ({ page }) => {
 
   // Navigate to AllPatients Page and get View / Edit Patients Page of created Patient
   await page.getByRole('link', { name: 'All Patients' }).click();
-  await page.getByPlaceholder('Search by ID/Name/Khmer Name/DOB/Contact No.').click();
-  await page.getByPlaceholder('Search by ID/Name/Khmer Name/DOB/Contact No.').fill('New Patient\'s Name');
+  await page.getByPlaceholder('Search by ID/Name/Khmer Name/').fill('New Patient\'s Name');
   await page.getByRole('cell', { name: 'New Patient\'s Name' }).first().click();
   await page.locator('img').first().click();
 
