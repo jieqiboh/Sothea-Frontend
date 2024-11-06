@@ -148,33 +148,6 @@ export default defineComponent({
                 }
             }
         },
-        async exportPatientData() {
-            const toast = useToast()
-
-            try {
-                axios({
-                    url: `${BaseURL}/export-db`,
-                    method: 'GET',
-                    responseType: 'blob', // important
-                }).then((response) => {
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', 'patientdata.csv');
-                    document.body.appendChild(link);
-                    link.click();
-                    // Cleanup
-                    link.parentNode.removeChild(link);
-                    window.URL.revokeObjectURL(url);
-                });
-            } catch (error) {
-                if (error.response) {
-                    toast.error(error.response.data.error)
-                } else { // No response received at all
-                    toast.error("An internal server error occurred.")
-                }
-            }
-        },
         searchPatient() {
             // get value of the search input
             const searchValue = document.getElementById('search-input').value;
