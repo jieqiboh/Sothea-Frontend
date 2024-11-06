@@ -50,9 +50,7 @@ test('test', async ({ page }) => {
   await page.locator('input[name="chronic-joint-pains"]').nth(1).check();
   await page.locator('input[name="chronic-muscle-aches"]').nth(1).check();
   await page.locator('input[name="std"]').nth(1).check();
-  await page.getByLabel('If Y to STD, specify:').click();
   await page.getByLabel('If Y to STD, specify:').fill('test');
-  await page.getByLabel('Others:').click();
   await page.getByLabel('Others:').fill('none');
   await page.getByRole('button', { name: 'Save Edits' }).click();
 
@@ -67,45 +65,24 @@ test('test', async ({ page }) => {
   // Update Vital Statistics of visit
   await page.getByRole('link', { name: 'Vital Statistics' }).click();
   await page.getByRole('button', { name: 'Edit' }).click();
-  await page.getByPlaceholder('Degree Celsius').click({
-    clickCount: 5
-  });
   await page.getByPlaceholder('Degree Celsius').fill('30');
-  await page.getByPlaceholder('mmHg').first().click();
-  await page.getByPlaceholder('mmHg').first().click();
   await page.getByPlaceholder('mmHg').first().fill('30');
-  await page.getByPlaceholder('mmHg').first().press('Tab');
-  await page.getByPlaceholder('mmHg').nth(1).press('Tab');
-  await page.getByPlaceholder('mmHg').nth(2).press('Tab');
-  await page.getByPlaceholder('%').click();
   await page.getByPlaceholder('%').fill('30');
-  await page.getByText('Temperature SpO2 Systolic BP1').click();
-  await page.getByPlaceholder('mmHg').nth(1).click();
   await page.getByPlaceholder('mmHg').nth(1).fill('30');
-  await page.getByPlaceholder('mmHg').nth(3).click();
   await page.getByPlaceholder('mmHg').nth(3).fill('30');
-  await page.getByPlaceholder('mmHg').nth(2).click();
   await page.getByPlaceholder('mmHg').nth(2).fill('30');
-  await page.getByPlaceholder('BPM').first().click();
   await page.getByPlaceholder('BPM').first().fill('30');
-  await page.getByPlaceholder('BPM').nth(1).click();
   await page.getByPlaceholder('BPM').nth(1).fill('30');
-  await page.getByPlaceholder('mmol/L').click();
   await page.getByPlaceholder('mmol/L').fill('30');
-  await page.getByPlaceholder('mg/dL').click();
   await page.getByPlaceholder('mg/dL').fill('30');
   await page.getByRole('button', { name: 'Save Edits' }).click();
 
   // Update Height and Weight of visit
   await page.getByRole('link', { name: 'Height and Weight' }).click();
   await page.getByRole('button', { name: 'Edit' }).click();
-  await page.getByPlaceholder('cm').click();
   await page.getByPlaceholder('cm').fill('30');
-  await page.getByPlaceholder('kg').click();
   await page.getByPlaceholder('kg').fill('30');
-  await page.getByRole('spinbutton').nth(2).click();
   await page.getByRole('spinbutton').nth(2).fill('30');
-  await page.getByRole('spinbutton').nth(3).click();
   await page.getByRole('spinbutton').nth(3).fill('30');
   await page.getByRole('button', { name: 'Save Edits' }).click();
 
