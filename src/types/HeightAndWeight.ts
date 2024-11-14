@@ -5,6 +5,6 @@ export default interface HeightAndWeight {
   weight: number
   bmi: number
   bmiAnalysis: string
-  paedsHeight: number
-  paedsWeight: number
+  paedsHeight: number | null
+  paedsWeight: number | null
 }
