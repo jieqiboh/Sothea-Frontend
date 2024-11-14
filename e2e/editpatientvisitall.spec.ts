@@ -64,7 +64,6 @@ test('test', async ({ page }) => {
   await page.getByPlaceholder('BPM').first().fill('99')
   await page.getByPlaceholder('BPM').nth(1).fill('87')
   await page.getByPlaceholder('mmol/L').fill('6.9')
-  await page.getByPlaceholder('mg/dL').fill('124.2')
   await page.getByRole('button', { name: 'Save Edits' }).click()
 
   // Edit all HeightAndWeight Modal fields
