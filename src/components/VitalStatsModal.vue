@@ -111,16 +111,6 @@
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
               :disabled="!isEditing" @keydown="preventNegative" min="0" />
           </div>
-
-          <!-- Random Blood Glucose (mg/dL) -->
-          <div class="ml-3 w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Random Blood Glucose (mg/dL) <span class="req">*</span>
-            </label>
-            <input v-model="randomBloodGlucoseMmolLp" type="number" step="0.01" placeholder="mg/dL"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
-          </div>
         </div>
 
         <!-- Edit Button -->
@@ -187,7 +177,6 @@ export default defineComponent({
           this.hr1 = null
           this.hr2 = null
           this.randomBloodGlucoseMmolL = null
-          this.randomBloodGlucoseMmolLp = null
         } else {
           this.temperature = vitalStatistics.temperature
           this.spO2 = vitalStatistics.spO2
@@ -198,7 +187,6 @@ export default defineComponent({
           this.hr1 = vitalStatistics.hr1
           this.hr2 = vitalStatistics.hr2
           this.randomBloodGlucoseMmolL = vitalStatistics.randomBloodGlucoseMmolL
-          this.randomBloodGlucoseMmolLp = vitalStatistics.randomBloodGlucoseMmolLp
         }
       }
     },
@@ -217,7 +205,6 @@ export default defineComponent({
       hr2: null as number | null,
       averageHR: null as number | null,
       randomBloodGlucoseMmolL: null as number | null,
-      randomBloodGlucoseMmolLp: null as number | null,
       isEditing: false
     }
   },
@@ -254,7 +241,6 @@ export default defineComponent({
       this.hr1 = vitalStatistics.hr1
       this.hr2 = vitalStatistics.hr2
       this.randomBloodGlucoseMmolL = vitalStatistics.randomBloodGlucoseMmolL
-      this.randomBloodGlucoseMmolLp = vitalStatistics.randomBloodGlucoseMmolLp
     }
   },
   methods: {
@@ -297,10 +283,6 @@ export default defineComponent({
           toast.error('Please enter Random Blood Glucose (mmol/L)')
           return
         }
-        if (this.randomBloodGlucoseMmolLp === null) {
-          toast.error('Please enter Random Blood Glucose (mg/dL)')
-          return
-        }
         if (this.avgSystolicBP === null) {
           toast.error('Average Systolic BP cannot be empty')
           return
@@ -327,7 +309,6 @@ export default defineComponent({
           hr2: this.hr2,
           averageHR: this.avgHR, // pre-computed value
           randomBloodGlucoseMmolL: this.randomBloodGlucoseMmolL,
-          randomBloodGlucoseMmolLp: this.randomBloodGlucoseMmolLp
         }
         await axios
           .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {

@@ -13,5 +13,4 @@ export default interface VitalStatistics {
   hr2: number
   averageHR: number
   randomBloodGlucoseMmolL: number
-  randomBloodGlucoseMmolLp: number
 }

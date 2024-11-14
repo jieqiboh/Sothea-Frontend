@@ -74,7 +74,6 @@ test('test', async ({ page }) => {
   await page.getByPlaceholder('BPM').first().fill('30');
   await page.getByPlaceholder('BPM').nth(1).fill('30');
   await page.getByPlaceholder('mmol/L').fill('30');
-  await page.getByPlaceholder('mg/dL').fill('30');
   await page.getByRole('button', { name: 'Save Edits' }).click();
 
   // Update Height and Weight of visit
@@ -171,7 +170,6 @@ test('test', async ({ page }) => {
   expect(await page.getByPlaceholder('BPM').first().inputValue()).toBe('30');
   expect(await page.getByPlaceholder('BPM').nth(1).inputValue()).toBe('30');
   expect(await page.getByPlaceholder('mmol/L').inputValue()).toBe('30');
-  expect(await page.getByPlaceholder('mg/dL').inputValue()).toBe('30');
 
   // Assert Height and Weight correct
   await page.getByRole('link', { name: 'Height and Weight' }).click();
