@@ -13,6 +13,26 @@
         </div>
       </div>
 
+      <!-- Well -->
+      <div class="flex flex-col mt-4">
+        <div class="flex flex-row">
+          <div class="font-normal text-sm w-1/3">WELL <span class="req">*</span></div>
+
+          <div class="flex items-center w-1/6">
+            <label class="inline-flex items-center">
+              <input type="radio" name="well" class="w-4 h-4" v-model="well" :value="true"
+                :disabled="!isEditing" />
+            </label>
+          </div>
+          <div class="flex items-center w-1/6">
+            <label class="inline-flex items-center">
+              <input type="radio" name="well" class="w-4 h-4" v-model="well" :value="false"
+                :disabled="!isEditing" />
+            </label>
+          </div>
+        </div>
+      </div>
+
       <!-- MSK -->
       <div class="flex flex-col mt-4">
         <div class="flex flex-row">
@@ -277,6 +297,7 @@ export default defineComponent({
   },
   data() {
     return {
+      well: null as boolean | null,
       msk: null as boolean | null,
       cvs: null as boolean | null,
       respi: null as boolean | null,
@@ -301,6 +322,7 @@ export default defineComponent({
         // In View / Edit Page
         const drConsult = this.patientData.doctorsconsultation
         if (!drConsult) {
+          this.well = null
           this.msk = null
           this.cvs = null
           this.respi = null
@@ -316,6 +338,7 @@ export default defineComponent({
           this.referralLoc = ''
           this.remarks = ''
         } else {
+          this.well = drConsult.well
           this.msk = drConsult.msk
           this.cvs = drConsult.cvs
           this.respi = drConsult.respi
@@ -338,6 +361,7 @@ export default defineComponent({
     if (!this.isAdd) {
       const drConsult = this.patientData.doctorsconsultation
       if (!drConsult) return
+      this.well = drConsult.well
       this.msk = drConsult.msk
       this.cvs = drConsult.cvs
       this.respi = drConsult.respi
@@ -358,6 +382,10 @@ export default defineComponent({
     async submitData() {
       const toast = useToast()
       try {
+        if (this.well === null) {
+          toast.error('Please indicate if patient is well')
+          return
+        }
         if (this.msk === null) {
           toast.error('Please indicate if patient has MSK')
           return
@@ -396,6 +424,7 @@ export default defineComponent({
         }
         const doctorsConsultation: DoctorsConsultation = {
           // need to define outside to catch missing fields
+          well: this.well,
           msk: this.msk,
           cvs: this.cvs,
           respi: this.respi,

@@ -102,6 +102,7 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: 'Edit' }).click();
   await page.locator('div:nth-child(4) > div > div:nth-child(2)').click();
   await page.locator('input[name="msk"]').first().check();
+  await page.locator('input[name="well"]').first().check();
   await page.locator('input[name="cvs"]').first().check();
   await page.locator('input[name="respi"]').first().check();
   await page.locator('input[name="gu"]').first().check();
@@ -190,6 +191,7 @@ test('test', async ({ page }) => {
   // Assert Doctor's Consultation correct
   await page.getByRole('link', { name: 'Doctor\'s Consult' }).click();
   expect(await page.locator('input[name="msk"]').first().isChecked()).toBe(true);
+  expect(await page.locator('input[name="well"]').first().isChecked()).toBe(true);
   expect(await page.locator('input[name="cvs"]').first().isChecked()).toBe(true);
   expect(await page.locator('input[name="respi"]').first().isChecked()).toBe(true);
   expect(await page.locator('input[name="gu"]').first().isChecked()).toBe(true);

@@ -1,6 +1,7 @@
 export default interface DoctorsConsultation {
   id?: number
   vid?: number
+  well: boolean
   msk: boolean
   cvs: boolean
   respi: boolean
