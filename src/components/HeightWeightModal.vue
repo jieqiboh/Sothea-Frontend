@@ -227,17 +227,11 @@ export default defineComponent({
           toast.error('Weight cannot be negative')
           return
         }
-        if (this.paedsHeight === null) {
-          toast.error('Please enter Paeds: Height %')
-          return
-        } else if (this.paedsHeight < 0) {
+        if (this.paedsHeight && this.paedsHeight < 0) {
           toast.error('Paeds: Height % cannot be negative')
           return
         }
-        if (this.paedsWeight === null) {
-          toast.error('Please enter Paeds: Weight %')
-          return
-        } else if (this.paedsWeight < 0) {
+        if (this.paedsWeight && this.paedsWeight < 0) {
           toast.error('Paeds: Weight % cannot be negative')
           return
         }
