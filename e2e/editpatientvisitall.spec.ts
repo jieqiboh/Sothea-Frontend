@@ -126,6 +126,7 @@ test('test', async ({ page }) => {
   // Edit all DoctorConsult Modal fields
   await page.getByRole('link', { name: "Doctor's Consult" }).click()
   await page.getByRole('button', { name: 'Edit' }).click()
+  await page.locator('input[name="healthy"]').nth(1).check()
   await page.locator('input[name="msk"]').nth(1).check()
   await page.getByText('CVS').click()
   await page.locator('input[name="cvs"]').first().check()
@@ -270,6 +271,7 @@ test('test', async ({ page }) => {
 
   // Assert all DoctorConsult Modal fields correct
   await page.getByRole('link', { name: "Doctor's Consult" }).click()
+  expect(await page.locator('input[name="healthy"]').nth(1).isChecked()).toBeTruthy()
   expect(await page.locator('input[name="msk"]').nth(1).isChecked()).toBeTruthy()
   expect(await page.locator('input[name="cvs"]').first().isChecked()).toBeTruthy()
   expect(await page.locator('input[name="respi"]').nth(1).isChecked()).toBeTruthy()
