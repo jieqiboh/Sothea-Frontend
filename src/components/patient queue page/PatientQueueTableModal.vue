@@ -157,11 +157,10 @@ export default defineComponent({
             }
             // filter patients array based on the search value
             this.patientVisits = this.patientVisitsFixed.filter(patient => {
-                return patient.name.toLowerCase().includes(searchValue) ||
-                    patient.name.includes(searchValue) ||
-                    patient.id.toString().includes(searchValue) ||
-                    patient.khmerName.toLowerCase().includes(searchValue) ||
-                    (patient.drugAllergies !== undefined && patient.drugAllergies !== null) ? patient.drugAllergies.toLowerCase().includes(searchValue) : false;
+                return patient.name?.toLowerCase().includes(searchValue) ||
+                    patient.id?.toString().includes(searchValue) ||
+                    patient.khmerName?.toLowerCase().includes(searchValue) ||
+                    (patient.drugAllergies ?? "").toLowerCase().includes(searchValue);
             });
         },
         async filterPatientsByDate() {

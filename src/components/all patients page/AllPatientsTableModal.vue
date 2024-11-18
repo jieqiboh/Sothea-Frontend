@@ -173,11 +173,10 @@ export default defineComponent({
             }
             // filter patientVisits array based on the search value
             this.patientVisits = this.patientVisitsFixed.filter(patientVisit => {
-                return patientVisit.name.toLowerCase().includes(searchValue) ||
-                    patientVisit.name.includes(searchValue) ||
-                    patientVisit.id.toString().includes(searchValue) ||
-                    patientVisit.khmerName.toLowerCase().includes(searchValue) ||
-                    patientVisit.contactNo.includes(searchValue) ||
+                return patientVisit.name?.toLowerCase().includes(searchValue) ||
+                    patientVisit.id?.toString().includes(searchValue) ||
+                    patientVisit.khmerName?.toLowerCase().includes(searchValue) ||
+                    patientVisit.contactNo?.includes(searchValue) ||
                     this.searchByRegDate(patientVisit.regDate, searchValue);
             });
         },
