@@ -7,7 +7,8 @@
         @update:activeSection="setActiveSection" @openTryDeleteVisitModal="tryDeleteVisit = true" :isAdd="false" />
       <div class="flex-grow">
         <SubNavBar :id="id" :regDate="regDate" :queueNo="queueNo"
-          @openModal="openRecords" />
+          @openModal="openRecords"
+          @refresh="loadPatientData" />
         <keep-alive>
           <component :is="activeComponent" :patientId="String(id)" :patientVid="String(vid)" :patientData="patient"
             :isAdd="false" @reload="loadPatientData" @patientUpdated="handlePatientUpdated"
@@ -46,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { ComponentPublicInstance, defineComponent } from 'vue';
 
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/NavBar.vue'
