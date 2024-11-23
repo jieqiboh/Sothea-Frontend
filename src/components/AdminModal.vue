@@ -9,10 +9,17 @@
           <div class="flex flex-row mb-2">
             <!-- Name Input -->
             <div class="w-1/2">
-              <label class="mb-1 block text-sm font-medium text-dark"> Name <span class="req">*</span></label>
+              <label class="mb-1 block text-sm font-medium text-dark">
+                Name <span class="req">*</span></label
+              >
               <div class="relative">
-                <input v-model="name" :disabled="!isEditing && !isAdd" type="text" placeholder="Name"
-                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
+                <input
+                  v-model="name"
+                  :disabled="!isEditing && !isAdd"
+                  type="text"
+                  placeholder="Name"
+                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+                />
                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
                   <img src="../assets/user.svg" width="20" height="20" />
                 </span>
@@ -21,10 +28,17 @@
 
             <!-- Khmer Name Input -->
             <div class="ml-2 w-1/2">
-              <label class="mb-1 block text-sm font-medium text-dark"> Khmer Name <span class="req">*</span></label>
+              <label class="mb-1 block text-sm font-medium text-dark">
+                Khmer Name <span class="req">*</span></label
+              >
               <div class="relative">
-                <input v-model="khmerName" :disabled="!isEditing && !isAdd" type="text" placeholder="Khmer Name"
-                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
+                <input
+                  v-model="khmerName"
+                  :disabled="!isEditing && !isAdd"
+                  type="text"
+                  placeholder="Khmer Name"
+                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+                />
                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
                   <img src="../assets/user.svg" width="20" height="20" />
                 </span>
@@ -37,24 +51,41 @@
             <div class="w-1/2">
               <label class="mb-1 block text-sm font-medium text-dark"> DOB </label>
               <div class="relative z-20">
-                <input v-model="dob" :disabled="!isEditing && !isAdd" type="date" :max="maxDate"
-                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2" />
+                <input
+                  v-model="dob"
+                  :disabled="!isEditing && !isAdd"
+                  type="date"
+                  :max="maxDate"
+                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
+                />
               </div>
             </div>
 
             <!-- Age Input -->
             <div class="ml-2 w-1/4">
               <label for="" class="mb-1 block text-sm font-medium text-dark"> Age </label>
-              <input :value="ageComputed" disabled type="number" placeholder="" min="0" step="1"
-                class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
+              <input
+                :value="ageComputed"
+                disabled
+                type="number"
+                placeholder=""
+                min="0"
+                step="1"
+                class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+              />
             </div>
 
             <!-- Gender Input -->
             <div class="ml-2 w-1/4">
-              <label for="" class="mb-1 block text-sm font-medium text-dark"> Gender <span class="req">*</span></label>
+              <label for="" class="mb-1 block text-sm font-medium text-dark">
+                Gender <span class="req">*</span></label
+              >
               <div class="relative z-20">
-                <select v-model="gender" :disabled="!isEditing && !isAdd"
-                  class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-3 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200">
+                <select
+                  v-model="gender"
+                  :disabled="!isEditing && !isAdd"
+                  class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-3 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+                >
                   <option value="M">M</option>
                   <option value="F">F</option>
                 </select>
@@ -69,10 +100,17 @@
           <div class="flex flex-row w-full mb-2">
             <!-- Contact No. Input -->
             <div class="w-1/2">
-              <label class="mb-1 block text-sm font-medium text-dark"> Contact No. <span class="req">*</span></label>
+              <label class="mb-1 block text-sm font-medium text-dark">
+                Contact No. <span class="req">*</span></label
+              >
               <div class="relative">
-                <input v-model="contactNo" :disabled="!isEditing && !isAdd" type="tel" placeholder="Contact No."
-                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
+                <input
+                  v-model="contactNo"
+                  :disabled="!isEditing && !isAdd"
+                  type="tel"
+                  placeholder="Contact No."
+                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+                />
                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
                   <img src="../assets/phone.svg" width="20" height="20" />
                 </span>
@@ -81,10 +119,17 @@
 
             <!-- Date Registered Input -->
             <div class="ml-2 w-1/2">
-              <label class="mb-1 block text-sm font-medium text-dark"> Date Registered <span class="req">*</span></label>
+              <label class="mb-1 block text-sm font-medium text-dark">
+                Date Registered <span class="req">*</span></label
+              >
               <div class="relative z-20">
-                <input v-model="regDate" :disabled="!isEditing && !isAdd" type="date" :max="maxDate"
-                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2" />
+                <input
+                  v-model="regDate"
+                  :disabled="!isEditing && !isAdd"
+                  type="date"
+                  :max="maxDate"
+                  class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
+                />
               </div>
             </div>
           </div>
@@ -97,17 +142,32 @@
             <div class="w-full">
               <label class="mb-1 block text-sm font-medium text-dark"> Photo ID </label>
 
-              <div :class="[
-                'relative',
-                { 'bg-gray-200': !isEditing && !isAdd, 'bg-white': isEditing || isAdd }
-              ]">
-                <label for="file"
-                  class="flex w-full h-[11rem] justify-center items-center cursor-pointer rounded-md border border-dashed border-gray-300 p-3 mr-2">
+              <div
+                :class="[
+                  'relative',
+                  { 'bg-gray-200': !isEditing && !isAdd, 'bg-white': isEditing || isAdd }
+                ]"
+              >
+                <label
+                  for="file"
+                  class="flex w-full h-[11rem] justify-center items-center cursor-pointer rounded-md border border-dashed border-gray-300 p-3 mr-2"
+                >
                   <div>
-                    <input type="file" name="file" id="file" class="sr-only" :disabled="!isEditing && !isAdd"
-                      @change="handleImageUpload" accept=".jpg, .jpeg, .png, .heic" />
-                    <img v-if="selectedPhoto" :src="selectedPhoto" alt="Selected Image"
-                      class="object-cover rounded-lg w-52 h-40" />
+                    <input
+                      type="file"
+                      name="file"
+                      id="file"
+                      class="sr-only"
+                      :disabled="!isEditing && !isAdd"
+                      @change="handleImageUpload"
+                      accept=".jpg, .jpeg, .png, .heic"
+                    />
+                    <img
+                      v-if="selectedPhoto"
+                      :src="selectedPhoto"
+                      alt="Selected Image"
+                      class="object-cover rounded-lg w-52 h-40"
+                    />
                     <template v-else>
                       <span class="flex items-center justify-center">
                         <img src="../assets/camera.svg" height="20" width="20" />
@@ -126,10 +186,17 @@
       <div class="flex flex-row w-full mb-2">
         <!-- Queue No Input -->
         <div class="mr-2 w-1/3">
-          <label class="mb-1 block text-sm font-medium text-dark"> Queue Number <span class="req">*</span></label>
+          <label class="mb-1 block text-sm font-medium text-dark">
+            Queue Number <span class="req">*</span></label
+          >
           <div class="relative">
-            <input v-model="queueNo" :disabled="!isEditing && !isAdd" type="text" placeholder="Queue Number"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
+            <input
+              v-model="queueNo"
+              :disabled="!isEditing && !isAdd"
+              type="text"
+              placeholder="Queue Number"
+              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+            />
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
               <img src="../assets/queueno.svg" width="20" height="20" />
             </span>
@@ -137,10 +204,17 @@
         </div>
         <!-- Village Input -->
         <div class="w-1/3">
-          <label class="mb-1 block text-sm font-medium text-dark"> Village <span class="req">*</span></label>
+          <label class="mb-1 block text-sm font-medium text-dark">
+            Village <span class="req">*</span></label
+          >
           <div class="relative">
-            <input v-model="village" :disabled="!isEditing && !isAdd" type="text" placeholder="Village"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
+            <input
+              v-model="village"
+              :disabled="!isEditing && !isAdd"
+              type="text"
+              placeholder="Village"
+              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+            />
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
               <img src="../assets/house.svg" width="20" height="20" />
             </span>
@@ -149,10 +223,17 @@
 
         <!-- Family Group Input -->
         <div class="ml-2 w-1/3">
-          <label class="mb-1 block text-sm font-medium text-dark"> Family Group <span class="req">*</span></label>
+          <label class="mb-1 block text-sm font-medium text-dark">
+            Family Group <span class="req">*</span></label
+          >
           <div class="relative">
-            <input v-model="familyGroup" :disabled="!isEditing && !isAdd" type="text" placeholder="Family Group"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
+            <input
+              v-model="familyGroup"
+              :disabled="!isEditing && !isAdd"
+              type="text"
+              placeholder="Family Group"
+              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+            />
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
               <img src="../assets/users.svg" width="20" height="20" />
             </span>
@@ -164,13 +245,18 @@
       <div class="flex flex-row w-full mb-2">
         <!-- Pregnant Input -->
         <div class="w-1/2">
-          <label for="" class="mb-1 block text-sm font-medium text-dark"> Pregnant? <span class="req">*</span></label>
+          <label for="" class="mb-1 block text-sm font-medium text-dark">
+            Pregnant? <span class="req">*</span></label
+          >
           <div class="relative z-20">
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
               <img src="../assets/pregnantwoman.svg" width="25" height="25" />
             </span>
-            <select v-model="pregnant" :disabled="!isEditing && !isAdd"
-              class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200">
+            <select
+              v-model="pregnant"
+              :disabled="!isEditing && !isAdd"
+              class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+            >
               <option :value="true">Y</option>
               <option :value="false">N</option>
             </select>
@@ -184,8 +270,13 @@
         <div class="ml-2 w-1/2">
           <label class="mb-1 block text-sm font-medium text-dark"> Last Menstrual Period </label>
           <div class="relative z-20">
-            <input v-model="lastMenstrualPeriod" :disabled="(!isEditing && !isAdd) || isMale" type="date" :max="maxDate"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2" />
+            <input
+              v-model="lastMenstrualPeriod"
+              :disabled="(!isEditing && !isAdd) || isMale"
+              type="date"
+              :max="maxDate"
+              class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
+            />
           </div>
         </div>
       </div>
@@ -196,9 +287,13 @@
         <div class="w-1/2">
           <label class="mb-1 block text-sm font-medium text-dark"> Drug Allergies </label>
           <div class="relative">
-            <input v-model="drugAllergies" :disabled="!isEditing && !isAdd" type="text"
+            <input
+              v-model="drugAllergies"
+              :disabled="!isEditing && !isAdd"
+              type="text"
               placeholder="Enter Drug Allergies"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200" />
+              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+            />
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
               <img src="../assets/drug.svg" width="20" height="20" />
             </span>
@@ -214,8 +309,11 @@
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
               <img src="../assets/mask.svg" width="25" height="25" />
             </span>
-            <select v-model="sentToId" :disabled="!isEditing && !isAdd"
-              class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200">
+            <select
+              v-model="sentToId"
+              :disabled="!isEditing && !isAdd"
+              class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+            >
               <option :value="true">Y</option>
               <option :value="false">N</option>
             </select>
@@ -228,22 +326,31 @@
 
       <!-- Save Button -->
       <div class="flex flex-row-reverse w-full mt-5">
-        <button v-if="isAdd" @click="submitData"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+        <button
+          v-if="isAdd"
+          @click="submitData"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
           Save
         </button>
       </div>
       <!-- Edit Button -->
       <div class="flex flex-row-reverse w-full mt-5">
-        <button v-if="!isEditing && !isAdd" @click="toggleEdit"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+        <button
+          v-if="!isEditing && !isAdd"
+          @click="toggleEdit"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
           Edit
         </button>
       </div>
       <!-- Save Edits Button -->
       <div class="flex flex-row-reverse w-full mt-5">
-        <button v-if="isEditing && !isAdd" @click="saveChanges"
-          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+        <button
+          v-if="isEditing && !isAdd"
+          @click="saveChanges"
+          class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+        >
           Save Edits
         </button>
       </div>
@@ -255,15 +362,15 @@
 import { defineComponent, type PropType } from 'vue'
 
 import type Admin from '@/types/Admin'
-import imageCompression from 'browser-image-compression';
-import heic2any from 'heic2any';
+import imageCompression from 'browser-image-compression'
+import heic2any from 'heic2any'
 
 import axios, { Axios, AxiosError, type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import type Patient from '@/types/Patient'
 import { BaseURL } from '@/main'
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 
 export default defineComponent({
   props: {
@@ -293,7 +400,7 @@ export default defineComponent({
         if (!admin) return
         this.name = admin.name
         this.khmerName = admin.khmerName
-        this.dob = (admin.dob != null) ? this.formatDateForInput(admin.dob) : null
+        this.dob = admin.dob != null ? this.formatDateForInput(admin.dob) : null
         this.age = admin.age
         this.gender = admin.gender
         this.contactNo = admin.contactNo
@@ -430,20 +537,18 @@ export default defineComponent({
 
         if (this.isAdd && !this.isEditing) {
           // Add new patient
-          await axios
-            .post(`${BaseURL}/patient`, admin)
-            .then((response) => {
-              toast.success('New Patient created successfully!')
-              // Emit patient details to be rendered in sidebar
-              this.$emit('patientCreated', {
-                id: response.data['id'],
-                name: this.name,
-                age: this.ageComputed,
-                vid: 1, // newly created patient will always have a visit id of 1
-                regDate: this.regDate, // regDate in local timezone
-                queueNo: this.queueNo
-              })
+          await axios.post(`${BaseURL}/patient`, admin).then((response) => {
+            toast.success('New Patient created successfully!')
+            // Emit patient details to be rendered in sidebar
+            this.$emit('patientCreated', {
+              id: response.data['id'],
+              name: this.name,
+              age: this.ageComputed,
+              vid: 1, // newly created patient will always have a visit id of 1
+              regDate: this.regDate, // regDate in local timezone
+              queueNo: this.queueNo
             })
+          })
         } else if (!this.isAdd && this.isEditing) {
           // Editing an existing patient
           await axios
@@ -465,18 +570,18 @@ export default defineComponent({
         }
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
-          const axiosError = error as AxiosError; // Safe casting
+          const axiosError = error as AxiosError // Safe casting
           if (axiosError.response) {
             // The request was made and server responded with a status code out of range 2xx
             console.log(axiosError.response.data)
-            toast.error(axiosError.message) 
+            toast.error(axiosError.message)
           } else if (error.request) {
             // The request was made but no response was received
             console.log(error.request)
             toast.error('No server response received, check your connection.')
           } else {
             // Something happened in setting up the request that triggered an Error
-            console.log('Error', axiosError.message);
+            console.log('Error', axiosError.message)
             toast.error('An internal server error occurred.')
           }
         } else {
@@ -507,36 +612,36 @@ export default defineComponent({
     //   }
     // },
     async handleImageUpload(event: any) {
-      const imageFile = event.target.files[0];
-      console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-      console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+      const imageFile = event.target.files[0]
+      console.log('originalFile instanceof Blob', imageFile instanceof Blob) // true
+      console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`)
 
       const options = {
         maxSizeMB: 1,
         maxWidthOrHeight: 1920,
-        useWebWorker: true,
+        useWebWorker: true
       }
       try {
         let fileToProcess = imageFile
         // Check if the file is a .heic image
-        if (fileToProcess.type === "image/heic") {
+        if (fileToProcess.type === 'image/heic') {
           try {
             // Convert HEIC to JPEG
             const convertedBlob = await heic2any({
               blob: fileToProcess,
-              toType: "image/jpeg", 
-            });
-            fileToProcess = convertedBlob as Blob; 
+              toType: 'image/jpeg'
+            })
+            fileToProcess = convertedBlob as Blob
           } catch (heicError) {
-            console.error('HEIC conversion failed', heicError);
+            console.error('HEIC conversion failed', heicError)
             toast.error('Image upload failed, Please re-upload a JPEG, JPG, PNG or HEIC file.')
-            return;
+            return
           }
         }
 
-        const compressedFile = await imageCompression(fileToProcess, options);
-        console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+        const compressedFile = await imageCompression(fileToProcess, options)
+        console.log('compressedFile instanceof Blob', compressedFile instanceof Blob) // true
+        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`) // smaller than maxSizeMB
         const reader = new FileReader()
         reader.onload = (e) => {
           // Remove the data URL prefix to get just the base64 string
@@ -547,7 +652,7 @@ export default defineComponent({
         }
         reader.readAsDataURL(compressedFile)
       } catch (error) {
-        console.log(error);
+        console.log(error)
         this.selectedPhoto = ''
         alert('Please select a JPEG, JPG, PNG or HEIC file.')
       }
@@ -557,9 +662,9 @@ export default defineComponent({
       const date = new Date(dateString)
 
       // Get the date components (year, month, day) of date in local timezone
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
+      const year = date.getFullYear()
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const day = String(date.getDate()).padStart(2, '0')
 
       // Return the formatted date string
       return `${year}-${month}-${day}`
@@ -586,7 +691,6 @@ h1 {
   font-weight: 500;
 }
 .req {
-        color: red;
+  color: red;
 }
 </style>
-
