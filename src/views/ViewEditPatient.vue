@@ -25,28 +25,46 @@
     </div>
 
     <div class="flex">
-      <SideBar :activeSection="activeSection" :id="id" :name="name" :age="age ? age : undefined"
-        @update:activeSection="setActiveSection" @openTryDeleteVisitModal="tryDeleteVisit = true" :isAdd="false" />
+      <SideBar
+        :activeSection="activeSection"
+        :id="id"
+        :name="name"
+        :age="age ? age : undefined"
+        @update:activeSection="setActiveSection"
+        @openTryDeleteVisitModal="tryDeleteVisit = true"
+        :isAdd="false"
+      />
       <div class="flex-grow">
         <SubNavBar :id="id" :regDate="regDate" :queueNo="queueNo"
           @openModal="openRecords"
           @refresh="tryReload = true" />
         <keep-alive>
-          <component :is="activeComponent" :patientId="String(id)" :patientVid="String(vid)" :patientData="patient"
-            :isAdd="false" @reload="loadPatientData" @patientUpdated="handlePatientUpdated"
-            @patientVisitCreated="handlePatientVisitCreated">
+          <component
+            :is="activeComponent"
+            :patientId="String(id)"
+            :patientVid="String(vid)"
+            :patientData="patient"
+            :isAdd="false"
+            @reload="loadPatientData"
+            @patientUpdated="handlePatientUpdated"
+            @patientVisitCreated="handlePatientVisitCreated"
+          >
           </component>
         </keep-alive>
-
       </div>
     </div>
     <!-- Records Modal -->
     <RecordsModal :id="id" :vid="vid" :isOpen="showRecords" @close="closeRecords"> </RecordsModal>
 
     <!-- Delete Visit Confirmation Modal -->
-    <div v-if="tryDeleteVisit"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
-      <div class="bg-white rounded-lg p-10 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
+    <div
+      v-if="tryDeleteVisit"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full"
+    >
+      <div
+        class="bg-white rounded-lg p-10 max-w-full overflow-y-auto"
+        style="max-height: 95%; max-width: 60%"
+      >
         <!-- Confirmation Message -->
         <div class="text-center text-lg text-gray-800 mb-6 mt-10">
           Are you sure you want to delete this patient visit?
@@ -54,12 +72,16 @@
 
         <!-- Action Buttons -->
         <div class="flex justify-center space-x-10 my-10">
-          <button @click="handleDeleteVisit"
-            class="bg-[#3f51b5] hover:bg-[#5c6cc4] text-white font-bold py-2 px-6 rounded-md transition-colors duration-200">
+          <button
+            @click="handleDeleteVisit"
+            class="bg-[#3f51b5] hover:bg-[#5c6cc4] text-white font-bold py-2 px-6 rounded-md transition-colors duration-200"
+          >
             Yes
           </button>
-          <button @click="tryDeleteVisit = false"
-            class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-6 rounded-md transition-colors duration-200">
+          <button
+            @click="tryDeleteVisit = false"
+            class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-6 rounded-md transition-colors duration-200"
+          >
             No
           </button>
         </div>
@@ -84,15 +106,15 @@ import HeightWeightModal from '../components/HeightWeightModal.vue'
 import VisualAcuityModal from '../components/VisualAcuityModal.vue'
 import FallRiskModal from '@/components/FallRiskModal.vue'
 import DrConsultModal from '../components/DrConsultModal.vue'
-import AddNewVisitModal from '@/components/AddNewVisitModal.vue';
+import AddNewVisitModal from '@/components/AddNewVisitModal.vue'
 
 import type Patient from '@/types/Patient'
 
 import axios, { AxiosError, type AxiosResponse } from 'axios'
 import { useToast } from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css'
-import { BaseURL } from '@/main';
-import DentalModal from '@/components/DentalModal.vue';
+import { BaseURL } from '@/main'
+import DentalModal from '@/components/DentalModal.vue'
 
 export default defineComponent({
   components: {
@@ -169,15 +191,13 @@ export default defineComponent({
     },
 
     async getPatientData(id: string, vid: string) {
-      const response: AxiosResponse = await axios.get(`${BaseURL}/patient/${id}/${vid}`);
-      const { data } = response;
-      this.patient = JSON.parse(JSON.stringify(data)) as Patient;
+      const response: AxiosResponse = await axios.get(`${BaseURL}/patient/${id}/${vid}`)
+      const { data } = response
+      this.patient = JSON.parse(JSON.stringify(data)) as Patient
 
-      const admin = this.patient.admin;
-      this.age = admin.dob
-        ? new Date().getFullYear() - new Date(admin.dob).getFullYear()
-        : null;
-      this.name = admin.name;
+      const admin = this.patient.admin
+      this.age = admin.dob ? new Date().getFullYear() - new Date(admin.dob).getFullYear() : null
+      this.name = admin.name
       this.regDate = this.formatDateForInput(admin.regDate)
       this.queueNo = admin.queueNo
     },
@@ -186,9 +206,9 @@ export default defineComponent({
       const date = new Date(dateString)
 
       // Get the date components (year, month, day) of date in local timezone
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
+      const year = date.getFullYear()
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const day = String(date.getDate()).padStart(2, '0')
 
       // Return the formatted date string
       return `${year}-${month}-${day}`
@@ -200,7 +220,7 @@ export default defineComponent({
         await this.getPatientData(this.id, this.vid)
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
-          const axiosError = error as AxiosError; // Safe casting
+          const axiosError = error as AxiosError // Safe casting
           if (axiosError.response) {
             // The request was made and server responded with a status code out of range 2xx
             console.log(axiosError.response.data)
@@ -211,7 +231,7 @@ export default defineComponent({
             toast.error('No server response received, check your connection.')
           } else {
             // Something happened in setting up the request that triggered an Error
-            console.log('Error', axiosError.message);
+            console.log('Error', axiosError.message)
             toast.error('An internal server error occurred.')
           }
         } else {
@@ -222,14 +242,16 @@ export default defineComponent({
     },
     handlePatientUpdated(event: any) {
       const { id, name, age, vid, regDate, queueNo } = event
-      console.log(`Patient Updated With ID: ${id}, Name: ${name}, Age: ${age}, VID: ${vid}, Reg Date: ${regDate}, Queue No: ${queueNo}`)
+      console.log(
+        `Patient Updated With ID: ${id}, Name: ${name}, Age: ${age}, VID: ${vid}, Reg Date: ${regDate}, Queue No: ${queueNo}`
+      )
       this.name = name
       this.age = age
       this.regDate = regDate
       this.queueNo = queueNo
     },
     handlePatientVisitCreated(event: any) {
-      const { id, name, age, vid, } = event
+      const { id, name, age, vid } = event
       console.log(`Patient Created Wth ID: ${id}, Name: ${name}, Age: ${age}, VID: ${vid}`)
       this.$router.push('/patient/' + id + '/' + vid)
       this.setActiveSection('admin') // go back to admin modal
@@ -241,33 +263,33 @@ export default defineComponent({
       this.showRecords = false
     },
     async handleDeleteVisit() {
-      const toast = useToast();
+      const toast = useToast()
       try {
-        await axios.delete(`${BaseURL}/patient/${this.id}/${this.vid}`);
-        this.$router.push('/allpatients');
-        toast.success('Patient Visit deleted successfully.');
+        await axios.delete(`${BaseURL}/patient/${this.id}/${this.vid}`)
+        this.$router.push('/allpatients')
+        toast.success('Patient Visit deleted successfully.')
       } catch (error: unknown) {
         // Handle axios errors
         if (axios.isAxiosError(error)) {
-          const axiosError = error as AxiosError; // Safe casting
+          const axiosError = error as AxiosError // Safe casting
 
           if (axiosError.response) {
             // Server responded with a status code outside of the 2xx range
-            console.log(axiosError.response.data);
-            toast.error(axiosError.message || 'Failed to delete the visit');
+            console.log(axiosError.response.data)
+            toast.error(axiosError.message || 'Failed to delete the visit')
           } else if (axiosError.request) {
             // Request was made but no response received (e.g., server is down)
-            console.log(axiosError.request);
-            toast.error('No server response received, check your connection.');
+            console.log(axiosError.request)
+            toast.error('No server response received, check your connection.')
           } else {
             // Error occurred in setting up the request
-            console.log('Error', axiosError.message);
-            toast.error('An internal server error occurred.');
+            console.log('Error', axiosError.message)
+            toast.error('An internal server error occurred.')
           }
         } else {
           // Handle unknown errors (not axios related)
-          console.log(error);
-          toast.error('An internal server error occurred.');
+          console.log(error)
+          toast.error('An internal server error occurred.')
         }
       }
     }
@@ -280,7 +302,7 @@ export default defineComponent({
         this.loadPatientData()
       }
     )
-  },
+  }
 })
 </script>
 
