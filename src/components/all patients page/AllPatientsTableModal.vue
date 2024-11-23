@@ -10,7 +10,7 @@
             <div class="flex justify-between items-center py-5">
                 <div class="relative flex-grow">
                     <input type="text" id="search-input"
-                        class="rounded-lg border-transparent appearance-none w-5/12 bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                        class="rounded-lg border-transparent appearance-none w-[25rem] bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
                         placeholder="Search by ID/Name/Khmer Name/Reg Date/Contact No." @input="searchPatient"
                         @keyup.enter="searchPatient" />
                 </div>
