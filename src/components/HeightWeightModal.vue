@@ -8,18 +8,38 @@
         <div class="flex flex-row mb-2">
           <!-- Height -->
           <div class="w-1/2">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Height (cm) <span class="req">*</span></label>
-            <input v-model="height" type="number" step="1" placeholder="cm"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Height (cm) <span class="req">*</span></label
+            >
+            <input
+              v-model="height"
+              type="number"
+              step="1"
+              placeholder="cm"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
 
           <!-- Weight -->
           <div class="ml-3 w-1/2">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Weight (kg) <span class="req">*</span></label>
-            <input v-model="weight" type="number" step="0.1" placeholder="kg"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Weight (kg) <span class="req">*</span></label
+            >
+            <input
+              v-model="weight"
+              type="number"
+              step="0.1"
+              placeholder="kg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
         </div>
 
@@ -28,27 +48,51 @@
           <!-- Paeds: Height % -->
           <div class="w-1/2">
             <div class="flex flex-row content-center">
-              <button @click="showHeightModal = true" class="mr-1.5 mb-1.5" title="Paeds Height Charts">
+              <button
+                @click="showHeightModal = true"
+                class="mr-1.5 mb-1.5"
+                title="Paeds Height Charts"
+              >
                 <img src="../assets/info.svg" alt="chart" class="w-6 h-6" />
               </button>
-              <label for="" class="mb-1 pt-0.5 block text-sm font-medium text-dark"> Paeds: Height % <span class="req">*</span></label>
+              <label for="" class="mb-1 pt-0.5 block text-sm font-medium text-dark">
+                Paeds: Height % <span class="req">*</span></label
+              >
             </div>
-            <input v-model="paedsHeight" type="number" placeholder=""
+            <input
+              v-model="paedsHeight"
+              type="number"
+              placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+            />
           </div>
 
           <!-- Paeds: Weight % -->
           <div class="ml-3 w-1/2">
             <div class="flex flex-row">
-              <button @click="showWeightModal = true" class="mr-1.5 mb-1.5" title="Paeds Weight Charts">
+              <button
+                @click="showWeightModal = true"
+                class="mr-1.5 mb-1.5"
+                title="Paeds Weight Charts"
+              >
                 <img src="../assets/info.svg" alt="chart" class="w-6 h-6" />
               </button>
-              <label for="" class="mb-1 pt-0.5 block text-sm font-medium text-dark"> Paeds: Weight % <span class="req">*</span></label>
+              <label for="" class="mb-1 pt-0.5 block text-sm font-medium text-dark">
+                Paeds: Weight % <span class="req">*</span></label
+              >
             </div>
-            <input v-model="paedsWeight" type="number" placeholder=""
+            <input
+              v-model="paedsWeight"
+              type="number"
+              placeholder=""
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+            />
           </div>
         </div>
 
@@ -56,9 +100,17 @@
         <div class="flex flex-row mb-2">
           <!-- BMI -->
           <div class="w-1/3">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> BMI <span class="req">*</span></label>
-            <input :value="bmi" disabled type="number" step="0.1" placeholder=""
-              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              BMI <span class="req">*</span></label
+            >
+            <input
+              :value="bmi"
+              disabled
+              type="number"
+              step="0.1"
+              placeholder=""
+              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+            />
           </div>
         </div>
 
@@ -66,53 +118,95 @@
         <div class="flex flex-row mb-2">
           <!-- BMI Analysis-->
           <div class="w-1/3">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> BMI Analysis <span class="req">*</span></label>
-            <input :value="bmianalysis" disabled type="text" placeholder=""
-              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              BMI Analysis <span class="req">*</span></label
+            >
+            <input
+              :value="bmianalysis"
+              disabled
+              type="text"
+              placeholder=""
+              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+            />
           </div>
         </div>
 
         <!-- Edit Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button v-if="!isEditing && !isAdd" @click="toggleEdit"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+          <button
+            v-if="!isEditing && !isAdd"
+            @click="toggleEdit"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
             Edit
           </button>
         </div>
 
         <!-- Save Edits Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button v-if="isEditing && !isAdd" @click="submitData"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+          <button
+            v-if="isEditing && !isAdd"
+            @click="submitData"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
             Save Edits
           </button>
         </div>
       </div>
-
     </div>
   </div>
 
   <!-- Height Percentile Modal -->
-  <div v-if="showHeightModal"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
-    <div class="bg-white rounded-lg p-5 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
+  <div
+    v-if="showHeightModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full"
+  >
+    <div
+      class="bg-white rounded-lg p-5 max-w-full overflow-y-auto"
+      style="max-height: 95%; max-width: 60%"
+    >
       <div class="flex justify-end">
-        <button @click="showHeightModal = false" class="text-gray-700 hover:text-gray-900">Close</button>
+        <button @click="showHeightModal = false" class="text-gray-700 hover:text-gray-900">
+          Close
+        </button>
       </div>
-      <img src="../assets/height-percentile-boys.jpg" alt="height percentile boys" class="w-full mb-4" />
-      <img src="../assets/height-percentile-girls.jpg" alt="height percentile girls" class="w-full" />
+      <img
+        src="../assets/height-percentile-boys.jpg"
+        alt="height percentile boys"
+        class="w-full mb-4"
+      />
+      <img
+        src="../assets/height-percentile-girls.jpg"
+        alt="height percentile girls"
+        class="w-full"
+      />
     </div>
   </div>
 
   <!-- Weight Percentile Modal -->
-  <div v-if="showWeightModal"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
-    <div class="bg-white rounded-lg p-5 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
+  <div
+    v-if="showWeightModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full"
+  >
+    <div
+      class="bg-white rounded-lg p-5 max-w-full overflow-y-auto"
+      style="max-height: 95%; max-width: 60%"
+    >
       <div class="flex justify-end">
-        <button @click="showWeightModal = false" class="text-gray-700 hover:text-gray-900">Close</button>
+        <button @click="showWeightModal = false" class="text-gray-700 hover:text-gray-900">
+          Close
+        </button>
       </div>
-      <img src="../assets/weight-percentile-boys.jpg" alt="weight percentile boys" class="w-full mb-4" />
-      <img src="../assets/weight-percentile-girls.jpg" alt="weight percentile girls" class="w-full" />
+      <img
+        src="../assets/weight-percentile-boys.jpg"
+        alt="weight percentile boys"
+        class="w-full mb-4"
+      />
+      <img
+        src="../assets/weight-percentile-girls.jpg"
+        alt="weight percentile girls"
+        class="w-full"
+      />
     </div>
   </div>
 </template>
@@ -163,7 +257,7 @@ export default defineComponent({
           this.paedsWeight = heightAndWeight.paedsWeight
         }
       }
-    },
+    }
   },
   data() {
     return {
@@ -219,12 +313,21 @@ export default defineComponent({
         if (this.height === null) {
           toast.error('Please enter height')
           return
+        } else if (this.height < 0) {
+          toast.error('Height cannot be negative')
+          return
+        } else if (this.height > 9999) {
+          toast.error('Height cannot be greater than 9999cm')
+          return
         }
         if (this.weight === null) {
           toast.error('Please enter weight')
           return
         } else if (this.weight < 0) {
           toast.error('Weight cannot be negative')
+          return
+        } else if (this.weight > 9999) {
+          toast.error('Weight cannot be greater than 9999kg')
           return
         }
         if (this.paedsHeight && this.paedsHeight < 0) {
@@ -266,7 +369,7 @@ export default defineComponent({
           })
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
-          const axiosError = error as AxiosError; // Safe casting
+          const axiosError = error as AxiosError // Safe casting
           if (axiosError.response) {
             // The request was made and server responded with a status code out of range 2xx
             console.log(axiosError.response.data)
@@ -277,7 +380,7 @@ export default defineComponent({
             toast.error('No server response received, check your connection.')
           } else {
             // Something happened in setting up the request that triggered an Error
-            console.log('Error', axiosError.message);
+            console.log('Error', axiosError.message)
             toast.error('An internal server error occurred.')
           }
         } else {
@@ -308,6 +411,6 @@ h1 {
   font-weight: 500;
 }
 .req {
-        color: red;
+  color: red;
 }
 </style>

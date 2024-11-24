@@ -8,18 +8,38 @@
         <div class="flex flex-row mb-2">
           <!-- Temperature -->
           <div class="w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Temperature <span class="req">*</span></label>
-            <input v-model="temperature" type="number" step="0.01" placeholder="Degree Celsius"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Temperature <span class="req">*</span></label
+            >
+            <input
+              v-model="temperature"
+              type="number"
+              step="0.01"
+              placeholder="Degree Celsius"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
 
           <!-- SpO2 -->
           <div class="ml-3 w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> SpO2 <span class="req">*</span></label>
-            <input v-model="spO2" type="number" step="0.01" placeholder="%"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              SpO2 <span class="req">*</span></label
+            >
+            <input
+              v-model="spO2"
+              type="number"
+              step="0.01"
+              placeholder="%"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
         </div>
 
@@ -27,24 +47,52 @@
         <div class="flex flex-row mb-2">
           <!-- Systolic BP1 -->
           <div class="w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Systolic BP1 <span class="req">*</span></label>
-            <input v-model="systolicBP1" type="number" step="0.01" placeholder="mmHg"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Systolic BP1 <span class="req">*</span></label
+            >
+            <input
+              v-model="systolicBP1"
+              type="number"
+              step="0.01"
+              placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
           <!-- Systolic BP2 -->
           <div class="ml-3 w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Systolic BP2 <span class="req">*</span></label>
-            <input v-model="systolicBP2" type="number" step="0.01" placeholder="mmHg"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Systolic BP2 <span class="req">*</span></label
+            >
+            <input
+              v-model="systolicBP2"
+              type="number"
+              step="0.01"
+              placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
 
           <!-- Avg Systolic BP -->
           <div class="ml-3 w-1/3">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Avg Systolic BP <span class="req">*</span></label>
-            <input :value="avgSystolicBP" disabled type="number" step="0.01" placeholder=""
-              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Avg Systolic BP <span class="req">*</span></label
+            >
+            <input
+              :value="avgSystolicBP"
+              disabled
+              type="number"
+              step="0.01"
+              placeholder=""
+              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+            />
           </div>
         </div>
 
@@ -52,17 +100,37 @@
         <div class="flex flex-row mb-2">
           <!-- Diastolic BP1 -->
           <div class="w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Diastolic BP1 <span class="req">*</span></label>
-            <input v-model="diastolicBP1" type="number" step="0.01" placeholder="mmHg"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Diastolic BP1 <span class="req">*</span></label
+            >
+            <input
+              v-model="diastolicBP1"
+              type="number"
+              step="0.01"
+              placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
           <!-- Diastolic BP2 -->
           <div class="ml-3 w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Diastolic BP2 <span class="req">*</span></label>
-            <input v-model="diastolicBP2" type="number" step="0.01" placeholder="mmHg"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Diastolic BP2 <span class="req">*</span></label
+            >
+            <input
+              v-model="diastolicBP2"
+              type="number"
+              step="0.01"
+              placeholder="mmHg"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
 
           <!-- Avg Diastolic BP -->
@@ -70,8 +138,14 @@
             <label for="" class="mb-1 block text-sm font-medium text-dark">
               Avg Diastolic BP <span class="req">*</span>
             </label>
-            <input :value="avgDiastolicBP" disabled type="number" step="0.01" placeholder=""
-              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
+            <input
+              :value="avgDiastolicBP"
+              disabled
+              type="number"
+              step="0.01"
+              placeholder=""
+              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+            />
           </div>
         </div>
 
@@ -79,24 +153,52 @@
         <div class="flex flex-row mb-2">
           <!-- HR1 -->
           <div class="w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> HR1 <span class="req">*</span></label>
-            <input v-model="hr1" type="number" step="1" placeholder="BPM"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              HR1 <span class="req">*</span></label
+            >
+            <input
+              v-model="hr1"
+              type="number"
+              step="1"
+              placeholder="BPM"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
           <!-- HR2 -->
           <div class="ml-3 w-1/4">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> HR2 <span class="req">*</span></label>
-            <input v-model="hr2" type="number" step="1" placeholder="BPM"
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              HR2 <span class="req">*</span></label
+            >
+            <input
+              v-model="hr2"
+              type="number"
+              step="1"
+              placeholder="BPM"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
 
           <!-- Avg HR -->
           <div class="ml-3 w-1/3">
-            <label for="" class="mb-1 block text-sm font-medium text-dark"> Avg HR <span class="req">*</span></label>
-            <input :value="avgHR" disabled type="number" step="1" placeholder=""
-              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2" />
+            <label for="" class="mb-1 block text-sm font-medium text-dark">
+              Avg HR <span class="req">*</span></label
+            >
+            <input
+              :value="avgHR"
+              disabled
+              type="number"
+              step="1"
+              placeholder=""
+              class="w-full bg-[#3f51b5]/50 rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+            />
           </div>
         </div>
 
@@ -107,24 +209,38 @@
             <label for="" class="mb-1 block text-sm font-medium text-dark">
               Random Blood Glucose (mmol/L) <span class="req">*</span>
             </label>
-            <input v-model="randomBloodGlucoseMmolL" type="number" step="0.01" placeholder="mmol/L"
+            <input
+              v-model="randomBloodGlucoseMmolL"
+              type="number"
+              step="0.01"
+              placeholder="mmol/L"
               class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" @keydown="preventNegative" min="0" />
+              :disabled="!isEditing"
+              @keydown="preventNegative"
+              min="0"
+              max="9999"
+            />
           </div>
         </div>
 
         <!-- Edit Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button v-if="!isEditing && !isAdd" @click="toggleEdit"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+          <button
+            v-if="!isEditing && !isAdd"
+            @click="toggleEdit"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
             Edit
           </button>
         </div>
 
         <!-- Save Edits Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button v-if="isEditing && !isAdd" @click="submitData"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+          <button
+            v-if="isEditing && !isAdd"
+            @click="submitData"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
             Save Edits
           </button>
         </div>
@@ -189,7 +305,7 @@ export default defineComponent({
           this.randomBloodGlucoseMmolL = vitalStatistics.randomBloodGlucoseMmolL
         }
       }
-    },
+    }
   },
   data() {
     return {
@@ -295,6 +411,20 @@ export default defineComponent({
           toast.error('Average HR cannot be empty')
           return
         }
+        if (
+          this.temperature > 9999 ||
+          this.spO2 > 9999 ||
+          this.systolicBP1 > 9999 ||
+          this.systolicBP2 > 9999 ||
+          this.diastolicBP1 > 9999 ||
+          this.diastolicBP2 > 9999 ||
+          this.hr1 > 9999 ||
+          this.hr2 > 9999 ||
+          this.randomBloodGlucoseMmolL > 9999
+        ) {
+          toast.error('Values cannot be greater than 9999')
+          return
+        }
         const vitalStatistics: VitalStatistics = {
           // need to define outside to catch missing fields
           temperature: this.temperature,
@@ -308,7 +438,7 @@ export default defineComponent({
           hr1: this.hr1,
           hr2: this.hr2,
           averageHR: this.avgHR, // pre-computed value
-          randomBloodGlucoseMmolL: this.randomBloodGlucoseMmolL,
+          randomBloodGlucoseMmolL: this.randomBloodGlucoseMmolL
         }
         await axios
           .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
@@ -324,7 +454,7 @@ export default defineComponent({
           })
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
-          const axiosError = error as AxiosError; // Safe casting
+          const axiosError = error as AxiosError // Safe casting
           if (axiosError.response) {
             // The request was made and server responded with a status code out of range 2xx
             console.log(axiosError.response.data)
@@ -335,7 +465,7 @@ export default defineComponent({
             toast.error('No server response received, check your connection.')
           } else {
             // Something happened in setting up the request that triggered an Error
-            console.log('Error', axiosError.message);
+            console.log('Error', axiosError.message)
             toast.error('An internal server error occurred.')
           }
         } else {
@@ -365,6 +495,6 @@ h1 {
   font-weight: 500;
 }
 .req {
-        color: red;
+  color: red;
 }
 </style>
