@@ -164,9 +164,8 @@ export default defineComponent({
             }
         },
         searchPatient() {
-            console.log('searching')
             // get value of the search input
-            const searchValue = document.getElementById('search-input').value;
+            const searchValue = document.getElementById('search-input').value.toLowerCase();
             // refresh the table of patientVisits
             if (searchValue == "") {
                 this.getData()
