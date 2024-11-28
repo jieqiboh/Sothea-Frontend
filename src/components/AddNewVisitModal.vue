@@ -290,9 +290,9 @@ export default defineComponent({
       //     ? this.formatDateForInput(admin.lastMenstrualPeriod)
       //     : null
       this.drugAllergies = admin.drugAllergies
-      this.photo = admin.photo
+      this.photo = admin.photo ? atob(admin.photo) : null
       // this.sentToId = admin.sentToId
-      this.selectedPhoto = this.photo ? `data:image/png;base64,${atob(this.photo)}` : ''
+      this.selectedPhoto = this.photo ? `data:image/png;base64,${this.photo}` : ''
     }
   },
   emits: ['patientVisitCreated'],

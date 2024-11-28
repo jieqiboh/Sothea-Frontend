@@ -414,10 +414,10 @@ export default defineComponent({
             ? this.formatDateForInput(admin.lastMenstrualPeriod)
             : null
         this.drugAllergies = admin.drugAllergies
-        this.photo = admin.photo
+        this.photo = admin.photo ? atob(admin.photo) : null // Decode base64 string
         this.sentToId = admin.sentToId
 
-        this.selectedPhoto = this.photo ? `data:image/png;base64,${atob(this.photo)}` : ''
+        this.selectedPhoto = this.photo ? `data:image/png;base64,${this.photo}` : ''
       }
     },
     gender(newValue) {
@@ -532,7 +532,7 @@ export default defineComponent({
             : null,
           drugAllergies: this.drugAllergies || null,
           sentToId: this.sentToId,
-          photo: this.photo || null
+          photo: this.photo || null // sending over as decoded base64 string, encoded in the backend
         }
 
         if (this.isAdd && !this.isEditing) {
