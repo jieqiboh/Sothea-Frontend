@@ -1,6 +1,28 @@
 <template>
   <div>
     <NavBar />
+    <!-- Reload Page Confirmation Modal -->
+    <div v-if="tryReload"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75 max-h-full max-w-full">
+      <div class="bg-white rounded-lg p-10 max-w-full overflow-y-auto" style="max-height: 95%; max-width: 60%;">
+        <!-- Confirmation Message -->
+        <div class="text-center text-lg text-gray-800 mb-6 mt-10">
+          Are you sure you want to reload? Any unsaved changes will be overwritten.
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-center space-x-10 my-10">
+          <button @click="{ loadPatientData(); tryReload = false; }"
+            class="bg-[#3f51b5] hover:bg-[#5c6cc4] text-white font-bold py-2 px-6 rounded-md transition-colors duration-200">
+            Yes
+          </button>
+          <button @click="tryReload = false"
+            class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-6 rounded-md transition-colors duration-200">
+            No
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="flex">
       <SideBar
@@ -13,7 +35,9 @@
         :isAdd="false"
       />
       <div class="flex-grow">
-        <SubNavBar :id="id" :regDate="regDate" :queueNo="queueNo" @openModal="openRecords" />
+        <SubNavBar :id="id" :regDate="regDate" :queueNo="queueNo"
+          @openModal="openRecords"
+          @refresh="tryReload = true" />
         <keep-alive>
           <component
             :is="activeComponent"
@@ -67,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { ComponentPublicInstance, defineComponent } from 'vue';
 
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/NavBar.vue'
@@ -128,7 +152,8 @@ export default defineComponent({
       regDate: '' as string, // format: YYYY-MM-DD, local timezone
       queueNo: '' as string,
       showRecords: false,
-      tryDeleteVisit: false
+      tryDeleteVisit: false,
+      tryReload: false,
     }
   },
   computed: {

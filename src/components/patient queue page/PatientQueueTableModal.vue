@@ -11,8 +11,8 @@
                 <div class="relative flex-grow flex flex-row">
                     <div class="mr-2">
                         <input type="text" id="search-input"
-                            class="rounded-lg border-transparent appearance-none w-[22rem] bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
-                            placeholder="Search by ID/Name/Khmer Name/Drug Allergies" @input="searchPatient"
+                            class="rounded-lg border-transparent appearance-none w-[26rem] bg-gray-300 border border-gray-300 py-3 px-5 text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                            placeholder="Search by Queue No/ID/Name/Khmer Name/Drug Allergies" @input="searchPatient"
                             @keyup.enter="searchPatient" />
                     </div>
                     <div>
@@ -150,18 +150,18 @@ export default defineComponent({
         },
         searchPatient() {
             // get value of the search input
-            const searchValue = document.getElementById('search-input').value;
+            const searchValue = document.getElementById('search-input').value.toLowerCase();
             // refresh the table of patients
             if (searchValue == "") {
                 this.getData()
             }
             // filter patients array based on the search value
             this.patientVisits = this.patientVisitsFixed.filter(patient => {
-                return patient.name.toLowerCase().includes(searchValue) ||
-                    patient.name.includes(searchValue) ||
-                    patient.id.toString().includes(searchValue) ||
-                    patient.khmerName.toLowerCase().includes(searchValue) ||
-                    (patient.drugAllergies !== undefined && patient.drugAllergies !== null) ? patient.drugAllergies.toLowerCase().includes(searchValue) : false;
+                return patient.queueNo?.toLowerCase().includes(searchValue) ||
+                    patient.name?.toLowerCase().includes(searchValue) ||
+                    patient.id?.toString().includes(searchValue) ||
+                    patient.khmerName?.toLowerCase().includes(searchValue) ||
+                    (patient.drugAllergies ?? "").toLowerCase().includes(searchValue);
             });
         },
         async filterPatientsByDate() {
