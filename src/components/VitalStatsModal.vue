@@ -48,7 +48,7 @@
           <!-- Systolic BP1 -->
           <div class="w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Systolic BP1 <span class="req">*</span></label
+              Systolic BP1</label
             >
             <input
               v-model="systolicBP1"
@@ -65,7 +65,7 @@
           <!-- Systolic BP2 -->
           <div class="ml-3 w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Systolic BP2 <span class="req">*</span></label
+              Systolic BP2</label
             >
             <input
               v-model="systolicBP2"
@@ -83,7 +83,7 @@
           <!-- Avg Systolic BP -->
           <div class="ml-3 w-1/3">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Avg Systolic BP <span class="req">*</span></label
+              Avg Systolic BP</label
             >
             <input
               :value="avgSystolicBP"
@@ -101,7 +101,7 @@
           <!-- Diastolic BP1 -->
           <div class="w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Diastolic BP1 <span class="req">*</span></label
+              Diastolic BP1</label
             >
             <input
               v-model="diastolicBP1"
@@ -118,7 +118,7 @@
           <!-- Diastolic BP2 -->
           <div class="ml-3 w-1/4">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Diastolic BP2 <span class="req">*</span></label
+              Diastolic BP2</label
             >
             <input
               v-model="diastolicBP2"
@@ -136,7 +136,7 @@
           <!-- Avg Diastolic BP -->
           <div class="ml-3 w-1/3">
             <label for="" class="mb-1 block text-sm font-medium text-dark">
-              Avg Diastolic BP <span class="req">*</span>
+              Avg Diastolic BP
             </label>
             <input
               :value="avgDiastolicBP"
@@ -371,22 +371,6 @@ export default defineComponent({
           toast.error('Please enter SpO2')
           return
         }
-        if (this.systolicBP1 === null) {
-          toast.error('Please enter Systolic BP1')
-          return
-        }
-        if (this.systolicBP2 === null) {
-          toast.error('Please enter Systolic BP2')
-          return
-        }
-        if (this.diastolicBP1 === null) {
-          toast.error('Please enter Diastolic BP1')
-          return
-        }
-        if (this.diastolicBP2 === null) {
-          toast.error('Please enter Diastolic BP2')
-          return
-        }
         if (this.hr1 === null) {
           toast.error('Please enter HR1')
           return
@@ -399,14 +383,6 @@ export default defineComponent({
           toast.error('Please enter Random Blood Glucose (mmol/L)')
           return
         }
-        if (this.avgSystolicBP === null) {
-          toast.error('Average Systolic BP cannot be empty')
-          return
-        }
-        if (this.avgDiastolicBP === null) {
-          toast.error('Average Diastolic BP cannot be empty')
-          return
-        }
         if (this.avgHR === null) {
           toast.error('Average HR cannot be empty')
           return
@@ -414,10 +390,10 @@ export default defineComponent({
         if (
           this.temperature > 9999 ||
           this.spO2 > 9999 ||
-          this.systolicBP1 > 9999 ||
-          this.systolicBP2 > 9999 ||
-          this.diastolicBP1 > 9999 ||
-          this.diastolicBP2 > 9999 ||
+          (this.systolicBP1 && this.systolicBP1 > 9999) ||
+          (this.systolicBP2 && this.systolicBP2 > 9999) ||
+          (this.diastolicBP1 && this.diastolicBP1 > 9999) ||
+          (this.diastolicBP2 && this.diastolicBP2 > 9999) ||
           this.hr1 > 9999 ||
           this.hr2 > 9999 ||
           this.randomBloodGlucoseMmolL > 9999
@@ -429,10 +405,10 @@ export default defineComponent({
           // need to define outside to catch missing fields
           temperature: this.temperature,
           spO2: this.spO2,
-          systolicBP1: this.systolicBP1,
-          systolicBP2: this.systolicBP2,
-          diastolicBP1: this.diastolicBP1,
-          diastolicBP2: this.diastolicBP2,
+          systolicBP1: this.systolicBP1 || null,
+          systolicBP2: this.systolicBP2 || null,
+          diastolicBP1: this.diastolicBP1 || null,
+          diastolicBP2: this.diastolicBP2 || null,
           averageSystolicBP: this.avgSystolicBP, // pre-computed value
           averageDiastolicBP: this.avgDiastolicBP, // pre-computed value
           hr1: this.hr1,
@@ -440,6 +416,7 @@ export default defineComponent({
           averageHR: this.avgHR, // pre-computed value
           randomBloodGlucoseMmolL: this.randomBloodGlucoseMmolL
         }
+        console.log(vitalStatistics)
         await axios
           .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
             vitalStatistics: vitalStatistics
