@@ -86,6 +86,7 @@ test('test', async ({ page }) => {
     // Edit all FallRisk Modal fields correct
     await page.getByRole('link', { name: 'Fall Risk' }).click();
     await page.getByRole('button', { name: 'Edit' }).click();
+    await page.getByLabel('C: >1x a week').check();
     await page.getByLabel('2 or more falls prior to').check();
     await page.getByLabel('Severely impaired (Score 3)').check();
     await page.getByLabel('Incontinence of urine and/or').check();
@@ -236,6 +237,7 @@ test('test', async ({ page }) => {
 
   // Assert all FallRisk Modal fields correct
   await page.getByRole('link', { name: 'Fall Risk' }).click()
+  expect(await page.getByLabel('C: >1x a week').isChecked()).toBeTruthy();
   expect(await page.getByLabel('2 or more falls prior to').isChecked()).toBeTruthy();
   expect(await page.getByLabel('Severely impaired (Score 3)').isChecked()).toBeTruthy();
   expect(await page.getByLabel('Incontinence of urine and/or').isChecked()).toBeTruthy();
