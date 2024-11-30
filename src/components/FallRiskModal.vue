@@ -4,6 +4,40 @@
             <h1>Fall Risk (For patients above 60)</h1>
             <br />
 
+            <!-- How often patient worries about falling -->
+            <div class="flex flex-col mt-4">
+                <div class="flex flex-row">
+                    <div class="font-medium text-sm">How often do you worry about falling? <span class="req">*</span></div>
+                </div>
+
+                <!-- Options (displayed vertically) -->
+                <div class="flex flex-col items-start mt-2 space-y-2">
+                    <label>
+                        <input type="radio" name="fallWorries" v-model="fallWorries" :value="'a'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">A: Never</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="fallWorries" v-model="fallWorries" :value="'b'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">B: 1x a week</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="fallWorries" v-model="fallWorries" :value="'c'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">C: >1x a week</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="fallWorries" v-model="fallWorries" :value="'d'"
+                            :disabled="!isEditing" />
+                        <span class="ml-2 text-sm">D: Every day</span>
+                    </label>
+                </div>
+            </div>
+
             <!-- History of fall within past 12 months -->
             <div class="flex flex-col mt-4">
                 <div class="flex flex-row">
@@ -15,25 +49,25 @@
                     <label>
                         <input type="radio" name="fallHistory" v-model="fallHistory" :value="'a'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">No fall (Score 0)</span>
+                        <span class="ml-2 text-sm">A: No fall (Score 0)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="fallHistory" v-model="fallHistory" :value="'b'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">1 fall prior to admission (Score 1)</span>
+                        <span class="ml-2 text-sm">B: 1 fall prior to admission (Score 1)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="fallHistory" v-model="fallHistory" :value="'c'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">2 or more falls prior to admission (Score 5)</span>
+                        <span class="ml-2 text-sm">C: 2 or more falls prior to admission (Score 5)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="fallHistory" v-model="fallHistory" :value="'d'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">1 or more falls during current admission (Score 5)</span>
+                        <span class="ml-2 text-sm">D: 1 or more falls during current admission (Score 5)</span>
                     </label>
                 </div>
             </div>
@@ -50,25 +84,25 @@
                     <label>
                         <input type="radio" name="cognitiveStatus" v-model="cognitiveStatus" :value="'a'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Intact (Score 0)</span>
+                        <span class="ml-2 text-sm">A: Intact (Score 0)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="cognitiveStatus" v-model="cognitiveStatus" :value="'b'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Minimally impaired (Score 1)</span>
+                        <span class="ml-2 text-sm">B: Minimally impaired (Score 1)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="cognitiveStatus" v-model="cognitiveStatus" :value="'c'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Moderately impaired (Score 2)</span>
+                        <span class="ml-2 text-sm">C: Moderately impaired (Score 2)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="cognitiveStatus" v-model="cognitiveStatus" :value="'d'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Severely impaired (Score 3)</span>
+                        <span class="ml-2 text-sm">D: Severely impaired (Score 3)</span>
                     </label>
                 </div>
             </div>
@@ -84,33 +118,33 @@
                     <label>
                         <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'a'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">No continence problems or IDC in-situ (Score 0)</span>
+                        <span class="ml-2 text-sm">A: No continence problems or IDC in-situ (Score 0)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'b'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Incontinence of urine and/or faeces (Score 1)</span>
+                        <span class="ml-2 text-sm">B: Incontinence of urine and/or faeces (Score 1)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'c'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Frequency (empties bladder > 6 times daily)/ Diarrhoea (Score
+                        <span class="ml-2 text-sm">C: Frequency (empties bladder > 6 times daily)/ Diarrhoea (Score
                             1)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'d'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Urgency (Score 1)</span>
+                        <span class="ml-2 text-sm">D: Urgency (Score 1)</span>
                     </label>
 
 
                     <label>
                         <input type="radio" name="continenceProblems" v-model="continenceProblems" :value="'e'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Needing nocturnal toileting more than 2 times daily (Score 1)</span>
+                        <span class="ml-2 text-sm">E: Needing nocturnal toileting more than 2 times daily (Score 1)</span>
                     </label>
                 </div>
             </div>
@@ -127,25 +161,25 @@
                     <label>
                         <input type="radio" name="safetyAwareness" v-model="safetyAwareness" :value="'a'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Good awareness and requests appropriate assistance (Score 0)</span>
+                        <span class="ml-2 text-sm">A: Good awareness and requests appropriate assistance (Score 0)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="safetyAwareness" v-model="safetyAwareness" :value="'b'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Occasional risk-taking behaviours (Score 1)</span>
+                        <span class="ml-2 text-sm">B: Occasional risk-taking behaviours (Score 1)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="safetyAwareness" v-model="safetyAwareness" :value="'c'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Inappropriate fear for activities (Score 2)</span>
+                        <span class="ml-2 text-sm">C: Inappropriate fear for activities (Score 2)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="safetyAwareness" v-model="safetyAwareness" :value="'d'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Frequent risk-taking behaviours (Score 3)</span>
+                        <span class="ml-2 text-sm">D: Frequent risk-taking behaviours (Score 3)</span>
                     </label>
                 </div>
             </div>
@@ -162,33 +196,33 @@
                     <label>
                         <input type="radio" name="unsteadiness" v-model="unsteadiness" :value="'a'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Steady gait or complete dependent or on traction (Score 0)</span>
+                        <span class="ml-2 text-sm">A: Steady gait or complete dependent or on traction (Score 0)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="unsteadiness" v-model="unsteadiness" :value="'b'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Minimally unsteadiness which needs supervision (Score 1)</span>
+                        <span class="ml-2 text-sm">B: Minimally unsteadiness which needs supervision (Score 1)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="unsteadiness" v-model="unsteadiness" :value="'c'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Moderately unsteadiness which require hands-on assist at times (Score
+                        <span class="ml-2 text-sm">C: Moderately unsteadiness which require hands-on assist at times (Score
                             4)</span>
                     </label>
 
                     <label>
                         <input type="radio" name="unsteadiness" v-model="unsteadiness" :value="'d'"
                             :disabled="!isEditing" />
-                        <span class="ml-2 text-sm">Severely unsteadiness and need constant hands-on assist (Score
+                        <span class="ml-2 text-sm">D: Severely unsteadiness and need constant hands-on assist (Score
                             5)</span>
                     </label>
                 </div>
             </div>
 
             <!-- Current Score Display -->
-            <div class="font-medium text-lg mt-4" :class="{ 'text-red-500': currentScore >= 8 }">Current Score: {{ currentScore }}</div>
+            <div class="font-medium text-lg mt-4" :class="{ 'text-red-500': fallRiskScore >= 8 }">Current Score: {{ fallRiskScore }}</div>
 
             <!-- Edit Button -->
             <div class="flex flex-row-reverse w-full mt-5">
@@ -237,7 +271,7 @@ export default defineComponent({
         }
     },
     computed: {
-        currentScore() {
+        fallRiskScore() {
             const scoresMap = {
                 'fallHistory': {
                     'a': 0,
@@ -273,12 +307,11 @@ export default defineComponent({
             };
 
             let totalScore = 0;
-            totalScore += scoresMap['fallHistory'][this.fallHistory] || 0;
-            totalScore += scoresMap['cognitiveStatus'][this.cognitiveStatus] || 0;
-            totalScore += scoresMap['continenceProblems'][this.continenceProblems] || 0;
-            totalScore += scoresMap['safetyAwareness'][this.safetyAwareness] || 0;
-            totalScore += scoresMap['unsteadiness'][this.unsteadiness] || 0;
-            console.log(totalScore);
+            totalScore += this.fallHistory ? scoresMap['fallHistory'][this.fallHistory] : 0;
+            totalScore += this.cognitiveStatus ? scoresMap['cognitiveStatus'][this.cognitiveStatus] : 0;
+            totalScore += this.continenceProblems ? scoresMap['continenceProblems'][this.continenceProblems] : 0;
+            totalScore += this.safetyAwareness ? scoresMap['safetyAwareness'][this.safetyAwareness] : 0;
+            totalScore += this.unsteadiness ? scoresMap['unsteadiness'][this.unsteadiness] : 0;
             return totalScore;
         }
     },
@@ -288,16 +321,20 @@ export default defineComponent({
             if (!this.isAdd) {
                 const fallRisk = this.patientData.fallrisk
                 if (!fallRisk) {
+                    this.fallWorries = ''
                     this.fallHistory = ''
                     this.cognitiveStatus = ''
                     this.continenceProblems = ''
                     this.safetyAwareness = ''
+                    this.fallRiskScore = 0
                 } else {
-                    this.fallHistory = fallRisk.fallHistory
-                    this.cognitiveStatus = fallRisk.cognitiveStatus
-                    this.continenceProblems = fallRisk.continenceProblems
-                    this.safetyAwareness = fallRisk.safetyAwareness
-                    this.unsteadiness = fallRisk.unsteadiness
+                    this.fallWorries = fallRisk.fallWorries as 'a' | 'b' | 'c' | 'd'
+                    this.fallHistory = fallRisk.fallHistory as 'a' | 'b' | 'c' | 'd'
+                    this.cognitiveStatus = fallRisk.cognitiveStatus as 'a' | 'b' | 'c' | 'd'
+                    this.continenceProblems = fallRisk.continenceProblems as 'a' | 'b' | 'c' | 'd' | 'e'
+                    this.safetyAwareness = fallRisk.safetyAwareness as 'a' | 'b' | 'c' | 'd'
+                    this.unsteadiness = fallRisk.unsteadiness as 'a' | 'b' | 'c' | 'd'
+                    this.fallRiskScore = fallRisk.fallRiskScore
                 }
             }
         },
@@ -306,20 +343,23 @@ export default defineComponent({
         if (!this.isAdd) {
             const fallRisk = this.patientData.fallrisk
             if (!fallRisk) return
-            this.fallHistory = fallRisk.fallHistory
-            this.cognitiveStatus = fallRisk.cognitiveStatus
-            this.continenceProblems = fallRisk.continenceProblems
-            this.safetyAwareness = fallRisk.safetyAwareness
-            this.unsteadiness = fallRisk.unsteadiness
+            this.fallWorries = fallRisk.fallWorries as 'a' | 'b' | 'c' | 'd'
+            this.fallHistory = fallRisk.fallHistory as 'a' | 'b' | 'c' | 'd'
+            this.cognitiveStatus = fallRisk.cognitiveStatus as 'a' | 'b' | 'c' | 'd'
+            this.continenceProblems = fallRisk.continenceProblems as 'a' | 'b' | 'c' | 'd' | 'e'
+            this.safetyAwareness = fallRisk.safetyAwareness as 'a' | 'b' | 'c' | 'd'
+            this.unsteadiness = fallRisk.unsteadiness as 'a' | 'b' | 'c' | 'd'
+            this.fallRiskScore = 0
         }
     },
     data() {
         return {
-            fallHistory: '' as 'a' | 'b' | 'c' | 'd',              // restrict to valid keys
-            cognitiveStatus: '' as 'a' | 'b' | 'c' | 'd',          // restrict to valid keys
-            continenceProblems: '' as 'a' | 'b' | 'c' | 'd' | 'e', // restrict to valid keys
-            safetyAwareness: '' as 'a' | 'b' | 'c' | 'd',          // restrict to valid keys
-            unsteadiness: '' as 'a' | 'b' | 'c' | 'd',             // restrict to valid keys
+            fallWorries: '' as 'a' | 'b' | 'c' | 'd' | '',              // restrict to valid keys
+            fallHistory: '' as 'a' | 'b' | 'c' | 'd' | '',              // restrict to valid keys
+            cognitiveStatus: '' as 'a' | 'b' | 'c' | 'd' | '',          // restrict to valid keys
+            continenceProblems: '' as 'a' | 'b' | 'c' | 'd' | 'e' | '', // restrict to valid keys
+            safetyAwareness: '' as 'a' | 'b' | 'c' | 'd' | '',          // restrict to valid keys
+            unsteadiness: '' as 'a' | 'b' | 'c' | 'd' | '',             // restrict to valid keys
             isEditing: false,
         }
     },
@@ -328,6 +368,7 @@ export default defineComponent({
             const toast = useToast()
             try {
                 if (
+                    this.fallWorries === '' ||
                     this.fallHistory === '' ||
                     this.cognitiveStatus === '' ||
                     this.continenceProblems === '' ||
@@ -339,11 +380,13 @@ export default defineComponent({
                 }
                 const fallRisk: FallRisk = {
                     // need to define outside to catch missing fields
+                    fallWorries: this.fallWorries,
                     fallHistory: this.fallHistory,
                     cognitiveStatus: this.cognitiveStatus,
                     continenceProblems: this.continenceProblems,
                     safetyAwareness: this.safetyAwareness,
-                    unsteadiness: this.unsteadiness
+                    unsteadiness: this.unsteadiness,
+                    fallRiskScore: this.fallRiskScore
                 }
                 await axios
                     .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
