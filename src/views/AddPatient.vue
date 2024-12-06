@@ -37,6 +37,7 @@ import VisualAcuityModal from '../components/VisualAcuityModal.vue'
 import FallRiskModal from '@/components/FallRiskModal.vue'
 import DentalModal from '@/components/DentalModal.vue'
 import DrConsultModal from '../components/DrConsultModal.vue'
+import PhysiotherapyModal from '../components/PhysiotherapyModal.vue'
 
 import axios from 'axios'
 
@@ -52,7 +53,8 @@ export default {
     VisualAcuityModal,
     FallRiskModal,
     DentalModal,
-    DrConsultModal
+    DrConsultModal,
+    PhysiotherapyModal
   },
   data() {
     return {
@@ -84,6 +86,8 @@ export default {
           return 'DentalModal'
         case 'dr-consult':
           return 'DrConsultModal'
+        case 'physiotherapy':
+          return 'PhysiotherapyModal'
         default:
           return 'AdminModal'
       }
