@@ -106,6 +106,7 @@ import HeightWeightModal from '../components/HeightWeightModal.vue'
 import VisualAcuityModal from '../components/VisualAcuityModal.vue'
 import FallRiskModal from '@/components/FallRiskModal.vue'
 import DrConsultModal from '../components/DrConsultModal.vue'
+import PhysiotherapyModal from '@/components/PhysiotherapyModal.vue'
 import AddNewVisitModal from '@/components/AddNewVisitModal.vue'
 
 import type Patient from '@/types/Patient'
@@ -131,6 +132,7 @@ export default defineComponent({
     FallRiskModal,
     DentalModal,
     DrConsultModal,
+    PhysiotherapyModal,
     AddNewVisitModal
   },
   props: {
@@ -179,6 +181,8 @@ export default defineComponent({
           return 'DrConsultModal'
         case 'add-new-visit':
           return 'AddNewVisitModal'
+        case 'physiotherapy':
+          return 'PhysiotherapyModal'
         default:
           return 'AdminModal'
       }
