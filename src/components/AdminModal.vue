@@ -207,16 +207,21 @@
           <label class="mb-1 block text-sm font-medium text-dark">
             Village <span class="req">*</span></label
           >
-          <div class="relative">
-            <input
-              v-model="village"
-              :disabled="!isEditing && !isAdd"
-              type="text"
-              placeholder="Village"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
-            />
+          <div class="relative z-20">
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
               <img src="../assets/house.svg" width="20" height="20" />
+            </span>
+
+            <select
+              v-model="village"
+              :disabled="!isEditing && !isAdd"
+              class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-12 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+            >
+              <option value="SO">SO</option>
+              <option value="R1">R1</option>
+            </select>
+            <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
+              <img src="../assets/chevrondown.svg" height="20" width="20" />
             </span>
           </div>
         </div>

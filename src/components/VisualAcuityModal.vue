@@ -11,9 +11,26 @@
             <label for="" class="mb-1 block text-sm font-medium text-dark">
               L eye vision (6/) <span class="req">*</span>
             </label>
-            <input v-model="lEyeVision" type="number" step="1" placeholder="" @keydown="preventNegative" min="0"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" />
+
+            <div class="relative z-20">
+              <select
+                v-model="lEyeVision"
+                :disabled="!isEditing"
+                class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-3 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+              >
+                <option :value="6">6</option>
+                <option :value="9">9</option>
+                <option :value="12">12</option>
+                <option :value="18">18</option>
+                <option :value="24">24</option>
+                <option :value="36">36</option>
+                <option :value="60">60</option>
+                <option :value="-1">-1</option>
+              </select>
+              <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
+                <img src="../assets/chevrondown.svg" height="20" width="20" />
+              </span>
+            </div>
           </div>
 
           <!-- R eye vision -->
@@ -21,33 +38,60 @@
             <label for="" class="mb-1 block text-sm font-medium text-dark">
               R eye vision (6/) <span class="req">*</span>
             </label>
-            <input v-model="rEyeVision" type="number" step="1" placeholder="" @keydown="preventNegative" min="0"
-              class="w-full bg-transparent rounded-md border border-stroke py-1.5 px-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200 disabled:border-gray-2"
-              :disabled="!isEditing" />
+            <div class="relative z-20">
+              <select
+                v-model="rEyeVision"
+                :disabled="!isEditing"
+                class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-3 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+              >
+                <option :value="6">6</option>
+                <option :value="9">9</option>
+                <option :value="12">12</option>
+                <option :value="18">18</option>
+                <option :value="24">24</option>
+                <option :value="36">36</option>
+                <option :value="60">60</option>
+                <option :value="-1">-1</option>
+              </select>
+              <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
+                <img src="../assets/chevrondown.svg" height="20" width="20" />
+              </span>
+            </div>
           </div>
         </div>
 
         <!-- Additional Intervention -->
         <div class="mt-4">
-          <label for="" class="mb-2 block text-sm font-medium text-dark">Additional Intervention:
+          <label for="" class="mb-2 block text-sm font-medium text-dark"
+            >Additional Intervention:
           </label>
-          <textarea v-model="additionalIntervention" rows="3" placeholder="Remarks"
+          <textarea
+            v-model="additionalIntervention"
+            rows="3"
+            placeholder="Remarks"
             class="w-full bg-transparent rounded-md border border-stroke p-3 font-normal text-sm text-dark-4 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
-            :disabled="!isEditing"></textarea>
+            :disabled="!isEditing"
+          ></textarea>
         </div>
 
         <!-- Edit Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button v-if="!isEditing && !isAdd" @click="toggleEdit"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+          <button
+            v-if="!isEditing && !isAdd"
+            @click="toggleEdit"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
             Edit
           </button>
         </div>
 
         <!-- Save Edits Button -->
         <div class="flex flex-row-reverse w-full mt-5">
-          <button v-if="isEditing && !isAdd" @click="submitData"
-            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none">
+          <button
+            v-if="isEditing && !isAdd"
+            @click="submitData"
+            class="px-5 py-2 transition ease-in duration-200 rounded-lg text-sm text-[#3f51b5] hover:bg-[#3f51b5] hover:text-white border-2 border-[#3f51b5] focus:outline-none"
+          >
             Save Edits
           </button>
         </div>
@@ -100,7 +144,7 @@ export default defineComponent({
           this.additionalIntervention = visualAcuity.additionalIntervention
         }
       }
-    },
+    }
   },
   data() {
     return {
@@ -151,7 +195,7 @@ export default defineComponent({
           })
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
-          const axiosError = error as AxiosError; // Safe casting
+          const axiosError = error as AxiosError // Safe casting
           if (axiosError.response) {
             // The request was made and server responded with a status code out of range 2xx
             console.log(axiosError.response.data)
@@ -162,7 +206,7 @@ export default defineComponent({
             toast.error('No server response received, check your connection.')
           } else {
             // Something happened in setting up the request that triggered an Error
-            console.log('Error', axiosError.message);
+            console.log('Error', axiosError.message)
             toast.error('An internal server error occurred.')
           }
         } else {
@@ -192,6 +236,6 @@ h1 {
   font-weight: 500;
 }
 .req {
-        color: red;
+  color: red;
 }
 </style>
