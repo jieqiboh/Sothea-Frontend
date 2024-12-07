@@ -26,6 +26,7 @@
                 <option :value="36">36</option>
                 <option :value="60">60</option>
                 <option :value="-1">-1</option>
+                <option :value="-2">-2</option>
               </select>
               <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
                 <img src="../assets/chevrondown.svg" height="20" width="20" />
@@ -52,6 +53,7 @@
                 <option :value="36">36</option>
                 <option :value="60">60</option>
                 <option :value="-1">-1</option>
+                <option :value="-2">-2</option>
               </select>
               <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
                 <img src="../assets/chevrondown.svg" height="20" width="20" />
