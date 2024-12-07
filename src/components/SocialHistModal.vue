@@ -93,9 +93,17 @@
           </div>
 
           <div class="flex w-1/3 grow">
-            <textarea rows="1" placeholder="If Y, how regularly?" v-model="howRegular"
-              class="w-full bg-transparent rounded-md border border-stroke p-3 text-sm text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
-              :disabled="!isEditing"></textarea>
+            <select
+                v-model="howRegular"
+                placeholder="If Y, how regularly?"
+                :disabled="!isEditing"
+                class="relative z-20 w-full appearance-none rounded-md border border-stroke bg-transparent py-1.5 pl-3 pr-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-200"
+              >
+                <option :value="'A'">A</option>
+                <option :value="'B'">B</option>
+                <option :value="'C'">C</option>
+                <option :value="'D'">D</option>
+              </select>
           </div>
         </div>
       </div>
@@ -210,14 +218,22 @@ export default defineComponent({
           toast.error('Please indicate alcohol history')
           return
         }
+        if (this.numberOfYears && isNaN(this.numberOfYears)) {
+          toast.error('Number of years must be a valid number');
+          return;
+        }
+        if (this.cigarettesPerDay && isNaN(this.cigarettesPerDay)) {
+          toast.error('Cigarettes per day must be a valid number');
+          return;
+        }
         const socialHistory: SocialHistory = {
           // need to define outside to catch missing fields
           pastSmokingHistory: this.pastSmokingHistory,
-          numberOfYears: this.numberOfYears,
+          numberOfYears: this.numberOfYears || null,
           currentSmokingHistory: this.currentSmokingHistory,
-          cigarettesPerDay: this.cigarettesPerDay,
+          cigarettesPerDay: this.cigarettesPerDay || null,
           alcoholHistory: this.alcoholHistory,
-          howRegular: this.howRegular
+          howRegular: this.howRegular || null
         }
         await axios
           .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
