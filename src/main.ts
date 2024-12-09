@@ -13,5 +13,6 @@ app.use(router)
 
 app.mount('#app')
 
-// export const BaseURL = 'http://192.168.0.100:9090' // Use in Prod!
+// export const BaseURL = 'http://192.168.0.100:9090' // Use in Prod! Primary Macbook
+// export const BaseURL = 'http://192.168.0.101:9090' // Use in Prod! Secondary MiniPC
 export const BaseURL = 'http://localhost:9090' // Use in development!
