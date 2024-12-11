@@ -330,12 +330,12 @@ export default defineComponent({
           toast.error('Weight cannot be greater than 9999kg')
           return
         }
-        if (this.paedsHeight && this.paedsHeight < 0) {
-          toast.error('Paeds: Height % cannot be negative')
+        if (this.paedsHeight && this.paedsHeight > 9999) {
+          toast.error('Paeds: Height % cannot be greater than 9999')
           return
         }
-        if (this.paedsWeight && this.paedsWeight < 0) {
-          toast.error('Paeds: Weight % cannot be negative')
+        if (this.paedsWeight && this.paedsWeight > 9999) {
+          toast.error('Paeds: Weight % cannot be greater than 9999')
           return
         }
         if (this.bmi === null) {
@@ -352,8 +352,8 @@ export default defineComponent({
           weight: this.weight,
           bmi: this.bmi,
           bmiAnalysis: this.bmianalysis,
-          paedsHeight: this.paedsHeight,
-          paedsWeight: this.paedsWeight
+          paedsHeight: this.paedsHeight || null,
+          paedsWeight: this.paedsWeight || null
         }
         await axios
           .patch(`${BaseURL}/patient/${this.patientId}/${this.patientVid}`, {
